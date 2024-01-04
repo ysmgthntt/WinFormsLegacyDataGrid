@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E38D3991-6512-4A72-82F9-4AF691B6EC01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsLegacyDataGrid", "src\WinFormsLegacyDataGrid\WinFormsLegacyDataGrid.csproj", "{60FC3B79-7BF6-4367-BE64-2C1F97E8EDD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60FC3B79-7BF6-4367-BE64-2C1F97E8EDD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60FC3B79-7BF6-4367-BE64-2C1F97E8EDD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60FC3B79-7BF6-4367-BE64-2C1F97E8EDD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60FC3B79-7BF6-4367-BE64-2C1F97E8EDD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60FC3B79-7BF6-4367-BE64-2C1F97E8EDD7} = {E38D3991-6512-4A72-82F9-4AF691B6EC01}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9397F05-AC87-4172-8BAE-ECE1E97F7261}
+	EndGlobalSection
+EndGlobal
