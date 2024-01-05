@@ -663,7 +663,7 @@ namespace System.Windows.Forms
             //
             string errString = string.Empty;
             Rectangle bounds = cellBounds;
-            object errInfo = DataGrid.ListManager[number];
+            object errInfo = DataGrid.ListManager/*[number]*/.Get(number);
             if (errInfo is IDataErrorInfo)
             {
                 errString = ((IDataErrorInfo)errInfo)[column.PropertyDescriptor.Name];

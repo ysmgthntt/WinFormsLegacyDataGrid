@@ -87,7 +87,7 @@ namespace System.Windows.Forms
             dataGrid.ColumnStartedEditing(Bounds);
         }
 
-        protected internal override bool ProcessKeyMessage(ref Message m)
+        protected /*internal*/ override bool ProcessKeyMessage(ref Message m)
         {
             Keys key = (Keys)unchecked((int)(long)m.WParam);
             Keys modifierKeys = ModifierKeys;

@@ -103,9 +103,9 @@ namespace System.Windows.Forms
         protected override void SetDataGridInColumn(DataGrid value)
         {
             base.SetDataGridInColumn(value);
-            if (edit.ParentInternal != null)
+            if (edit.Parent/*Internal*/ != null)
             {
-                edit.ParentInternal.Controls.Remove(edit);
+                edit.Parent/*Internal*/.Controls.Remove(edit);
             }
             if (value != null)
             {
@@ -631,9 +631,9 @@ namespace System.Windows.Forms
 
         protected internal override void ReleaseHostedControl()
         {
-            if (edit.ParentInternal != null)
+            if (edit.Parent/*Internal*/ != null)
             {
-                edit.ParentInternal.Controls.Remove(edit);
+                edit.Parent/*Internal*/.Controls.Remove(edit);
             }
         }
     }

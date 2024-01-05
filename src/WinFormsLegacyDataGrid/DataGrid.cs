@@ -25,7 +25,7 @@ namespace System.Windows.Forms
     DefaultEvent(nameof(Navigate)),
     ComplexBindingProperties(nameof(DataSource), nameof(DataMember)),
     ]
-    public class DataGrid : Control, ISupportInitialize, IDataGridEditingService
+    public partial class DataGrid : Control, ISupportInitialize, IDataGridEditingService
     {
 #if DEBUG
         internal TraceSwitch DataGridAcc = new TraceSwitch("DataGridAcc", "Trace Windows Forms DataGrid Accessibility");
@@ -1374,7 +1374,7 @@ namespace System.Windows.Forms
             }
         }
 
-        internal override bool ShouldSerializeForeColor()
+        internal /*override*/ bool ShouldSerializeForeColor()
         {
             return !DefaultForeBrush.Color.Equals(ForeColor);
         }
@@ -1383,7 +1383,7 @@ namespace System.Windows.Forms
         ///  Indicates whether the <see cref='BackColor'/> property should be
         ///  persisted.
         /// </summary>
-        internal override bool ShouldSerializeBackColor()
+        internal /*override*/ bool ShouldSerializeBackColor()
         {
             return !DefaultBackBrush.Color.Equals(BackColor);
         }
@@ -1757,7 +1757,7 @@ namespace System.Windows.Forms
                 {
                     if (listManager == null)
                     {
-                        if (ContainsFocus && ParentInternal == null)
+                        if (ContainsFocus && Parent/*Internal*/ == null)
                         {
                             Debug.Assert(toBeDisposedEditingControl == null, "we should have removed the toBeDisposedEditingControl already");
                             // if we unparent the active control then the form won't close
@@ -3513,7 +3513,7 @@ namespace System.Windows.Forms
 
             for (int i = 0; i < listManager.Count; i++)
             {
-                object errObj = listManager[i];
+                object errObj = listManager/*[i]*/.Get(i);
                 if (errObj is IDataErrorInfo)
                 {
                     string errString = ((IDataErrorInfo)errObj).Error;
@@ -3608,7 +3608,7 @@ namespace System.Windows.Forms
             else
             {
                 // let's see how we are doing w/ the errors
-                object errObj = listManager[ea.Index];
+                object errObj = listManager/*[ea.Index]*/.Get(ea.Index);
                 bool oldListHasErrors = ListHasErrors;
                 if (errObj is IDataErrorInfo)
                 {
@@ -5126,7 +5126,7 @@ namespace System.Windows.Forms
             }
 
             int size;
-            Graphics g = CreateGraphicsInternal();
+            Graphics g = CreateGraphics/*Internal*/();
             try
             {
                 DataGridColumnStyle column = myGridTable.GridColumnStyles[col];
@@ -5298,8 +5298,8 @@ namespace System.Windows.Forms
                 clip.Width = layout.Data.X + layout.Data.Width - leftEdge - 2;
             }
 
-            CaptureInternal = true;
-            Cursor.ClipInternal = RectangleToScreen(clip);
+            Capture/*Internal*/ = true;
+            Cursor.Clip/*Internal*/ = RectangleToScreen(clip);
             gridState[GRIDSTATE_trackColResize] = true;
             trackColAnchor = x;
             trackColumn = col;
@@ -5420,8 +5420,8 @@ namespace System.Windows.Forms
             }
             finally
             {
-                Cursor.ClipInternal = Rectangle.Empty;
-                CaptureInternal = false;
+                Cursor.Clip/*Internal*/ = Rectangle.Empty;
+                Capture/*Internal*/ = false;
                 gridState[GRIDSTATE_layoutSuspended] = false;
             }
 
@@ -5480,7 +5480,7 @@ namespace System.Windows.Forms
                 return;
             }
 
-            Graphics g = CreateGraphicsInternal();
+            Graphics g = CreateGraphics/*Internal*/();
             try
             {
                 GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
@@ -5536,8 +5536,8 @@ namespace System.Windows.Forms
             clip.Y = topEdge + 3;
             clip.Height = layout.Data.Y + layout.Data.Height - topEdge - 2;
 
-            CaptureInternal = true;
-            Cursor.ClipInternal = RectangleToScreen(clip);
+            Capture/*Internal*/ = true;
+            Cursor.Clip/*Internal*/ = RectangleToScreen(clip);
             gridState[GRIDSTATE_trackRowResize] = true;
             trackRowAnchor = y;
             trackRow = row;
@@ -5590,8 +5590,8 @@ namespace System.Windows.Forms
             }
             finally
             {
-                Cursor.ClipInternal = Rectangle.Empty;
-                CaptureInternal = false;
+                Cursor.Clip/*Internal*/ = Rectangle.Empty;
+                Capture/*Internal*/ = false;
             }
             // OnRowResize(EventArgs.Empty);
         }
@@ -6325,7 +6325,7 @@ namespace System.Windows.Forms
                     cy += rowHeight;
                 }
 
-                using (Graphics graphics = CreateGraphicsInternal())
+                using (Graphics graphics = CreateGraphics/*Internal*/())
                 {
                     IntPtr handle = region.GetHrgn(graphics);
                     if (handle != IntPtr.Zero)
@@ -6407,7 +6407,7 @@ namespace System.Windows.Forms
         {
             IntPtr parentHandle = Handle;
             IntPtr dc = UnsafeNativeMethods.GetDCEx(new HandleRef(this, parentHandle), NativeMethods.NullHandleRef, NativeMethods.DCX_CACHE | NativeMethods.DCX_LOCKWINDOWUPDATE);
-            IntPtr halftone = ControlPaint.CreateHalftoneHBRUSH();
+            IntPtr halftone = /*ControlPaint.*/CreateHalftoneHBRUSH();
             IntPtr saveBrush = Gdi32.SelectObject(dc, halftone);
             SafeNativeMethods.PatBlt(new HandleRef(this, dc), r.X, r.Y, r.Width, r.Height, NativeMethods.PATINVERT);
             Gdi32.SelectObject(dc, saveBrush);
@@ -10570,14 +10570,14 @@ namespace System.Windows.Forms
                 }
                 else
                 {
-                    if (AllowAdd != listManager.AllowAdd && !gridReadOnly)
+                    if (AllowAdd != listManager.GetAllowAdd() && !gridReadOnly)
                     {
                         change = true;
                     }
 
-                    AllowAdd = listManager.AllowAdd && !gridReadOnly && bl != null && bl.SupportsChangeNotification;
-                    AllowEdit = listManager.AllowEdit && !gridReadOnly;
-                    AllowRemove = listManager.AllowRemove && !gridReadOnly && bl != null && bl.SupportsChangeNotification;     //
+                    AllowAdd = listManager.GetAllowAdd() && !gridReadOnly && bl != null && bl.SupportsChangeNotification;
+                    AllowEdit = listManager.GetAllowEdit() && !gridReadOnly;
+                    AllowRemove = listManager.GetAllowRemove() && !gridReadOnly && bl != null && bl.SupportsChangeNotification;     //
                 }
                 return change;
             }

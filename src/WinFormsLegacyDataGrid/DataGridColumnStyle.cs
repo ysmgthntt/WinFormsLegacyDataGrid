@@ -470,7 +470,7 @@ namespace System.Windows.Forms
                 throw new InvalidOperationException(SR.DataGridColumnNoPropertyDescriptor);
             }
 
-            return descriptor.GetValue(source[rowNum]);
+            return descriptor.GetValue(source/*[rowNum]*/.Get(rowNum));
         }
 
         /// <summary>
@@ -668,12 +668,12 @@ namespace System.Windows.Forms
             {
                 throw new ArgumentException(SR.DataGridColumnListManagerPosition, nameof(rowNum));
             }
-            if (source[rowNum] is IEditableObject editableObject)
+            if (source/*[rowNum]*/.Get(rowNum) is IEditableObject editableObject)
             {
                 editableObject.BeginEdit();
             }
 
-            descriptor.SetValue(source[rowNum], value);
+            descriptor.SetValue(source/*[rowNum]*/.Get(rowNum), value);
         }
 
         protected internal virtual void ColumnStartedEditing(Control editingControl)

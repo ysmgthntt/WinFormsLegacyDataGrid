@@ -653,7 +653,7 @@ namespace System.Windows.Forms
 
             // Paint the error icon
             //
-            object errorInfo = DataGrid.ListManager[number];
+            object errorInfo = DataGrid.ListManager/*[number]*/.Get(number);
             if (!(errorInfo is IDataErrorInfo))
             {
                 return;
