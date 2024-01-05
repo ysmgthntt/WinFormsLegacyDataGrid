@@ -15,7 +15,7 @@ namespace System.Windows.Forms
     ///  control.
     /// </summary>
     [
-    Editor("System.Windows.Forms.Design.DataGridColumnCollectionEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
+    //Editor("System.Windows.Forms.Design.DataGridColumnCollectionEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
     ListBindable(false)
     ]
     public class GridColumnStylesCollection : BaseCollection, IList

@@ -155,7 +155,8 @@ namespace System.Windows.Forms
 
         // add the corresponding value Editor: rip one from the valueEditor for the DisplayMember in the
         // format object
-        [DefaultValue(null), Editor("System.Windows.Forms.Design.DataGridColumnStyleFormatEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
+        //[DefaultValue(null), Editor("System.Windows.Forms.Design.DataGridColumnStyleFormatEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
+        [DefaultValue(null)]
         public string Format
         {
             get

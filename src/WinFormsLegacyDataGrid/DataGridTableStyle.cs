@@ -1358,7 +1358,8 @@ namespace System.Windows.Forms
         /// <summary>
         ///  Gets the name of this grid table.
         /// </summary>
-        [Editor("System.Windows.Forms.Design.DataGridTableStyleMappingNameEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)), DefaultValue("")]
+        //[Editor("System.Windows.Forms.Design.DataGridTableStyleMappingNameEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)), DefaultValue("")]
+        [DefaultValue("")]
         public string MappingName
         {
             get

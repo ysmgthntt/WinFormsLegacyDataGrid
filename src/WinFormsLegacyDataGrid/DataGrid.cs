@@ -20,7 +20,7 @@ namespace System.Windows.Forms
     [
     ComVisible(true),
     ClassInterface(ClassInterfaceType.AutoDispatch),
-    Designer("System.Windows.Forms.Design.DataGridDesigner, " + AssemblyRef.SystemDesign),
+    //Designer("System.Windows.Forms.Design.DataGridDesigner, " + AssemblyRef.SystemDesign),
     DefaultProperty(nameof(DataSource)),
     DefaultEvent(nameof(Navigate)),
     ComplexBindingProperties(nameof(DataSource), nameof(DataMember)),

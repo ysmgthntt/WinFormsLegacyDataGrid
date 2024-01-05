@@ -279,7 +279,7 @@ namespace System.Windows.Forms
             remove => Events.RemoveHandler(s_headerTextEvent, value);
         }
 
-        [Editor("System.Windows.Forms.Design.DataGridColumnStyleMappingNameEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
+        //[Editor("System.Windows.Forms.Design.DataGridColumnStyleMappingNameEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
         [Localizable(true)]
         [DefaultValue("")]
         public string MappingName
