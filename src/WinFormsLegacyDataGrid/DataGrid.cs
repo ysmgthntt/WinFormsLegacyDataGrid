@@ -4138,8 +4138,11 @@ namespace System.Windows.Forms
             base.OnHandleCreated(e);
 
             // toolTipping
-            toolTipProvider = new DataGridToolTip(this);
-            toolTipProvider.CreateToolTipHandle();
+            if (!DesignMode)    // ★
+            {
+                toolTipProvider = new DataGridToolTip(this);
+                toolTipProvider.CreateToolTipHandle();
+            }
             toolTipId = 0;
 
             PerformLayout();
