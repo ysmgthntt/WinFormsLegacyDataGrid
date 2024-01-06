@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using static Interop;
 
 namespace System.Windows.Forms
 {
@@ -20,8 +18,8 @@ namespace System.Windows.Forms
 
             if (_updateCount == 0)
             {
-                UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), WindowMessages.WM_SETREDRAW, 0, 0);
-                //PInvoke.SendMessage(this, PInvoke.WM_SETREDRAW, (WPARAM)(BOOL)false);
+                //UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), WindowMessages.WM_SETREDRAW, 0, 0);
+                PInvoke.SendMessage(this, PInvoke.WM_SETREDRAW, (WPARAM)(BOOL)false);
             }
 
             _updateCount++;
@@ -40,8 +38,8 @@ namespace System.Windows.Forms
                 _updateCount--;
                 if (_updateCount == 0)
                 {
-                    UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), WindowMessages.WM_SETREDRAW, -1, 0);
-                    //PInvoke.SendMessage(this, PInvoke.WM_SETREDRAW, (WPARAM)(BOOL)true);
+                    //UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), WindowMessages.WM_SETREDRAW, -1, 0);
+                    PInvoke.SendMessage(this, PInvoke.WM_SETREDRAW, (WPARAM)(BOOL)true);
                     if (invalidate)
                     {
                         Invalidate();
@@ -56,28 +54,29 @@ namespace System.Windows.Forms
             }
         }
 
+        internal Graphics CreateGraphicsInternal()
+            => Graphics.FromHwndInternal(Handle);
+
         // ControlPaint.cs
 
-        private static IntPtr CreateHalftoneHBRUSH()
+        private static unsafe HBRUSH CreateHalftoneHBRUSH()
         {
-            short[] grayPattern = new short[8];
+            short* grayPattern = stackalloc short[8];
             for (int i = 0; i < 8; i++)
             {
                 grayPattern[i] = (short)(0x5555 << (i & 1));
             }
 
-            IntPtr hBitmap = SafeNativeMethods.CreateBitmap(8, 8, 1, 1, grayPattern);
+            using PInvoke.CreateBitmapScope hBitmap = new(8, 8, 1, 1, grayPattern);
 
-            NativeMethods.LOGBRUSH lb = new NativeMethods.LOGBRUSH
+            LOGBRUSH lb = new()
             {
-                lbColor = ColorTranslator.ToWin32(Color.Black),
-                lbStyle = NativeMethods.BS_PATTERN,
-                lbHatch = hBitmap
+                lbStyle = BRUSH_STYLE.BS_PATTERN,
+                lbColor = default, // color is ignored since style is BS.PATTERN
+                lbHatch = (nuint)(IntPtr)hBitmap
             };
-            IntPtr brush = SafeNativeMethods.CreateBrushIndirect(ref lb);
 
-            Gdi32.DeleteObject(hBitmap);
-            return brush;
+            return PInvoke.CreateBrushIndirect(&lb);
         }
     }
 }

@@ -384,7 +384,7 @@ namespace System.Windows.Forms
                     }
                     else
                     {
-                        Graphics g = DataGrid.CreateGraphics/*Internal*/();
+                        Graphics g = DataGrid.CreateGraphicsInternal();
                         focusedTextWidth = (int)Math.Ceiling(g.MeasureString(((string)RelationsList[focusedRelation]), DataGrid.LinkFont).Width);
                         g.Dispose();
                     }
@@ -832,7 +832,7 @@ namespace System.Windows.Forms
             if (relationshipRect.IsEmpty && DataGrid.AllowNavigation)
             {
                 Debug.WriteLineIf(CompModSwitches.DGRelationShpRowLayout.TraceVerbose, "GetRelationshipRect grinding away");
-                Graphics g = DataGrid.CreateGraphics/*Internal*/();
+                Graphics g = DataGrid.CreateGraphicsInternal();
                 relationshipRect = new Rectangle
                 {
                     X = 0 //indentWidth;

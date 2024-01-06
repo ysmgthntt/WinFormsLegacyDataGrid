@@ -4,7 +4,7 @@
 
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using static Interop;
+//using static Interop;
 
 namespace System.Windows.Forms
 {
@@ -42,7 +42,8 @@ namespace System.Windows.Forms
         {
             // but what if we get a CtrlV?
             // what about deleting from the menu?
-            if (m.Msg == WindowMessages.WM_PASTE || m.Msg == WindowMessages.WM_CUT || m.Msg == WindowMessages.WM_CLEAR)
+            //if (m.Msg == WindowMessages.WM_PASTE || m.Msg == WindowMessages.WM_CUT || m.Msg == WindowMessages.WM_CLEAR)
+            if (m.Msg == PInvoke.WM_PASTE || m.Msg == PInvoke.WM_CUT || m.Msg == PInvoke.WM_CLEAR)
             {
                 IsInEditOrNavigateMode = false;
                 dataGrid.ColumnStartedEditing(Bounds);
@@ -98,7 +99,7 @@ namespace System.Windows.Forms
                 // enter and escape keys are sent directly to the DataGrid
                 // for those keys, eat the WM_CHAR part of the KeyMessage
                 //
-                if (m.Msg == WindowMessages.WM_CHAR)
+                if (m.Msg == /*WindowMessages*/PInvoke.WM_CHAR)
                 {
                     return true;
                 }
@@ -106,7 +107,7 @@ namespace System.Windows.Forms
                 return ProcessKeyPreview(ref m);
             }
 
-            if (m.Msg == WindowMessages.WM_CHAR)
+            if (m.Msg == /*WindowMessages*/PInvoke.WM_CHAR)
             {
                 if (key == Keys.LineFeed)           // eat the LineFeed we get when the user presses Ctrl-Enter in a gridTextBox
                 {
@@ -119,7 +120,7 @@ namespace System.Windows.Forms
             // now the edit control will be always on top of the grid
             // we only want to process the WM_KEYUP message ( the same way the grid was doing when the grid was getting all
             // the keys )
-            if (m.Msg == WindowMessages.WM_KEYUP)
+            if (m.Msg == /*WindowMessages*/PInvoke.WM_KEYUP)
             {
                 return true;
             }
@@ -207,7 +208,7 @@ namespace System.Windows.Forms
                     if (IsInEditOrNavigateMode && (Control.ModifierKeys & Keys.Shift) == Keys.Shift)
                     {
                         // when we get a SHIFT-SPACEBAR message, disregard the WM_CHAR part of the message
-                        if (m.Msg == WindowMessages.WM_CHAR)
+                        if (m.Msg == /*WindowMessages*/PInvoke.WM_CHAR)
                         {
                             return true;
                         }
@@ -221,7 +222,7 @@ namespace System.Windows.Forms
                     if (IsInEditOrNavigateMode && (Control.ModifierKeys & Keys.Control) == Keys.Control)
                     {
                         // when we get a Control-A message, disregard the WM_CHAR part of the message
-                        if (m.Msg == WindowMessages.WM_CHAR)
+                        if (m.Msg == /*WindowMessages*/PInvoke.WM_CHAR)
                         {
                             return true;
                         }

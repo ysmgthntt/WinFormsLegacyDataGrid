@@ -5,13 +5,13 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using static Interop;
+//using static Interop;
 
 namespace System.Windows.Forms
 {
     // this class is basically a NativeWindow that does toolTipping
     // should be one for the entire grid
-    internal class DataGridToolTip : MarshalByRefObject
+    internal class DataGridToolTip /*: MarshalByRefObject*/
     {
         // the toolTip control
         private NativeWindow tipWindow = null;
@@ -31,24 +31,37 @@ namespace System.Windows.Forms
         {
             if (tipWindow == null || tipWindow.Handle == IntPtr.Zero)
             {
+                /*
                 NativeMethods.INITCOMMONCONTROLSEX icc = new NativeMethods.INITCOMMONCONTROLSEX
                 {
                     dwICC = NativeMethods.ICC_TAB_CLASSES
                 };
                 icc.dwSize = Marshal.SizeOf(icc);
                 SafeNativeMethods.InitCommonControlsEx(icc);
+                */
+                unsafe
+                {
+                    PInvoke.InitCommonControlsEx(new INITCOMMONCONTROLSEX
+                    {
+                        dwSize = (uint)sizeof(INITCOMMONCONTROLSEX),
+                        dwICC = INITCOMMONCONTROLSEX_ICC.ICC_TAB_CLASSES
+                    });
+                }
                 CreateParams cparams = new CreateParams
                 {
                     Parent = dataGrid.Handle,
-                    ClassName = NativeMethods.TOOLTIPS_CLASS,
-                    Style = NativeMethods.TTS_ALWAYSTIP
+                    ClassName = /*NativeMethods*/PInvoke.TOOLTIPS_CLASS,
+                    Style = /*NativeMethods*/(int)PInvoke.TTS_ALWAYSTIP
                 };
                 tipWindow = new NativeWindow();
                 tipWindow.CreateHandle(cparams);
 
-                User32.SendMessageW(tipWindow, WindowMessages.TTM_SETMAXTIPWIDTH, IntPtr.Zero, (IntPtr)SystemInformation.MaxWindowTrackSize.Width);
-                SafeNativeMethods.SetWindowPos(new HandleRef(tipWindow, tipWindow.Handle), NativeMethods.HWND_NOTOPMOST, 0, 0, 0, 0, NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOACTIVATE);
-                User32.SendMessageW(tipWindow, WindowMessages.TTM_SETDELAYTIME, (IntPtr)ComCtl32.TTDT.INITIAL, (IntPtr)0);
+                //User32.SendMessageW(tipWindow, WindowMessages.TTM_SETMAXTIPWIDTH, IntPtr.Zero, (IntPtr)SystemInformation.MaxWindowTrackSize.Width);
+                PInvoke.SendMessage(tipWindow, PInvoke.TTM_SETMAXTIPWIDTH, 0, SystemInformation.MaxWindowTrackSize.Width);
+                //SafeNativeMethods.SetWindowPos(new HandleRef(tipWindow, tipWindow.Handle), NativeMethods.HWND_NOTOPMOST, 0, 0, 0, 0, NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOACTIVATE);
+                PInvoke.SetWindowPos(tipWindow, HWND.HWND_NOTOPMOST, 0, 0, 0, 0, SET_WINDOW_POS_FLAGS.SWP_NOSIZE | SET_WINDOW_POS_FLAGS.SWP_NOMOVE | SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE);
+                //User32.SendMessageW(tipWindow, WindowMessages.TTM_SETDELAYTIME, (IntPtr)ComCtl32.TTDT.INITIAL, (IntPtr)0);
+                PInvoke.SendMessage(tipWindow, PInvoke.TTM_SETDELAYTIME, PInvoke.TTDT_INITIAL, 0);
             }
         }
 
@@ -61,14 +74,16 @@ namespace System.Windows.Forms
             if (toolTipString == null)
                 throw new ArgumentNullException(nameof(toolTipString));
 
-            var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId, ComCtl32.TTF.SUBCLASS, toolTipString, iconBounds);
-            info.SendMessage(tipWindow, WindowMessages.TTM_ADDTOOLW);
+            //var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId, ComCtl32.TTF.SUBCLASS, toolTipString, iconBounds);
+            var info = new ToolInfoWrapper<Control>(dataGrid, toolTipId, TOOLTIP_FLAGS.TTF_SUBCLASS, toolTipString, iconBounds);
+            info.SendMessage(tipWindow, /*WindowMessages*/PInvoke.TTM_ADDTOOLW);
         }
 
         public void RemoveToolTip(IntPtr toolTipId)
         {
-            var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId);
-            info.SendMessage(tipWindow, WindowMessages.TTM_DELTOOLW);
+            //var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId);
+            var info = new ToolInfoWrapper<Control>(dataGrid, toolTipId);
+            info.SendMessage(tipWindow, /*WindowMessages*/PInvoke.TTM_DELTOOLW);
         }
 
         // will destroy the tipWindow

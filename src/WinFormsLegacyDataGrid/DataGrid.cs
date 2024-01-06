@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using static Interop;
+//using static Interop;
 
 namespace System.Windows.Forms
 {
@@ -537,7 +537,8 @@ namespace System.Windows.Forms
         [
         SRCategory(nameof(SR.CatAppearance)),
         DefaultValue(defaultBorderStyle),
-        DispId(NativeMethods.ActiveX.DISPID_BORDERSTYLE),
+        //DispId(NativeMethods.ActiveX.DISPID_BORDERSTYLE),
+        DispId(PInvoke.DISPID_BORDERSTYLE),
         SRDescription(nameof(SR.DataGridBorderStyleDescr))
         ]
         public BorderStyle BorderStyle
@@ -2515,7 +2516,8 @@ namespace System.Windows.Forms
                 for (int r = 0; r < rects.Length; r++)
                 {
                     scroll = rects[r];
-                    SafeNativeMethods.ScrollWindow(new HandleRef(this, Handle),
+                    //SafeNativeMethods.ScrollWindow(new HandleRef(this, Handle),
+                    PInvoke.ScrollWindow(this,
                                         change,
                                         0,
                                         ref scroll,
@@ -4693,7 +4695,7 @@ namespace System.Windows.Forms
             // and that would be wrong.
             gridState[GRIDSTATE_isScrolling] = true;
             wheelDelta += e.Delta;
-            float movePerc = (float)wheelDelta / (float)NativeMethods.WHEEL_DELTA;
+            float movePerc = (float)wheelDelta / (float)/*NativeMethods*/PInvoke.WHEEL_DELTA;
             int move = (int)((float)SystemInformation.MouseWheelScrollLines * movePerc);
             if (move != 0)
             {
@@ -5129,7 +5131,7 @@ namespace System.Windows.Forms
             }
 
             int size;
-            Graphics g = CreateGraphics/*Internal*/();
+            Graphics g = CreateGraphicsInternal();
             try
             {
                 DataGridColumnStyle column = myGridTable.GridColumnStyles[col];
@@ -5483,7 +5485,7 @@ namespace System.Windows.Forms
                 return;
             }
 
-            Graphics g = CreateGraphics/*Internal*/();
+            Graphics g = CreateGraphicsInternal();
             try
             {
                 GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
@@ -6328,12 +6330,13 @@ namespace System.Windows.Forms
                     cy += rowHeight;
                 }
 
-                using (Graphics graphics = CreateGraphics/*Internal*/())
+                using (Graphics graphics = CreateGraphicsInternal())
                 {
                     IntPtr handle = region.GetHrgn(graphics);
                     if (handle != IntPtr.Zero)
                     {
-                        cachedScrollableRegion = UnsafeNativeMethods.GetRectsFromRegion(handle);
+                        //cachedScrollableRegion = UnsafeNativeMethods.GetRectsFromRegion(handle);
+                        cachedScrollableRegion = ((HRGN)handle).GetRegionRects();
 
                         region.ReleaseHrgn(handle);
                     }
@@ -6408,14 +6411,16 @@ namespace System.Windows.Forms
         /// </summary>
         private void DrawSplitBar(Rectangle r)
         {
-            IntPtr parentHandle = Handle;
-            IntPtr dc = UnsafeNativeMethods.GetDCEx(new HandleRef(this, parentHandle), NativeMethods.NullHandleRef, NativeMethods.DCX_CACHE | NativeMethods.DCX_LOCKWINDOWUPDATE);
-            IntPtr halftone = /*ControlPaint.*/CreateHalftoneHBRUSH();
-            IntPtr saveBrush = Gdi32.SelectObject(dc, halftone);
-            SafeNativeMethods.PatBlt(new HandleRef(this, dc), r.X, r.Y, r.Width, r.Height, NativeMethods.PATINVERT);
-            Gdi32.SelectObject(dc, saveBrush);
-            Gdi32.DeleteObject(halftone);
-            User32.ReleaseDC(new HandleRef(this, parentHandle), dc);
+            //IntPtr parentHandle = Handle;
+            //IntPtr dc = UnsafeNativeMethods.GetDCEx(new HandleRef(this, parentHandle), NativeMethods.NullHandleRef, NativeMethods.DCX_CACHE | NativeMethods.DCX_LOCKWINDOWUPDATE);
+            using GetDcScope dc = new((HWND)Handle, HRGN.Null, GET_DCX_FLAGS.DCX_CACHE | GET_DCX_FLAGS.DCX_LOCKWINDOWUPDATE);
+            /*IntPtr*/HBRUSH halftone = /*ControlPaint.*/CreateHalftoneHBRUSH();
+            /*IntPtr*/HGDIOBJ saveBrush = /*Gdi32*/PInvoke.SelectObject(dc, halftone);
+            //SafeNativeMethods.PatBlt(new HandleRef(this, dc), r.X, r.Y, r.Width, r.Height, NativeMethods.PATINVERT);
+            PInvoke.PatBlt((HDC)dc, r.X, r.Y, r.Width, r.Height, ROP_CODE.PATINVERT);
+            /*Gdi32*/PInvoke.SelectObject(dc, saveBrush);
+            /*Gdi32*/PInvoke.DeleteObject(halftone);
+            //User32.ReleaseDC(new HandleRef(this, parentHandle), dc);
         }
 
         /// <summary>
@@ -9151,7 +9156,7 @@ namespace System.Windows.Forms
         /// </summary>
         protected override bool ProcessKeyPreview(ref Message m)
         {
-            if (m.Msg == WindowMessages.WM_KEYDOWN)
+            if (m.Msg == /*WindowMessages*/PInvoke.WM_KEYDOWN)
             {
                 KeyEventArgs ke = new KeyEventArgs((Keys)(unchecked((int)(long)m.WParam)) | ModifierKeys);
                 switch (ke.KeyCode)
@@ -9180,7 +9185,7 @@ namespace System.Windows.Forms
                 // Ctrl-Tab will be sent as a tab paired w/ a control on the KeyUp message
                 //
             }
-            else if (m.Msg == WindowMessages.WM_KEYUP)
+            else if (m.Msg == /*WindowMessages*/PInvoke.WM_KEYUP)
             {
                 KeyEventArgs ke = new KeyEventArgs((Keys)(unchecked((int)(long)m.WParam)) | ModifierKeys);
                 if (ke.KeyCode == Keys.Tab)
@@ -9591,7 +9596,8 @@ namespace System.Windows.Forms
                 }
 
                 RECT scrollArea = rowsRect;
-                SafeNativeMethods.ScrollWindow(new HandleRef(this, Handle), 0, deltaY, ref scrollArea, ref scrollArea);
+                //SafeNativeMethods.ScrollWindow(new HandleRef(this, Handle), 0, deltaY, ref scrollArea, ref scrollArea);
+                PInvoke.ScrollWindow(this, 0, deltaY, ref scrollArea, ref scrollArea);
                 OnScroll(EventArgs.Empty);
 
                 if (wasEditing)
@@ -9888,7 +9894,8 @@ namespace System.Windows.Forms
             {
                 RECT scrollRECT = new Rectangle(underParentRows.X, underParentRows.Y - layout.ParentRows.Height, underParentRows.Width, underParentRows.Height + layout.ParentRows.Height);
 
-                SafeNativeMethods.ScrollWindow(new HandleRef(this, Handle), 0, -parentRowsRect.Height, ref scrollRECT, ref scrollRECT);
+                //SafeNativeMethods.ScrollWindow(new HandleRef(this, Handle), 0, -parentRowsRect.Height, ref scrollRECT, ref scrollRECT);
+                PInvoke.ScrollWindow(this, 0, -parentRowsRect.Height, ref scrollRECT, ref scrollRECT);
 
                 // If the vertical scrollbar was visible before and not after
                 // the ScrollWindow call, then we will not get invalidated
