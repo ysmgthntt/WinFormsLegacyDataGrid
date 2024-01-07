@@ -24,14 +24,14 @@ internal static class SR
     internal static string CatPropertyChanged => GetResourceString(nameof(CatPropertyChanged));
     internal static string CatWindowStyle => GetResourceString(nameof(CatWindowStyle));
     //
-    internal static string AccDGCollapse => nameof(AccDGCollapse);
-    internal static string AccDGEdit => nameof(AccDGEdit);
-    internal static string AccDGExpand => nameof(AccDGExpand);
-    internal static string AccDGNavigate => nameof(AccDGNavigate);
-    internal static string AccDGNavigateBack => nameof(AccDGNavigateBack);
-    internal static string AccDGNewRow => nameof(AccDGNewRow);
-    internal static string AccDGParentRow => nameof(AccDGParentRow);
-    internal static string AccDGParentRows => nameof(AccDGParentRows);
+    internal static string AccDGCollapse => "Collapse";
+    internal static string AccDGEdit => "Edit";
+    internal static string AccDGExpand => "Expand";
+    internal static string AccDGNavigate => "Navigate";
+    internal static string AccDGNavigateBack => "Navigate Back";
+    internal static string AccDGNewRow => "(Create New)";
+    internal static string AccDGParentRow => "Parent Row";
+    internal static string AccDGParentRows => "Parent Rows";
     internal static string BadDataSourceForComplexBinding => nameof(BadDataSourceForComplexBinding);
     internal static string ControlBackColorDescr => nameof(ControlBackColorDescr);
     internal static string ControlForeColorDescr => nameof(ControlForeColorDescr);
@@ -80,7 +80,7 @@ internal static class SR
     internal static string DataGridNavigateEventDescr => nameof(DataGridNavigateEventDescr);
     internal static string DataGridNavigationModeDescr => nameof(DataGridNavigationModeDescr);
     internal static string DataGridNodeClickEventDescr => nameof(DataGridNodeClickEventDescr);
-    internal static string DataGridNullText => nameof(DataGridNullText);
+    internal static string DataGridNullText => "(null)";
     internal static string DataGridOnBackgroundColorChangedDescr => nameof(DataGridOnBackgroundColorChangedDescr);
     internal static string DataGridOnBorderStyleChangedDescr => nameof(DataGridOnBorderStyleChangedDescr);
     internal static string DataGridOnCaptionVisibleChangedDescr => nameof(DataGridOnCaptionVisibleChangedDescr);
