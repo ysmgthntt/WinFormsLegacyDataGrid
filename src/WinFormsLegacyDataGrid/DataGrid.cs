@@ -1623,7 +1623,7 @@ namespace System.Windows.Forms
         [
          DefaultValue(null),
          SRCategory(nameof(SR.CatData)),
-         Editor("System.Windows.Forms.Design.DataMemberListEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)),
+         //Editor("System.Windows.Forms.Design.DataMemberListEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)),
          SRDescription(nameof(SR.DataGridDataMemberDescr))
         ]
         public string DataMember
