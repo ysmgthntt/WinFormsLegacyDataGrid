@@ -703,7 +703,8 @@ namespace System.Windows.Forms
 
         protected virtual bool ShouldSerializeHeaderForeColor()
         {
-            return !HeaderForePen.Equals(DefaultHeaderForePen);
+            //return !HeaderForePen.Equals(DefaultHeaderForePen);
+            return !HeaderForeBrush.Equals(DefaultHeaderForeBrush);
         }
 
         public void ResetHeaderForeColor()

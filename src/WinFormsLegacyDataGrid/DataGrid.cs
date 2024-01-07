@@ -1621,7 +1621,7 @@ namespace System.Windows.Forms
         ///  Gets or sets the specific table in a DataSource for the control.
         /// </summary>
         [
-         DefaultValue(null),
+         DefaultValue(/*null*/""),
          SRCategory(nameof(SR.CatData)),
          //Editor("System.Windows.Forms.Design.DataMemberListEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)),
          SRDescription(nameof(SR.DataGridDataMemberDescr))
@@ -2394,7 +2394,8 @@ namespace System.Windows.Forms
 
         protected virtual bool ShouldSerializeHeaderForeColor()
         {
-            return !HeaderForePen.Equals(DefaultHeaderForePen);
+            //return !HeaderForePen.Equals(DefaultHeaderForePen);
+            return !HeaderForeBrush.Equals(DefaultHeaderForeBrush);
         }
 
         public void ResetHeaderForeColor()
