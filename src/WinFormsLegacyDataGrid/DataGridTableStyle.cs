@@ -7,7 +7,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Represents the table drawn by the <see cref='Forms.DataGrid'/> control at run time.
@@ -151,7 +155,7 @@ namespace System.Windows.Forms
                     throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(AlternatingBackColor)));
                 }
 
-                if (System.Windows.Forms.DataGrid.IsTransparentColor(value))
+                if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
                     throw new ArgumentException(SR.DataGridTableStyleTransparentAlternatingBackColorNotAllowed, nameof(value));
                 }
@@ -198,12 +202,12 @@ namespace System.Windows.Forms
 
         protected bool ShouldSerializeBackColor()
         {
-            return !System.Windows.Forms.DataGridTableStyle.DefaultBackBrush.Equals(backBrush);
+            return !/*System.Windows.Forms.*/DataGridTableStyle.DefaultBackBrush.Equals(backBrush);
         }
 
         protected bool ShouldSerializeForeColor()
         {
-            return !System.Windows.Forms.DataGridTableStyle.DefaultForeBrush.Equals(foreBrush);
+            return !/*System.Windows.Forms.*/DataGridTableStyle.DefaultForeBrush.Equals(foreBrush);
         }
 
         internal SolidBrush BackBrush
@@ -231,7 +235,7 @@ namespace System.Windows.Forms
                     throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(BackColor)));
                 }
 
-                if (System.Windows.Forms.DataGrid.IsTransparentColor(value))
+                if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
                     throw new ArgumentException(SR.DataGridTableStyleTransparentBackColorNotAllowed, nameof(value));
                 }
@@ -572,7 +576,7 @@ namespace System.Windows.Forms
                     throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(HeaderBackColor)));
                 }
 
-                if (System.Windows.Forms.DataGrid.IsTransparentColor(value))
+                if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
                     throw new ArgumentException(SR.DataGridTableStyleTransparentHeaderBackColorNotAllowed, nameof(value));
                 }
@@ -1075,7 +1079,7 @@ namespace System.Windows.Forms
                     throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(SelectionBackColor)));
                 }
 
-                if (System.Windows.Forms.DataGrid.IsTransparentColor(value))
+                if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
                     throw new ArgumentException(SR.DataGridTableStyleTransparentSelectionBackColorNotAllowed, nameof(value));
                 }

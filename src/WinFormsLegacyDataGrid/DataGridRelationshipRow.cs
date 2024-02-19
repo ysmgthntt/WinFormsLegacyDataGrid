@@ -840,13 +840,13 @@ namespace System.Windows.Forms
 
         private int PaintRelationText(Graphics g, Rectangle bounds, bool alignToRight)
         {
-            g.FillRectangle(GetBackBrush(), bounds.X, bounds.Y, bounds.Width, System.Windows.Forms.DataGridTableStyle.relationshipSpacing);
+            g.FillRectangle(GetBackBrush(), bounds.X, bounds.Y, bounds.Width, /*System.Windows.Forms.*/DataGridTableStyle.relationshipSpacing);
 
             int relationshipHeight = dgTable.RelationshipHeight;
-            Rectangle textBounds = new Rectangle(bounds.X, bounds.Y + System.Windows.Forms.DataGridTableStyle.relationshipSpacing,
+            Rectangle textBounds = new Rectangle(bounds.X, bounds.Y + /*System.Windows.Forms.*/DataGridTableStyle.relationshipSpacing,
                                                  bounds.Width,
                                                  relationshipHeight);
-            int cy = System.Windows.Forms.DataGridTableStyle.relationshipSpacing;
+            int cy = /*System.Windows.Forms.*/DataGridTableStyle.relationshipSpacing;
             for (int r = 0; r < dgTable.RelationsList.Count; ++r)
             {
                 if (cy > bounds.Height)
@@ -940,7 +940,7 @@ namespace System.Windows.Forms
             int relation = -1;
             int relationshipHeight = dgTable.RelationshipHeight;
             Rectangle relRect = GetRelationshipRect();
-            int cy = base.Height - dgTable.BorderWidth + System.Windows.Forms.DataGridTableStyle.relationshipSpacing;
+            int cy = base.Height - dgTable.BorderWidth + /*System.Windows.Forms.*/DataGridTableStyle.relationshipSpacing;
             while (cy < relRect.Bottom)
             {
                 if (cy > y)

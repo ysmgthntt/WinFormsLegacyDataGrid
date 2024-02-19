@@ -8,7 +8,11 @@ using System.Diagnostics;
 using System.Drawing.Design;
 using System.Globalization;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Represents a collection of System.Windows.Forms.DataGridColumnStyle objects in the <see cref='DataGrid'/>

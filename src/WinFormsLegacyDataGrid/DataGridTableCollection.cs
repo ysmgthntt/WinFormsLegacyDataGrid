@@ -6,7 +6,11 @@ using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Represents a collection of <see cref='DataGridTableStyle'/> objects in the <see cref='DataGrid'/>

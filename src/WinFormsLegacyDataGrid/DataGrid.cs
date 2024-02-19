@@ -12,7 +12,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 //using static Interop;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Displays ADO.NET data in a scrollable grid.
@@ -60,7 +64,7 @@ namespace System.Windows.Forms
         private const int GRIDSTATE_layoutSuspended = 0x01000000;
 
         // PERF: take all the bools and put them into a state variable
-        private Collections.Specialized.BitVector32 gridState;                  // see GRIDSTATE_ consts above
+        private System.Collections.Specialized.BitVector32 gridState;                  // see GRIDSTATE_ consts above
 
         // for column widths
         private const int NumRowsForAutoResize = 10;
@@ -316,7 +320,7 @@ namespace System.Windows.Forms
             SetStyle(ControlStyles.Opaque, false);
             SetStyle(ControlStyles.SupportsTransparentBackColor, false);
             SetStyle(ControlStyles.UserMouse, true);
-            gridState = new Collections.Specialized.BitVector32(0x00042827);
+            gridState = new System.Collections.Specialized.BitVector32(0x00042827);
 
             dataGridTables = new GridTableStylesCollection(this);
             layout = CreateInitialLayoutState();

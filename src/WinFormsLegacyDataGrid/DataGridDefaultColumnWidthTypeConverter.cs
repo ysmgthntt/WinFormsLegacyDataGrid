@@ -5,7 +5,11 @@
 using System.ComponentModel;
 using System.Globalization;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     public class DataGridPreferredColumnWidthTypeConverter : TypeConverter
     {

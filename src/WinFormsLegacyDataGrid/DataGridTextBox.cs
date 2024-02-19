@@ -6,7 +6,11 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 //using static Interop;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Represents a <see cref='TextBox'/> control that is hosted in a

@@ -8,7 +8,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Specifies the appearance and text formatting and behavior of a <see cref='DataGrid'/> control column.

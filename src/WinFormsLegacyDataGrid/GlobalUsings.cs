@@ -6,5 +6,7 @@ global using Windows.Win32.UI.WindowsAndMessaging;
 
 global using System;
 global using System.Diagnostics.CodeAnalysis;
+global using System.Windows.Forms;
 
+global using WinFormsLegacyControls;
 global using WinFormsLegacyDataGrid.Migration;

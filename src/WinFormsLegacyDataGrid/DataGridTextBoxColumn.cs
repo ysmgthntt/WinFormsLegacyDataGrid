@@ -7,7 +7,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 
+#if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
+#else
+namespace WinFormsLegacyControls
+#endif
 {
     /// <summary>
     ///  Hosts a System.Windows.Forms.TextBox control in a cell of a System.Windows.Forms.DataGridColumnStyle for editing strings.
@@ -21,7 +25,7 @@ namespace System.Windows.Forms
         private string format = null;
         private TypeConverter typeConverter;
         private IFormatProvider formatInfo = null;
-        private Reflection.MethodInfo parseMethod;
+        private System.Reflection.MethodInfo parseMethod;
 
         // hosted control
         private readonly DataGridTextBox edit;
