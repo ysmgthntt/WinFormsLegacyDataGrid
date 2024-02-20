@@ -272,7 +272,7 @@ namespace WinFormsLegacyControls
             get
             {
                 DataGrid dataGrid = DataGrid;
-                if (dataGrid == null)
+                if (dataGrid is null)
                 {
                     return 0;
                 }
@@ -631,7 +631,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                return (headerFont ?? (DataGrid == null ? Control.DefaultFont : DataGrid.Font));
+                return (headerFont ?? (DataGrid is null ? Control.DefaultFont : DataGrid.Font));
             }
             set
             {
@@ -640,7 +640,7 @@ namespace WinFormsLegacyControls
                     throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(HeaderFont)));
                 }
 
-                if (value == null && headerFont != null || (value != null && !value.Equals(headerFont)))
+                if ((value is null && headerFont is not null) || (value is not null && !value.Equals(headerFont)))
                 {
                     headerFont = value;
                     OnHeaderFontChanged(EventArgs.Empty);
@@ -656,12 +656,12 @@ namespace WinFormsLegacyControls
 
         private bool ShouldSerializeHeaderFont()
         {
-            return (headerFont != null);
+            return (headerFont is not null);
         }
 
         public void ResetHeaderFont()
         {
-            if (headerFont != null)
+            if (headerFont is not null)
             {
                 headerFont = null;
                 OnHeaderFontChanged(EventArgs.Empty);
@@ -1043,7 +1043,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (DataGrid != null)
+                if (DataGrid is not null)
                 {
                     value = Math.Max(DataGrid.MinimumRowHeaderWidth(), value);
                 }
@@ -1188,7 +1188,7 @@ namespace WinFormsLegacyControls
         //
         private void InvalidateInside()
         {
-            if (DataGrid != null)
+            if (DataGrid is not null)
             {
                 DataGrid.InvalidateInside();
             }
@@ -1216,7 +1216,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public DataGridTableStyle(CurrencyManager listManager) : this()
         {
-            Debug.Assert(listManager != null, "the DataGridTabel cannot use a null listManager");
+            Debug.Assert(listManager is not null, "the DataGridTabel cannot use a null listManager");
             mappingName = listManager.GetListName();
             // set up the Relations and the columns
             SetGridColumnStylesCollection(listManager);
@@ -1235,7 +1235,7 @@ namespace WinFormsLegacyControls
             for (int i = 0; i < propCount; i++)
             {
                 PropertyDescriptor prop = propCollection[i];
-                Debug.Assert(prop != null, "prop is null: how that happened?");
+                Debug.Assert(prop is not null, "prop is null: how that happened?");
                 if (PropertyDescriptorIsARelation(prop))
                 {
                     // relation
@@ -1257,12 +1257,12 @@ namespace WinFormsLegacyControls
                 relationsList.Clear();
             }
 
-            Debug.Assert(propCollection != null, "propCollection is null: how that happened?");
+            Debug.Assert(propCollection is not null, "propCollection is null: how that happened?");
             int propCount = propCollection.Count;
             for (int i = 0; i < propCount; i++)
             {
                 PropertyDescriptor prop = propCollection[i];
-                Debug.Assert(prop != null, "prop is null: how that happened?");
+                Debug.Assert(prop is not null, "prop is null: how that happened?");
                 // do not take into account the properties that are browsable.
                 if (!prop.IsBrowsable)
                 {
@@ -1307,7 +1307,7 @@ namespace WinFormsLegacyControls
 
         internal protected virtual DataGridColumnStyle CreateGridColumn(PropertyDescriptor prop, bool isDefault)
         {
-            if (prop == null)
+            if (prop is null)
             {
                 throw new ArgumentNullException(nameof(prop));
             }
@@ -1373,7 +1373,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     value = string.Empty;
                 }
@@ -1389,7 +1389,7 @@ namespace WinFormsLegacyControls
                 // this could throw
                 try
                 {
-                    if (DataGrid != null)
+                    if (DataGrid is not null)
                     {
                         DataGrid.TableStyles.CheckForMappingNameDuplicates(this);
                     }
@@ -1442,14 +1442,14 @@ namespace WinFormsLegacyControls
         /// </summary>
         internal void SetInternalDataGrid(DataGrid dG, bool force)
         {
-            if (dataGrid != null && dataGrid.Equals(dG) && !force)
+            if (dataGrid is not null && dataGrid.Equals(dG) && !force)
             {
                 return;
             }
             else
             {
                 dataGrid = dG;
-                if (dG != null && dG.Initializing)
+                if (dG is not null && dG.Initializing)
                 {
                     return;
                 }
@@ -1515,7 +1515,7 @@ namespace WinFormsLegacyControls
         public bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber)
         {
             DataGrid grid = DataGrid;
-            if (grid == null)
+            if (grid is null)
             {
                 return false;
             }
@@ -1532,7 +1532,7 @@ namespace WinFormsLegacyControls
         public bool EndEdit(DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort)
         {
             DataGrid grid = DataGrid;
-            if (grid == null)
+            if (grid is null)
             {
                 return false;
             }
@@ -1545,7 +1545,7 @@ namespace WinFormsLegacyControls
         internal void InvalidateColumn(DataGridColumnStyle column)
         {
             int index = GridColumnStyles.IndexOf(column);
-            if (index >= 0 && DataGrid != null)
+            if (index >= 0 && DataGrid is not null)
             {
                 DataGrid.InvalidateColumn(index);
             }
@@ -1561,14 +1561,14 @@ namespace WinFormsLegacyControls
                 DataGridColumnStyle col = e.Element as DataGridColumnStyle;
                 if (e.Action == CollectionChangeAction.Add)
                 {
-                    if (col != null)
+                    if (col is not null)
                     {
                         col.SetDataGridInternalInColumn(grid);
                     }
                 }
                 else if (e.Action == CollectionChangeAction.Remove)
                 {
-                    if (col != null)
+                    if (col is not null)
                     {
                         col.SetDataGridInternalInColumn(null);
                     }
@@ -1579,7 +1579,7 @@ namespace WinFormsLegacyControls
                     Debug.Assert(e.Action == CollectionChangeAction.Refresh, "there are only Add, Remove and Refresh in the CollectionChangeAction");
                     // if we get a column in this collectionChangeEventArgs it means
                     // that the propertyDescriptor in that column changed.
-                    if (e.Element != null)
+                    if (e.Element is not null)
                     {
                         for (int i = 0; i < gridColumns.Count; i++)
                         {
@@ -1588,7 +1588,7 @@ namespace WinFormsLegacyControls
                     }
                 }
 
-                if (grid != null)
+                if (grid is not null)
                 {
                     grid.OnColumnCollectionChanged(this, e);
                 }
@@ -1761,7 +1761,7 @@ namespace WinFormsLegacyControls
             if (disposing)
             {
                 GridColumnStylesCollection cols = GridColumnStyles;
-                if (cols != null)
+                if (cols is not null)
                 {
                     for (int i = 0; i < cols.Count; i++)
                     {

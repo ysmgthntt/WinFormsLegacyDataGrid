@@ -58,7 +58,7 @@ namespace WinFormsLegacyControls
         public DataGridColumnStyle(PropertyDescriptor prop) : this()
         {
             PropertyDescriptor = prop;
-            if (prop != null)
+            if (prop is not null)
             {
                 _readOnly = prop.IsReadOnly;
             }
@@ -69,7 +69,7 @@ namespace WinFormsLegacyControls
 #if DEBUG
             IsDefault = isDefault;
 #endif
-            if (isDefault && prop != null)
+            if (isDefault && prop is not null)
             {
                 // take the header name from the property name
                 _headerName = prop.Name;
@@ -177,10 +177,10 @@ namespace WinFormsLegacyControls
         protected virtual void SetDataGridInColumn(DataGrid value)
         {
             // we need to set up the PropertyDescriptor
-            if (PropertyDescriptor == null && value != null)
+            if (PropertyDescriptor is null && value is not null)
             {
                 CurrencyManager lm = value.ListManager;
-                if (lm == null)
+                if (lm is null)
                 {
                     return;
                 }
@@ -201,7 +201,7 @@ namespace WinFormsLegacyControls
 
         internal void SetDataGridInternalInColumn(DataGrid value)
         {
-            if (value == null || value.Initializing)
+            if (value is null || value.Initializing)
             {
                 return;
             }
@@ -217,12 +217,12 @@ namespace WinFormsLegacyControls
 
         internal void SetDataGridTableInColumn(DataGridTableStyle value, bool force)
         {
-            if (_dataGridTableStyle != null && _dataGridTableStyle.Equals(value) && !force)
+            if (_dataGridTableStyle is not null && _dataGridTableStyle.Equals(value) && !force)
             {
                 return;
             }
 
-            if (value != null && value.DataGrid != null && !value.DataGrid.Initializing)
+            if (value is not null && value.DataGrid is not null && !value.DataGrid.Initializing)
             {
                 SetDataGridInColumn(value.DataGrid);
             }
@@ -241,7 +241,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Indicates whether the Font property should be persisted.
         /// </summary>
-        private bool ShouldSerializeFont() => _font != null;
+        private bool ShouldSerializeFont() => _font is not null;
 
         public event EventHandler FontChanged
         {
@@ -259,7 +259,7 @@ namespace WinFormsLegacyControls
             get => _headerName;
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     value = string.Empty;
                 }
@@ -269,7 +269,7 @@ namespace WinFormsLegacyControls
                     _headerName = value;
                     OnHeaderTextChanged(EventArgs.Empty);
                     // we only invalidate columns that are visible ( ie, their propertyDescriptor is not null)
-                    if (PropertyDescriptor != null)
+                    if (PropertyDescriptor is not null)
                     {
                         Invalidate();
                     }
@@ -291,7 +291,7 @@ namespace WinFormsLegacyControls
             get => _mappingName;
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     value = string.Empty;
                 }
@@ -399,7 +399,7 @@ namespace WinFormsLegacyControls
                 {
                     _width = value;
                     DataGrid grid = DataGridTableStyle?.DataGrid;
-                    if (grid != null)
+                    if (grid is not null)
                     {
                         // rearrange the scroll bars
                         grid.PerformLayout();
@@ -469,7 +469,7 @@ namespace WinFormsLegacyControls
         {
             CheckValidDataSource(source);
             PropertyDescriptor descriptor = PropertyDescriptor;
-            if (descriptor == null)
+            if (descriptor is null)
             {
                 throw new InvalidOperationException(SR.DataGridColumnNoPropertyDescriptor);
             }
@@ -496,7 +496,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected void CheckValidDataSource(CurrencyManager value)
         {
-            if (value == null)
+            if (value is null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
@@ -505,7 +505,7 @@ namespace WinFormsLegacyControls
             // In that case, we still have to push the value into the backend
             // and we only need the propertyDescriptor to push the value.
             // (take a look at gridEditAndDeleteEditColumn)
-            if (PropertyDescriptor == null)
+            if (PropertyDescriptor is null)
             {
                 throw new InvalidOperationException(string.Format(SR.DataGridColumnUnbound, HeaderText));
             }
@@ -570,7 +570,7 @@ namespace WinFormsLegacyControls
         internal virtual bool KeyPress(int rowNum, Keys keyData)
         {
             // if this is read only then do not do anything
-            if (ReadOnly || (DataGridTableStyle != null && DataGridTableStyle.DataGrid != null && DataGridTableStyle.DataGrid.ReadOnly))
+            if (ReadOnly || (DataGridTableStyle is not null && DataGridTableStyle.DataGrid is not null && DataGridTableStyle.DataGrid.ReadOnly))
             {
                 return false;
             }
@@ -663,7 +663,7 @@ namespace WinFormsLegacyControls
         {
             CheckValidDataSource(source);
             PropertyDescriptor descriptor = PropertyDescriptor;
-            if (descriptor == null)
+            if (descriptor is null)
             {
                 throw new InvalidOperationException(SR.DataGridColumnNoPropertyDescriptor);
             }
@@ -702,7 +702,7 @@ namespace WinFormsLegacyControls
             {
                 get
                 {
-                    if (dgEditColumnEditing == null)
+                    if (dgEditColumnEditing is null)
                     {
                         dgEditColumnEditing = new TraceSwitch("DGEditColumnEditing", "Editing related tracing");
                     }
@@ -717,7 +717,7 @@ namespace WinFormsLegacyControls
         {
             public DataGridColumnHeaderAccessibleObject(DataGridColumnStyle owner) : this()
             {
-                Debug.Assert(owner != null, "DataGridColumnHeaderAccessibleObject must have a valid owner DataGridColumn");
+                Debug.Assert(owner is not null, "DataGridColumnHeaderAccessibleObject must have a valid owner DataGridColumn");
                 Owner = owner;
             }
 
@@ -731,7 +731,7 @@ namespace WinFormsLegacyControls
                 {
                     // we need to get the width and the X coordinate of this column on the screen
                     // we can't just cache this, cause the column may be moved in the collection
-                    if (Owner.PropertyDescriptor == null)
+                    if (Owner.PropertyDescriptor is null)
                     {
                         return Rectangle.Empty;
                     }

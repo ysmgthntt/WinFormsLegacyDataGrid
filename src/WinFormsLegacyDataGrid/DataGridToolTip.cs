@@ -22,14 +22,14 @@ namespace System.Windows.Forms
         // CONSTRUCTOR
         public DataGridToolTip(DataGrid dataGrid)
         {
-            Debug.Assert(dataGrid != null, "can't attach a tool tip to a null grid");
+            Debug.Assert(dataGrid is not null, "can't attach a tool tip to a null grid");
             this.dataGrid = dataGrid;
         }
 
         // will ensure that the toolTip window was created
         public void CreateToolTipHandle()
         {
-            if (tipWindow == null || tipWindow.Handle == IntPtr.Zero)
+            if (tipWindow is null || tipWindow.Handle == IntPtr.Zero)
             {
                 /*
                 NativeMethods.INITCOMMONCONTROLSEX icc = new NativeMethods.INITCOMMONCONTROLSEX
@@ -67,11 +67,11 @@ namespace System.Windows.Forms
 
         public void AddToolTip(string toolTipString, IntPtr toolTipId, Rectangle iconBounds)
         {
-            Debug.Assert(tipWindow != null && tipWindow.Handle != IntPtr.Zero, "the tipWindow was not initialized, bailing out");
+            Debug.Assert(tipWindow is not null && tipWindow.Handle != IntPtr.Zero, "the tipWindow was not initialized, bailing out");
             if (iconBounds.IsEmpty)
                 throw new ArgumentNullException(nameof(iconBounds), SR.DataGridToolTipEmptyIcon);
 
-            if (toolTipString == null)
+            if (toolTipString is null)
                 throw new ArgumentNullException(nameof(toolTipString));
 
             //var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId, ComCtl32.TTF.SUBCLASS, toolTipString, iconBounds);
@@ -89,7 +89,7 @@ namespace System.Windows.Forms
         // will destroy the tipWindow
         public void Destroy()
         {
-            Debug.Assert(tipWindow != null, "how can one destroy a null window");
+            Debug.Assert(tipWindow is not null, "how can one destroy a null window");
             tipWindow.DestroyHandle();
             tipWindow = null;
         }

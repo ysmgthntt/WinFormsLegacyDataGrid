@@ -280,7 +280,7 @@ namespace WinFormsLegacyControls
 
             // columns which are not the default should have a default
             // width of DataGrid.PreferredColumnWidth
-            if (DataGridTableStyle != null && column.Width == -1)
+            if (DataGridTableStyle is not null && column.Width == -1)
             {
                 column._width = DataGridTableStyle.PreferredColumnWidth;
             }
@@ -294,7 +294,7 @@ namespace WinFormsLegacyControls
 
         public void AddRange(DataGridColumnStyle[] columns)
         {
-            if (columns == null)
+            if (columns is null)
             {
                 throw new ArgumentNullException(nameof(columns));
             }
@@ -354,7 +354,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public bool Contains(PropertyDescriptor propertyDescriptor)
         {
-            return this[propertyDescriptor] != null;
+            return this[propertyDescriptor] is not null;
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace WinFormsLegacyControls
             onCollectionChanged?.Invoke(this, e);
 
             DataGrid grid = owner.DataGrid;
-            if (grid != null)
+            if (grid is not null)
             {
                 grid.checkHierarchy = true;
             }

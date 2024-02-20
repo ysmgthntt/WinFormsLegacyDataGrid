@@ -107,11 +107,11 @@ namespace WinFormsLegacyControls
         protected override void SetDataGridInColumn(DataGrid value)
         {
             base.SetDataGridInColumn(value);
-            if (edit.Parent/*Internal*/ != null)
+            if (edit.Parent/*Internal*/ is not null)
             {
                 edit.Parent/*Internal*/.Controls.Remove(edit);
             }
-            if (value != null)
+            if (value is not null)
             {
                 value.Controls.Add(edit);
             }
@@ -146,7 +146,7 @@ namespace WinFormsLegacyControls
             set
             {
                 base.PropertyDescriptor = value;
-                if (PropertyDescriptor != null)
+                if (PropertyDescriptor is not null)
                 {
                     if (PropertyDescriptor.PropertyType != typeof(object))
                     {
@@ -169,12 +169,12 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     value = string.Empty;
                 }
 
-                if (format == null || !format.Equals(value))
+                if (format is null || !format.Equals(value))
                 {
                     format = value;
 
@@ -183,7 +183,7 @@ namespace WinFormsLegacyControls
                     //
                     if (format.Length == 0)
                     {
-                        if (typeConverter != null && !typeConverter.CanConvertFrom(typeof(string)))
+                        if (typeConverter is not null && !typeConverter.CanConvertFrom(typeof(string)))
                         {
                             ReadOnly = true;
                         }
@@ -203,7 +203,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (formatInfo == null || !formatInfo.Equals(value))
+                if (formatInfo is null || !formatInfo.Equals(value))
                 {
                     formatInfo = value;
                 }
@@ -220,9 +220,9 @@ namespace WinFormsLegacyControls
             {
                 // if the gridColumn is can't convert the string to
                 // the backGround propertyDescriptor, then make the column ReadOnly
-                if (!value && (format == null || format.Length == 0))
+                if (!value && (format is null || format.Length == 0))
                 {
-                    if (typeConverter != null && !typeConverter.CanConvertFrom(typeof(string)))
+                    if (typeConverter is not null && !typeConverter.CanConvertFrom(typeof(string)))
                     {
                         return;
                     }
@@ -275,7 +275,7 @@ namespace WinFormsLegacyControls
             // before deleting the column will go to the backEnd)
             // however, in that situation, we are left w/ the editColumn which is not parented.
             // the grid will call Edit to reset the EditColumn
-            if (wasFocused && DataGridTableStyle != null && DataGridTableStyle.DataGrid != null && DataGridTableStyle.DataGrid.CanFocus)
+            if (wasFocused && DataGridTableStyle is not null && DataGridTableStyle.DataGrid is not null && DataGridTableStyle.DataGrid.CanFocus)
             {
                 DataGridTableStyle.DataGrid.Focus();
                 Debug.Assert(!edit.Focused, "the edit control just conceeded focus to the dataGrid");
@@ -285,7 +285,7 @@ namespace WinFormsLegacyControls
         protected internal override void UpdateUI(CurrencyManager source, int rowNum, string displayText)
         {
             edit.Text = GetText(GetColumnValueAtRow(source, rowNum));
-            if (!edit.ReadOnly && displayText != null)
+            if (!edit.ReadOnly && displayText is not null)
             {
                 edit.Text = displayText;
             }
@@ -381,7 +381,7 @@ namespace WinFormsLegacyControls
             // edit.Visible = true;
             edit.IsInEditOrNavigateMode = false;
             // tell the dataGrid that there is an edit:
-            if (DataGridTableStyle != null && DataGridTableStyle.DataGrid != null)
+            if (DataGridTableStyle is not null && DataGridTableStyle.DataGrid is not null)
             {
                 DataGridTableStyle.DataGrid.ColumnStartedEditing(edit.Bounds);
             }
@@ -409,7 +409,7 @@ namespace WinFormsLegacyControls
                     value = Convert.DBNull;
                     edit.Text = NullText;
                 }
-                else if (format != null && format.Length != 0 && parseMethod != null && FormatInfo != null)
+                else if (format is not null && format.Length != 0 && parseMethod is not null && FormatInfo is not null)
                 {
                     // use reflection to get the Parse method on the
                     // type of the propertyDescriptor.
@@ -423,7 +423,7 @@ namespace WinFormsLegacyControls
                         edit.Text = value.ToString();
                     }
                 }
-                else if (typeConverter != null && typeConverter.CanConvertFrom(typeof(string)))
+                else if (typeConverter is not null && typeConverter.CanConvertFrom(typeof(string)))
                 {
                     value = typeConverter.ConvertFromString(edit.Text);
                     edit.Text = typeConverter.ConvertToString(value);
@@ -464,7 +464,7 @@ namespace WinFormsLegacyControls
             edit.ReadOnly = readOnly || ReadOnly || DataGridTableStyle.ReadOnly;
 
             edit.Text = GetText(GetColumnValueAtRow(source, rowNum));
-            if (!edit.ReadOnly && displayText != null)
+            if (!edit.ReadOnly && displayText is not null)
             {
                 // tell the grid that we are changing stuff
                 DataGridTableStyle.DataGrid.ColumnStartedEditing(bounds);
@@ -506,7 +506,7 @@ namespace WinFormsLegacyControls
             // select the text even if the text box is read only
             // because the navigation code in the DataGridTextBox::ProcessKeyMessage
             // uses the SelectedText property
-            if (displayText == null)
+            if (displayText is null)
             {
                 edit.SelectAll();
             }
@@ -533,7 +533,7 @@ namespace WinFormsLegacyControls
             {
                 return NullText;
             }
-            else if (format != null && format.Length != 0 && (value is IFormattable))
+            else if (format is not null && format.Length != 0 && (value is IFormattable))
             {
                 try
                 {
@@ -547,12 +547,12 @@ namespace WinFormsLegacyControls
             else
             {
                 // use the typeConverter:
-                if (typeConverter != null && typeConverter.CanConvertTo(typeof(string)))
+                if (typeConverter is not null && typeConverter.CanConvertTo(typeof(string)))
                 {
                     return (string)typeConverter.ConvertTo(value, typeof(string));
                 }
             }
-            return (value != null ? value.ToString() : "");
+            return (value is not null ? value.ToString() : "");
         }
 
         /// <summary>
@@ -636,7 +636,7 @@ namespace WinFormsLegacyControls
 
         protected internal override void ReleaseHostedControl()
         {
-            if (edit.Parent/*Internal*/ != null)
+            if (edit.Parent/*Internal*/ is not null)
             {
                 edit.Parent/*Internal*/.Controls.Remove(edit);
             }

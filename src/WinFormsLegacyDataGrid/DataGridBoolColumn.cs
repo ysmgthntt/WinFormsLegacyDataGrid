@@ -182,10 +182,10 @@ namespace WinFormsLegacyControls
         private bool IsReadOnly()
         {
             bool ret = ReadOnly;
-            if (DataGridTableStyle != null)
+            if (DataGridTableStyle is not null)
             {
                 ret = ret || DataGridTableStyle.ReadOnly;
-                if (DataGridTableStyle.DataGrid != null)
+                if (DataGridTableStyle.DataGrid is not null)
                 {
                     ret = ret || DataGridTableStyle.DataGrid.ReadOnly;
                 }

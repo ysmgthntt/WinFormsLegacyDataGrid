@@ -97,7 +97,7 @@ namespace System.Windows.Forms
                 gridStyle = dgTable.GridLineStyle;
             }
 
-            int bWidth = DataGrid == null ? 0 : gridStyle == DataGridLineStyle.Solid ? 1 : 0;
+            int bWidth = DataGrid is null ? 0 : gridStyle == DataGridLineStyle.Solid ? 1 : 0;
             dataBounds.Height -= bWidth;
             int cx = base.PaintData(g, dataBounds, firstVisibleColumn, columnCount, alignToRight);
 

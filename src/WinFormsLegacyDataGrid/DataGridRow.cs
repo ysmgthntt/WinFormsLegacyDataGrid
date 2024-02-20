@@ -56,7 +56,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public DataGridRow(DataGrid dataGrid, DataGridTableStyle dgTable, int rowNumber)
         {
-            if (dataGrid == null || dgTable.DataGrid == null)
+            if (dataGrid is null || dgTable.DataGrid is null)
             {
                 throw new ArgumentNullException(nameof(dataGrid));
             }
@@ -81,7 +81,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                if (accessibleObject == null)
+                if (accessibleObject is null)
                 {
                     accessibleObject = CreateAccessibleObject();
                 }
@@ -105,13 +105,13 @@ namespace WinFormsLegacyControls
 
             try
             {
-                if (dgTable.DataGrid.DataSource != null)
+                if (dgTable.DataGrid.DataSource is not null)
                 {
                     int nCols = columns.Count;
                     for (int i = 0; i < nCols; ++i)
                     {
                         // if (columns[i].Visible && columns[i].PropertyDescriptor != null)
-                        if (columns[i].PropertyDescriptor != null)
+                        if (columns[i].PropertyDescriptor is not null)
                         {
                             h = Math.Max(h, columns[i].GetMinimumHeight());
                         }
@@ -247,11 +247,11 @@ namespace WinFormsLegacyControls
             int cx = 0;
             Rectangle cellBounds = new Rectangle();
             GridColumnStylesCollection columns = dgTable.GridColumnStyles;
-            if (columns != null)
+            if (columns is not null)
             {
                 for (int i = firstVisibleCol; i < col; i++)
                 {
-                    if (columns[i].PropertyDescriptor != null)
+                    if (columns[i].PropertyDescriptor is not null)
                     {
                         cx += columns[i].Width;
                     }
@@ -280,7 +280,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected Bitmap GetStarBitmap()
         {
-            if (starBmp == null)
+            if (starBmp is null)
             {
                 starBmp = GetBitmap("DataGridRow.star");
             }
@@ -294,7 +294,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected Bitmap GetPencilBitmap()
         {
-            if (pencilBmp == null)
+            if (pencilBmp is null)
             {
                 pencilBmp = GetBitmap("DataGridRow.pencil");
             }
@@ -307,7 +307,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected Bitmap GetErrorBitmap()
         {
-            if (errorBmp == null)
+            if (errorBmp is null)
             {
                 errorBmp = GetBitmap("DataGridRow.error");
             }
@@ -317,7 +317,7 @@ namespace WinFormsLegacyControls
 
         protected Bitmap GetLeftArrowBitmap()
         {
-            if (leftArrow == null)
+            if (leftArrow is null)
             {
                 leftArrow = GetBitmap("DataGridRow.left");
             }
@@ -327,7 +327,7 @@ namespace WinFormsLegacyControls
 
         protected Bitmap GetRightArrowBitmap()
         {
-            if (rightArrow == null)
+            if (rightArrow is null)
             {
                 rightArrow = GetBitmap("DataGridRow.right");
             }
@@ -360,7 +360,7 @@ namespace WinFormsLegacyControls
         {
             int currentColIndex = dgTable.DataGrid.CurrentCell.ColumnNumber;
             GridColumnStylesCollection columns = dgTable.GridColumnStyles;
-            if (columns != null && currentColIndex >= 0 && currentColIndex < columns.Count)
+            if (columns is not null && currentColIndex >= 0 && currentColIndex < columns.Count)
             {
                 DataGridColumnStyle currentColumn = columns[currentColIndex];
                 if (currentColumn.KeyPress(RowNumber, keyData))
@@ -513,7 +513,7 @@ namespace WinFormsLegacyControls
                 }
 
                 // if (!columns[col].Visible || columns[col].PropertyDescriptor == null)
-                if (columns[col].PropertyDescriptor == null || columns[col].Width <= 0)
+                if (columns[col].PropertyDescriptor is null || columns[col].Width <= 0)
                 {
                     continue;
                 }
@@ -664,7 +664,7 @@ namespace WinFormsLegacyControls
             }
 
             string errString = ((IDataErrorInfo)errorInfo).Error;
-            if (errString == null)
+            if (errString is null)
             {
                 errString = string.Empty;
             }
@@ -776,7 +776,7 @@ namespace WinFormsLegacyControls
 
             public DataGridRowAccessibleObject(DataGridRow owner) : base()
             {
-                Debug.Assert(owner != null, "DataGridRowAccessibleObject must have a valid owner DataGridRow");
+                Debug.Assert(owner is not null, "DataGridRowAccessibleObject must have a valid owner DataGridRow");
                 this.owner = owner;
                 DataGrid grid = DataGrid;
                 Debug.WriteLineIf(DataGrid.DataGridAcc.TraceVerbose, "Create row accessible object");
@@ -786,7 +786,7 @@ namespace WinFormsLegacyControls
 
             private void EnsureChildren()
             {
-                if (cells == null)
+                if (cells is null)
                 {
                     // default size... little extra for relationships...
                     //
@@ -996,7 +996,7 @@ namespace WinFormsLegacyControls
 
             public DataGridCellAccessibleObject(DataGridRow owner, int column) : base()
             {
-                Debug.Assert(owner != null, "DataGridColumnAccessibleObject must have a valid owner DataGridRow");
+                Debug.Assert(owner is not null, "DataGridColumnAccessibleObject must have a valid owner DataGridRow");
                 this.owner = owner;
                 this.column = column;
                 Debug.WriteLineIf(DataGrid.DataGridAcc.TraceVerbose, "Create cell accessible object");
@@ -1128,7 +1128,7 @@ namespace WinFormsLegacyControls
                         else
                         {
                             AccessibleObject o = DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber + 1);
-                            if (o != null)
+                            if (o is not null)
                             {
                                 return o.Navigate(AccessibleNavigation.FirstChild);
                             }
@@ -1147,7 +1147,7 @@ namespace WinFormsLegacyControls
                         else
                         {
                             AccessibleObject o = DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber - 1);
-                            if (o != null)
+                            if (o is not null)
                             {
                                 return o.Navigate(AccessibleNavigation.LastChild);
                             }

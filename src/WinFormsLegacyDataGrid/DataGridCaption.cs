@@ -76,7 +76,7 @@ namespace System.Windows.Forms
 
         internal void OnGridFontChanged()
         {
-            if (dataGridFont == null || !dataGridFont.Equals(dataGrid.Font))
+            if (dataGridFont is null || !dataGridFont.Equals(dataGrid.Font))
             {
                 try
                 {
@@ -173,7 +173,7 @@ namespace System.Windows.Forms
         {
             get
             {
-                if (events == null)
+                if (events is null)
                 {
                     events = new EventHandlerList();
                 }
@@ -188,7 +188,7 @@ namespace System.Windows.Forms
                 // use the dataGridFont only if the user
                 // did not set the CaptionFont
                 //
-                if (textFont == null)
+                if (textFont is null)
                 {
                     return dataGridFont;
                 }
@@ -199,12 +199,12 @@ namespace System.Windows.Forms
             }
             set
             {
-                if (textFont == null || !textFont.Equals(value))
+                if (textFont is null || !textFont.Equals(value))
                 {
                     textFont = value;
                     // this property gets called in the constructor before dataGrid has a caption
                     // and we don't need this special-handling then...
-                    if (dataGrid.Caption != null)
+                    if (dataGrid.Caption is not null)
                     {
                         dataGrid.RecalculateFonts();
                         dataGrid.PerformLayout();
@@ -216,7 +216,7 @@ namespace System.Windows.Forms
 
         internal bool ShouldSerializeFont()
         {
-            return textFont != null && !textFont.Equals(dataGridFont);
+            return textFont is not null && !textFont.Equals(dataGridFont);
         }
 
         internal bool ShouldSerializeBackColor()
@@ -261,7 +261,7 @@ namespace System.Windows.Forms
             }
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     text = string.Empty;
                 }
@@ -355,12 +355,12 @@ namespace System.Windows.Forms
             // Locking 'this' here is ok since this is an internal class.
             lock (this)
             {
-                if (handler == null)
+                if (handler is null)
                 {
                     return;
                 }
 
-                for (EventEntry e = eventList; e != null; e = e.next)
+                for (EventEntry e = eventList; e is not null; e = e.next)
                 {
                     if (e.key == key)
                     {
@@ -398,7 +398,7 @@ namespace System.Windows.Forms
 
         private void Invalidate()
         {
-            if (dataGrid != null)
+            if (dataGrid is not null)
             {
                 dataGrid.InvalidateCaption();
             }
@@ -406,7 +406,7 @@ namespace System.Windows.Forms
 
         private void InvalidateCaptionRect(Rectangle r)
         {
-            if (dataGrid != null)
+            if (dataGrid is not null)
             {
                 dataGrid.InvalidateCaptionRect(r);
             }
@@ -468,7 +468,7 @@ namespace System.Windows.Forms
         {
             if (alignRight)
             {
-                if (leftButtonBitmap_bidi == null)
+                if (leftButtonBitmap_bidi is null)
                 {
                     leftButtonBitmap_bidi = GetBitmap("DataGridCaption.backarrow_bidi");
                 }
@@ -477,7 +477,7 @@ namespace System.Windows.Forms
             }
             else
             {
-                if (leftButtonBitmap == null)
+                if (leftButtonBitmap is null)
                 {
                     leftButtonBitmap = GetBitmap("DataGridCaption.backarrow");
                 }
@@ -488,7 +488,7 @@ namespace System.Windows.Forms
 
         private Bitmap GetDetailsBmp()
         {
-            if (magnifyingGlassBitmap == null)
+            if (magnifyingGlassBitmap is null)
             {
                 magnifyingGlassBitmap = GetBitmap("DataGridCaption.Details");
             }
@@ -501,7 +501,7 @@ namespace System.Windows.Forms
             // Locking 'this' here is ok since this is an internal class.
             lock (this)
             {
-                for (EventEntry e = eventList; e != null; e = e.next)
+                for (EventEntry e = eventList; e is not null; e = e.next)
                 {
                     if (e.key == key)
                     {
@@ -826,7 +826,7 @@ namespace System.Windows.Forms
         protected virtual void RaiseEvent(object key, EventArgs e)
         {
             Delegate handler = GetEventHandler(key);
-            if (handler != null)
+            if (handler is not null)
             {
                 ((EventHandler)handler)(this, e);
             }
@@ -837,19 +837,19 @@ namespace System.Windows.Forms
             // Locking 'this' here is ok since this is an internal class.
             lock (this)
             {
-                if (handler == null)
+                if (handler is null)
                 {
                     return;
                 }
 
-                for (EventEntry e = eventList, prev = null; e != null; prev = e, e = e.next)
+                for (EventEntry e = eventList, prev = null; e is not null; prev = e, e = e.next)
                 {
                     if (e.key == key)
                     {
                         e.handler = Delegate.Remove(e.handler, handler);
-                        if (e.handler == null)
+                        if (e.handler is null)
                         {
-                            if (prev == null)
+                            if (prev is null)
                             {
                                 eventList = e.next;
                             }

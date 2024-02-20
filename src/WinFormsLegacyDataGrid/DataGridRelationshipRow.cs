@@ -174,8 +174,8 @@ namespace System.Windows.Forms
         {
             Debug.Assert(dgTable.DataGrid.AllowNavigation, "how can the user expand the relations if the grid does not allow navigation?");
             if (expanded == false
-                && DataGrid != null
-                && dgTable != null
+                && DataGrid is not null
+                && dgTable is not null
                 && dgTable.RelationsList.Count > 0)
             {
                 expanded = true;
@@ -312,7 +312,7 @@ namespace System.Windows.Forms
         /// </summary>
         private bool PointOverPlusMinusGlyph(int x, int y, Rectangle rowHeaders, bool alignToRight)
         {
-            if (dgTable == null || dgTable.DataGrid == null || !dgTable.DataGrid.AllowNavigation)
+            if (dgTable is null || dgTable.DataGrid is null || !dgTable.DataGrid.AllowNavigation)
             {
                 return false;
             }
@@ -446,7 +446,7 @@ namespace System.Windows.Forms
             switch (keyData & Keys.KeyCode)
             {
                 case Keys.F5:
-                    if (dgTable == null || dgTable.DataGrid == null || !dgTable.DataGrid.AllowNavigation)
+                    if (dgTable is null || dgTable.DataGrid is null || !dgTable.DataGrid.AllowNavigation)
                     {
                         return false;
                     }
@@ -534,7 +534,7 @@ namespace System.Windows.Forms
 
             // if there are no relationships, this row can't do anything with the
             // key
-            if (dgTable.RelationsList.Count == 0 || dgTable.DataGrid == null || !dgTable.DataGrid.AllowNavigation)
+            if (dgTable.RelationsList.Count == 0 || dgTable.DataGrid is null || !dgTable.DataGrid.AllowNavigation)
             {
                 return false;
             }
@@ -998,7 +998,7 @@ namespace System.Windows.Forms
             {
                 base.AddChildAccessibleObjects(children);
                 DataGridRelationshipRow row = (DataGridRelationshipRow)Owner;
-                if (row.dgTable.RelationsList != null)
+                if (row.dgTable.RelationsList is not null)
                 {
                     for (int i = 0; i < row.dgTable.RelationsList.Count; i++)
                     {
@@ -1085,7 +1085,7 @@ namespace System.Windows.Forms
 
             public DataGridRelationshipAccessibleObject(DataGridRelationshipRow owner, int relationship) : base()
             {
-                Debug.Assert(owner != null, "DataGridRelationshipAccessibleObject must have a valid owner DataGridRow");
+                Debug.Assert(owner is not null, "DataGridRelationshipAccessibleObject must have a valid owner DataGridRow");
                 this.owner = owner;
                 this.relationship = relationship;
             }

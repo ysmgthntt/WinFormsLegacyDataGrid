@@ -390,7 +390,7 @@ namespace WinFormsLegacyControls
                 if (AllowSorting != value)
                 {
                     gridState[GRIDSTATE_allowSorting] = value;
-                    if (!value && listManager != null)
+                    if (!value && listManager is not null)
                     {
                         IList list = listManager.List;
                         if (list is IBindingList)
@@ -743,7 +743,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                return !(listManager == null || myGridTable == null);
+                return !(listManager is null || myGridTable is null);
             }
         }
 
@@ -951,7 +951,7 @@ namespace WinFormsLegacyControls
                 }
 
                 // should we throw an exception, maybe?
-                if (DataGridRowsLength == 0 || myGridTable.GridColumnStyles == null || myGridTable.GridColumnStyles.Count == 0)
+                if (DataGridRowsLength == 0 || myGridTable.GridColumnStyles is null || myGridTable.GridColumnStyles.Count == 0)
                 {
                     return;
                 }
@@ -1152,7 +1152,7 @@ namespace WinFormsLegacyControls
                     errorMessage = e.Message;
                 }
 
-                if (errorMessage != null)
+                if (errorMessage is not null)
                 {
                     DialogResult result = RTLAwareMessageBox.Show(null,
                         string.Format(SR.DataGridPushedIncorrectValueIntoColumn, errorMessage),
@@ -1398,7 +1398,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                if (dataGridRows == null)
+                if (dataGridRows is null)
                 {
                     CreateDataGridRows();
                 }
@@ -1468,7 +1468,7 @@ namespace WinFormsLegacyControls
             DataGridTableStyle dgt = myGridTable;
             InitializeColumnWidths();
 
-            if (listManager == null)
+            if (listManager is null)
             {
                 SetDataGridRows(Array.Empty<DataGridRow>(), 0);
                 return;
@@ -1504,7 +1504,7 @@ namespace WinFormsLegacyControls
             int nDataGridRows = 0;
             CurrencyManager listManager = ListManager;
 
-            if (listManager != null)
+            if (listManager is not null)
             {
                 nDataGridRows = listManager.Count;
                 if (policy.AllowAdd)
@@ -1536,7 +1536,7 @@ namespace WinFormsLegacyControls
 #if DEBUG
             // sanity check: all the rows should have the same
             // dataGridTable
-            if (newRows != null && newRowsLength > 0)
+            if (newRows is not null && newRowsLength > 0)
             {
                 DataGridTableStyle dgTable = newRows[0].DataGridTableStyle;
                 for (int i = 0; i < newRowsLength; i++)
@@ -1576,18 +1576,18 @@ namespace WinFormsLegacyControls
 
             set
             {
-                if (value != null && !(value is IList || value is IListSource))
+                if (value is not null && !(value is IList || value is IListSource))
                 {
                     throw new ArgumentException(SR.BadDataSourceForComplexBinding);
                 }
 
-                if (dataSource != null && dataSource.Equals(value))
+                if (dataSource is not null && dataSource.Equals(value))
                 {
                     return;
                 }
 
                 // when the designer resets the dataSource to null, set the dataMember to null, too
-                if ((value == null || value == Convert.DBNull) && DataMember != null && DataMember.Length != 0)
+                if ((value is null || value == Convert.DBNull) && DataMember is not null && DataMember.Length != 0)
                 {
                     dataSource = null;
                     DataMember = string.Empty;
@@ -1597,12 +1597,12 @@ namespace WinFormsLegacyControls
                 // if we are setting the dataSource and the dataMember is not a part
                 // of the properties in the dataSource, then set the dataMember to ""
                 //
-                if (value != null)
+                if (value is not null)
                 {
                     EnforceValidDataMember(value);
                 }
 
-                Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: DataSource being set to " + ((value == null) ? "null" : value.ToString()));
+                Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: DataSource being set to " + ((value is null) ? "null" : value.ToString()));
 
                 // when we change the dataSource, we need to clear the parent rows.
                 // the same goes for all the caption UI: reset it when the datasource changes.
@@ -1638,12 +1638,12 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (dataMember != null && dataMember.Equals(value))
+                if (dataMember is not null && dataMember.Equals(value))
                 {
                     return;
                 }
 
-                Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: DataSource being set to " + ((value == null) ? "null" : value.ToString()));
+                Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: DataSource being set to " + ((value is null) ? "null" : value.ToString()));
                 // when we change the dataMember, we need to clear the parent rows.
                 // the same goes for all the caption UI: reset it when the datamember changes.
                 //
@@ -1671,7 +1671,7 @@ namespace WinFormsLegacyControls
             get
             {
                 //try to return something useful:
-                if (listManager == null && BindingContext != null && DataSource != null)
+                if (listManager is null && BindingContext is not null && DataSource is not null)
                 {
                     return (CurrencyManager)BindingContext[DataSource, DataMember];
                 }
@@ -1710,7 +1710,7 @@ namespace WinFormsLegacyControls
             }
 
             gridState[GRIDSTATE_inSetListManager] = true;
-            if (toBeDisposedEditingControl != null)
+            if (toBeDisposedEditingControl is not null)
             {
                 Debug.Assert(Controls.Contains(toBeDisposedEditingControl));
                 Controls.Remove(toBeDisposedEditingControl);
@@ -1723,7 +1723,7 @@ namespace WinFormsLegacyControls
                 UpdateListManager();
 
                 // unwire the events:
-                if (listManager != null)
+                if (listManager is not null)
                 {
                     UnWireDataSource();
                 }
@@ -1735,7 +1735,7 @@ namespace WinFormsLegacyControls
                 // in the grid. the reason is that if the BindingContext was not yet requested, and it is created in the BindingContext prop
                 // then the grid will call Set_ListManager again, and eventually that means that the dataGrid::listManager will
                 // be hooked up twice to all the events (PositionChanged, ItemChanged, CurrentChanged)
-                if (newDataSource != null && BindingContext != null && !(newDataSource == Convert.DBNull))
+                if (newDataSource is not null && BindingContext is not null && !(newDataSource == Convert.DBNull))
                 {
                     listManager = (CurrencyManager)BindingContext[newDataSource, newDataMember];
                 }
@@ -1751,7 +1751,7 @@ namespace WinFormsLegacyControls
                 listManagerChanged = (listManager != oldListManager);
 
                 // wire the events
-                if (listManager != null)
+                if (listManager is not null)
                 {
                     WireDataSource();
                     // update the policy
@@ -1760,11 +1760,11 @@ namespace WinFormsLegacyControls
 
                 if (!Initializing)
                 {
-                    if (listManager == null)
+                    if (listManager is null)
                     {
-                        if (ContainsFocus && Parent/*Internal*/ == null)
+                        if (ContainsFocus && Parent/*Internal*/ is null)
                         {
-                            Debug.Assert(toBeDisposedEditingControl == null, "we should have removed the toBeDisposedEditingControl already");
+                            Debug.Assert(toBeDisposedEditingControl is null, "we should have removed the toBeDisposedEditingControl already");
                             // if we unparent the active control then the form won't close
                             for (int i = 0; i < Controls.Count; i++)
                             {
@@ -1783,8 +1783,8 @@ namespace WinFormsLegacyControls
 #if DEBUG
                             else
                             {
-                                Debug.Assert(toBeDisposedEditingControl != null, "if the grid contains the focus, then the active control should be in the children of data grid control");
-                                Debug.Assert(editColumn != null, "if we have an editing control should be a control in the data grid column");
+                                Debug.Assert(toBeDisposedEditingControl is not null, "if the grid contains the focus, then the active control should be in the children of data grid control");
+                                Debug.Assert(editColumn is not null, "if we have an editing control should be a control in the data grid column");
                                 if (editColumn is DataGridTextBoxColumn)
                                 {
                                     Debug.Assert(((DataGridTextBoxColumn)editColumn).TextBox == toBeDisposedEditingControl, "if we have an editing control should be a control in the data grid column");
@@ -1798,7 +1798,7 @@ namespace WinFormsLegacyControls
                         defaultTableStyle.GridColumnStyles.Clear();
                         SetDataGridTable(defaultTableStyle, forceColumnCreation);
 
-                        if (toBeDisposedEditingControl != null)
+                        if (toBeDisposedEditingControl is not null)
                         {
                             Controls.Add(toBeDisposedEditingControl);
                         }
@@ -1820,7 +1820,7 @@ namespace WinFormsLegacyControls
                         BeginUpdateInternal();
                     }
 
-                    if (listManager != null)
+                    if (listManager is not null)
                     {
                         // get rid of the old gridColumns
                         // we need to clear the old column collection even when navigating to
@@ -1829,7 +1829,7 @@ namespace WinFormsLegacyControls
                         defaultTableStyle.GridColumnStyles.ResetDefaultColumnCollection();
 
                         DataGridTableStyle newGridTable = dataGridTables[listManager.GetListName()];
-                        if (newGridTable == null)
+                        if (newGridTable is null)
                         {
                             SetDataGridTable(defaultTableStyle, forceColumnCreation);
                         }
@@ -1901,13 +1901,13 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                if (originalState == null)
+                if (originalState is null)
                 {
-                    return listManager == null ? -1 : listManager.Position;
+                    return listManager is null ? -1 : listManager.Position;
                 }
                 else
                 {
-                    if (BindingContext == null)
+                    if (BindingContext is null)
                     {
                         return -1;
                     }
@@ -1918,12 +1918,12 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (listManager == null)
+                if (listManager is null)
                 {
                     throw new InvalidOperationException(SR.DataGridSetSelectIndex);
                 }
 
-                if (originalState == null)
+                if (originalState is null)
                 {
                     listManager.Position = value;
                     currentRow = value;
@@ -2248,7 +2248,7 @@ namespace WinFormsLegacyControls
 
         private void ResetBackgroundColor()
         {
-            if (backgroundBrush != null && BackgroundBrush != DefaultBackgroundBrush)
+            if (backgroundBrush is not null && BackgroundBrush != DefaultBackgroundBrush)
             {
                 backgroundBrush.Dispose();
                 backgroundBrush = null;
@@ -2285,7 +2285,7 @@ namespace WinFormsLegacyControls
                 if (!value.Equals(backgroundBrush.Color))
                 {
 
-                    if (backgroundBrush != null && BackgroundBrush != DefaultBackgroundBrush)
+                    if (backgroundBrush is not null && BackgroundBrush != DefaultBackgroundBrush)
                     {
                         backgroundBrush.Dispose();
                         backgroundBrush = null;
@@ -2322,7 +2322,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (value == null)
+                if (value is null)
                 {
                     throw new ArgumentNullException(nameof(HeaderFont));
                 }
@@ -2339,12 +2339,12 @@ namespace WinFormsLegacyControls
 
         protected bool ShouldSerializeHeaderFont()
         {
-            return (headerFont != null);
+            return (headerFont is not null);
         }
 
         public void ResetHeaderFont()
         {
-            if (headerFont != null)
+            if (headerFont is not null)
             {
                 headerFont = null;
                 RecalculateFonts();
@@ -2510,7 +2510,7 @@ namespace WinFormsLegacyControls
 
         private void ScrollRectangles(RECT[] rects, int change)
         {
-            if (rects != null)
+            if (rects is not null)
             {
                 RECT scroll;
                 if (isRightToLeft())
@@ -3181,7 +3181,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                return Math.Min(numVisibleCols, myGridTable == null ? 0 : myGridTable.GridColumnStyles.Count);
+                return Math.Min(numVisibleCols, myGridTable is null ? 0 : myGridTable.GridColumnStyles.Count);
             }
         }
 
@@ -3308,7 +3308,7 @@ namespace WinFormsLegacyControls
         private void WireDataSource()
         {
             Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: WireDataSource");
-            Debug.Assert(listManager != null, "Can't wire up to a null DataSource");
+            Debug.Assert(listManager is not null, "Can't wire up to a null DataSource");
             listManager.CurrentChanged += currentChangedHandler;
             listManager.PositionChanged += positionChangedHandler;
             listManager.ItemChanged += itemChangedHandler;
@@ -3318,7 +3318,7 @@ namespace WinFormsLegacyControls
         private void UnWireDataSource()
         {
             Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: UnWireDataSource");
-            Debug.Assert(listManager != null, "Can't un wire from a null DataSource");
+            Debug.Assert(listManager is not null, "Can't un wire from a null DataSource");
             listManager.CurrentChanged -= currentChangedHandler;
             listManager.PositionChanged -= positionChangedHandler;
             listManager.ItemChanged -= itemChangedHandler;
@@ -3434,13 +3434,13 @@ namespace WinFormsLegacyControls
         }
         private void RowHeadersVisibleChanged(object sender, EventArgs e)
         {
-            layout.RowHeadersVisible = myGridTable == null ? false : myGridTable.RowHeadersVisible;
+            layout.RowHeadersVisible = myGridTable is null ? false : myGridTable.RowHeadersVisible;
             PerformLayout();
             InvalidateInside();
         }
         private void ColumnHeadersVisibleChanged(object sender, EventArgs e)
         {
-            layout.ColumnHeadersVisible = myGridTable == null ? false : myGridTable.ColumnHeadersVisible;
+            layout.ColumnHeadersVisible = myGridTable is null ? false : myGridTable.ColumnHeadersVisible;
             PerformLayout();
             InvalidateInside();
         }
@@ -3454,7 +3454,7 @@ namespace WinFormsLegacyControls
         }
         private void AllowSortingChanged(object sender, EventArgs e)
         {
-            if (!myGridTable.AllowSorting && listManager != null)
+            if (!myGridTable.AllowSorting && listManager is not null)
             {
                 IList list = listManager.List;
                 if (list is IBindingList)
@@ -3513,7 +3513,7 @@ namespace WinFormsLegacyControls
 
         private bool DataGridSourceHasErrors()
         {
-            if (listManager == null)
+            if (listManager is null)
             {
                 return false;
             }
@@ -3524,7 +3524,7 @@ namespace WinFormsLegacyControls
                 if (errObj is IDataErrorInfo)
                 {
                     string errString = ((IDataErrorInfo)errObj).Error;
-                    if (errString != null && errString.Length != 0)
+                    if (errString is not null && errString.Length != 0)
                     {
                         return true;
                     }
@@ -3541,7 +3541,7 @@ namespace WinFormsLegacyControls
                 return;
             }
 
-            if (listManager == null)
+            if (listManager is null)
             {
                 return;
             }
@@ -3574,7 +3574,7 @@ namespace WinFormsLegacyControls
                 // w/ the same name as the list in the dataGrid
 
                 DataGridTableStyle newGridTable = dataGridTables[listManager.GetListName()];
-                if (newGridTable == null)
+                if (newGridTable is null)
                 {
                     if (!myGridTable.IsDefault)
                     {
@@ -3639,7 +3639,7 @@ namespace WinFormsLegacyControls
                 // we need to update the edit box:
                 // we update the text in the edit box only when the currentRow
                 // equals the ea.Index
-                if (editColumn != null && ea.Index == currentRow)
+                if (editColumn is not null && ea.Index == currentRow)
                 {
                     editColumn.UpdateUI(ListManager, ea.Index, null);
                 }
@@ -3775,10 +3775,12 @@ namespace WinFormsLegacyControls
         protected void OnScroll(EventArgs e)
         {
             // reset the toolTip information
-            if (ToolTipProvider != null)
+            if (ToolTipProvider is not null)
             {
                 ResetToolTip();
-            } ((EventHandler)Events[EVENT_SCROLL])?.Invoke(this, e);
+            }
+
+            ((EventHandler)Events[EVENT_SCROLL])?.Invoke(this, e);
         }
 
         /// <summary>
@@ -3793,7 +3795,7 @@ namespace WinFormsLegacyControls
                 return;
             }
 
-            if (DataSource == null)
+            if (DataSource is null)
             {
                 Debug.Fail("Horizontal Scrollbar should be disabled without a DataSource.");
                 return;
@@ -3882,7 +3884,7 @@ namespace WinFormsLegacyControls
                 return;
             }
 
-            if (DataSource == null)
+            if (DataSource is null)
             {
                 Debug.Fail("Vertical Scrollbar should be disabled without a DataSource.");
                 return;
@@ -3918,7 +3920,7 @@ namespace WinFormsLegacyControls
                 errorMessage = e.Message;
             }
 
-            if (errorMessage != null)
+            if (errorMessage is not null)
             {
                 DialogResult result = RTLAwareMessageBox.Show(null, string.Format(SR.DataGridPushedIncorrectValueIntoColumn,
                         errorMessage), SR.DataGridErrorMessageBoxCaption, MessageBoxButtons.YesNo,
@@ -3970,7 +3972,7 @@ namespace WinFormsLegacyControls
 
         protected override void OnBindingContextChanged(EventArgs e)
         {
-            if (DataSource != null && !gridState[GRIDSTATE_inSetListManager])
+            if (DataSource is not null && !gridState[GRIDSTATE_inSetListManager])
             {
                 try
                 {
@@ -3982,7 +3984,7 @@ namespace WinFormsLegacyControls
                 catch
                 {
                     // at runtime we will rethrow the exception
-                    if (Site == null || !Site.DesignMode)
+                    if (Site is null || !Site.DesignMode)
                     {
                         throw;
                     }
@@ -4046,7 +4048,7 @@ namespace WinFormsLegacyControls
             RecalculateFonts();
             RecreateDataGridRows();
             // get all the rows in the parentRows stack, and modify their height
-            if (originalState != null)
+            if (originalState is not null)
             {
                 Debug.Assert(!parentRows.IsEmpty(), "if the originalState is not null, then parentRows contains at least one row");
                 Stack parentStack = new Stack();
@@ -4121,7 +4123,7 @@ namespace WinFormsLegacyControls
                     }
 
                     // reset the toolTip information
-                    if (ToolTipProvider != null)
+                    if (ToolTipProvider is not null)
                     {
                         ResetToolTip();
                     }
@@ -4164,7 +4166,7 @@ namespace WinFormsLegacyControls
             base.OnHandleDestroyed(e);
 
             // toolTipping
-            if (toolTipProvider != null)
+            if (toolTipProvider is not null)
             {
                 toolTipProvider.Destroy();
                 toolTipProvider = null;
@@ -4204,7 +4206,7 @@ namespace WinFormsLegacyControls
             try
             {
                 EndEdit();
-                if (listManager != null && !gridState[GRIDSTATE_editControlChanging])
+                if (listManager is not null && !gridState[GRIDSTATE_editControlChanging])
                 {
                     if (gridState[GRIDSTATE_inAddNewRow])
                     {
@@ -4255,7 +4257,7 @@ namespace WinFormsLegacyControls
 
             base.OnKeyPress(kpe);
             GridColumnStylesCollection coll = myGridTable.GridColumnStyles;
-            if (coll != null && currentCol > 0 && currentCol < coll.Count)
+            if (coll is not null && currentCol > 0 && currentCol < coll.Count)
             {
                 if (!coll[currentCol].ReadOnly)
                 {
@@ -4276,7 +4278,7 @@ namespace WinFormsLegacyControls
 
             gridState[GRIDSTATE_childLinkFocused] = false;
             gridState[GRIDSTATE_dragging] = false;
-            if (listManager == null)
+            if (listManager is null)
             {
                 return;
             }
@@ -4505,7 +4507,7 @@ namespace WinFormsLegacyControls
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            if (listManager == null)
+            if (listManager is null)
             {
                 return;
             }
@@ -4595,7 +4597,7 @@ namespace WinFormsLegacyControls
             //
             if (location.type == HitTestType.ParentRows)
             {
-                if (parentRows != null)
+                if (parentRows is not null)
                 {
                     parentRows.OnMouseMove(e.X, e.Y);
                 }
@@ -4625,7 +4627,7 @@ namespace WinFormsLegacyControls
         {
             base.OnMouseUp(e);
             gridState[GRIDSTATE_dragging] = false;
-            if (listManager == null || myGridTable == null)
+            if (listManager is null || myGridTable is null)
             {
                 return;
             }
@@ -4685,7 +4687,7 @@ namespace WinFormsLegacyControls
                 wheelingDown = false;
             }
 
-            if (listManager == null || myGridTable == null)
+            if (listManager is null || myGridTable is null)
             {
                 return;
             }
@@ -4776,7 +4778,7 @@ namespace WinFormsLegacyControls
             catch
             {
                 // at runtime we will rethrow the exception
-                if (Site == null || !Site.DesignMode)
+                if (Site is null || !Site.DesignMode)
                 {
                     throw;
                 }
@@ -4895,7 +4897,7 @@ namespace WinFormsLegacyControls
 
         internal void ParentRowsDataChanged()
         {
-            Debug.Assert(originalState != null, "how can we get a list changed event from another listmanager/list while not navigating");
+            Debug.Assert(originalState is not null, "how can we get a list changed event from another listmanager/list while not navigating");
 
             // do the reset work that is done in SetDataBindings, set_DataSource, set_DataMember;
             parentRows.Clear();
@@ -5025,7 +5027,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber)
         {
-            if (DataSource == null || myGridTable == null)
+            if (DataSource is null || myGridTable is null)
             {
                 return false;
             }
@@ -5084,7 +5086,7 @@ namespace WinFormsLegacyControls
         private void CancelCursorUpdate()
         {
             Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: Requesting CancelEdit()");
-            if (listManager != null)
+            if (listManager is not null)
             {
                 EndEdit();
                 listManager.CancelCurrentEdit();
@@ -5093,9 +5095,9 @@ namespace WinFormsLegacyControls
 
         private void CheckHierarchyState()
         {
-            if (checkHierarchy && listManager != null && myGridTable != null)
+            if (checkHierarchy && listManager is not null && myGridTable is not null)
             {
-                if (myGridTable == null)
+                if (myGridTable is null)
                 {
                     // there was nothing to check
                     return;
@@ -5130,7 +5132,7 @@ namespace WinFormsLegacyControls
             Debug.WriteLineIf(CompModSwitches.DataGridLayout.TraceVerbose, "DataGridLayout: ColAutoResize");
             EndEdit();
             CurrencyManager listManager = this.listManager;
-            if (listManager == null)
+            if (listManager is null)
             {
                 return;
             }
@@ -5175,7 +5177,7 @@ namespace WinFormsLegacyControls
                     {
                         for (int i = lastTotallyVisibleCol + 1; i < myGridTable.GridColumnStyles.Count; i++)
                         {
-                            if (myGridTable.GridColumnStyles[i].PropertyDescriptor != null)
+                            if (myGridTable.GridColumnStyles[i].PropertyDescriptor is not null)
                             {
                                 lastColumnIsLastTotallyVisibleCol = false;
                                 break;
@@ -5209,7 +5211,7 @@ namespace WinFormsLegacyControls
 
                         for (int i = colCount - 1; i >= 0; i--)
                         {
-                            if (cols[i].PropertyDescriptor == null)
+                            if (cols[i].PropertyDescriptor is null)
                             {
                                 continue;
                             }
@@ -5292,7 +5294,7 @@ namespace WinFormsLegacyControls
         private void ColResizeBegin(MouseEventArgs e, int col)
         {
             Debug.WriteLineIf(CompModSwitches.DataGridLayout.TraceVerbose, "DataGridLayout: ColResizeBegin");
-            Debug.Assert(myGridTable != null, "Column resizing operations can't be called when myGridTable == null.");
+            Debug.Assert(myGridTable is not null, "Column resizing operations can't be called when myGridTable == null.");
 
             int x = e.X;
             EndEdit();
@@ -5320,7 +5322,7 @@ namespace WinFormsLegacyControls
 
         private void ColResizeMove(MouseEventArgs e)
         {
-            if (lastSplitBar != null)
+            if (lastSplitBar is not null)
             {
                 DrawColSplitBar(lastSplitBar);
                 lastSplitBar = e;
@@ -5331,12 +5333,12 @@ namespace WinFormsLegacyControls
         private void ColResizeEnd(MouseEventArgs e)
         {
             Debug.WriteLineIf(CompModSwitches.DataGridLayout.TraceVerbose, "DataGridLayout: ColResizeEnd");
-            Debug.Assert(myGridTable != null, "Column resizing operations can't be called when myGridTable == null.");
+            Debug.Assert(myGridTable is not null, "Column resizing operations can't be called when myGridTable == null.");
 
             gridState[GRIDSTATE_layoutSuspended] = true;
             try
             {
-                if (lastSplitBar != null)
+                if (lastSplitBar is not null)
                 {
                     DrawColSplitBar(lastSplitBar);
                     lastSplitBar = null;
@@ -5364,7 +5366,7 @@ namespace WinFormsLegacyControls
                     bool lastColumnIsLastTotallyVisibleCol = true;
                     for (int i = lastTotallyVisibleCol + 1; i < myGridTable.GridColumnStyles.Count; i++)
                     {
-                        if (myGridTable.GridColumnStyles[i].PropertyDescriptor != null)
+                        if (myGridTable.GridColumnStyles[i].PropertyDescriptor is not null)
                         {
                             lastColumnIsLastTotallyVisibleCol = false;
                             break;
@@ -5387,7 +5389,7 @@ namespace WinFormsLegacyControls
 
                         for (int i = colCount - 1; i > -1; i--)
                         {
-                            if (cols[i].PropertyDescriptor == null)
+                            if (cols[i].PropertyDescriptor is null)
                             {
                                 continue;
                             }
@@ -5456,7 +5458,7 @@ namespace WinFormsLegacyControls
             gridState[GRIDSTATE_metaDataChanged] = true;
             try
             {
-                if (originalState != null)
+                if (originalState is not null)
                 {
                     // set the originalState to null so that Set_ListManager knows that
                     // it has to unhook the MetaDataChanged events
@@ -5485,7 +5487,7 @@ namespace WinFormsLegacyControls
 
             EndEdit();
             CurrencyManager listManager = ListManager;
-            if (listManager == null)
+            if (listManager is null)
             {
                 return;
             }
@@ -5537,7 +5539,7 @@ namespace WinFormsLegacyControls
         private void RowResizeBegin(MouseEventArgs e, int row)
         {
             Debug.WriteLineIf(CompModSwitches.DataGridLayout.TraceVerbose, "DataGridLayout: RowResizeBegin");
-            Debug.Assert(myGridTable != null, "Row resizing operations can't be called when myGridTable == null.");
+            Debug.Assert(myGridTable is not null, "Row resizing operations can't be called when myGridTable == null.");
 
             int y = e.Y;
             EndEdit();
@@ -5558,7 +5560,7 @@ namespace WinFormsLegacyControls
 
         private void RowResizeMove(MouseEventArgs e)
         {
-            if (lastSplitBar != null)
+            if (lastSplitBar is not null)
             {
                 DrawRowSplitBar(lastSplitBar);
                 lastSplitBar = e;
@@ -5569,11 +5571,11 @@ namespace WinFormsLegacyControls
         private void RowResizeEnd(MouseEventArgs e)
         {
             Debug.WriteLineIf(CompModSwitches.DataGridLayout.TraceVerbose, "DataGridLayout: RowResizeEnd");
-            Debug.Assert(myGridTable != null, "Row resizing operations can't be called when myGridTable == null.");
+            Debug.Assert(myGridTable is not null, "Row resizing operations can't be called when myGridTable == null.");
 
             try
             {
-                if (lastSplitBar != null)
+                if (lastSplitBar is not null)
                 {
                     DrawRowSplitBar(lastSplitBar);
                     lastSplitBar = null;
@@ -5636,7 +5638,7 @@ namespace WinFormsLegacyControls
             // if (CompModSwitches.DataGridCursor.OutputVerbose) Debug.WriteLine("DataGridCursor: We are about to sort column " + col.ToString());
             ListSortDirection direction = ListManager.GetSortDirection();
             PropertyDescriptor sortColumn = ListManager.GetSortProperty();
-            if (sortColumn != null && sortColumn.Equals(prop))
+            if (sortColumn is not null && sortColumn.Equals(prop))
             {
                 direction = (direction == ListSortDirection.Ascending) ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
@@ -5665,7 +5667,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         private bool CommitEdit()
         {
-            Debug.WriteLineIf(CompModSwitches.DataGridEditing.TraceVerbose, "DataGridEditing: \t  CommitEdit " + (editRow == null ? "" : editRow.RowNumber.ToString(CultureInfo.InvariantCulture)));
+            Debug.WriteLineIf(CompModSwitches.DataGridEditing.TraceVerbose, "DataGridEditing: \t  CommitEdit " + (editRow is null ? "" : editRow.RowNumber.ToString(CultureInfo.InvariantCulture)));
 
             // we want to commit the editing if
             // 1. the user was editing or navigating around the data grid and
@@ -5682,7 +5684,7 @@ namespace WinFormsLegacyControls
             // the datagrid does not perform a layout
             gridState[GRIDSTATE_editControlChanging] = true;
 
-            if ((editColumn != null && editColumn.ReadOnly) || gridState[GRIDSTATE_inAddNewRow])
+            if ((editColumn is not null && editColumn.ReadOnly) || gridState[GRIDSTATE_inAddNewRow])
             {
                 bool focusTheGrid = false;
                 if (ContainsFocus)
@@ -5900,7 +5902,7 @@ namespace WinFormsLegacyControls
             bool newRowHeadersVisible = myGridTable.IsDefault ? RowHeadersVisible : myGridTable.RowHeadersVisible;
             int newRowHeaderWidth = myGridTable.IsDefault ? RowHeaderWidth : myGridTable.RowHeaderWidth;
             newLayout.RowHeadersVisible = newRowHeadersVisible;
-            if (myGridTable != null && newRowHeadersVisible)
+            if (myGridTable is not null && newRowHeadersVisible)
             {
                 Rectangle rowHeaders = newLayout.RowHeaders;
                 if (alignLeft)
@@ -6011,7 +6013,7 @@ namespace WinFormsLegacyControls
                 minRowHeaderWidth += errorRowBitmapWidth;
             }
 
-            if (myGridTable != null && myGridTable.RelationsList.Count != 0)
+            if (myGridTable is not null && myGridTable.RelationsList.Count != 0)
             {
                 minRowHeaderWidth += 15; // the size of the plus/minus glyph and spacing around it
             }
@@ -6049,7 +6051,7 @@ namespace WinFormsLegacyControls
             while (cx < visibleWidth && curCol < nGridCols)
             {
                 // if (columns.Visible && columns.PropertyDescriptor != null)
-                if (columns[curCol].PropertyDescriptor != null)
+                if (columns[curCol].PropertyDescriptor is not null)
                 {
                     cx += columns[curCol].Width;
                 }
@@ -6071,7 +6073,7 @@ namespace WinFormsLegacyControls
                         break;
                     }
                     // if (columns.Visible && columns.PropertyDescriptor != null)
-                    if (columns[i].PropertyDescriptor != null)
+                    if (columns[i].PropertyDescriptor is not null)
                     {
                         cx += columns[i].Width;
                     }
@@ -6124,7 +6126,7 @@ namespace WinFormsLegacyControls
             // we will check to see if myGridTables.GridColumns.Count != 0
             // because when we reset the dataGridTable, we don't have any columns, and we still
             // call HorizontalOffset = 0, and that will call ComputeFirstVisibleColumn with an empty collection of columns.
-            if (myGridTable != null && myGridTable.GridColumnStyles != null && myGridTable.GridColumnStyles.Count != 0)
+            if (myGridTable is not null && myGridTable.GridColumnStyles is not null && myGridTable.GridColumnStyles.Count != 0)
             {
                 GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
                 int cx = 0;
@@ -6147,7 +6149,7 @@ namespace WinFormsLegacyControls
                 for (first = 0; first < nGridCols; first++)
                 {
                     // if (columns[first].Visible && columns[first].PropertyDescriptor != null);
-                    if (columns[first].PropertyDescriptor != null)
+                    if (columns[first].PropertyDescriptor is not null)
                     {
                         cx += columns[first].Width;
                     }
@@ -6306,7 +6308,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         private RECT[] CreateScrollableRegion(Rectangle scroll)
         {
-            if (cachedScrollableRegion != null)
+            if (cachedScrollableRegion is not null)
             {
                 return cachedScrollableRegion;
             }
@@ -6359,27 +6361,27 @@ namespace WinFormsLegacyControls
         {
             if (disposing)
             {
-                if (vertScrollBar != null)
+                if (vertScrollBar is not null)
                 {
                     vertScrollBar.Dispose();
                 }
 
-                if (horizScrollBar != null)
+                if (horizScrollBar is not null)
                 {
                     horizScrollBar.Dispose();
                 }
 
-                if (toBeDisposedEditingControl != null)
+                if (toBeDisposedEditingControl is not null)
                 {
                     toBeDisposedEditingControl.Dispose();
                     toBeDisposedEditingControl = null;
                 }
 
                 GridTableStylesCollection tables = TableStyles;
-                if (tables != null)
+                if (tables is not null)
                 {
 #if DEBUG
-                    Debug.Assert(myGridTable == null || myGridTable.IsDefault || tables.Contains(myGridTable), "how come that the currentTable is not in the list of tables?");
+                    Debug.Assert(myGridTable is null || myGridTable.IsDefault || tables.Contains(myGridTable), "how come that the currentTable is not in the list of tables?");
 #endif // DEBUG
                     for (int i = 0; i < tables.Count; i++)
                     {
@@ -6459,7 +6461,7 @@ namespace WinFormsLegacyControls
             EndEdit();
 
             Debug.WriteLineIf(CompModSwitches.DataGridEditing.TraceVerbose, "DataGridEditing: Edit, currentRow = " + currentRow.ToString(CultureInfo.InvariantCulture) +
-                                                                           ", currentCol = " + currentCol.ToString(CultureInfo.InvariantCulture) + (displayText != null ? ", displayText= " + displayText : ""));
+                                                                           ", currentCol = " + currentCol.ToString(CultureInfo.InvariantCulture) + (displayText is not null ? ", displayText= " + displayText : ""));
 
             /* allow navigation even if the policy does not allow editing
             if (!policy.AllowEdit)
@@ -6485,7 +6487,7 @@ namespace WinFormsLegacyControls
 
             // what if the currentCol does not have a propDesc?
             editColumn = myGridTable.GridColumnStyles[currentCol];
-            if (editColumn.PropertyDescriptor == null)
+            if (editColumn.PropertyDescriptor is null)
             {
                 return;
             }
@@ -6587,13 +6589,13 @@ namespace WinFormsLegacyControls
         //
         private void EnforceValidDataMember(object value)
         {
-            Debug.Assert(value != null, "we should not have a null dataSource when we want to check for a valid dataMember");
-            if (DataMember == null || DataMember.Length == 0)
+            Debug.Assert(value is not null, "we should not have a null dataSource when we want to check for a valid dataMember");
+            if (DataMember is null || DataMember.Length == 0)
             {
                 return;
             }
 
-            if (BindingContext == null)
+            if (BindingContext is null)
             {
                 return;
             }
@@ -6672,7 +6674,7 @@ namespace WinFormsLegacyControls
 
         internal protected virtual void ColumnStartedEditing(Control editingControl)
         {
-            if (editingControl == null)
+            if (editingControl is null)
             {
                 return;
             }
@@ -6771,11 +6773,11 @@ namespace WinFormsLegacyControls
         public void EndInit()
         {
             inInit = false;
-            if (myGridTable == null && ListManager != null)
+            if (myGridTable is null && ListManager is not null)
             {
                 SetDataGridTable(TableStyles[ListManager.GetListName()], true);      // true for forcing column creation
             }
-            if (myGridTable != null)
+            if (myGridTable is not null)
             {
                 myGridTable.DataGrid = this;
             }
@@ -6786,7 +6788,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         private int GetColFromX(int x)
         {
-            if (myGridTable == null)
+            if (myGridTable is null)
             {
                 return -1;
             }
@@ -6804,7 +6806,7 @@ namespace WinFormsLegacyControls
             while (cx < inside.Width + inside.X && col < columnCount)
             {
                 // if (columns[col].Visible && columns[col].PropertyDescriptor != null)
-                if (columns[col].PropertyDescriptor != null)
+                if (columns[col].PropertyDescriptor is not null)
                 {
                     cx += columns[col].Width;
                 }
@@ -6826,7 +6828,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         internal int GetColBeg(int col)
         {
-            Debug.Assert(myGridTable != null, "GetColBeg can't be called when myGridTable == null.");
+            Debug.Assert(myGridTable is not null, "GetColBeg can't be called when myGridTable == null.");
 
             int offset = layout.Data.X - negOffset;
             GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
@@ -6835,7 +6837,7 @@ namespace WinFormsLegacyControls
             for (int i = firstVisibleCol; i < lastCol; ++i)
             {
                 // if (columns[i].Visible && columns[i].PropertyDescriptor != null)
-                if (columns[i].PropertyDescriptor != null)
+                if (columns[i].PropertyDescriptor is not null)
                 {
                     offset += columns[i].Width;
                 }
@@ -6852,7 +6854,7 @@ namespace WinFormsLegacyControls
         {
             // return MirrorPoint(GetColBeg(col) + myGridTable.GridColumnStyles[col].Width, layout.Data, isRightToLeft());
             int colBeg = GetColBeg(col);
-            Debug.Assert(myGridTable.GridColumnStyles[col].PropertyDescriptor != null, "why would we need the coordinate of a column that is not visible?");
+            Debug.Assert(myGridTable.GridColumnStyles[col].PropertyDescriptor is not null, "why would we need the coordinate of a column that is not visible?");
             int width = myGridTable.GridColumnStyles[col].Width;
             return isRightToLeft() ? colBeg - width : colBeg + width;
         }
@@ -6860,7 +6862,7 @@ namespace WinFormsLegacyControls
         private int GetColumnWidthSum()
         {
             int sum = 0;
-            if (myGridTable != null && myGridTable.GridColumnStyles != null)
+            if (myGridTable is not null && myGridTable.GridColumnStyles is not null)
             {
                 GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
 
@@ -6868,7 +6870,7 @@ namespace WinFormsLegacyControls
                 for (int i = 0; i < columnsCount; i++)
                 {
                     // if (columns[i].Visible && columns[i].PropertyDescriptor != null)
-                    if (columns[i].PropertyDescriptor != null)
+                    if (columns[i].PropertyDescriptor is not null)
                     {
                         sum += columns[i].Width;
                     }
@@ -7203,7 +7205,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         private void InitializeColumnWidths()
         {
-            if (myGridTable == null)
+            if (myGridTable is null)
             {
                 return;
             }
@@ -7267,12 +7269,12 @@ namespace WinFormsLegacyControls
         internal void InvalidateColumn(int column)
         {
             GridColumnStylesCollection gridColumns = myGridTable.GridColumnStyles;
-            if (column < 0 || gridColumns == null || gridColumns.Count <= column)
+            if (column < 0 || gridColumns is null || gridColumns.Count <= column)
             {
                 return;
             }
 
-            Debug.Assert(gridColumns[column].PropertyDescriptor != null, "how can we invalidate a column that is invisible?");
+            Debug.Assert(gridColumns[column].PropertyDescriptor is not null, "how can we invalidate a column that is invisible?");
             // bail if the column is not visible.
             if (column < firstVisibleCol || column > firstVisibleCol + numVisibleCols - 1)
             {
@@ -7429,7 +7431,7 @@ namespace WinFormsLegacyControls
         private void LayoutScrollBars()
         {
             // if we set the dataSource to null, then take away the scrollbars.
-            if (listManager == null || myGridTable == null)
+            if (listManager is null || myGridTable is null)
             {
                 horizScrollBar.Visible = false;
                 vertScrollBar.Visible = false;
@@ -7628,7 +7630,7 @@ namespace WinFormsLegacyControls
             // Set_ListManager in the NavigateBack/NavigateTo methods.
             // otherwise the DataSource_MetaDataChanged event will not get registered
             // properly
-            if (parentRows.GetTopParent() == null)
+            if (parentRows.GetTopParent() is null)
             {
                 originalState = null;
             }
@@ -7660,7 +7662,7 @@ namespace WinFormsLegacyControls
             // from the one that is currently in the grid
             // in that case, we need to reset the dataGridTableStyle in the rows
             localGridRows = DataGridRows;
-            if (localGridRows != null && localGridRows.Length != 0)
+            if (localGridRows is not null && localGridRows.Length != 0)
             {
                 DataGridTableStyle dgTable = localGridRows[0].DataGridTableStyle;
                 if (dgTable != myGridTable)
@@ -7700,9 +7702,9 @@ namespace WinFormsLegacyControls
                 RecreateDataGridRows();
             }
 
-            caption.BackButtonActive = (parentRows.GetTopParent() != null) && AllowNavigation;
+            caption.BackButtonActive = (parentRows.GetTopParent() is not null) && AllowNavigation;
             caption.BackButtonVisible = caption.BackButtonActive;
-            caption.DownButtonActive = (parentRows.GetTopParent() != null);
+            caption.DownButtonActive = (parentRows.GetTopParent() is not null);
 
             PerformLayout();
             Invalidate();
@@ -7806,7 +7808,7 @@ namespace WinFormsLegacyControls
             }
 
             // We save our state if the parent rows stack is empty.
-            if (parentRows.GetTopParent() == null)
+            if (parentRows.GetTopParent() is null)
             {
                 originalState = dgs;
             }
@@ -7841,7 +7843,7 @@ namespace WinFormsLegacyControls
                 currentRow = listManager.Position == -1 ? 0 : listManager.Position;
             }
 
-            if (parentRows.GetTopParent() != null)
+            if (parentRows.GetTopParent() is not null)
             {
                 caption.BackButtonActive = AllowNavigation;
                 caption.BackButtonVisible = caption.BackButtonActive;
@@ -7890,7 +7892,7 @@ namespace WinFormsLegacyControls
                     // if the element in the collectionChangeEventArgs is not null
                     // and the action is refresh, then it means that the user
                     // set the propDesc. we do not want to override this.
-                    if (e.Action != CollectionChangeAction.Refresh || e.Element == null)
+                    if (e.Action != CollectionChangeAction.Refresh || e.Element is null)
                     {
                         PairTableStylesAndGridColumns(listManager, myGridTable, false);
                     }
@@ -7949,7 +7951,7 @@ namespace WinFormsLegacyControls
             // Now paint the column header text!
             for (int col = firstVisibleCol; col < nGridCols; ++col)
             {
-                if (gridColumns[col].PropertyDescriptor == null)
+                if (gridColumns[col].PropertyDescriptor is null)
                 {
                     continue;
                 }
@@ -7959,7 +7961,7 @@ namespace WinFormsLegacyControls
                     break;
                 }
 
-                bool columnSorted = sortProperty != null && sortProperty.Equals(gridColumns[col].PropertyDescriptor);
+                bool columnSorted = sortProperty is not null && sortProperty.Equals(gridColumns[col].PropertyDescriptor);
                 TriangleDirection whichWay = TriangleDirection.Up;
                 if (columnSorted)
                 {
@@ -8151,7 +8153,7 @@ namespace WinFormsLegacyControls
 
             Rectangle rc = gridBounds;
 
-            if (listManager != null)
+            if (listManager is not null)
             {
                 if (layout.ColumnHeadersVisible)
                 {
@@ -8326,7 +8328,7 @@ namespace WinFormsLegacyControls
         {
             Debug.WriteLineIf(CompModSwitches.DataGridKeys.TraceVerbose, "DataGridKeys: ProcessDialogKey " + TypeDescriptor.GetConverter(typeof(Keys)).ConvertToString(keyData));
             DataGridRow[] localGridRows = DataGridRows;
-            if (listManager != null && DataGridRowsLength > 0 && localGridRows[currentRow].OnKeyPress(keyData))
+            if (listManager is not null && DataGridRowsLength > 0 && localGridRows[currentRow].OnKeyPress(keyData))
             {
                 Debug.WriteLineIf(CompModSwitches.DataGridKeys.TraceVerbose, "DataGridKeys: Current Row ate the keystroke");
                 return true;
@@ -8436,7 +8438,7 @@ namespace WinFormsLegacyControls
         {
             int rowsDeleted = 0;
 
-            int currentRowsCount = listManager == null ? 0 : listManager.Count;
+            int currentRowsCount = listManager is null ? 0 : listManager.Count;
 
             if (Visible)
             {
@@ -8445,7 +8447,7 @@ namespace WinFormsLegacyControls
 
             try
             {
-                if (ListManager != null)
+                if (ListManager is not null)
                 {
                     for (int i = 0; i < DataGridRowsLength; i++)
                     {
@@ -8483,7 +8485,7 @@ namespace WinFormsLegacyControls
             // keep the copy of the old rows in place
             // it may be the case that deleting one row could cause multiple rows to be deleted in the same list
             //
-            if (listManager != null && currentRowsCount == listManager.Count + rowsDeleted)
+            if (listManager is not null && currentRowsCount == listManager.Count + rowsDeleted)
             {
                 DeleteDataGridRows(rowsDeleted);
             }
@@ -8498,7 +8500,7 @@ namespace WinFormsLegacyControls
                 EndUpdateInternal();
             }
 
-            if (listManager != null && currentRowsCount != listManager.Count + rowsDeleted)
+            if (listManager is not null && currentRowsCount != listManager.Count + rowsDeleted)
             {
                 Invalidate();
             }
@@ -8515,7 +8517,7 @@ namespace WinFormsLegacyControls
                 for (i = startCol + 1; i < cols.Count; i++)
                 {
                     // if (cols[i].Visible && cols[i].PropertyDescriptor != null)
-                    if (cols[i].PropertyDescriptor != null)
+                    if (cols[i].PropertyDescriptor is not null)
                     {
                         return i;
                     }
@@ -8527,7 +8529,7 @@ namespace WinFormsLegacyControls
                 for (i = startCol - 1; i >= 0; i--)
                 {
                     // if (cols[i].Visible && cols[i].PropertyDescriptor != null)
-                    if (cols[i].PropertyDescriptor != null)
+                    if (cols[i].PropertyDescriptor is not null)
                     {
                         return i;
                     }
@@ -8542,7 +8544,7 @@ namespace WinFormsLegacyControls
         protected bool ProcessGridKey(KeyEventArgs ke)
         {
             Debug.WriteLineIf(CompModSwitches.DataGridKeys.TraceVerbose, "DataGridKeys: ProcessGridKey " + TypeDescriptor.GetConverter(typeof(Keys)).ConvertToString(ke.KeyCode));
-            if (listManager == null || myGridTable == null)
+            if (listManager is null || myGridTable is null)
             {
                 return false;
             }
@@ -8571,7 +8573,7 @@ namespace WinFormsLegacyControls
             int lastColumnMarkedVisible = cols.Count;
             for (int i = 0; i < cols.Count; i++)
             {
-                if (cols[i].PropertyDescriptor != null)
+                if (cols[i].PropertyDescriptor is not null)
                 {
                     firstColumnMarkedVisible = i;
                     break;
@@ -8580,7 +8582,7 @@ namespace WinFormsLegacyControls
 
             for (int i = cols.Count - 1; i >= 0; i--)
             {
-                if (cols[i].PropertyDescriptor != null)
+                if (cols[i].PropertyDescriptor is not null)
                 {
                     lastColumnMarkedVisible = i;
                     break;
@@ -9022,7 +9024,7 @@ namespace WinFormsLegacyControls
 #if DEBUG
                         // when the list is empty, then the position
                         // in the listManager is -1, and the currentPosition in the grid is 0
-                        if (ListManager != null && ListManager.Count > 0)
+                        if (ListManager is not null && ListManager.Count > 0)
                         {
                             Debug.Assert(ListManager.Position == currentRow,
                                             "Current row out of sync with DataSource",
@@ -9207,7 +9209,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected bool ProcessTabKey(Keys keyData)
         {
-            if (listManager == null || myGridTable == null)
+            if (listManager is null || myGridTable is null)
             {
                 return false;
             }
@@ -9272,7 +9274,7 @@ namespace WinFormsLegacyControls
             for (int i = 0; i < cols.Count; i++)
             {
                 // if (cols[i].Visible && cols[i].PropertyDescriptor != null) {
-                if (cols[i].PropertyDescriptor != null)
+                if (cols[i].PropertyDescriptor is not null)
                 {
                     firstColumnMarkedVisible = i;
                     break;
@@ -9281,7 +9283,7 @@ namespace WinFormsLegacyControls
             for (int i = cols.Count - 1; i >= 0; i--)
             {
                 // if (cols[i].Visible && cols[i].PropertyDescriptor != null) {
-                if (cols[i].PropertyDescriptor != null)
+                if (cols[i].PropertyDescriptor is not null)
                 {
                     lastColumnMarkedVisible = i;
                     break;
@@ -9464,7 +9466,7 @@ namespace WinFormsLegacyControls
             linkFontHeight = LinkFont.Height;
             captionFontHeight = CaptionFont.Height;
 
-            if (myGridTable == null || myGridTable.IsDefault)
+            if (myGridTable is null || myGridTable.IsDefault)
             {
                 headerFontHeight = HeaderFont.Height;
             }
@@ -9636,7 +9638,7 @@ namespace WinFormsLegacyControls
             {
                 for (int i = 0; i < nGridCols; i++)
                 {
-                    if (gridColumns[i].PropertyDescriptor != null)
+                    if (gridColumns[i].PropertyDescriptor is not null)
                     {
                         nVisibleCols++;
                     }
@@ -9654,7 +9656,7 @@ namespace WinFormsLegacyControls
             for (int i = 0; i < newCol; i++)
             {
                 // if (gridColumns[i].Visible && gridColumns[i].PropertyDescriptor != null)
-                if (gridColumns[i].PropertyDescriptor != null)
+                if (gridColumns[i].PropertyDescriptor is not null)
                 {
                     newColOffset += gridColumns[i].Width;
                 }
@@ -9752,7 +9754,7 @@ namespace WinFormsLegacyControls
                     for (int i = 0; i < props.Count; i++)
                     {
                         DataGridColumnStyle col = gridCols.MapColumnStyleToPropertyName(props[i].Name);
-                        if (col != null)
+                        if (col is not null)
                         {
                             col.PropertyDescriptor = props[i];
                         }
@@ -9791,7 +9793,7 @@ namespace WinFormsLegacyControls
         internal void SetDataGridTable(DataGridTableStyle newTable, bool forceColumnCreation)
         {
             // we have to listen to the dataGridTable for the propertyChangedEvent
-            if (myGridTable != null)
+            if (myGridTable is not null)
             {
                 // unwire the propertyChanged event
                 UnWireTableStylePropChanged(myGridTable);
@@ -9822,20 +9824,20 @@ namespace WinFormsLegacyControls
             // the code in DataGridTextBoxColumn already checks to see if the edits are parented
             // before parenting them.
             //
-            if (newTable != null)
+            if (newTable is not null)
             {
                 newTable.DataGrid = this;
             }
 
             // pair the tableStyles and GridColumns
             //
-            if (listManager != null)
+            if (listManager is not null)
             {
                 PairTableStylesAndGridColumns(listManager, myGridTable, forceColumnCreation);
             }
 
             // reset the relations UI on the newTable
-            if (newTable != null)
+            if (newTable is not null)
             {
                 newTable.ResetRelationsUI();
             }
@@ -9849,7 +9851,7 @@ namespace WinFormsLegacyControls
             // if we add a tableStyle that mapps to the
             // current listName, then we should set the currentRow to the
             // position in the listManager
-            if (listManager == null)
+            if (listManager is null)
             {
                 currentRow = 0;
             }
@@ -9975,14 +9977,14 @@ namespace WinFormsLegacyControls
         {
             if (site)
             {
-                if (component.Site == null)
+                if (component.Site is null)
                 {
                     container.Add(component);
                 }
             }
             else
             {
-                if (component.Site != null && component.Site.Container == container)
+                if (component.Site is not null && component.Site.Container == container)
                 {
                     container.Remove(component);
                 }
@@ -9992,10 +9994,10 @@ namespace WinFormsLegacyControls
         public void SubObjectsSiteChange(bool site)
         {
             DataGrid dgrid = this;
-            if (dgrid.DesignMode && dgrid.Site != null)
+            if (dgrid.DesignMode && dgrid.Site is not null)
             {
                 IDesignerHost host = (IDesignerHost)dgrid.Site.GetService(typeof(IDesignerHost));
-                if (host != null)
+                if (host is not null)
                 {
                     DesignerTransaction trans = host.CreateTransaction();
                     try
@@ -10051,7 +10053,7 @@ namespace WinFormsLegacyControls
             Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: Requesting EndEdit()");
             try
             {
-                if (listManager != null)
+                if (listManager is not null)
                 {
                     EndEdit();
                     listManager.EndCurrentEdit();
@@ -10118,7 +10120,7 @@ namespace WinFormsLegacyControls
                     // Note: Any non-null value in AccessibleName overrides the default accessible name logic,
                     // even an empty string (this is the only way to *force* the accessible name to be blank).
                     string name = Owner.AccessibleName;
-                    if (name != null)
+                    if (name is not null)
                     {
                         return name;
                     }
@@ -10155,7 +10157,7 @@ namespace WinFormsLegacyControls
                 int cols = ColumnCountPrivate;
                 int rows = RowCountPrivate;
 
-                if (dataGrid.dataGridRows == null)
+                if (dataGrid.dataGridRows is null)
                 {
                     dataGrid.CreateDataGridRows();
                 }
@@ -10573,8 +10575,8 @@ namespace WinFormsLegacyControls
             {
                 bool change = false;
                 // only IBindingList can have an AddNewRow
-                IBindingList bl = listManager == null ? null : listManager.List as IBindingList;
-                if (listManager == null)
+                IBindingList bl = listManager is null ? null : listManager.List as IBindingList;
+                if (listManager is null)
                 {
                     if (!allowAdd)
                     {
@@ -10590,9 +10592,9 @@ namespace WinFormsLegacyControls
                         change = true;
                     }
 
-                    AllowAdd = listManager.GetAllowAdd() && !gridReadOnly && bl != null && bl.SupportsChangeNotification;
+                    AllowAdd = listManager.GetAllowAdd() && !gridReadOnly && bl is not null && bl.SupportsChangeNotification;
                     AllowEdit = listManager.GetAllowEdit() && !gridReadOnly;
-                    AllowRemove = listManager.GetAllowRemove() && !gridReadOnly && bl != null && bl.SupportsChangeNotification;     //
+                    AllowRemove = listManager.GetAllowRemove() && !gridReadOnly && bl is not null && bl.SupportsChangeNotification;     //
                 }
                 return change;
             }

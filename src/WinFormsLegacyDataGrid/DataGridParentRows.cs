@@ -82,7 +82,7 @@ namespace System.Windows.Forms
         {
             get
             {
-                if (accessibleObject == null)
+                if (accessibleObject is null)
                 {
                     accessibleObject = new DataGridParentRowsAccessibleObject(this);
                 }
@@ -278,7 +278,7 @@ namespace System.Windows.Forms
             CurrencyManager childDataSource = (CurrencyManager)dataGrid.BindingContext[dgs.DataSource, dgs.DataMember];
             parents.Add(dgs);
             SetParentCount(parentsCount + 1);
-            Debug.Assert(GetTopParent() != null, "we should have a parent at least");
+            Debug.Assert(GetTopParent() is not null, "we should have a parent at least");
         }
 
         internal void Clear()
@@ -302,7 +302,7 @@ namespace System.Windows.Forms
 
         internal void CheckNull(object value, string propName)
         {
-            if (value == null)
+            if (value is null)
             {
                 throw new ArgumentNullException(nameof(propName));
             }
@@ -352,7 +352,7 @@ namespace System.Windows.Forms
 
         internal void Invalidate()
         {
-            if (dataGrid != null)
+            if (dataGrid is not null)
             {
                 dataGrid.InvalidateParentRows();
             }
@@ -360,7 +360,7 @@ namespace System.Windows.Forms
 
         internal void InvalidateRect(Rectangle rect)
         {
-            if (dataGrid != null)
+            if (dataGrid is not null)
             {
                 Rectangle r = new Rectangle(rect.X, rect.Y, rect.Width + borderWidth, rect.Height + borderWidth);
                 dataGrid.InvalidateParentRowsRect(r);
@@ -854,7 +854,7 @@ namespace System.Windows.Forms
 
         private Bitmap GetRightArrowBitmap()
         {
-            if (rightArrow == null)
+            if (rightArrow is null)
             {
                 rightArrow = GetBitmap("DataGridParentRows.RightArrow");
             }
@@ -864,7 +864,7 @@ namespace System.Windows.Forms
 
         private Bitmap GetLeftArrowBitmap()
         {
-            if (leftArrow == null)
+            if (leftArrow is null)
             {
                 leftArrow = GetBitmap("DataGridParentRows.LeftArrow");
             }
@@ -1199,7 +1199,7 @@ namespace System.Windows.Forms
 
             public DataGridParentRowsAccessibleObject(DataGridParentRows owner) : base()
             {
-                Debug.Assert(owner != null, "DataGridParentRowsAccessibleObject must have a valid owner");
+                Debug.Assert(owner is not null, "DataGridParentRowsAccessibleObject must have a valid owner");
                 this.owner = owner;
             }
 

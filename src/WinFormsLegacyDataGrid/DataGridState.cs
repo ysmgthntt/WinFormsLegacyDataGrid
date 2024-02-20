@@ -47,7 +47,7 @@ namespace System.Windows.Forms
         {
             get
             {
-                if (parentRowAccessibleObject == null)
+                if (parentRowAccessibleObject is null)
                 {
                     parentRowAccessibleObject = new DataGridStateParentRowAccessibleObject(this);
                 }
@@ -136,13 +136,13 @@ namespace System.Windows.Forms
 
         private void DataSource_Changed(object sender, ItemChangedEventArgs e)
         {
-            if (DataGrid != null && ListManager.Position == e.Index)
+            if (DataGrid is not null && ListManager.Position == e.Index)
             {
                 DataGrid.InvalidateParentRows();
                 return;
             }
 
-            if (DataGrid != null)
+            if (DataGrid is not null)
             {
                 DataGrid.ParentRowsDataChanged();
             }
@@ -150,7 +150,7 @@ namespace System.Windows.Forms
 
         private void DataSource_MetaDataChanged(object sender, EventArgs e)
         {
-            if (DataGrid != null)
+            if (DataGrid is not null)
             {
                 DataGrid.ParentRowsDataChanged();
             }
@@ -163,7 +163,7 @@ namespace System.Windows.Forms
 
             public DataGridStateParentRowAccessibleObject(DataGridState owner) : base()
             {
-                Debug.Assert(owner != null, "DataGridRowAccessibleObject must have a valid owner DataGridRow");
+                Debug.Assert(owner is not null, "DataGridRowAccessibleObject must have a valid owner DataGridRow");
                 this.owner = owner;
             }
 

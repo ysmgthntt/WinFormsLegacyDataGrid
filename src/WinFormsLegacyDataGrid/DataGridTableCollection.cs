@@ -144,7 +144,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                if (tableName == null)
+                if (tableName is null)
                 {
                     throw new ArgumentNullException(nameof(tableName));
                 }
@@ -186,12 +186,12 @@ namespace WinFormsLegacyControls
         {
             // set the rowHeaderWidth on the newly added table to at least the minimum value
             // on its owner
-            if (owner != null && owner.MinimumRowHeaderWidth() > table.RowHeaderWidth)
+            if (owner is not null && owner.MinimumRowHeaderWidth() > table.RowHeaderWidth)
             {
                 table.RowHeaderWidth = owner.MinimumRowHeaderWidth();
             }
 
-            if (table.DataGrid != owner && table.DataGrid != null)
+            if (table.DataGrid != owner && table.DataGrid is not null)
             {
                 throw new ArgumentException(SR.DataGridTableStyleCollectionAddedParentedTableStyle, "table");
             }
@@ -212,7 +212,7 @@ namespace WinFormsLegacyControls
 
         public virtual void AddRange(DataGridTableStyle[] tables)
         {
-            if (tables == null)
+            if (tables is null)
             {
                 throw new ArgumentNullException(nameof(tables));
             }
@@ -289,7 +289,7 @@ namespace WinFormsLegacyControls
             onCollectionChanged?.Invoke(this, e);
 
             DataGrid grid = owner;
-            if (grid != null)
+            if (grid is not null)
             {
                 /* FOR DEMO: Microsoft: TableStylesCollection::OnCollectionChanged: set the datagridtble
                 DataView dataView = ((DataView) grid.DataSource);
