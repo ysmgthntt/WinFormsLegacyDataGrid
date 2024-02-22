@@ -498,10 +498,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected void CheckValidDataSource(CurrencyManager value)
         {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            ArgumentNullException.ThrowIfNull(value);
 
             // The code may delete a gridColumn that was editing.
             // In that case, we still have to push the value into the backend

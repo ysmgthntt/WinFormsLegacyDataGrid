@@ -144,10 +144,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                if (tableName is null)
-                {
-                    throw new ArgumentNullException(nameof(tableName));
-                }
+                ArgumentNullException.ThrowIfNull(tableName);
 
                 int itemCount = items.Count;
                 for (int i = 0; i < itemCount; ++i)
@@ -212,10 +209,8 @@ namespace WinFormsLegacyControls
 
         public virtual void AddRange(DataGridTableStyle[] tables)
         {
-            if (tables is null)
-            {
-                throw new ArgumentNullException(nameof(tables));
-            }
+            ArgumentNullException.ThrowIfNull(tables);
+
             foreach (DataGridTableStyle table in tables)
             {
                 table.DataGrid = owner;

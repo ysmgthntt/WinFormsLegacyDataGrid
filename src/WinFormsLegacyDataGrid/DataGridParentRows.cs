@@ -119,9 +119,10 @@ namespace System.Windows.Forms
             }
             set
             {
+                ArgumentNullException.ThrowIfNull(value, nameof(BackBrush));
+
                 if (value != backBrush)
                 {
-                    CheckNull(value, "BackBrush");
                     backBrush = value;
                     Invalidate();
                 }
@@ -136,9 +137,10 @@ namespace System.Windows.Forms
             }
             set
             {
+                ArgumentNullException.ThrowIfNull(value, nameof(ForeBrush));
+
                 if (value != foreBrush)
                 {
-                    CheckNull(value, "BackBrush");
                     foreBrush = value;
                     Invalidate();
                 }
@@ -298,14 +300,6 @@ namespace System.Windows.Forms
         {
             parentsCount = count;
             dataGrid.Caption.BackButtonVisible = (parentsCount > 0) && (dataGrid.AllowNavigation);
-        }
-
-        internal void CheckNull(object? value, string propName)
-        {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(propName));
-            }
         }
 
         internal void Dispose()

@@ -2325,10 +2325,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (value is null)
-                {
-                    throw new ArgumentNullException(nameof(HeaderFont));
-                }
+                ArgumentNullException.ThrowIfNull(value, nameof(HeaderFont));
 
                 if (!value.Equals(headerFont))
                 {

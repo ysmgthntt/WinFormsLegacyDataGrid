@@ -294,10 +294,8 @@ namespace WinFormsLegacyControls
 
         public void AddRange(DataGridColumnStyle[] columns)
         {
-            if (columns is null)
-            {
-                throw new ArgumentNullException(nameof(columns));
-            }
+            ArgumentNullException.ThrowIfNull(columns);
+
             for (int i = 0; i < columns.Length; i++)
             {
                 Add(columns[i]);

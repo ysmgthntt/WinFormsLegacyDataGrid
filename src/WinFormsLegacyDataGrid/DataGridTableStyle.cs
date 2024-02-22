@@ -1307,10 +1307,7 @@ namespace WinFormsLegacyControls
 
         internal protected virtual DataGridColumnStyle CreateGridColumn(PropertyDescriptor prop, bool isDefault)
         {
-            if (prop is null)
-            {
-                throw new ArgumentNullException(nameof(prop));
-            }
+            ArgumentNullException.ThrowIfNull(prop);
 
             DataGridColumnStyle? ret = null;
             Type dataType = prop.PropertyType;

@@ -68,11 +68,11 @@ namespace System.Windows.Forms
         public void AddToolTip(string toolTipString, IntPtr toolTipId, Rectangle iconBounds)
         {
             Debug.Assert(tipWindow is not null && tipWindow.Handle != IntPtr.Zero, "the tipWindow was not initialized, bailing out");
+
+            ArgumentNullException.ThrowIfNull(toolTipString);
+
             if (iconBounds.IsEmpty)
                 throw new ArgumentNullException(nameof(iconBounds), SR.DataGridToolTipEmptyIcon);
-
-            if (toolTipString is null)
-                throw new ArgumentNullException(nameof(toolTipString));
 
             //var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId, ComCtl32.TTF.SUBCLASS, toolTipString, iconBounds);
             var info = new ToolInfoWrapper<Control>(dataGrid, toolTipId, TOOLTIP_FLAGS.TTF_SUBCLASS, toolTipString, iconBounds);
