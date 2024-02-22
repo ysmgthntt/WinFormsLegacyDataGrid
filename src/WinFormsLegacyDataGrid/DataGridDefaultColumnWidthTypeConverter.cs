@@ -13,7 +13,7 @@ namespace WinFormsLegacyControls
 {
     public class DataGridPreferredColumnWidthTypeConverter : TypeConverter
     {
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
         {
             if (sourceType == typeof(string) || sourceType == typeof(int))
             {
@@ -25,11 +25,11 @@ namespace WinFormsLegacyControls
             }
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         {
             if (destinationType == typeof(string))
             {
-                if (value.GetType() == typeof(int))
+                if (value!.GetType() == typeof(int))
                 {
                     int pulica = (int)value;
                     if (pulica == -1)
@@ -52,11 +52,11 @@ namespace WinFormsLegacyControls
             }
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         {
             if (value.GetType() == typeof(string))
             {
-                string text = value.ToString();
+                string text = value.ToString()!;
                 if (text.Equals("AutoColumnResize (-1)"))
                 {
                     return -1;

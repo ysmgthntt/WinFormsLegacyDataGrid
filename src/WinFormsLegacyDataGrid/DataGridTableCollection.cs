@@ -19,13 +19,13 @@ namespace WinFormsLegacyControls
     [ListBindable(false)]
     public class GridTableStylesCollection : BaseCollection, IList
     {
-        CollectionChangeEventHandler onCollectionChanged;
+        CollectionChangeEventHandler? onCollectionChanged;
         readonly ArrayList items = new ArrayList();
-        readonly DataGrid owner = null;
+        readonly DataGrid owner /*= null*/;
 
-        int IList.Add(object value)
+        int IList.Add(object? value)
         {
-            return Add((DataGridTableStyle)value);
+            return Add((DataGridTableStyle)value!);
         }
 
         void IList.Clear()
@@ -33,24 +33,24 @@ namespace WinFormsLegacyControls
             Clear();
         }
 
-        bool IList.Contains(object value)
+        bool IList.Contains(object? value)
         {
             return items.Contains(value);
         }
 
-        int IList.IndexOf(object value)
+        int IList.IndexOf(object? value)
         {
             return items.IndexOf(value);
         }
 
-        void IList.Insert(int index, object value)
+        void IList.Insert(int index, object? value)
         {
             throw new NotSupportedException();
         }
 
-        void IList.Remove(object value)
+        void IList.Remove(object? value)
         {
-            Remove((DataGridTableStyle)value);
+            Remove((DataGridTableStyle)value!);
         }
 
         void IList.RemoveAt(int index)
@@ -68,7 +68,7 @@ namespace WinFormsLegacyControls
             get { return false; }
         }
 
-        object IList.this[int index]
+        object? IList.this[int index]
         {
             get { return items[index]; }
             set { throw new NotSupportedException(); }
@@ -133,14 +133,14 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                return (DataGridTableStyle)items[index];
+                return (DataGridTableStyle)items[index]!;
             }
         }
 
         /// <summary>
         ///  Retrieves the DataGridTable with the name provided.
         /// </summary>
-        public DataGridTableStyle this[string tableName]
+        public DataGridTableStyle? this[string tableName]
         {
             get
             {
@@ -152,7 +152,7 @@ namespace WinFormsLegacyControls
                 int itemCount = items.Count;
                 for (int i = 0; i < itemCount; ++i)
                 {
-                    DataGridTableStyle table = (DataGridTableStyle)items[i];
+                    DataGridTableStyle table = (DataGridTableStyle)items[i]!;
                     // NOTE: case-insensitive
                     if (string.Equals(table.MappingName, tableName, StringComparison.OrdinalIgnoreCase))
                     {
@@ -172,7 +172,7 @@ namespace WinFormsLegacyControls
 
             for (int i = 0; i < items.Count; i++)
             {
-                if (((DataGridTableStyle)items[i]).MappingName.Equals(table.MappingName) && table != items[i])
+                if (((DataGridTableStyle)items[i]!).MappingName.Equals(table.MappingName) && table != items[i])
                 {
                     throw new ArgumentException(SR.DataGridTableStyleDuplicateMappingName, "table");
                 }
@@ -205,7 +205,7 @@ namespace WinFormsLegacyControls
             return index;
         }
 
-        private void TableStyleMappingNameChanged(object sender, EventArgs pcea)
+        private void TableStyleMappingNameChanged(object? sender, EventArgs pcea)
         {
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null));
         }
@@ -235,7 +235,7 @@ namespace WinFormsLegacyControls
         {
             for (int i = 0; i < items.Count; i++)
             {
-                DataGridTableStyle element = (DataGridTableStyle)items[i];
+                DataGridTableStyle element = (DataGridTableStyle)items[i]!;
                 element.MappingNameChanged -= new EventHandler(TableStyleMappingNameChanged);
             }
 
@@ -261,7 +261,7 @@ namespace WinFormsLegacyControls
             int itemCount = items.Count;
             for (int i = 0; i < itemCount; ++i)
             {
-                DataGridTableStyle table = (DataGridTableStyle)items[i];
+                DataGridTableStyle table = (DataGridTableStyle)items[i]!;
                 // NOTE: case-insensitive
                 if (string.Compare(table.MappingName, name, true, CultureInfo.InvariantCulture) == 0)
                 {
@@ -331,7 +331,7 @@ namespace WinFormsLegacyControls
 
         public void RemoveAt(int index)
         {
-            DataGridTableStyle element = (DataGridTableStyle)items[index];
+            DataGridTableStyle element = (DataGridTableStyle)items[index]!;
             element.MappingNameChanged -= new EventHandler(TableStyleMappingNameChanged);
             items.RemoveAt(index);
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, element));

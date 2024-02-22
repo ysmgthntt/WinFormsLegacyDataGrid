@@ -23,9 +23,9 @@ namespace WinFormsLegacyControls
     public abstract class DataGridColumnStyle : Component, IDataGridColumnStyleEditingNotificationService
     {
         private HorizontalAlignment _alignment = HorizontalAlignment.Left;
-        private PropertyDescriptor _propertyDescriptor = null;
-        private DataGridTableStyle _dataGridTableStyle = null;
-        private readonly Font _font = null;
+        private PropertyDescriptor? _propertyDescriptor = null;
+        private DataGridTableStyle? _dataGridTableStyle = null;
+        //private readonly Font _font = null;
         private string _mappingName = string.Empty;
         private string _headerName = string.Empty;
         private bool _invalid = false;
@@ -33,7 +33,7 @@ namespace WinFormsLegacyControls
         private bool _readOnly = false;
         private bool _updating = false;
         internal int _width = -1;
-        private AccessibleObject _headerAccessibleObject = null;
+        private AccessibleObject? _headerAccessibleObject = null;
 
         private static readonly object s_alignmentEvent = new object();
         private static readonly object s_propertyDescriptorEvent = new object();
@@ -55,7 +55,7 @@ namespace WinFormsLegacyControls
         ///  Initializes a new instance of the <see cref='DataGridColumnStyle'/>
         ///  class with the specified <see cref='T:System.ComponentModel.PropertyDescriptor'/>.
         /// </summary>
-        public DataGridColumnStyle(PropertyDescriptor prop) : this()
+        public DataGridColumnStyle(PropertyDescriptor? prop) : this()
         {
             PropertyDescriptor = prop;
             if (prop is not null)
@@ -64,7 +64,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        private protected DataGridColumnStyle(PropertyDescriptor prop, bool isDefault) : this(prop)
+        private protected DataGridColumnStyle(PropertyDescriptor? prop, bool isDefault) : this(prop)
         {
 #if DEBUG
             IsDefault = isDefault;
@@ -116,7 +116,7 @@ namespace WinFormsLegacyControls
         ///  When overridden in a derived class, updates the value of a specified row with
         ///  the given text.
         /// </summary>
-        protected internal virtual void UpdateUI(CurrencyManager source, int rowNum, string displayText)
+        protected internal virtual void UpdateUI(CurrencyManager source, int rowNum, string? displayText)
         {
         }
 
@@ -136,7 +136,7 @@ namespace WinFormsLegacyControls
         [DefaultValue(null)]
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public virtual PropertyDescriptor PropertyDescriptor
+        public virtual PropertyDescriptor? PropertyDescriptor
         {
             get => _propertyDescriptor;
             set
@@ -199,7 +199,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal void SetDataGridInternalInColumn(DataGrid value)
+        internal void SetDataGridInternalInColumn(DataGrid? value)
         {
             if (value is null || value.Initializing)
             {
@@ -213,9 +213,9 @@ namespace WinFormsLegacyControls
         ///  Gets the System.Windows.Forms.DataGridTableStyle for the column.
         /// </summary>
         [Browsable(false)]
-        public virtual DataGridTableStyle DataGridTableStyle => _dataGridTableStyle;
+        public virtual DataGridTableStyle? DataGridTableStyle => _dataGridTableStyle;
 
-        internal void SetDataGridTableInColumn(DataGridTableStyle value, bool force)
+        internal void SetDataGridTableInColumn(DataGridTableStyle? value, bool force)
         {
             if (_dataGridTableStyle is not null && _dataGridTableStyle.Equals(value) && !force)
             {
@@ -238,10 +238,12 @@ namespace WinFormsLegacyControls
             get => DataGridTableStyle?.DataGrid?.FontHeight ?? DataGridTableStyle.defaultFontHeight;
         }
 
+        /*
         /// <summary>
         ///  Indicates whether the Font property should be persisted.
         /// </summary>
         private bool ShouldSerializeFont() => _font is not null;
+        */
 
         public event EventHandler FontChanged
         {
@@ -398,7 +400,7 @@ namespace WinFormsLegacyControls
                 if (_width != value)
                 {
                     _width = value;
-                    DataGrid grid = DataGridTableStyle?.DataGrid;
+                    DataGrid? grid = DataGridTableStyle?.DataGrid;
                     if (grid is not null)
                     {
                         // rearrange the scroll bars
@@ -439,7 +441,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal virtual string GetDisplayText(object value) => value.ToString();
+        internal virtual string? GetDisplayText(object value) => value.ToString();
 
         private void ResetNullText() => NullText = SR.DataGridNullText;
 
@@ -449,7 +451,7 @@ namespace WinFormsLegacyControls
         ///  When overridden in a derived class, gets the optimum width and height of the
         ///  specified value.
         /// </summary>
-        protected internal abstract Size GetPreferredSize(Graphics g, object value);
+        protected internal abstract Size GetPreferredSize(Graphics g, object? value);
 
         /// <summary>
         ///  Gets the minimum height of a row.
@@ -460,15 +462,15 @@ namespace WinFormsLegacyControls
         ///  When overridden in a derived class, gets the height to be used in for
         ///  automatically resizing columns.
         /// </summary>
-        protected internal abstract int GetPreferredHeight(Graphics g, object value);
+        protected internal abstract int GetPreferredHeight(Graphics g, object? value);
 
         /// <summary>
         ///  Gets the value in the specified row from the specified System.Windows.Forms.ListManager.
         /// </summary>
-        protected internal virtual object GetColumnValueAtRow(CurrencyManager source, int rowNum)
+        protected internal virtual object? GetColumnValueAtRow(CurrencyManager source, int rowNum)
         {
             CheckValidDataSource(source);
-            PropertyDescriptor descriptor = PropertyDescriptor;
+            PropertyDescriptor? descriptor = PropertyDescriptor;
             if (descriptor is null)
             {
                 throw new InvalidOperationException(SR.DataGridColumnNoPropertyDescriptor);
@@ -536,7 +538,7 @@ namespace WinFormsLegacyControls
         ///  row number, <see cref='Rectangle'/>, argument indicating whether
         ///  the column is read-only, and the text to display in the new control.
         /// </summary>
-        protected internal virtual void Edit(CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string displayText)
+        protected internal virtual void Edit(CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string? displayText)
         {
             Edit(source, rowNum, bounds, readOnly, displayText, true);
         }
@@ -544,7 +546,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  When overridden in a deriving class, prepares a cell for editing.
         /// </summary>
-        protected internal abstract void Edit(CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string displayText, bool cellIsVisible);
+        protected internal abstract void Edit(CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string? displayText, bool cellIsVisible);
 
         /// <summary>
         ///  Indicates whether the a mouse down event occurred at the specified row, at
@@ -616,53 +618,53 @@ namespace WinFormsLegacyControls
 
         private void OnPropertyDescriptorChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_propertyDescriptorEvent] as EventHandler;
+            EventHandler? eh = Events[s_propertyDescriptorEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         private void OnAlignmentChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_alignmentEvent] as EventHandler;
+            EventHandler? eh = Events[s_alignmentEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         private void OnHeaderTextChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_headerTextEvent] as EventHandler;
+            EventHandler? eh = Events[s_headerTextEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         private void OnMappingNameChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_mappingNameEvent] as EventHandler;
+            EventHandler? eh = Events[s_mappingNameEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         private void OnReadOnlyChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_readOnlyEvent] as EventHandler;
+            EventHandler? eh = Events[s_readOnlyEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         private void OnNullTextChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_nullTextEvent] as EventHandler;
+            EventHandler? eh = Events[s_nullTextEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         private void OnWidthChanged(EventArgs e)
         {
-            EventHandler eh = Events[s_widthEvent] as EventHandler;
+            EventHandler? eh = Events[s_widthEvent] as EventHandler;
             eh?.Invoke(this, e);
         }
 
         /// <summary>
         ///  Sets the value in a specified row with the value from a specified see DataView.
         /// </summary>
-        protected internal virtual void SetColumnValueAtRow(CurrencyManager source, int rowNum, object value)
+        protected internal virtual void SetColumnValueAtRow(CurrencyManager source, int rowNum, object? value)
         {
             CheckValidDataSource(source);
-            PropertyDescriptor descriptor = PropertyDescriptor;
+            PropertyDescriptor? descriptor = PropertyDescriptor;
             if (descriptor is null)
             {
                 throw new InvalidOperationException(SR.DataGridColumnNoPropertyDescriptor);
@@ -696,7 +698,7 @@ namespace WinFormsLegacyControls
 
         protected class CompModSwitches
         {
-            private static TraceSwitch dgEditColumnEditing;
+            private static TraceSwitch? dgEditColumnEditing;
 
             public static TraceSwitch DGEditColumnEditing
             {
@@ -743,7 +745,7 @@ namespace WinFormsLegacyControls
                     }
 
                     // We need to find this column's offset in the gridColumnCollection.
-                    GridColumnStylesCollection cols = Owner._dataGridTableStyle.GridColumnStyles;
+                    GridColumnStylesCollection cols = Owner._dataGridTableStyle!.GridColumnStyles;
                     int offset = -1;
                     for (int i = 0; i < cols.Count; i++)
                     {
@@ -765,26 +767,26 @@ namespace WinFormsLegacyControls
 
             public override string Name => Owner._headerName;
 
-            protected DataGridColumnStyle Owner { get; }
+            protected DataGridColumnStyle Owner { get; } = null!;
 
             public override AccessibleObject Parent => DataGrid.AccessibilityObject;
 
-            private DataGrid DataGrid => Owner._dataGridTableStyle.dataGrid;
+            private DataGrid DataGrid => Owner._dataGridTableStyle!.dataGrid!;
 
             public override AccessibleRole Role => AccessibleRole.ColumnHeader;
 
-            public override AccessibleObject Navigate(AccessibleNavigation navdir)
+            public override AccessibleObject? Navigate(AccessibleNavigation navdir)
             {
                 switch (navdir)
                 {
                     case AccessibleNavigation.Right:
                     case AccessibleNavigation.Next:
                     case AccessibleNavigation.Down:
-                        return Parent.GetChild(1 + Owner._dataGridTableStyle.GridColumnStyles.IndexOf(Owner) + 1);
+                        return Parent.GetChild(1 + Owner._dataGridTableStyle!.GridColumnStyles.IndexOf(Owner) + 1);
                     case AccessibleNavigation.Up:
                     case AccessibleNavigation.Left:
                     case AccessibleNavigation.Previous:
-                        return Parent.GetChild(1 + Owner._dataGridTableStyle.GridColumnStyles.IndexOf(Owner) - 1);
+                        return Parent.GetChild(1 + Owner._dataGridTableStyle!.GridColumnStyles.IndexOf(Owner) - 1);
 
                 }
 

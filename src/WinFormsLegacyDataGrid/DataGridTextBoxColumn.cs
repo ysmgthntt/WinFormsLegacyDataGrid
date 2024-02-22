@@ -22,16 +22,16 @@ namespace WinFormsLegacyControls
         private readonly int xMargin = 2;
         private readonly int yMargin = 1;
         // private int   fontHandle =        0;
-        private string format = null;
-        private TypeConverter typeConverter;
-        private IFormatProvider formatInfo = null;
-        private System.Reflection.MethodInfo parseMethod;
+        private string? format = null;
+        private TypeConverter? typeConverter;
+        private IFormatProvider? formatInfo = null;
+        private System.Reflection.MethodInfo? parseMethod;
 
         // hosted control
         private readonly DataGridTextBox edit;
 
         // editing state
-        private string oldValue = null;
+        private string? oldValue = null;
         private int editRow = -1;
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace WinFormsLegacyControls
         ///  Initializes a new instance of a System.Windows.Forms.DataGridTextBoxColumn. with
         ///  the specified System.Data.DataColumn and System.Windows.Forms.ComponentModel.Format.
         /// </summary>
-        public DataGridTextBoxColumn(PropertyDescriptor prop, string format) : this(prop, format, false) { }
+        public DataGridTextBoxColumn(PropertyDescriptor? prop, string? format) : this(prop, format, false) { }
 
-        public DataGridTextBoxColumn(PropertyDescriptor prop, string format, bool isDefault) : base(prop, isDefault)
+        public DataGridTextBoxColumn(PropertyDescriptor? prop, string? format, bool isDefault) : base(prop, isDefault)
         {
             edit = new DataGridTextBox
             {
@@ -141,7 +141,7 @@ namespace WinFormsLegacyControls
         SRDescription(nameof(SR.FormatControlFormatDescr)),
         DefaultValue(null)
         ]
-        public override PropertyDescriptor PropertyDescriptor
+        public override PropertyDescriptor? PropertyDescriptor
         {
             set
             {
@@ -161,7 +161,7 @@ namespace WinFormsLegacyControls
         // format object
         //[DefaultValue(null), Editor("System.Windows.Forms.Design.DataGridColumnStyleFormatEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
         [DefaultValue(null)]
-        public string Format
+        public string? Format
         {
             get
             {
@@ -195,7 +195,7 @@ namespace WinFormsLegacyControls
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
-        public IFormatProvider FormatInfo
+        public IFormatProvider? FormatInfo
         {
             get
             {
@@ -282,7 +282,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        protected internal override void UpdateUI(CurrencyManager source, int rowNum, string displayText)
+        protected internal override void UpdateUI(CurrencyManager source, int rowNum, string? displayText)
         {
             edit.Text = GetText(GetColumnValueAtRow(source, rowNum));
             if (!edit.ReadOnly && displayText is not null)
@@ -307,9 +307,9 @@ namespace WinFormsLegacyControls
         ///  height of the cell in a specified row relative
         ///  to the specified value.
         /// </summary>
-        protected internal override Size GetPreferredSize(Graphics g, object value)
+        protected internal override Size GetPreferredSize(Graphics g, object? value)
         {
-            Size extents = Size.Ceiling(g.MeasureString(GetText(value), DataGridTableStyle.DataGrid.Font));
+            Size extents = Size.Ceiling(g.MeasureString(GetText(value), DataGridTableStyle!.DataGrid!.Font));
             extents.Width += xMargin * 2 + DataGridTableStyle.GridLineWidth;
             extents.Height += yMargin;
             return extents;
@@ -328,11 +328,11 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the height to be used in for automatically resizing columns.
         /// </summary>
-        protected internal override int GetPreferredHeight(Graphics g, object value)
+        protected internal override int GetPreferredHeight(Graphics g, object? value)
         {
             int newLineIndex = 0;
             int newLines = 0;
-            string valueString = GetText(value);
+            string valueString = GetText(value)!;
             while (newLineIndex != -1 && newLineIndex < valueString.Length)
             {
                 newLineIndex = valueString.IndexOf("\r\n", newLineIndex + 1);
@@ -403,7 +403,7 @@ namespace WinFormsLegacyControls
 
             try
             {
-                object value = edit.Text;
+                object? value = edit.Text;
                 if (NullText.Equals(value))
                 {
                     value = Convert.DBNull;
@@ -413,7 +413,7 @@ namespace WinFormsLegacyControls
                 {
                     // use reflection to get the Parse method on the
                     // type of the propertyDescriptor.
-                    value = (object)parseMethod.Invoke(null, new object[] { edit.Text, FormatInfo });
+                    value = (object)parseMethod.Invoke(null, new object[] { edit.Text, FormatInfo })!;
                     if (value is IFormattable)
                     {
                         edit.Text = ((IFormattable)value).ToString(format, formatInfo);
@@ -454,20 +454,20 @@ namespace WinFormsLegacyControls
                                     int rowNum,
                                     Rectangle bounds,
                                     bool readOnly,
-                                    string displayText,
+                                    string? displayText,
                                     bool cellIsVisible)
         {
             DebugOut("Begining Edit, rowNum :" + rowNum.ToString(CultureInfo.InvariantCulture));
 
             Rectangle originalBounds = bounds;
 
-            edit.ReadOnly = readOnly || ReadOnly || DataGridTableStyle.ReadOnly;
+            edit.ReadOnly = readOnly || ReadOnly || DataGridTableStyle!.ReadOnly;
 
             edit.Text = GetText(GetColumnValueAtRow(source, rowNum));
             if (!edit.ReadOnly && displayText is not null)
             {
                 // tell the grid that we are changing stuff
-                DataGridTableStyle.DataGrid.ColumnStartedEditing(bounds);
+                DataGridTableStyle!.DataGrid!.ColumnStartedEditing(bounds);
                 // tell the edit control that the user changed it
                 edit.IsInEditOrNavigateMode = false;
                 edit.Text = displayText;
@@ -492,7 +492,7 @@ namespace WinFormsLegacyControls
                 // edit.Visible = false;
             }
 
-            edit.RightToLeft = DataGridTableStyle.DataGrid.RightToLeft;
+            edit.RightToLeft = DataGridTableStyle!.DataGrid!.RightToLeft;
 
             edit.Focus();
 
@@ -522,12 +522,12 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal override string GetDisplayText(object value)
+        internal override string? GetDisplayText(object value)
         {
             return GetText(value);
         }
 
-        private string GetText(object value)
+        private string? GetText(object? value)
         {
             if (value is DBNull)
             {
@@ -549,7 +549,7 @@ namespace WinFormsLegacyControls
                 // use the typeConverter:
                 if (typeConverter is not null && typeConverter.CanConvertTo(typeof(string)))
                 {
-                    return (string)typeConverter.ConvertTo(value, typeof(string));
+                    return (string?)typeConverter.ConvertTo(value, typeof(string));
                 }
             }
             return (value is not null ? value.ToString() : "");
@@ -569,7 +569,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected internal override void Paint(Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight)
         {
-            string text = GetText(GetColumnValueAtRow(source, rowNum));
+            string? text = GetText(GetColumnValueAtRow(source, rowNum));
             PaintText(g, bounds, text, alignToRight);
         }
 
@@ -581,7 +581,7 @@ namespace WinFormsLegacyControls
         protected internal override void Paint(Graphics g, Rectangle bounds, CurrencyManager source, int rowNum,
                                      Brush backBrush, Brush foreBrush, bool alignToRight)
         {
-            string text = GetText(GetColumnValueAtRow(source, rowNum));
+            string? text = GetText(GetColumnValueAtRow(source, rowNum));
             PaintText(g, bounds, text, backBrush, foreBrush, alignToRight);
         }
 
@@ -589,16 +589,16 @@ namespace WinFormsLegacyControls
         ///  Draws the text and
         ///  rectangle at the given location with the specified alignment.
         /// </summary>
-        protected void PaintText(Graphics g, Rectangle bounds, string text, bool alignToRight)
+        protected void PaintText(Graphics g, Rectangle bounds, string? text, bool alignToRight)
         {
-            PaintText(g, bounds, text, DataGridTableStyle.BackBrush, DataGridTableStyle.ForeBrush, alignToRight);
+            PaintText(g, bounds, text, DataGridTableStyle!.BackBrush, DataGridTableStyle.ForeBrush, alignToRight);
         }
 
         /// <summary>
         ///  Draws the text and rectangle at the specified location with the
         ///  specified colors and alignment.
         /// </summary>
-        protected void PaintText(Graphics g, Rectangle textBounds, string text, Brush backBrush, Brush foreBrush, bool alignToRight)
+        protected void PaintText(Graphics g, Rectangle textBounds, string? text, Brush backBrush, Brush foreBrush, bool alignToRight)
         {
             /*
             if (edit.Visible)
@@ -624,7 +624,7 @@ namespace WinFormsLegacyControls
             // so do not deflate the rectangle.
             rect.Offset(0, 2 * yMargin);
             rect.Height -= 2 * yMargin;
-            g.DrawString(text, DataGridTableStyle.DataGrid.Font, foreBrush, rect, format);
+            g.DrawString(text, DataGridTableStyle!.DataGrid!.Font, foreBrush, rect, format);
             format.Dispose();
         }
 

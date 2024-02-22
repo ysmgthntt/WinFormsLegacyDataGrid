@@ -28,16 +28,17 @@ namespace WinFormsLegacyControls
 
         // only needed to signal the dataGrid that an edit
         // takes place
-        private DataGrid dataGrid;
+        private DataGrid? dataGrid;
 
         public DataGridTextBox() : base()
         {
             TabStop = false;
         }
+
         /// <summary>
         ///  Sets the <see cref='DataGrid'/> to which this <see cref='TextBox'/> control belongs.
         /// </summary>
-        public void SetDataGrid(DataGrid parentGrid)
+        public void SetDataGrid(DataGrid? parentGrid)
         {
             dataGrid = parentGrid;
         }
@@ -50,7 +51,7 @@ namespace WinFormsLegacyControls
             if (m.Msg == PInvoke.WM_PASTE || m.Msg == PInvoke.WM_CUT || m.Msg == PInvoke.WM_CLEAR)
             {
                 IsInEditOrNavigateMode = false;
-                dataGrid.ColumnStartedEditing(Bounds);
+                dataGrid!.ColumnStartedEditing(Bounds);
             }
 
             base.WndProc(ref m);
@@ -59,7 +60,7 @@ namespace WinFormsLegacyControls
 
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            dataGrid.TextBoxOnMouseWheel(e);
+            dataGrid!.TextBoxOnMouseWheel(e);
         }
 
         protected override void OnKeyPress(KeyPressEventArgs e)
@@ -89,7 +90,7 @@ namespace WinFormsLegacyControls
             IsInEditOrNavigateMode = false;
 
             // let the DataGrid know about the edit
-            dataGrid.ColumnStartedEditing(Bounds);
+            dataGrid!.ColumnStartedEditing(Bounds);
         }
 
         protected /*internal*/ override bool ProcessKeyMessage(ref Message m)
@@ -257,7 +258,7 @@ namespace WinFormsLegacyControls
                             // the edit control will use the
                             // delete key: we are in Edit mode now:
                             IsInEditOrNavigateMode = false;
-                            dataGrid.ColumnStartedEditing(Bounds);
+                            dataGrid!.ColumnStartedEditing(Bounds);
 
                             return ProcessKeyEventArgs(ref m);
                         }

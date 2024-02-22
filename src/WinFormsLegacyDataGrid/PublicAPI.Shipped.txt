@@ -1,122 +1,123 @@
-﻿abstract WinFormsLegacyControls.DataGridColumnStyle.Abort(int rowNum) -> void
-abstract WinFormsLegacyControls.DataGridColumnStyle.Commit(System.Windows.Forms.CurrencyManager dataSource, int rowNum) -> bool
-abstract WinFormsLegacyControls.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string displayText, bool cellIsVisible) -> void
+﻿#nullable enable
+abstract WinFormsLegacyControls.DataGridColumnStyle.Abort(int rowNum) -> void
+abstract WinFormsLegacyControls.DataGridColumnStyle.Commit(System.Windows.Forms.CurrencyManager! dataSource, int rowNum) -> bool
+abstract WinFormsLegacyControls.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string? displayText, bool cellIsVisible) -> void
 abstract WinFormsLegacyControls.DataGridColumnStyle.GetMinimumHeight() -> int
-abstract WinFormsLegacyControls.DataGridColumnStyle.GetPreferredHeight(System.Drawing.Graphics g, object value) -> int
-abstract WinFormsLegacyControls.DataGridColumnStyle.GetPreferredSize(System.Drawing.Graphics g, object value) -> System.Drawing.Size
-abstract WinFormsLegacyControls.DataGridColumnStyle.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum) -> void
-abstract WinFormsLegacyControls.DataGridColumnStyle.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum, bool alignToRight) -> void
+abstract WinFormsLegacyControls.DataGridColumnStyle.GetPreferredHeight(System.Drawing.Graphics! g, object? value) -> int
+abstract WinFormsLegacyControls.DataGridColumnStyle.GetPreferredSize(System.Drawing.Graphics! g, object? value) -> System.Drawing.Size
+abstract WinFormsLegacyControls.DataGridColumnStyle.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum) -> void
+abstract WinFormsLegacyControls.DataGridColumnStyle.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum, bool alignToRight) -> void
 override WinFormsLegacyControls.DataGrid.BackColor.get -> System.Drawing.Color
 override WinFormsLegacyControls.DataGrid.BackColor.set -> void
-override WinFormsLegacyControls.DataGrid.BackgroundImage.get -> System.Drawing.Image
+override WinFormsLegacyControls.DataGrid.BackgroundImage.get -> System.Drawing.Image?
 override WinFormsLegacyControls.DataGrid.BackgroundImage.set -> void
 override WinFormsLegacyControls.DataGrid.BackgroundImageLayout.get -> System.Windows.Forms.ImageLayout
 override WinFormsLegacyControls.DataGrid.BackgroundImageLayout.set -> void
-override WinFormsLegacyControls.DataGrid.CreateAccessibilityInstance() -> System.Windows.Forms.AccessibleObject
-override WinFormsLegacyControls.DataGrid.Cursor.get -> System.Windows.Forms.Cursor
+override WinFormsLegacyControls.DataGrid.CreateAccessibilityInstance() -> System.Windows.Forms.AccessibleObject!
+override WinFormsLegacyControls.DataGrid.Cursor.get -> System.Windows.Forms.Cursor!
 override WinFormsLegacyControls.DataGrid.Cursor.set -> void
 override WinFormsLegacyControls.DataGrid.DefaultSize.get -> System.Drawing.Size
 override WinFormsLegacyControls.DataGrid.Dispose(bool disposing) -> void
 override WinFormsLegacyControls.DataGrid.ForeColor.get -> System.Drawing.Color
 override WinFormsLegacyControls.DataGrid.ForeColor.set -> void
-override WinFormsLegacyControls.DataGrid.HitTestInfo.Equals(object value) -> bool
+override WinFormsLegacyControls.DataGrid.HitTestInfo.Equals(object? value) -> bool
 override WinFormsLegacyControls.DataGrid.HitTestInfo.GetHashCode() -> int
-override WinFormsLegacyControls.DataGrid.HitTestInfo.ToString() -> string
-override WinFormsLegacyControls.DataGrid.OnBackColorChanged(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnBindingContextChanged(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnEnter(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnFontChanged(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnForeColorChanged(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnHandleCreated(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnHandleDestroyed(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnKeyDown(System.Windows.Forms.KeyEventArgs ke) -> void
-override WinFormsLegacyControls.DataGrid.OnKeyPress(System.Windows.Forms.KeyPressEventArgs kpe) -> void
-override WinFormsLegacyControls.DataGrid.OnLayout(System.Windows.Forms.LayoutEventArgs levent) -> void
-override WinFormsLegacyControls.DataGrid.OnLeave(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnMouseDown(System.Windows.Forms.MouseEventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnMouseLeave(System.EventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnMouseMove(System.Windows.Forms.MouseEventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnMouseUp(System.Windows.Forms.MouseEventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnMouseWheel(System.Windows.Forms.MouseEventArgs e) -> void
-override WinFormsLegacyControls.DataGrid.OnPaint(System.Windows.Forms.PaintEventArgs pe) -> void
-override WinFormsLegacyControls.DataGrid.OnPaintBackground(System.Windows.Forms.PaintEventArgs ebe) -> void
-override WinFormsLegacyControls.DataGrid.OnResize(System.EventArgs e) -> void
+override WinFormsLegacyControls.DataGrid.HitTestInfo.ToString() -> string?
+override WinFormsLegacyControls.DataGrid.OnBackColorChanged(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnBindingContextChanged(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnEnter(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnFontChanged(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnForeColorChanged(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnHandleCreated(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnHandleDestroyed(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnKeyDown(System.Windows.Forms.KeyEventArgs! ke) -> void
+override WinFormsLegacyControls.DataGrid.OnKeyPress(System.Windows.Forms.KeyPressEventArgs! kpe) -> void
+override WinFormsLegacyControls.DataGrid.OnLayout(System.Windows.Forms.LayoutEventArgs! levent) -> void
+override WinFormsLegacyControls.DataGrid.OnLeave(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnMouseDown(System.Windows.Forms.MouseEventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnMouseLeave(System.EventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnMouseMove(System.Windows.Forms.MouseEventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnMouseUp(System.Windows.Forms.MouseEventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnMouseWheel(System.Windows.Forms.MouseEventArgs! e) -> void
+override WinFormsLegacyControls.DataGrid.OnPaint(System.Windows.Forms.PaintEventArgs! pe) -> void
+override WinFormsLegacyControls.DataGrid.OnPaintBackground(System.Windows.Forms.PaintEventArgs! ebe) -> void
+override WinFormsLegacyControls.DataGrid.OnResize(System.EventArgs! e) -> void
 override WinFormsLegacyControls.DataGrid.ProcessDialogKey(System.Windows.Forms.Keys keyData) -> bool
 override WinFormsLegacyControls.DataGrid.ProcessKeyPreview(ref System.Windows.Forms.Message m) -> bool
 override WinFormsLegacyControls.DataGrid.ResetBackColor() -> void
 override WinFormsLegacyControls.DataGrid.ResetForeColor() -> void
-override WinFormsLegacyControls.DataGrid.Site.get -> System.ComponentModel.ISite
+override WinFormsLegacyControls.DataGrid.Site.get -> System.ComponentModel.ISite?
 override WinFormsLegacyControls.DataGrid.Site.set -> void
-override WinFormsLegacyControls.DataGrid.Text.get -> string
+override WinFormsLegacyControls.DataGrid.Text.get -> string!
 override WinFormsLegacyControls.DataGrid.Text.set -> void
 override WinFormsLegacyControls.DataGridBoolColumn.Abort(int rowNum) -> void
-override WinFormsLegacyControls.DataGridBoolColumn.Commit(System.Windows.Forms.CurrencyManager dataSource, int rowNum) -> bool
+override WinFormsLegacyControls.DataGridBoolColumn.Commit(System.Windows.Forms.CurrencyManager! dataSource, int rowNum) -> bool
 override WinFormsLegacyControls.DataGridBoolColumn.ConcedeFocus() -> void
-override WinFormsLegacyControls.DataGridBoolColumn.Edit(System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string displayText, bool cellIsVisible) -> void
+override WinFormsLegacyControls.DataGridBoolColumn.Edit(System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string? displayText, bool cellIsVisible) -> void
 override WinFormsLegacyControls.DataGridBoolColumn.EnterNullValue() -> void
-override WinFormsLegacyControls.DataGridBoolColumn.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager lm, int row) -> object
+override WinFormsLegacyControls.DataGridBoolColumn.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager! lm, int row) -> object!
 override WinFormsLegacyControls.DataGridBoolColumn.GetMinimumHeight() -> int
-override WinFormsLegacyControls.DataGridBoolColumn.GetPreferredHeight(System.Drawing.Graphics g, object value) -> int
-override WinFormsLegacyControls.DataGridBoolColumn.GetPreferredSize(System.Drawing.Graphics g, object value) -> System.Drawing.Size
-override WinFormsLegacyControls.DataGridBoolColumn.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum) -> void
-override WinFormsLegacyControls.DataGridBoolColumn.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum, bool alignToRight) -> void
-override WinFormsLegacyControls.DataGridBoolColumn.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Brush backBrush, System.Drawing.Brush foreBrush, bool alignToRight) -> void
-override WinFormsLegacyControls.DataGridBoolColumn.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager lm, int row, object value) -> void
-override WinFormsLegacyControls.DataGridCell.Equals(object o) -> bool
+override WinFormsLegacyControls.DataGridBoolColumn.GetPreferredHeight(System.Drawing.Graphics! g, object? value) -> int
+override WinFormsLegacyControls.DataGridBoolColumn.GetPreferredSize(System.Drawing.Graphics! g, object? value) -> System.Drawing.Size
+override WinFormsLegacyControls.DataGridBoolColumn.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum) -> void
+override WinFormsLegacyControls.DataGridBoolColumn.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum, bool alignToRight) -> void
+override WinFormsLegacyControls.DataGridBoolColumn.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Brush! backBrush, System.Drawing.Brush! foreBrush, bool alignToRight) -> void
+override WinFormsLegacyControls.DataGridBoolColumn.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager! lm, int row, object? value) -> void
+override WinFormsLegacyControls.DataGridCell.Equals(object? o) -> bool
 override WinFormsLegacyControls.DataGridCell.GetHashCode() -> int
-override WinFormsLegacyControls.DataGridCell.ToString() -> string
+override WinFormsLegacyControls.DataGridCell.ToString() -> string!
 override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Bounds.get -> System.Drawing.Rectangle
-override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Name.get -> string
-override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Navigate(System.Windows.Forms.AccessibleNavigation navdir) -> System.Windows.Forms.AccessibleObject
-override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Parent.get -> System.Windows.Forms.AccessibleObject
+override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Name.get -> string!
+override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Navigate(System.Windows.Forms.AccessibleNavigation navdir) -> System.Windows.Forms.AccessibleObject?
+override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Parent.get -> System.Windows.Forms.AccessibleObject!
 override WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Role.get -> System.Windows.Forms.AccessibleRole
-override WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Type sourceType) -> bool
-override WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) -> object
-override WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, System.Type destinationType) -> object
+override WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, System.Type! sourceType) -> bool
+override WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object! value) -> object?
+override WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object? value, System.Type! destinationType) -> object?
 override WinFormsLegacyControls.DataGridTableStyle.Dispose(bool disposing) -> void
-override WinFormsLegacyControls.DataGridTextBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs e) -> void
-override WinFormsLegacyControls.DataGridTextBox.OnMouseWheel(System.Windows.Forms.MouseEventArgs e) -> void
+override WinFormsLegacyControls.DataGridTextBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs! e) -> void
+override WinFormsLegacyControls.DataGridTextBox.OnMouseWheel(System.Windows.Forms.MouseEventArgs! e) -> void
 override WinFormsLegacyControls.DataGridTextBox.ProcessKeyMessage(ref System.Windows.Forms.Message m) -> bool
 override WinFormsLegacyControls.DataGridTextBox.WndProc(ref System.Windows.Forms.Message m) -> void
 override WinFormsLegacyControls.DataGridTextBoxColumn.Abort(int rowNum) -> void
-override WinFormsLegacyControls.DataGridTextBoxColumn.Commit(System.Windows.Forms.CurrencyManager dataSource, int rowNum) -> bool
+override WinFormsLegacyControls.DataGridTextBoxColumn.Commit(System.Windows.Forms.CurrencyManager! dataSource, int rowNum) -> bool
 override WinFormsLegacyControls.DataGridTextBoxColumn.ConcedeFocus() -> void
-override WinFormsLegacyControls.DataGridTextBoxColumn.Edit(System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string displayText, bool cellIsVisible) -> void
+override WinFormsLegacyControls.DataGridTextBoxColumn.Edit(System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string? displayText, bool cellIsVisible) -> void
 override WinFormsLegacyControls.DataGridTextBoxColumn.EnterNullValue() -> void
 override WinFormsLegacyControls.DataGridTextBoxColumn.GetMinimumHeight() -> int
-override WinFormsLegacyControls.DataGridTextBoxColumn.GetPreferredHeight(System.Drawing.Graphics g, object value) -> int
-override WinFormsLegacyControls.DataGridTextBoxColumn.GetPreferredSize(System.Drawing.Graphics g, object value) -> System.Drawing.Size
-override WinFormsLegacyControls.DataGridTextBoxColumn.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum) -> void
-override WinFormsLegacyControls.DataGridTextBoxColumn.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum, bool alignToRight) -> void
-override WinFormsLegacyControls.DataGridTextBoxColumn.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Brush backBrush, System.Drawing.Brush foreBrush, bool alignToRight) -> void
+override WinFormsLegacyControls.DataGridTextBoxColumn.GetPreferredHeight(System.Drawing.Graphics! g, object? value) -> int
+override WinFormsLegacyControls.DataGridTextBoxColumn.GetPreferredSize(System.Drawing.Graphics! g, object? value) -> System.Drawing.Size
+override WinFormsLegacyControls.DataGridTextBoxColumn.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum) -> void
+override WinFormsLegacyControls.DataGridTextBoxColumn.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum, bool alignToRight) -> void
+override WinFormsLegacyControls.DataGridTextBoxColumn.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Brush! backBrush, System.Drawing.Brush! foreBrush, bool alignToRight) -> void
 override WinFormsLegacyControls.DataGridTextBoxColumn.PropertyDescriptor.set -> void
 override WinFormsLegacyControls.DataGridTextBoxColumn.ReadOnly.get -> bool
 override WinFormsLegacyControls.DataGridTextBoxColumn.ReadOnly.set -> void
 override WinFormsLegacyControls.DataGridTextBoxColumn.ReleaseHostedControl() -> void
-override WinFormsLegacyControls.DataGridTextBoxColumn.SetDataGridInColumn(WinFormsLegacyControls.DataGrid value) -> void
-override WinFormsLegacyControls.DataGridTextBoxColumn.UpdateUI(System.Windows.Forms.CurrencyManager source, int rowNum, string displayText) -> void
-static readonly WinFormsLegacyControls.DataGrid.HitTestInfo.Nowhere -> WinFormsLegacyControls.DataGrid.HitTestInfo
-static readonly WinFormsLegacyControls.DataGridTableStyle.DefaultTableStyle -> WinFormsLegacyControls.DataGridTableStyle
-static WinFormsLegacyControls.DataGridColumnStyle.CompModSwitches.DGEditColumnEditing.get -> System.Diagnostics.TraceSwitch
-static WinFormsLegacyControls.GridTablesFactory.CreateGridTables(WinFormsLegacyControls.DataGridTableStyle gridTable, object dataSource, string dataMember, System.Windows.Forms.BindingContext bindingManager) -> WinFormsLegacyControls.DataGridTableStyle[]
+override WinFormsLegacyControls.DataGridTextBoxColumn.SetDataGridInColumn(WinFormsLegacyControls.DataGrid! value) -> void
+override WinFormsLegacyControls.DataGridTextBoxColumn.UpdateUI(System.Windows.Forms.CurrencyManager! source, int rowNum, string? displayText) -> void
+static readonly WinFormsLegacyControls.DataGrid.HitTestInfo.Nowhere -> WinFormsLegacyControls.DataGrid.HitTestInfo!
+static readonly WinFormsLegacyControls.DataGridTableStyle.DefaultTableStyle -> WinFormsLegacyControls.DataGridTableStyle!
+static WinFormsLegacyControls.DataGridColumnStyle.CompModSwitches.DGEditColumnEditing.get -> System.Diagnostics.TraceSwitch!
+static WinFormsLegacyControls.GridTablesFactory.CreateGridTables(WinFormsLegacyControls.DataGridTableStyle! gridTable, object! dataSource, string! dataMember, System.Windows.Forms.BindingContext! bindingManager) -> WinFormsLegacyControls.DataGridTableStyle![]!
 virtual WinFormsLegacyControls.DataGrid.CancelEditing() -> void
 virtual WinFormsLegacyControls.DataGrid.ColumnStartedEditing(System.Drawing.Rectangle bounds) -> void
-virtual WinFormsLegacyControls.DataGrid.ColumnStartedEditing(System.Windows.Forms.Control editingControl) -> void
-virtual WinFormsLegacyControls.DataGrid.CreateGridColumn(System.ComponentModel.PropertyDescriptor prop) -> WinFormsLegacyControls.DataGridColumnStyle
-virtual WinFormsLegacyControls.DataGrid.CreateGridColumn(System.ComponentModel.PropertyDescriptor prop, bool isDefault) -> WinFormsLegacyControls.DataGridColumnStyle
-virtual WinFormsLegacyControls.DataGrid.GetOutputTextDelimiter() -> string
-virtual WinFormsLegacyControls.DataGrid.GridHScrolled(object sender, System.Windows.Forms.ScrollEventArgs se) -> void
-virtual WinFormsLegacyControls.DataGrid.GridVScrolled(object sender, System.Windows.Forms.ScrollEventArgs se) -> void
-virtual WinFormsLegacyControls.DataGrid.OnAllowNavigationChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnBackgroundColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnBorderStyleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnCaptionVisibleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnCurrentCellChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnDataSourceChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnFlatModeChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnParentRowsLabelStyleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnParentRowsVisibleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGrid.OnReadOnlyChanged(System.EventArgs e) -> void
+virtual WinFormsLegacyControls.DataGrid.ColumnStartedEditing(System.Windows.Forms.Control! editingControl) -> void
+virtual WinFormsLegacyControls.DataGrid.CreateGridColumn(System.ComponentModel.PropertyDescriptor! prop) -> WinFormsLegacyControls.DataGridColumnStyle?
+virtual WinFormsLegacyControls.DataGrid.CreateGridColumn(System.ComponentModel.PropertyDescriptor! prop, bool isDefault) -> WinFormsLegacyControls.DataGridColumnStyle?
+virtual WinFormsLegacyControls.DataGrid.GetOutputTextDelimiter() -> string!
+virtual WinFormsLegacyControls.DataGrid.GridHScrolled(object? sender, System.Windows.Forms.ScrollEventArgs! se) -> void
+virtual WinFormsLegacyControls.DataGrid.GridVScrolled(object? sender, System.Windows.Forms.ScrollEventArgs! se) -> void
+virtual WinFormsLegacyControls.DataGrid.OnAllowNavigationChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnBackgroundColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnBorderStyleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnCaptionVisibleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnCurrentCellChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnDataSourceChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnFlatModeChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnParentRowsLabelStyleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnParentRowsVisibleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGrid.OnReadOnlyChanged(System.EventArgs! e) -> void
 virtual WinFormsLegacyControls.DataGrid.ShouldSerializeAlternatingBackColor() -> bool
 virtual WinFormsLegacyControls.DataGrid.ShouldSerializeBackgroundColor() -> bool
 virtual WinFormsLegacyControls.DataGrid.ShouldSerializeCaptionBackColor() -> bool
@@ -130,56 +131,56 @@ virtual WinFormsLegacyControls.DataGrid.ShouldSerializeParentRowsForeColor() -> 
 virtual WinFormsLegacyControls.DataGrid.ShouldSerializeSelectionForeColor() -> bool
 virtual WinFormsLegacyControls.DataGridColumnStyle.Alignment.get -> System.Windows.Forms.HorizontalAlignment
 virtual WinFormsLegacyControls.DataGridColumnStyle.Alignment.set -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.ColumnStartedEditing(System.Windows.Forms.Control editingControl) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.ColumnStartedEditing(System.Windows.Forms.Control! editingControl) -> void
 virtual WinFormsLegacyControls.DataGridColumnStyle.ConcedeFocus() -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.CreateHeaderAccessibleObject() -> System.Windows.Forms.AccessibleObject
-virtual WinFormsLegacyControls.DataGridColumnStyle.DataGridTableStyle.get -> WinFormsLegacyControls.DataGridTableStyle
-virtual WinFormsLegacyControls.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly) -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string displayText) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.CreateHeaderAccessibleObject() -> System.Windows.Forms.AccessibleObject!
+virtual WinFormsLegacyControls.DataGridColumnStyle.DataGridTableStyle.get -> WinFormsLegacyControls.DataGridTableStyle?
+virtual WinFormsLegacyControls.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Rectangle bounds, bool readOnly, string? displayText) -> void
 virtual WinFormsLegacyControls.DataGridColumnStyle.EnterNullValue() -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager source, int rowNum) -> object
-virtual WinFormsLegacyControls.DataGridColumnStyle.HeaderText.get -> string
+virtual WinFormsLegacyControls.DataGridColumnStyle.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager! source, int rowNum) -> object?
+virtual WinFormsLegacyControls.DataGridColumnStyle.HeaderText.get -> string!
 virtual WinFormsLegacyControls.DataGridColumnStyle.HeaderText.set -> void
 virtual WinFormsLegacyControls.DataGridColumnStyle.Invalidate() -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.NullText.get -> string
+virtual WinFormsLegacyControls.DataGridColumnStyle.NullText.get -> string!
 virtual WinFormsLegacyControls.DataGridColumnStyle.NullText.set -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.Paint(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager source, int rowNum, System.Drawing.Brush backBrush, System.Drawing.Brush foreBrush, bool alignToRight) -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.PropertyDescriptor.get -> System.ComponentModel.PropertyDescriptor
+virtual WinFormsLegacyControls.DataGridColumnStyle.Paint(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, System.Windows.Forms.CurrencyManager! source, int rowNum, System.Drawing.Brush! backBrush, System.Drawing.Brush! foreBrush, bool alignToRight) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.PropertyDescriptor.get -> System.ComponentModel.PropertyDescriptor?
 virtual WinFormsLegacyControls.DataGridColumnStyle.PropertyDescriptor.set -> void
 virtual WinFormsLegacyControls.DataGridColumnStyle.ReadOnly.get -> bool
 virtual WinFormsLegacyControls.DataGridColumnStyle.ReadOnly.set -> void
 virtual WinFormsLegacyControls.DataGridColumnStyle.ReleaseHostedControl() -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager source, int rowNum, object value) -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.SetDataGrid(WinFormsLegacyControls.DataGrid value) -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.SetDataGridInColumn(WinFormsLegacyControls.DataGrid value) -> void
-virtual WinFormsLegacyControls.DataGridColumnStyle.UpdateUI(System.Windows.Forms.CurrencyManager source, int rowNum, string displayText) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager! source, int rowNum, object? value) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.SetDataGrid(WinFormsLegacyControls.DataGrid! value) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.SetDataGridInColumn(WinFormsLegacyControls.DataGrid! value) -> void
+virtual WinFormsLegacyControls.DataGridColumnStyle.UpdateUI(System.Windows.Forms.CurrencyManager! source, int rowNum, string? displayText) -> void
 virtual WinFormsLegacyControls.DataGridColumnStyle.Width.get -> int
 virtual WinFormsLegacyControls.DataGridColumnStyle.Width.set -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.CreateGridColumn(System.ComponentModel.PropertyDescriptor prop) -> WinFormsLegacyControls.DataGridColumnStyle
-virtual WinFormsLegacyControls.DataGridTableStyle.CreateGridColumn(System.ComponentModel.PropertyDescriptor prop, bool isDefault) -> WinFormsLegacyControls.DataGridColumnStyle
-virtual WinFormsLegacyControls.DataGridTableStyle.DataGrid.get -> WinFormsLegacyControls.DataGrid
+virtual WinFormsLegacyControls.DataGridTableStyle.CreateGridColumn(System.ComponentModel.PropertyDescriptor! prop) -> WinFormsLegacyControls.DataGridColumnStyle!
+virtual WinFormsLegacyControls.DataGridTableStyle.CreateGridColumn(System.ComponentModel.PropertyDescriptor! prop, bool isDefault) -> WinFormsLegacyControls.DataGridColumnStyle!
+virtual WinFormsLegacyControls.DataGridTableStyle.DataGrid.get -> WinFormsLegacyControls.DataGrid?
 virtual WinFormsLegacyControls.DataGridTableStyle.DataGrid.set -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.GridColumnStyles.get -> WinFormsLegacyControls.GridColumnStylesCollection
-virtual WinFormsLegacyControls.DataGridTableStyle.OnAllowSortingChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnAlternatingBackColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnBackColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnColumnHeadersVisibleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnForeColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnGridLineColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnGridLineStyleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnHeaderBackColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnHeaderFontChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnHeaderForeColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnLinkColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnLinkHoverColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnMappingNameChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnPreferredColumnWidthChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnPreferredRowHeightChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnReadOnlyChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnRowHeadersVisibleChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnRowHeaderWidthChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnSelectionBackColorChanged(System.EventArgs e) -> void
-virtual WinFormsLegacyControls.DataGridTableStyle.OnSelectionForeColorChanged(System.EventArgs e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.GridColumnStyles.get -> WinFormsLegacyControls.GridColumnStylesCollection!
+virtual WinFormsLegacyControls.DataGridTableStyle.OnAllowSortingChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnAlternatingBackColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnBackColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnColumnHeadersVisibleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnForeColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnGridLineColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnGridLineStyleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnHeaderBackColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnHeaderFontChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnHeaderForeColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnLinkColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnLinkHoverColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnMappingNameChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnPreferredColumnWidthChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnPreferredRowHeightChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnReadOnlyChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnRowHeadersVisibleChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnRowHeaderWidthChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnSelectionBackColorChanged(System.EventArgs! e) -> void
+virtual WinFormsLegacyControls.DataGridTableStyle.OnSelectionForeColorChanged(System.EventArgs! e) -> void
 virtual WinFormsLegacyControls.DataGridTableStyle.ReadOnly.get -> bool
 virtual WinFormsLegacyControls.DataGridTableStyle.ReadOnly.set -> void
 virtual WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeAlternatingBackColor() -> bool
@@ -189,62 +190,62 @@ virtual WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeHeaderForeColor
 virtual WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeLinkColor() -> bool
 virtual WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeLinkHoverColor() -> bool
 virtual WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeSelectionForeColor() -> bool
-virtual WinFormsLegacyControls.DataGridTextBoxColumn.TextBox.get -> System.Windows.Forms.TextBox
-virtual WinFormsLegacyControls.GridColumnStylesCollection.Add(WinFormsLegacyControls.DataGridColumnStyle column) -> int
-virtual WinFormsLegacyControls.GridTableStylesCollection.Add(WinFormsLegacyControls.DataGridTableStyle table) -> int
-virtual WinFormsLegacyControls.GridTableStylesCollection.AddRange(WinFormsLegacyControls.DataGridTableStyle[] tables) -> void
+virtual WinFormsLegacyControls.DataGridTextBoxColumn.TextBox.get -> System.Windows.Forms.TextBox!
+virtual WinFormsLegacyControls.GridColumnStylesCollection.Add(WinFormsLegacyControls.DataGridColumnStyle! column) -> int
+virtual WinFormsLegacyControls.GridTableStylesCollection.Add(WinFormsLegacyControls.DataGridTableStyle! table) -> int
+virtual WinFormsLegacyControls.GridTableStylesCollection.AddRange(WinFormsLegacyControls.DataGridTableStyle![]! tables) -> void
 WinFormsLegacyControls.DataGrid
 WinFormsLegacyControls.DataGrid.AllowNavigation.get -> bool
 WinFormsLegacyControls.DataGrid.AllowNavigation.set -> void
-WinFormsLegacyControls.DataGrid.AllowNavigationChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.AllowNavigationChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.AllowSorting.get -> bool
 WinFormsLegacyControls.DataGrid.AllowSorting.set -> void
 WinFormsLegacyControls.DataGrid.AlternatingBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.AlternatingBackColor.set -> void
-WinFormsLegacyControls.DataGrid.BackButtonClick -> System.EventHandler
+WinFormsLegacyControls.DataGrid.BackButtonClick -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.BackgroundColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.BackgroundColor.set -> void
-WinFormsLegacyControls.DataGrid.BackgroundColorChanged -> System.EventHandler
-WinFormsLegacyControls.DataGrid.BackgroundImageChanged -> System.EventHandler
-WinFormsLegacyControls.DataGrid.BackgroundImageLayoutChanged -> System.EventHandler
-WinFormsLegacyControls.DataGrid.BeginEdit(WinFormsLegacyControls.DataGridColumnStyle gridColumn, int rowNumber) -> bool
+WinFormsLegacyControls.DataGrid.BackgroundColorChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGrid.BackgroundImageChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGrid.BackgroundImageLayoutChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGrid.BeginEdit(WinFormsLegacyControls.DataGridColumnStyle! gridColumn, int rowNumber) -> bool
 WinFormsLegacyControls.DataGrid.BeginInit() -> void
 WinFormsLegacyControls.DataGrid.BorderStyle.get -> System.Windows.Forms.BorderStyle
 WinFormsLegacyControls.DataGrid.BorderStyle.set -> void
-WinFormsLegacyControls.DataGrid.BorderStyleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.BorderStyleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.CaptionBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.CaptionBackColor.set -> void
-WinFormsLegacyControls.DataGrid.CaptionFont.get -> System.Drawing.Font
+WinFormsLegacyControls.DataGrid.CaptionFont.get -> System.Drawing.Font!
 WinFormsLegacyControls.DataGrid.CaptionFont.set -> void
 WinFormsLegacyControls.DataGrid.CaptionForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.CaptionForeColor.set -> void
-WinFormsLegacyControls.DataGrid.CaptionText.get -> string
+WinFormsLegacyControls.DataGrid.CaptionText.get -> string!
 WinFormsLegacyControls.DataGrid.CaptionText.set -> void
 WinFormsLegacyControls.DataGrid.CaptionVisible.get -> bool
 WinFormsLegacyControls.DataGrid.CaptionVisible.set -> void
-WinFormsLegacyControls.DataGrid.CaptionVisibleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.CaptionVisibleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.Collapse(int row) -> void
 WinFormsLegacyControls.DataGrid.ColumnHeadersVisible.get -> bool
 WinFormsLegacyControls.DataGrid.ColumnHeadersVisible.set -> void
 WinFormsLegacyControls.DataGrid.CurrentCell.get -> WinFormsLegacyControls.DataGridCell
 WinFormsLegacyControls.DataGrid.CurrentCell.set -> void
-WinFormsLegacyControls.DataGrid.CurrentCellChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.CurrentCellChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.CurrentRowIndex.get -> int
 WinFormsLegacyControls.DataGrid.CurrentRowIndex.set -> void
-WinFormsLegacyControls.DataGrid.CursorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.CursorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.DataGrid() -> void
-WinFormsLegacyControls.DataGrid.DataMember.get -> string
+WinFormsLegacyControls.DataGrid.DataMember.get -> string!
 WinFormsLegacyControls.DataGrid.DataMember.set -> void
-WinFormsLegacyControls.DataGrid.DataSource.get -> object
+WinFormsLegacyControls.DataGrid.DataSource.get -> object?
 WinFormsLegacyControls.DataGrid.DataSource.set -> void
-WinFormsLegacyControls.DataGrid.DataSourceChanged -> System.EventHandler
-WinFormsLegacyControls.DataGrid.EndEdit(WinFormsLegacyControls.DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort) -> bool
+WinFormsLegacyControls.DataGrid.DataSourceChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGrid.EndEdit(WinFormsLegacyControls.DataGridColumnStyle! gridColumn, int rowNumber, bool shouldAbort) -> bool
 WinFormsLegacyControls.DataGrid.EndInit() -> void
 WinFormsLegacyControls.DataGrid.Expand(int row) -> void
 WinFormsLegacyControls.DataGrid.FirstVisibleColumn.get -> int
 WinFormsLegacyControls.DataGrid.FlatMode.get -> bool
 WinFormsLegacyControls.DataGrid.FlatMode.set -> void
-WinFormsLegacyControls.DataGrid.FlatModeChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.FlatModeChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.GetCellBounds(int row, int col) -> System.Drawing.Rectangle
 WinFormsLegacyControls.DataGrid.GetCellBounds(WinFormsLegacyControls.DataGridCell dgc) -> System.Drawing.Rectangle
 WinFormsLegacyControls.DataGrid.GetCurrentCellBounds() -> System.Drawing.Rectangle
@@ -254,12 +255,12 @@ WinFormsLegacyControls.DataGrid.GridLineStyle.get -> WinFormsLegacyControls.Data
 WinFormsLegacyControls.DataGrid.GridLineStyle.set -> void
 WinFormsLegacyControls.DataGrid.HeaderBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.HeaderBackColor.set -> void
-WinFormsLegacyControls.DataGrid.HeaderFont.get -> System.Drawing.Font
+WinFormsLegacyControls.DataGrid.HeaderFont.get -> System.Drawing.Font!
 WinFormsLegacyControls.DataGrid.HeaderFont.set -> void
 WinFormsLegacyControls.DataGrid.HeaderForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.HeaderForeColor.set -> void
-WinFormsLegacyControls.DataGrid.HitTest(int x, int y) -> WinFormsLegacyControls.DataGrid.HitTestInfo
-WinFormsLegacyControls.DataGrid.HitTest(System.Drawing.Point position) -> WinFormsLegacyControls.DataGrid.HitTestInfo
+WinFormsLegacyControls.DataGrid.HitTest(int x, int y) -> WinFormsLegacyControls.DataGrid.HitTestInfo!
+WinFormsLegacyControls.DataGrid.HitTest(System.Drawing.Point position) -> WinFormsLegacyControls.DataGrid.HitTestInfo!
 WinFormsLegacyControls.DataGrid.HitTestInfo
 WinFormsLegacyControls.DataGrid.HitTestInfo.Column.get -> int
 WinFormsLegacyControls.DataGrid.HitTestInfo.Row.get -> int
@@ -273,42 +274,42 @@ WinFormsLegacyControls.DataGrid.HitTestType.None = 0 -> WinFormsLegacyControls.D
 WinFormsLegacyControls.DataGrid.HitTestType.ParentRows = 64 -> WinFormsLegacyControls.DataGrid.HitTestType
 WinFormsLegacyControls.DataGrid.HitTestType.RowHeader = 4 -> WinFormsLegacyControls.DataGrid.HitTestType
 WinFormsLegacyControls.DataGrid.HitTestType.RowResize = 16 -> WinFormsLegacyControls.DataGrid.HitTestType
-WinFormsLegacyControls.DataGrid.HorizScrollBar.get -> System.Windows.Forms.ScrollBar
+WinFormsLegacyControls.DataGrid.HorizScrollBar.get -> System.Windows.Forms.ScrollBar!
 WinFormsLegacyControls.DataGrid.IsExpanded(int rowNumber) -> bool
 WinFormsLegacyControls.DataGrid.IsSelected(int row) -> bool
 WinFormsLegacyControls.DataGrid.LinkColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.LinkColor.set -> void
 WinFormsLegacyControls.DataGrid.LinkHoverColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.LinkHoverColor.set -> void
-WinFormsLegacyControls.DataGrid.ListManager.get -> System.Windows.Forms.CurrencyManager
+WinFormsLegacyControls.DataGrid.ListManager.get -> System.Windows.Forms.CurrencyManager!
 WinFormsLegacyControls.DataGrid.ListManager.set -> void
-WinFormsLegacyControls.DataGrid.Navigate -> System.Windows.Forms.NavigateEventHandler
+WinFormsLegacyControls.DataGrid.Navigate -> System.Windows.Forms.NavigateEventHandler!
 WinFormsLegacyControls.DataGrid.NavigateBack() -> void
-WinFormsLegacyControls.DataGrid.NavigateTo(int rowNumber, string relationName) -> void
-WinFormsLegacyControls.DataGrid.OnBackButtonClicked(object sender, System.EventArgs e) -> void
-WinFormsLegacyControls.DataGrid.OnNavigate(System.Windows.Forms.NavigateEventArgs e) -> void
-WinFormsLegacyControls.DataGrid.OnRowHeaderClick(System.EventArgs e) -> void
-WinFormsLegacyControls.DataGrid.OnScroll(System.EventArgs e) -> void
-WinFormsLegacyControls.DataGrid.OnShowParentDetailsButtonClicked(object sender, System.EventArgs e) -> void
+WinFormsLegacyControls.DataGrid.NavigateTo(int rowNumber, string! relationName) -> void
+WinFormsLegacyControls.DataGrid.OnBackButtonClicked(object? sender, System.EventArgs! e) -> void
+WinFormsLegacyControls.DataGrid.OnNavigate(System.Windows.Forms.NavigateEventArgs! e) -> void
+WinFormsLegacyControls.DataGrid.OnRowHeaderClick(System.EventArgs! e) -> void
+WinFormsLegacyControls.DataGrid.OnScroll(System.EventArgs! e) -> void
+WinFormsLegacyControls.DataGrid.OnShowParentDetailsButtonClicked(object? sender, System.EventArgs! e) -> void
 WinFormsLegacyControls.DataGrid.ParentRowsBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.ParentRowsBackColor.set -> void
 WinFormsLegacyControls.DataGrid.ParentRowsForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.ParentRowsForeColor.set -> void
 WinFormsLegacyControls.DataGrid.ParentRowsLabelStyle.get -> WinFormsLegacyControls.DataGridParentRowsLabelStyle
 WinFormsLegacyControls.DataGrid.ParentRowsLabelStyle.set -> void
-WinFormsLegacyControls.DataGrid.ParentRowsLabelStyleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.ParentRowsLabelStyleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.ParentRowsVisible.get -> bool
 WinFormsLegacyControls.DataGrid.ParentRowsVisible.set -> void
-WinFormsLegacyControls.DataGrid.ParentRowsVisibleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.ParentRowsVisibleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.PreferredColumnWidth.get -> int
 WinFormsLegacyControls.DataGrid.PreferredColumnWidth.set -> void
 WinFormsLegacyControls.DataGrid.PreferredRowHeight.get -> int
 WinFormsLegacyControls.DataGrid.PreferredRowHeight.set -> void
-WinFormsLegacyControls.DataGrid.ProcessGridKey(System.Windows.Forms.KeyEventArgs ke) -> bool
+WinFormsLegacyControls.DataGrid.ProcessGridKey(System.Windows.Forms.KeyEventArgs! ke) -> bool
 WinFormsLegacyControls.DataGrid.ProcessTabKey(System.Windows.Forms.Keys keyData) -> bool
 WinFormsLegacyControls.DataGrid.ReadOnly.get -> bool
 WinFormsLegacyControls.DataGrid.ReadOnly.set -> void
-WinFormsLegacyControls.DataGrid.ReadOnlyChanged -> System.EventHandler
+WinFormsLegacyControls.DataGrid.ReadOnlyChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.ResetAlternatingBackColor() -> void
 WinFormsLegacyControls.DataGrid.ResetGridLineColor() -> void
 WinFormsLegacyControls.DataGrid.ResetHeaderBackColor() -> void
@@ -319,48 +320,48 @@ WinFormsLegacyControls.DataGrid.ResetLinkHoverColor() -> void
 WinFormsLegacyControls.DataGrid.ResetSelection() -> void
 WinFormsLegacyControls.DataGrid.ResetSelectionBackColor() -> void
 WinFormsLegacyControls.DataGrid.ResetSelectionForeColor() -> void
-WinFormsLegacyControls.DataGrid.RowHeaderClick -> System.EventHandler
+WinFormsLegacyControls.DataGrid.RowHeaderClick -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.RowHeadersVisible.get -> bool
 WinFormsLegacyControls.DataGrid.RowHeadersVisible.set -> void
 WinFormsLegacyControls.DataGrid.RowHeaderWidth.get -> int
 WinFormsLegacyControls.DataGrid.RowHeaderWidth.set -> void
-WinFormsLegacyControls.DataGrid.Scroll -> System.EventHandler
+WinFormsLegacyControls.DataGrid.Scroll -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.Select(int row) -> void
 WinFormsLegacyControls.DataGrid.SelectionBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.SelectionBackColor.set -> void
 WinFormsLegacyControls.DataGrid.SelectionForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGrid.SelectionForeColor.set -> void
-WinFormsLegacyControls.DataGrid.SetDataBinding(object dataSource, string dataMember) -> void
+WinFormsLegacyControls.DataGrid.SetDataBinding(object! dataSource, string! dataMember) -> void
 WinFormsLegacyControls.DataGrid.ShouldSerializeHeaderFont() -> bool
 WinFormsLegacyControls.DataGrid.ShouldSerializePreferredRowHeight() -> bool
 WinFormsLegacyControls.DataGrid.ShouldSerializeSelectionBackColor() -> bool
-WinFormsLegacyControls.DataGrid.ShowParentDetailsButtonClick -> System.EventHandler
+WinFormsLegacyControls.DataGrid.ShowParentDetailsButtonClick -> System.EventHandler!
 WinFormsLegacyControls.DataGrid.SubObjectsSiteChange(bool site) -> void
-WinFormsLegacyControls.DataGrid.TableStyles.get -> WinFormsLegacyControls.GridTableStylesCollection
-WinFormsLegacyControls.DataGrid.TextChanged -> System.EventHandler
-WinFormsLegacyControls.DataGrid.this[int rowIndex, int columnIndex].get -> object
+WinFormsLegacyControls.DataGrid.TableStyles.get -> WinFormsLegacyControls.GridTableStylesCollection!
+WinFormsLegacyControls.DataGrid.TextChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGrid.this[int rowIndex, int columnIndex].get -> object?
 WinFormsLegacyControls.DataGrid.this[int rowIndex, int columnIndex].set -> void
-WinFormsLegacyControls.DataGrid.this[WinFormsLegacyControls.DataGridCell cell].get -> object
+WinFormsLegacyControls.DataGrid.this[WinFormsLegacyControls.DataGridCell cell].get -> object?
 WinFormsLegacyControls.DataGrid.this[WinFormsLegacyControls.DataGridCell cell].set -> void
 WinFormsLegacyControls.DataGrid.UnSelect(int row) -> void
-WinFormsLegacyControls.DataGrid.VertScrollBar.get -> System.Windows.Forms.ScrollBar
+WinFormsLegacyControls.DataGrid.VertScrollBar.get -> System.Windows.Forms.ScrollBar!
 WinFormsLegacyControls.DataGrid.VisibleColumnCount.get -> int
 WinFormsLegacyControls.DataGrid.VisibleRowCount.get -> int
 WinFormsLegacyControls.DataGridBoolColumn
 WinFormsLegacyControls.DataGridBoolColumn.AllowNull.get -> bool
 WinFormsLegacyControls.DataGridBoolColumn.AllowNull.set -> void
-WinFormsLegacyControls.DataGridBoolColumn.AllowNullChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridBoolColumn.AllowNullChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridBoolColumn.DataGridBoolColumn() -> void
-WinFormsLegacyControls.DataGridBoolColumn.DataGridBoolColumn(System.ComponentModel.PropertyDescriptor prop) -> void
-WinFormsLegacyControls.DataGridBoolColumn.DataGridBoolColumn(System.ComponentModel.PropertyDescriptor prop, bool isDefault) -> void
-WinFormsLegacyControls.DataGridBoolColumn.FalseValue.get -> object
+WinFormsLegacyControls.DataGridBoolColumn.DataGridBoolColumn(System.ComponentModel.PropertyDescriptor! prop) -> void
+WinFormsLegacyControls.DataGridBoolColumn.DataGridBoolColumn(System.ComponentModel.PropertyDescriptor! prop, bool isDefault) -> void
+WinFormsLegacyControls.DataGridBoolColumn.FalseValue.get -> object!
 WinFormsLegacyControls.DataGridBoolColumn.FalseValue.set -> void
-WinFormsLegacyControls.DataGridBoolColumn.FalseValueChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridBoolColumn.NullValue.get -> object
+WinFormsLegacyControls.DataGridBoolColumn.FalseValueChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridBoolColumn.NullValue.get -> object!
 WinFormsLegacyControls.DataGridBoolColumn.NullValue.set -> void
-WinFormsLegacyControls.DataGridBoolColumn.TrueValue.get -> object
+WinFormsLegacyControls.DataGridBoolColumn.TrueValue.get -> object!
 WinFormsLegacyControls.DataGridBoolColumn.TrueValue.set -> void
-WinFormsLegacyControls.DataGridBoolColumn.TrueValueChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridBoolColumn.TrueValueChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridCell
 WinFormsLegacyControls.DataGridCell.ColumnNumber.get -> int
 WinFormsLegacyControls.DataGridCell.ColumnNumber.set -> void
@@ -369,30 +370,30 @@ WinFormsLegacyControls.DataGridCell.DataGridCell(int r, int c) -> void
 WinFormsLegacyControls.DataGridCell.RowNumber.get -> int
 WinFormsLegacyControls.DataGridCell.RowNumber.set -> void
 WinFormsLegacyControls.DataGridColumnStyle
-WinFormsLegacyControls.DataGridColumnStyle.AlignmentChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridColumnStyle.AlignmentChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridColumnStyle.BeginUpdate() -> void
-WinFormsLegacyControls.DataGridColumnStyle.CheckValidDataSource(System.Windows.Forms.CurrencyManager value) -> void
+WinFormsLegacyControls.DataGridColumnStyle.CheckValidDataSource(System.Windows.Forms.CurrencyManager! value) -> void
 WinFormsLegacyControls.DataGridColumnStyle.CompModSwitches
 WinFormsLegacyControls.DataGridColumnStyle.CompModSwitches.CompModSwitches() -> void
 WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject
 WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.DataGridColumnHeaderAccessibleObject() -> void
-WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.DataGridColumnHeaderAccessibleObject(WinFormsLegacyControls.DataGridColumnStyle owner) -> void
-WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Owner.get -> WinFormsLegacyControls.DataGridColumnStyle
+WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.DataGridColumnHeaderAccessibleObject(WinFormsLegacyControls.DataGridColumnStyle! owner) -> void
+WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnHeaderAccessibleObject.Owner.get -> WinFormsLegacyControls.DataGridColumnStyle!
 WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnStyle() -> void
-WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnStyle(System.ComponentModel.PropertyDescriptor prop) -> void
+WinFormsLegacyControls.DataGridColumnStyle.DataGridColumnStyle(System.ComponentModel.PropertyDescriptor? prop) -> void
 WinFormsLegacyControls.DataGridColumnStyle.EndUpdate() -> void
-WinFormsLegacyControls.DataGridColumnStyle.FontChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridColumnStyle.FontChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridColumnStyle.FontHeight.get -> int
-WinFormsLegacyControls.DataGridColumnStyle.HeaderAccessibleObject.get -> System.Windows.Forms.AccessibleObject
-WinFormsLegacyControls.DataGridColumnStyle.HeaderTextChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridColumnStyle.MappingName.get -> string
+WinFormsLegacyControls.DataGridColumnStyle.HeaderAccessibleObject.get -> System.Windows.Forms.AccessibleObject!
+WinFormsLegacyControls.DataGridColumnStyle.HeaderTextChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridColumnStyle.MappingName.get -> string!
 WinFormsLegacyControls.DataGridColumnStyle.MappingName.set -> void
-WinFormsLegacyControls.DataGridColumnStyle.MappingNameChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridColumnStyle.NullTextChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridColumnStyle.PropertyDescriptorChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridColumnStyle.ReadOnlyChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridColumnStyle.MappingNameChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridColumnStyle.NullTextChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridColumnStyle.PropertyDescriptorChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridColumnStyle.ReadOnlyChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridColumnStyle.ResetHeaderText() -> void
-WinFormsLegacyControls.DataGridColumnStyle.WidthChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridColumnStyle.WidthChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridLineStyle
 WinFormsLegacyControls.DataGridLineStyle.None = 0 -> WinFormsLegacyControls.DataGridLineStyle
 WinFormsLegacyControls.DataGridLineStyle.Solid = 1 -> WinFormsLegacyControls.DataGridLineStyle
@@ -406,55 +407,55 @@ WinFormsLegacyControls.DataGridPreferredColumnWidthTypeConverter.DataGridPreferr
 WinFormsLegacyControls.DataGridTableStyle
 WinFormsLegacyControls.DataGridTableStyle.AllowSorting.get -> bool
 WinFormsLegacyControls.DataGridTableStyle.AllowSorting.set -> void
-WinFormsLegacyControls.DataGridTableStyle.AllowSortingChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.AllowSortingChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.AlternatingBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.AlternatingBackColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.AlternatingBackColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.AlternatingBackColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.BackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.BackColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.BackColorChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridTableStyle.BeginEdit(WinFormsLegacyControls.DataGridColumnStyle gridColumn, int rowNumber) -> bool
+WinFormsLegacyControls.DataGridTableStyle.BackColorChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridTableStyle.BeginEdit(WinFormsLegacyControls.DataGridColumnStyle! gridColumn, int rowNumber) -> bool
 WinFormsLegacyControls.DataGridTableStyle.ColumnHeadersVisible.get -> bool
 WinFormsLegacyControls.DataGridTableStyle.ColumnHeadersVisible.set -> void
-WinFormsLegacyControls.DataGridTableStyle.ColumnHeadersVisibleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.ColumnHeadersVisibleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.DataGridTableStyle() -> void
 WinFormsLegacyControls.DataGridTableStyle.DataGridTableStyle(bool isDefaultTableStyle) -> void
-WinFormsLegacyControls.DataGridTableStyle.DataGridTableStyle(System.Windows.Forms.CurrencyManager listManager) -> void
-WinFormsLegacyControls.DataGridTableStyle.EndEdit(WinFormsLegacyControls.DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort) -> bool
+WinFormsLegacyControls.DataGridTableStyle.DataGridTableStyle(System.Windows.Forms.CurrencyManager! listManager) -> void
+WinFormsLegacyControls.DataGridTableStyle.EndEdit(WinFormsLegacyControls.DataGridColumnStyle! gridColumn, int rowNumber, bool shouldAbort) -> bool
 WinFormsLegacyControls.DataGridTableStyle.ForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.ForeColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.ForeColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.ForeColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.GridLineColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.GridLineColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.GridLineColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.GridLineColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.GridLineStyle.get -> WinFormsLegacyControls.DataGridLineStyle
 WinFormsLegacyControls.DataGridTableStyle.GridLineStyle.set -> void
-WinFormsLegacyControls.DataGridTableStyle.GridLineStyleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.GridLineStyleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.HeaderBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.HeaderBackColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.HeaderBackColorChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridTableStyle.HeaderFont.get -> System.Drawing.Font
+WinFormsLegacyControls.DataGridTableStyle.HeaderBackColorChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridTableStyle.HeaderFont.get -> System.Drawing.Font!
 WinFormsLegacyControls.DataGridTableStyle.HeaderFont.set -> void
-WinFormsLegacyControls.DataGridTableStyle.HeaderFontChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.HeaderFontChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.HeaderForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.HeaderForeColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.HeaderForeColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.HeaderForeColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.LinkColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.LinkColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.LinkColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.LinkColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.LinkHoverColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.LinkHoverColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.LinkHoverColorChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridTableStyle.MappingName.get -> string
+WinFormsLegacyControls.DataGridTableStyle.LinkHoverColorChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridTableStyle.MappingName.get -> string!
 WinFormsLegacyControls.DataGridTableStyle.MappingName.set -> void
-WinFormsLegacyControls.DataGridTableStyle.MappingNameChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.MappingNameChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.PreferredColumnWidth.get -> int
 WinFormsLegacyControls.DataGridTableStyle.PreferredColumnWidth.set -> void
-WinFormsLegacyControls.DataGridTableStyle.PreferredColumnWidthChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.PreferredColumnWidthChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.PreferredRowHeight.get -> int
 WinFormsLegacyControls.DataGridTableStyle.PreferredRowHeight.set -> void
-WinFormsLegacyControls.DataGridTableStyle.PreferredRowHeightChanged -> System.EventHandler
-WinFormsLegacyControls.DataGridTableStyle.ReadOnlyChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.PreferredRowHeightChanged -> System.EventHandler!
+WinFormsLegacyControls.DataGridTableStyle.ReadOnlyChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.ResetAlternatingBackColor() -> void
 WinFormsLegacyControls.DataGridTableStyle.ResetBackColor() -> void
 WinFormsLegacyControls.DataGridTableStyle.ResetForeColor() -> void
@@ -468,16 +469,16 @@ WinFormsLegacyControls.DataGridTableStyle.ResetSelectionBackColor() -> void
 WinFormsLegacyControls.DataGridTableStyle.ResetSelectionForeColor() -> void
 WinFormsLegacyControls.DataGridTableStyle.RowHeadersVisible.get -> bool
 WinFormsLegacyControls.DataGridTableStyle.RowHeadersVisible.set -> void
-WinFormsLegacyControls.DataGridTableStyle.RowHeadersVisibleChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.RowHeadersVisibleChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.RowHeaderWidth.get -> int
 WinFormsLegacyControls.DataGridTableStyle.RowHeaderWidth.set -> void
-WinFormsLegacyControls.DataGridTableStyle.RowHeaderWidthChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.RowHeaderWidthChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.SelectionBackColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.SelectionBackColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.SelectionBackColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.SelectionBackColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.SelectionForeColor.get -> System.Drawing.Color
 WinFormsLegacyControls.DataGridTableStyle.SelectionForeColor.set -> void
-WinFormsLegacyControls.DataGridTableStyle.SelectionForeColorChanged -> System.EventHandler
+WinFormsLegacyControls.DataGridTableStyle.SelectionForeColorChanged -> System.EventHandler!
 WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeBackColor() -> bool
 WinFormsLegacyControls.DataGridTableStyle.ShouldSerializeForeColor() -> bool
 WinFormsLegacyControls.DataGridTableStyle.ShouldSerializePreferredRowHeight() -> bool
@@ -486,45 +487,45 @@ WinFormsLegacyControls.DataGridTextBox
 WinFormsLegacyControls.DataGridTextBox.DataGridTextBox() -> void
 WinFormsLegacyControls.DataGridTextBox.IsInEditOrNavigateMode.get -> bool
 WinFormsLegacyControls.DataGridTextBox.IsInEditOrNavigateMode.set -> void
-WinFormsLegacyControls.DataGridTextBox.SetDataGrid(WinFormsLegacyControls.DataGrid parentGrid) -> void
+WinFormsLegacyControls.DataGridTextBox.SetDataGrid(WinFormsLegacyControls.DataGrid? parentGrid) -> void
 WinFormsLegacyControls.DataGridTextBoxColumn
 WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn() -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor prop) -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor prop, bool isDefault) -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor prop, string format) -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor prop, string format, bool isDefault) -> void
+WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor! prop) -> void
+WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor! prop, bool isDefault) -> void
+WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor? prop, string? format) -> void
+WinFormsLegacyControls.DataGridTextBoxColumn.DataGridTextBoxColumn(System.ComponentModel.PropertyDescriptor? prop, string? format, bool isDefault) -> void
 WinFormsLegacyControls.DataGridTextBoxColumn.EndEdit() -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.Format.get -> string
+WinFormsLegacyControls.DataGridTextBoxColumn.Format.get -> string?
 WinFormsLegacyControls.DataGridTextBoxColumn.Format.set -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.FormatInfo.get -> System.IFormatProvider
+WinFormsLegacyControls.DataGridTextBoxColumn.FormatInfo.get -> System.IFormatProvider?
 WinFormsLegacyControls.DataGridTextBoxColumn.FormatInfo.set -> void
 WinFormsLegacyControls.DataGridTextBoxColumn.HideEditBox() -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string text, bool alignToRight) -> void
-WinFormsLegacyControls.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics g, System.Drawing.Rectangle textBounds, string text, System.Drawing.Brush backBrush, System.Drawing.Brush foreBrush, bool alignToRight) -> void
+WinFormsLegacyControls.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics! g, System.Drawing.Rectangle bounds, string? text, bool alignToRight) -> void
+WinFormsLegacyControls.DataGridTextBoxColumn.PaintText(System.Drawing.Graphics! g, System.Drawing.Rectangle textBounds, string? text, System.Drawing.Brush! backBrush, System.Drawing.Brush! foreBrush, bool alignToRight) -> void
 WinFormsLegacyControls.GridColumnStylesCollection
-WinFormsLegacyControls.GridColumnStylesCollection.AddRange(WinFormsLegacyControls.DataGridColumnStyle[] columns) -> void
+WinFormsLegacyControls.GridColumnStylesCollection.AddRange(WinFormsLegacyControls.DataGridColumnStyle![]! columns) -> void
 WinFormsLegacyControls.GridColumnStylesCollection.Clear() -> void
-WinFormsLegacyControls.GridColumnStylesCollection.CollectionChanged -> System.ComponentModel.CollectionChangeEventHandler
-WinFormsLegacyControls.GridColumnStylesCollection.Contains(string name) -> bool
-WinFormsLegacyControls.GridColumnStylesCollection.Contains(System.ComponentModel.PropertyDescriptor propertyDescriptor) -> bool
-WinFormsLegacyControls.GridColumnStylesCollection.Contains(WinFormsLegacyControls.DataGridColumnStyle column) -> bool
-WinFormsLegacyControls.GridColumnStylesCollection.IndexOf(WinFormsLegacyControls.DataGridColumnStyle element) -> int
-WinFormsLegacyControls.GridColumnStylesCollection.Remove(WinFormsLegacyControls.DataGridColumnStyle column) -> void
+WinFormsLegacyControls.GridColumnStylesCollection.CollectionChanged -> System.ComponentModel.CollectionChangeEventHandler!
+WinFormsLegacyControls.GridColumnStylesCollection.Contains(string! name) -> bool
+WinFormsLegacyControls.GridColumnStylesCollection.Contains(System.ComponentModel.PropertyDescriptor! propertyDescriptor) -> bool
+WinFormsLegacyControls.GridColumnStylesCollection.Contains(WinFormsLegacyControls.DataGridColumnStyle! column) -> bool
+WinFormsLegacyControls.GridColumnStylesCollection.IndexOf(WinFormsLegacyControls.DataGridColumnStyle! element) -> int
+WinFormsLegacyControls.GridColumnStylesCollection.Remove(WinFormsLegacyControls.DataGridColumnStyle! column) -> void
 WinFormsLegacyControls.GridColumnStylesCollection.RemoveAt(int index) -> void
 WinFormsLegacyControls.GridColumnStylesCollection.ResetPropertyDescriptors() -> void
-WinFormsLegacyControls.GridColumnStylesCollection.this[int index].get -> WinFormsLegacyControls.DataGridColumnStyle
-WinFormsLegacyControls.GridColumnStylesCollection.this[string columnName].get -> WinFormsLegacyControls.DataGridColumnStyle
-WinFormsLegacyControls.GridColumnStylesCollection.this[System.ComponentModel.PropertyDescriptor propertyDesciptor].get -> WinFormsLegacyControls.DataGridColumnStyle
+WinFormsLegacyControls.GridColumnStylesCollection.this[int index].get -> WinFormsLegacyControls.DataGridColumnStyle!
+WinFormsLegacyControls.GridColumnStylesCollection.this[string! columnName].get -> WinFormsLegacyControls.DataGridColumnStyle?
+WinFormsLegacyControls.GridColumnStylesCollection.this[System.ComponentModel.PropertyDescriptor! propertyDesciptor].get -> WinFormsLegacyControls.DataGridColumnStyle?
 WinFormsLegacyControls.GridTablesFactory
 WinFormsLegacyControls.GridTableStylesCollection
 WinFormsLegacyControls.GridTableStylesCollection.Clear() -> void
-WinFormsLegacyControls.GridTableStylesCollection.CollectionChanged -> System.ComponentModel.CollectionChangeEventHandler
-WinFormsLegacyControls.GridTableStylesCollection.Contains(string name) -> bool
-WinFormsLegacyControls.GridTableStylesCollection.Contains(WinFormsLegacyControls.DataGridTableStyle table) -> bool
-WinFormsLegacyControls.GridTableStylesCollection.Remove(WinFormsLegacyControls.DataGridTableStyle table) -> void
+WinFormsLegacyControls.GridTableStylesCollection.CollectionChanged -> System.ComponentModel.CollectionChangeEventHandler!
+WinFormsLegacyControls.GridTableStylesCollection.Contains(string! name) -> bool
+WinFormsLegacyControls.GridTableStylesCollection.Contains(WinFormsLegacyControls.DataGridTableStyle! table) -> bool
+WinFormsLegacyControls.GridTableStylesCollection.Remove(WinFormsLegacyControls.DataGridTableStyle! table) -> void
 WinFormsLegacyControls.GridTableStylesCollection.RemoveAt(int index) -> void
-WinFormsLegacyControls.GridTableStylesCollection.this[int index].get -> WinFormsLegacyControls.DataGridTableStyle
-WinFormsLegacyControls.GridTableStylesCollection.this[string tableName].get -> WinFormsLegacyControls.DataGridTableStyle
+WinFormsLegacyControls.GridTableStylesCollection.this[int index].get -> WinFormsLegacyControls.DataGridTableStyle!
+WinFormsLegacyControls.GridTableStylesCollection.this[string! tableName].get -> WinFormsLegacyControls.DataGridTableStyle?
 WinFormsLegacyControls.IDataGridEditingService
-WinFormsLegacyControls.IDataGridEditingService.BeginEdit(WinFormsLegacyControls.DataGridColumnStyle gridColumn, int rowNumber) -> bool
-WinFormsLegacyControls.IDataGridEditingService.EndEdit(WinFormsLegacyControls.DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort) -> bool
+WinFormsLegacyControls.IDataGridEditingService.BeginEdit(WinFormsLegacyControls.DataGridColumnStyle! gridColumn, int rowNumber) -> bool
+WinFormsLegacyControls.IDataGridEditingService.EndEdit(WinFormsLegacyControls.DataGridColumnStyle! gridColumn, int rowNumber, bool shouldAbort) -> bool

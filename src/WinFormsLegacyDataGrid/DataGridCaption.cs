@@ -15,7 +15,7 @@ namespace System.Windows.Forms
     /// </summary>
     internal class DataGridCaption
     {
-        internal EventHandlerList events;
+        internal EventHandlerList? events;
 
         private const int xOffset = 3;
         private const int yOffset = 1;
@@ -25,7 +25,7 @@ namespace System.Windows.Forms
 
         private static readonly Point minimumBounds = new Point(50, 30);
 
-        private readonly DataGrid dataGrid = null;
+        private readonly DataGrid dataGrid /*= null*/;
         private bool backButtonVisible = false;
         private bool downButtonVisible = false;
 
@@ -35,12 +35,12 @@ namespace System.Windows.Forms
 
         private string text = string.Empty;
         private bool textBorderVisible = false;
-        private Font textFont = null;
+        private Font? textFont = null;
 
         // use the datagridFont when the textFont is not set
         // we cache this font ( cause we have to make it bold every time we paint the caption )
         //
-        private Font dataGridFont = null;
+        private Font dataGridFont = null!;
 
         private bool backActive = false;
         private bool downActive = false;
@@ -50,9 +50,9 @@ namespace System.Windows.Forms
         // if the downButton should point down or not
         private bool downButtonDown = false;
 
-        private static Bitmap leftButtonBitmap;
-        private static Bitmap leftButtonBitmap_bidi;
-        private static Bitmap magnifyingGlassBitmap;
+        private static Bitmap? leftButtonBitmap;
+        private static Bitmap? leftButtonBitmap_bidi;
+        private static Bitmap? magnifyingGlassBitmap;
 
         private Rectangle backButtonRect = new Rectangle();
         private Rectangle downButtonRect = new Rectangle();
@@ -60,7 +60,7 @@ namespace System.Windows.Forms
 
         private CaptionLocation lastMouseLocation = CaptionLocation.Nowhere;
 
-        private EventEntry eventList;
+        private EventEntry? eventList;
         private static readonly object EVENT_BACKWARDCLICKED = new object();
         private static readonly object EVENT_DOWNCLICKED = new object();
         private static readonly object EVENT_CAPTIONCLICKED = new object();
@@ -253,6 +253,7 @@ namespace System.Windows.Forms
             Invalidate();
         }
 
+        [AllowNull]
         internal string Text
         {
             get
@@ -360,7 +361,7 @@ namespace System.Windows.Forms
                     return;
                 }
 
-                for (EventEntry e = eventList; e is not null; e = e.next)
+                for (EventEntry? e = eventList; e is not null; e = e.next)
                 {
                     if (e.key == key)
                     {
@@ -434,20 +435,20 @@ namespace System.Windows.Forms
         {
             if (backActive)
             {
-                ((EventHandler)Events[EVENT_BACKWARDCLICKED])?.Invoke(this, e);
+                ((EventHandler?)Events[EVENT_BACKWARDCLICKED])?.Invoke(this, e);
             }
         }
 
         protected void OnCaptionClicked(EventArgs e)
         {
-            ((EventHandler)Events[EVENT_CAPTIONCLICKED])?.Invoke(this, e);
+            ((EventHandler?)Events[EVENT_CAPTIONCLICKED])?.Invoke(this, e);
         }
 
         protected void OnDownClicked(EventArgs e)
         {
             if (downActive && downButtonVisible)
             {
-                ((EventHandler)Events[EVENT_DOWNCLICKED])?.Invoke(this, e);
+                ((EventHandler?)Events[EVENT_DOWNCLICKED])?.Invoke(this, e);
             }
         }
 
@@ -496,12 +497,12 @@ namespace System.Windows.Forms
             return magnifyingGlassBitmap;
         }
 
-        protected virtual Delegate GetEventHandler(object key)
+        protected virtual Delegate? GetEventHandler(object key)
         {
             // Locking 'this' here is ok since this is an internal class.
             lock (this)
             {
-                for (EventEntry e = eventList; e is not null; e = e.next)
+                for (EventEntry? e = eventList; e is not null; e = e.next)
                 {
                     if (e.key == key)
                     {
@@ -825,7 +826,7 @@ namespace System.Windows.Forms
 
         protected virtual void RaiseEvent(object key, EventArgs e)
         {
-            Delegate handler = GetEventHandler(key);
+            Delegate? handler = GetEventHandler(key);
             if (handler is not null)
             {
                 ((EventHandler)handler)(this, e);
@@ -842,7 +843,7 @@ namespace System.Windows.Forms
                     return;
                 }
 
-                for (EventEntry e = eventList, prev = null; e is not null; prev = e, e = e.next)
+                for (EventEntry? e = eventList, prev = null; e is not null; prev = e, e = e.next)
                 {
                     if (e.key == key)
                     {
@@ -882,6 +883,7 @@ namespace System.Windows.Forms
             DownButtonDown = !DownButtonDown;
             return DownButtonDown;
         }
+
         internal enum CaptionLocation
         {
             Nowhere,
@@ -892,11 +894,11 @@ namespace System.Windows.Forms
 
         private sealed class EventEntry
         {
-            internal EventEntry next;
+            internal EventEntry? next;
             internal object key;
-            internal Delegate handler;
+            internal Delegate? handler;
 
-            internal EventEntry(EventEntry next, object key, Delegate handler)
+            internal EventEntry(EventEntry? next, object key, Delegate handler)
             {
                 this.next = next;
                 this.key = key;

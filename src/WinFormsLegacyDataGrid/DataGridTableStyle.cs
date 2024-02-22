@@ -25,7 +25,7 @@ namespace WinFormsLegacyControls
     {
         // internal for DataGridColumn accessibility...
         //
-        internal DataGrid dataGrid = null;
+        internal DataGrid? dataGrid = null;
 
         // relationship UI
         private int relationshipHeight = 0;
@@ -39,7 +39,7 @@ namespace WinFormsLegacyControls
 
         // the name of the table
         private string mappingName = string.Empty;
-        private readonly GridColumnStylesCollection gridColumns = null;
+        private readonly GridColumnStylesCollection gridColumns /*= null*/;
         private bool readOnly = false;
         private readonly bool isDefaultTableStyle = false;
 
@@ -85,7 +85,7 @@ namespace WinFormsLegacyControls
         private SolidBrush gridLineBrush = DefaultGridLineBrush;
         private DataGridLineStyle gridLineStyle = defaultGridLineStyle;
         internal SolidBrush headerBackBrush = DefaultHeaderBackBrush;
-        internal Font headerFont = null; // this is ambient property to Font value.
+        internal Font? headerFont = null; // this is ambient property to Font value.
         internal SolidBrush headerForeBrush = DefaultHeaderForeBrush;
         internal Pen headerForePen = DefaultHeaderForePen;
         private SolidBrush linkBrush = DefaultLinkBrush;
@@ -271,8 +271,8 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                DataGrid dataGrid = DataGrid;
-                if (dataGrid is null)
+                //DataGrid dataGrid = DataGrid;
+                if (DataGrid is null)
                 {
                     return 0;
                 }
@@ -388,8 +388,8 @@ namespace WinFormsLegacyControls
                     }
                     else
                     {
-                        Graphics g = DataGrid.CreateGraphicsInternal();
-                        focusedTextWidth = (int)Math.Ceiling(g.MeasureString(((string)RelationsList[focusedRelation]), DataGrid.LinkFont).Width);
+                        Graphics g = DataGrid!.CreateGraphicsInternal();
+                        focusedTextWidth = (int)Math.Ceiling(g.MeasureString(((string)RelationsList[focusedRelation]!), DataGrid.LinkFont).Width);
                         g.Dispose();
                     }
                 }
@@ -834,7 +834,7 @@ namespace WinFormsLegacyControls
 
         private Rectangle ComputeRelationshipRect()
         {
-            if (relationshipRect.IsEmpty && DataGrid.AllowNavigation)
+            if (relationshipRect.IsEmpty && DataGrid!.AllowNavigation)
             {
                 Debug.WriteLineIf(CompModSwitches.DGRelationShpRowLayout.TraceVerbose, "GetRelationshipRect grinding away");
                 Graphics g = DataGrid.CreateGraphicsInternal();
@@ -848,7 +848,7 @@ namespace WinFormsLegacyControls
                 int longestRelationship = 0;
                 for (int r = 0; r < RelationsList.Count; ++r)
                 {
-                    int rwidth = (int)Math.Ceiling(g.MeasureString(((string)RelationsList[r]), DataGrid.LinkFont).Width)
+                    int rwidth = (int)Math.Ceiling(g.MeasureString(((string?)RelationsList[r]), DataGrid.LinkFont).Width)
 ;
                     if (rwidth > longestRelationship)
                     {
@@ -874,7 +874,7 @@ namespace WinFormsLegacyControls
         {
             relationshipRect = Rectangle.Empty;
             focusedRelation = -1;
-            relationshipHeight = dataGrid.LinkFontHeight + relationshipSpacing;
+            relationshipHeight = dataGrid!.LinkFontHeight + relationshipSpacing;
         }
 
         internal int RelationshipHeight
@@ -1312,7 +1312,7 @@ namespace WinFormsLegacyControls
                 throw new ArgumentNullException(nameof(prop));
             }
 
-            DataGridColumnStyle ret = null;
+            DataGridColumnStyle? ret = null;
             Type dataType = prop.PropertyType;
 
             if (dataType.Equals(typeof(bool)))
@@ -1440,7 +1440,7 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the <see cref='Forms.DataGrid'/>
         ///  control displaying the table.
         /// </summary>
-        internal void SetInternalDataGrid(DataGrid dG, bool force)
+        internal void SetInternalDataGrid(DataGrid? dG, bool force)
         {
             if (dataGrid is not null && dataGrid.Equals(dG) && !force)
             {
@@ -1466,7 +1466,7 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the <see cref='Forms.DataGrid'/> control for the drawn table.
         /// </summary>
         [Browsable(false)]
-        public virtual DataGrid DataGrid
+        public virtual DataGrid? DataGrid
         {
             get
             {
@@ -1514,7 +1514,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public bool BeginEdit(DataGridColumnStyle gridColumn, int rowNumber)
         {
-            DataGrid grid = DataGrid;
+            DataGrid? grid = DataGrid;
             if (grid is null)
             {
                 return false;
@@ -1531,7 +1531,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public bool EndEdit(DataGridColumnStyle gridColumn, int rowNumber, bool shouldAbort)
         {
-            DataGrid grid = DataGrid;
+            DataGrid? grid = DataGrid;
             if (grid is null)
             {
                 return false;
@@ -1551,14 +1551,14 @@ namespace WinFormsLegacyControls
             }
         }
 
-        private void OnColumnCollectionChanged(object sender, CollectionChangeEventArgs e)
+        private void OnColumnCollectionChanged(object? sender, CollectionChangeEventArgs e)
         {
             gridColumns.CollectionChanged -= new CollectionChangeEventHandler(OnColumnCollectionChanged);
 
             try
             {
-                DataGrid grid = DataGrid;
-                DataGridColumnStyle col = e.Element as DataGridColumnStyle;
+                DataGrid? grid = DataGrid;
+                DataGridColumnStyle? col = e.Element as DataGridColumnStyle;
                 if (e.Action == CollectionChangeAction.Add)
                 {
                     if (col is not null)

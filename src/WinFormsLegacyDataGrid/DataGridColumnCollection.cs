@@ -24,16 +24,16 @@ namespace WinFormsLegacyControls
     ]
     public class GridColumnStylesCollection : BaseCollection, IList
     {
-        CollectionChangeEventHandler onCollectionChanged;
+        CollectionChangeEventHandler? onCollectionChanged;
         readonly ArrayList items = new ArrayList();
-        readonly DataGridTableStyle owner = null;
+        readonly DataGridTableStyle owner /*= null*/;
         private readonly bool isDefault = false;
 
         // we have to implement IList for the Collection editor to work
         //
-        int IList.Add(object value)
+        int IList.Add(object? value)
         {
-            return Add((DataGridColumnStyle)value);
+            return Add((DataGridColumnStyle)value!);
         }
 
         void IList.Clear()
@@ -41,24 +41,24 @@ namespace WinFormsLegacyControls
             Clear();
         }
 
-        bool IList.Contains(object value)
+        bool IList.Contains(object? value)
         {
             return items.Contains(value);
         }
 
-        int IList.IndexOf(object value)
+        int IList.IndexOf(object? value)
         {
             return items.IndexOf(value);
         }
 
-        void IList.Insert(int index, object value)
+        void IList.Insert(int index, object? value)
         {
             throw new NotSupportedException();
         }
 
-        void IList.Remove(object value)
+        void IList.Remove(object? value)
         {
-            Remove((DataGridColumnStyle)value);
+            Remove((DataGridColumnStyle)value!);
         }
 
         void IList.RemoveAt(int index)
@@ -76,7 +76,7 @@ namespace WinFormsLegacyControls
             get { return false; }
         }
 
-        object IList.this[int index]
+        object? IList.this[int index]
         {
             get { return items[index]; }
             set { throw new NotSupportedException(); }
@@ -166,7 +166,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                return (DataGridColumnStyle)items[index];
+                return (DataGridColumnStyle)items[index]!;
             }
         }
 
@@ -174,14 +174,14 @@ namespace WinFormsLegacyControls
         ///  Gets the System.Windows.Forms.DataGridColumnStyle
         ///  with the specified name.
         /// </summary>
-        public DataGridColumnStyle this[string columnName]
+        public DataGridColumnStyle? this[string columnName]
         {
             get
             {
                 int itemCount = items.Count;
                 for (int i = 0; i < itemCount; ++i)
                 {
-                    DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+                    DataGridColumnStyle column = (DataGridColumnStyle)items[i]!;
                     // NOTE: case-insensitive
                     if (string.Equals(column.MappingName, columnName, StringComparison.OrdinalIgnoreCase))
                     {
@@ -192,12 +192,12 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal DataGridColumnStyle MapColumnStyleToPropertyName(string mappingName)
+        internal DataGridColumnStyle? MapColumnStyleToPropertyName(string mappingName)
         {
             int itemCount = items.Count;
             for (int i = 0; i < itemCount; ++i)
             {
-                DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+                DataGridColumnStyle column = (DataGridColumnStyle)items[i]!;
                 // NOTE: case-insensitive
                 if (string.Equals(column.MappingName, mappingName, StringComparison.OrdinalIgnoreCase))
                 {
@@ -211,14 +211,14 @@ namespace WinFormsLegacyControls
         ///  Gets the System.Windows.Forms.DataGridColumnStyle associated with the
         ///  specified <see cref='Data.DataColumn'/>.
         /// </summary>
-        public DataGridColumnStyle this[PropertyDescriptor propertyDesciptor]
+        public DataGridColumnStyle? this[PropertyDescriptor propertyDesciptor]
         {
             get
             {
                 int itemCount = items.Count;
                 for (int i = 0; i < itemCount; ++i)
                 {
-                    DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+                    DataGridColumnStyle column = (DataGridColumnStyle)items[i]!;
                     if (propertyDesciptor.Equals(column.PropertyDescriptor))
                     {
                         return column;
@@ -248,21 +248,21 @@ namespace WinFormsLegacyControls
 
             for (int i = 0; i < items.Count; i++)
             {
-                if (((DataGridColumnStyle)items[i]).MappingName.Equals(column.MappingName) && column != items[i])
+                if (((DataGridColumnStyle)items[i]!).MappingName.Equals(column.MappingName) && column != items[i])
                 {
                     throw new ArgumentException(SR.DataGridColumnStyleDuplicateMappingName, "column");
                 }
             }
         }
 
-        private void ColumnStyleMappingNameChanged(object sender, EventArgs pcea)
+        private void ColumnStyleMappingNameChanged(object? sender, EventArgs pcea)
         {
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null));
         }
 
-        private void ColumnStylePropDescChanged(object sender, EventArgs pcea)
+        private void ColumnStylePropDescChanged(object? sender, EventArgs pcea)
         {
-            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, (DataGridColumnStyle)sender));
+            OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, /*(DataGridColumnStyle)*/sender));
         }
 
         public virtual int Add(DataGridColumnStyle column)
@@ -476,7 +476,7 @@ namespace WinFormsLegacyControls
             int itemCount = items.Count;
             for (int i = 0; i < itemCount; ++i)
             {
-                DataGridColumnStyle column = (DataGridColumnStyle)items[i];
+                DataGridColumnStyle column = (DataGridColumnStyle)items[i]!;
                 if (element == column)
                 {
                     return i;
@@ -492,7 +492,7 @@ namespace WinFormsLegacyControls
         {
             onCollectionChanged?.Invoke(this, e);
 
-            DataGrid grid = owner.DataGrid;
+            DataGrid? grid = owner.DataGrid;
             if (grid is not null)
             {
                 grid.checkHierarchy = true;
@@ -540,7 +540,7 @@ namespace WinFormsLegacyControls
                 throw new ArgumentException(SR.DataGridDefaultColumnCollectionChanged);
             }
 
-            DataGridColumnStyle toRemove = (DataGridColumnStyle)items[index];
+            DataGridColumnStyle toRemove = (DataGridColumnStyle)items[index]!;
             toRemove.SetDataGridTableInColumn(null, true);
             toRemove.MappingNameChanged -= new EventHandler(ColumnStyleMappingNameChanged);
             toRemove.PropertyDescriptorChanged -= new EventHandler(ColumnStylePropDescChanged);

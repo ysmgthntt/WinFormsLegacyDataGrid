@@ -14,10 +14,10 @@ namespace System.Windows.Forms
     internal class DataGridToolTip /*: MarshalByRefObject*/
     {
         // the toolTip control
-        private NativeWindow tipWindow = null;
+        private NativeWindow? tipWindow = null;
 
         // the dataGrid which contains this toolTip
-        private readonly DataGrid dataGrid = null;
+        private readonly DataGrid dataGrid /*= null*/;
 
         // CONSTRUCTOR
         public DataGridToolTip(DataGrid dataGrid)
@@ -83,7 +83,7 @@ namespace System.Windows.Forms
         {
             //var info = new ComCtl32.ToolInfoWrapper(dataGrid, toolTipId);
             var info = new ToolInfoWrapper<Control>(dataGrid, toolTipId);
-            info.SendMessage(tipWindow, /*WindowMessages*/PInvoke.TTM_DELTOOLW);
+            info.SendMessage(tipWindow!, /*WindowMessages*/PInvoke.TTM_DELTOOLW);
         }
 
         // will destroy the tipWindow

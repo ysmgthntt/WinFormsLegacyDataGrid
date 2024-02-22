@@ -36,7 +36,7 @@ namespace WinFormsLegacyControls
         ///  Gets a value indicating whether the <see cref='DataGridCell'/> is
         ///  identical to a second <see cref='DataGridCell'/>.
         /// </summary>
-        public override bool Equals(object o)
+        public override bool Equals(object? o)
         {
             if (!(o is DataGridCell rhs))
             {

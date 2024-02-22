@@ -29,8 +29,8 @@ namespace System.Windows.Forms
         // private Color borderColor = SystemColors.WindowFrame;
         private Brush borderBrush = new SolidBrush(SystemColors.WindowFrame);
 
-        private static Bitmap rightArrow = null;
-        private static Bitmap leftArrow = null;
+        private static Bitmap? rightArrow = null;
+        private static Bitmap? leftArrow = null;
 
         private readonly ColorMap[] colorMap = new ColorMap[] { new ColorMap() };
 
@@ -65,7 +65,7 @@ namespace System.Windows.Forms
         private readonly ArrayList parents = new ArrayList();
         private int parentsCount = 0;
         private readonly ArrayList rowHeights = new ArrayList();
-        AccessibleObject accessibleObject;
+        AccessibleObject? accessibleObject;
 
         internal DataGridParentRows(DataGrid dataGrid)
         {
@@ -153,7 +153,7 @@ namespace System.Windows.Forms
             int rectY = 0;
             for (int i = 0; i < parentsCount; i++)
             {
-                int height = (int)rowHeights[i];
+                int height = (int)rowHeights[i]!;
                 if (parents[i] == dgs)
                 {
                     ret.X = layout.leftArrow.IsEmpty ? layout.data.X : layout.leftArrow.Right;
@@ -275,7 +275,7 @@ namespace System.Windows.Forms
         /// </summary>
         internal void AddParent(DataGridState dgs)
         {
-            CurrencyManager childDataSource = (CurrencyManager)dataGrid.BindingContext[dgs.DataSource, dgs.DataMember];
+            CurrencyManager childDataSource = (CurrencyManager)dataGrid.BindingContext![dgs.DataSource!, dgs.DataMember];
             parents.Add(dgs);
             SetParentCount(parentsCount + 1);
             Debug.Assert(GetTopParent() is not null, "we should have a parent at least");
@@ -285,7 +285,7 @@ namespace System.Windows.Forms
         {
             for (int i = 0; i < parents.Count; i++)
             {
-                DataGridState dgs = parents[i] as DataGridState;
+                DataGridState dgs = (DataGridState)parents[i]!;
                 dgs.RemoveChangeNotification();
             }
             parents.Clear();
@@ -300,7 +300,7 @@ namespace System.Windows.Forms
             dataGrid.Caption.BackButtonVisible = (parentsCount > 0) && (dataGrid.AllowNavigation);
         }
 
-        internal void CheckNull(object value, string propName)
+        internal void CheckNull(object? value, string propName)
         {
             if (value is null)
             {
@@ -316,13 +316,13 @@ namespace System.Windows.Forms
         /// <summary>
         ///  Retrieves the top most parent in the list of parents.
         /// </summary>
-        internal DataGridState GetTopParent()
+        internal DataGridState? GetTopParent()
         {
             if (parentsCount < 1)
             {
                 return null;
             }
-            return (DataGridState)(((ICloneable)(parents[parentsCount - 1])).Clone());
+            return (DataGridState)(((ICloneable)(parents[parentsCount - 1]!)).Clone());
         }
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace System.Windows.Forms
         /// <summary>
         ///  Similar to GetTopParent() but also removes it.
         /// </summary>
-        internal DataGridState PopTop()
+        internal DataGridState? PopTop()
         {
             if (parentsCount < 1)
             {
@@ -344,7 +344,7 @@ namespace System.Windows.Forms
             }
 
             SetParentCount(parentsCount - 1);
-            DataGridState ret = (DataGridState)parents[parentsCount];
+            DataGridState ret = (DataGridState)parents[parentsCount]!;
             ret.RemoveChangeNotification();
             parents.RemoveAt(parentsCount);
             return ret;
@@ -399,8 +399,8 @@ namespace System.Windows.Forms
                 int rowHeightsCount = rowHeights.Count;
                 for (int i = rowHeightsCount; i < parentsCount; i++)
                 {
-                    DataGridState dgs = (DataGridState)parents[i];
-                    GridColumnStylesCollection cols = dgs.GridColumnStyles;
+                    DataGridState dgs = (DataGridState)parents[i]!;
+                    GridColumnStylesCollection cols = dgs.GridColumnStyles!;
 
                     int colsHeight = 0;
 
@@ -426,7 +426,7 @@ namespace System.Windows.Forms
                 }
                 else
                 {
-                    totalHeight -= (int)rowHeights[rowHeights.Count - 1];
+                    totalHeight -= (int)rowHeights[rowHeights.Count - 1]!;
                 }
 
                 rowHeights.RemoveAt(rowHeights.Count - 1);
@@ -661,10 +661,10 @@ namespace System.Windows.Forms
             int width = 0;
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row];
+                DataGridState dgs = (DataGridState)parents[row]!;
                 // Graphics.MeasureString(...) returns different results for ": " than for " :"
                 //
-                string displayTableName = dgs.ListManager.GetListName() + " :";
+                string displayTableName = dgs.ListManager!.GetListName() + " :";
                 int size = (int)g.MeasureString(displayTableName, textFont).Width;
                 width = Math.Max(size, width);
             }
@@ -680,8 +680,8 @@ namespace System.Windows.Forms
 
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row];
-                GridColumnStylesCollection columns = dgs.GridColumnStyles;
+                DataGridState dgs = (DataGridState)parents[row]!;
+                GridColumnStylesCollection columns = dgs.GridColumnStyles!;
                 if (colNum < columns.Count)
                 {
                     // Graphics.MeasureString(...) returns different results for ": " than for " :"
@@ -702,12 +702,12 @@ namespace System.Windows.Forms
             int width = 0;
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row];
-                GridColumnStylesCollection columns = dgs.GridColumnStyles;
+                DataGridState dgs = (DataGridState)parents[row]!;
+                GridColumnStylesCollection columns = dgs.GridColumnStyles!;
                 if (colNum < columns.Count)
                 {
-                    object value = columns[colNum].GetColumnValueAtRow((CurrencyManager)dataGrid.BindingContext[dgs.DataSource, dgs.DataMember],
-                                                                        dgs.LinkingRow.RowNumber);
+                    object? value = columns[colNum].GetColumnValueAtRow((CurrencyManager)dataGrid.BindingContext![dgs.DataSource!, dgs.DataMember],
+                                                                        dgs.LinkingRow!.RowNumber);
                     int size = columns[colNum].GetPreferredSize(g, value).Width;
                     width = Math.Max(size, width);
                 }
@@ -721,8 +721,8 @@ namespace System.Windows.Forms
             int colNum = 0;
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row];
-                colNum = Math.Max(colNum, dgs.GridColumnStyles.Count);
+                DataGridState dgs = (DataGridState)parents[row]!;
+                colNum = Math.Max(colNum, dgs.GridColumnStyles!.Count);
             }
             return colNum;
         }
@@ -813,7 +813,7 @@ namespace System.Windows.Forms
             Rectangle rowBounds = layout.data;
             for (int row = 0; row < parentsCount; ++row)
             {
-                rowBounds.Height = (int)rowHeights[row];
+                rowBounds.Height = (int)rowHeights[row]!;
                 if (rowBounds.Y > bounds.Bottom)
                 {
                     break;
@@ -970,11 +970,11 @@ namespace System.Windows.Forms
         private int PaintRow(Graphics g, Rectangle bounds, int row, Font font, bool alignToRight,
                              int tableNameBoxWidth, int[] colsNameWidths, int[] colsDataWidths)
         {
-            DataGridState dgs = (DataGridState)parents[row];
+            DataGridState dgs = (DataGridState)parents[row]!;
             Rectangle paintBounds = bounds;
             Rectangle rowBounds = bounds;
-            paintBounds.Height = (int)rowHeights[row];
-            rowBounds.Height = (int)rowHeights[row];
+            paintBounds.Height = (int)rowHeights[row]!;
+            rowBounds.Height = (int)rowHeights[row]!;
 
             int paintedWidth = 0;
             // used for scrolling: when paiting, we will skip horizOffset cells in the dataGrid ParentRows
@@ -993,7 +993,7 @@ namespace System.Windows.Forms
                 {
                     paintBounds.Width = Math.Min(paintBounds.Width, tableNameBoxWidth);
                     paintBounds.X = MirrorRect(bounds, paintBounds, alignToRight);
-                    string displayTableName = dgs.ListManager.GetListName() + ": ";
+                    string displayTableName = dgs.ListManager!.GetListName() + ": ";
                     PaintText(g, paintBounds, displayTableName, font, true, alignToRight);      // true is for painting bold
                     paintedWidth += paintBounds.Width;
                 }
@@ -1024,7 +1024,7 @@ namespace System.Windows.Forms
         {
             Rectangle paintBounds = bounds;
             Rectangle rowBounds = bounds;
-            GridColumnStylesCollection cols = dgs.GridColumnStyles;
+            GridColumnStylesCollection cols = dgs.GridColumnStyles!;
             int cx = 0;
 
             for (int i = 0; i < cols.Count; i++)
@@ -1074,8 +1074,8 @@ namespace System.Windows.Forms
 
                     // when we paint the data grid parent rows, we want to paint the data at the position
                     // stored in the currency manager.
-                    cols[i].Paint(g, paintBounds, (CurrencyManager)dataGrid.BindingContext[dgs.DataSource, dgs.DataMember],
-                                    dataGrid.BindingContext[dgs.DataSource, dgs.DataMember].Position, BackBrush, ForeBrush, alignToRight);
+                    CurrencyManager source = (CurrencyManager)dataGrid.BindingContext![dgs.DataSource!, dgs.DataMember];
+                    cols[i].Paint(g, paintBounds, source, source.Position, BackBrush, ForeBrush, alignToRight);
 
                     cx += paintBounds.Width;
 
@@ -1195,7 +1195,7 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         protected internal class DataGridParentRowsAccessibleObject : AccessibleObject
         {
-            readonly DataGridParentRows owner = null;
+            readonly DataGridParentRows owner /*= null*/;
 
             public DataGridParentRowsAccessibleObject(DataGridParentRows owner) : base()
             {
@@ -1274,7 +1274,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string Value
+            public override string? Value
             {
                 get
                 {
@@ -1289,7 +1289,7 @@ namespace System.Windows.Forms
 
             public override AccessibleObject GetChild(int index)
             {
-                return ((DataGridState)owner.parents[index]).ParentRowAccessibleObject;
+                return ((DataGridState)owner.parents[index]!).ParentRowAccessibleObject;
             }
 
             public override int GetChildCount()
@@ -1301,12 +1301,12 @@ namespace System.Windows.Forms
             ///  Returns the currently focused child, if any.
             ///  Returns this if the object itself is focused.
             /// </summary>
-            public override AccessibleObject GetFocused()
+            public override AccessibleObject? GetFocused()
             {
                 return null;
             }
 
-            internal AccessibleObject GetNext(AccessibleObject child)
+            internal AccessibleObject? GetNext(AccessibleObject child)
             {
                 int children = GetChildCount();
                 bool hit = false;
@@ -1326,7 +1326,7 @@ namespace System.Windows.Forms
                 return null;
             }
 
-            internal AccessibleObject GetPrev(AccessibleObject child)
+            internal AccessibleObject? GetPrev(AccessibleObject child)
             {
                 int children = GetChildCount();
                 bool hit = false;
@@ -1349,7 +1349,7 @@ namespace System.Windows.Forms
             /// <summary>
             ///  Navigate to the next or previous grid entry.
             /// </summary>
-            public override AccessibleObject Navigate(AccessibleNavigation navdir)
+            public override AccessibleObject? Navigate(AccessibleNavigation navdir)
             {
                 switch (navdir)
                 {

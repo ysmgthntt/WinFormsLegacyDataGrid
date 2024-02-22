@@ -17,13 +17,13 @@ namespace System.Windows.Forms
     {
         // fields
         //
-        public object DataSource = null;
-        public string DataMember = null;
-        public CurrencyManager ListManager = null;
+        public object? DataSource = null;
+        public string? DataMember = null;
+        public CurrencyManager? ListManager = null;
         public DataGridRow[] DataGridRows = Array.Empty<DataGridRow>();
-        public DataGrid DataGrid;
+        public DataGrid? DataGrid;
         public int DataGridRowsLength = 0;
-        public GridColumnStylesCollection GridColumnStyles = null;
+        public GridColumnStylesCollection? GridColumnStyles = null;
 
         public int FirstVisibleRow = 0;
         public int FirstVisibleCol = 0;
@@ -31,8 +31,8 @@ namespace System.Windows.Forms
         public int CurrentRow = 0;
         public int CurrentCol = 0;
 
-        public DataGridRow LinkingRow = null;
-        AccessibleObject parentRowAccessibleObject;
+        public DataGridRow? LinkingRow = null;
+        AccessibleObject? parentRowAccessibleObject;
 
         public DataGridState()
         {
@@ -108,8 +108,8 @@ namespace System.Windows.Forms
         // when the datagridstate is no longer needed;
         public void RemoveChangeNotification()
         {
-            ListManager.ItemChanged -= new ItemChangedEventHandler(DataSource_Changed);
-            ListManager.MetaDataChanged -= new EventHandler(DataSource_MetaDataChanged);
+            ListManager!.ItemChanged -= new ItemChangedEventHandler(DataSource_Changed);
+            ListManager!.MetaDataChanged -= new EventHandler(DataSource_MetaDataChanged);
         }
 
         /// <summary>
@@ -134,9 +134,9 @@ namespace System.Windows.Forms
             dataGrid.SetDataGridRows(DataGridRows, DataGridRowsLength);
         }
 
-        private void DataSource_Changed(object sender, ItemChangedEventArgs e)
+        private void DataSource_Changed(object? sender, ItemChangedEventArgs e)
         {
-            if (DataGrid is not null && ListManager.Position == e.Index)
+            if (DataGrid is not null && ListManager!.Position == e.Index)
             {
                 DataGrid.InvalidateParentRows();
                 return;
@@ -148,7 +148,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private void DataSource_MetaDataChanged(object sender, EventArgs e)
+        private void DataSource_MetaDataChanged(object? sender, EventArgs e)
         {
             if (DataGrid is not null)
             {
@@ -159,7 +159,7 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         internal class DataGridStateParentRowAccessibleObject : AccessibleObject
         {
-            readonly DataGridState owner = null;
+            readonly DataGridState owner /*= null*/;
 
             public DataGridStateParentRowAccessibleObject(DataGridState owner) : base()
             {
@@ -172,7 +172,7 @@ namespace System.Windows.Forms
                 get
                 {
                     DataGridParentRows dataGridParentRows = ((DataGridParentRows.DataGridParentRowsAccessibleObject)Parent).Owner;
-                    DataGrid g = owner.LinkingRow.DataGrid;
+                    DataGrid g = owner.LinkingRow!.DataGrid;
                     Rectangle r = dataGridParentRows.GetBoundsForDataGridStateAccesibility(owner);
                     r.Y += g.ParentRowsBounds.Y;
                     return g.RectangleToScreen(r);
@@ -191,7 +191,7 @@ namespace System.Windows.Forms
             {
                 get
                 {
-                    return owner.LinkingRow.DataGrid.ParentRowsAccessibleObject;
+                    return owner.LinkingRow!.DataGrid.ParentRowsAccessibleObject;
                 }
             }
 
@@ -209,13 +209,13 @@ namespace System.Windows.Forms
                 {
                     StringBuilder sb = new StringBuilder();
 
-                    CurrencyManager source = (CurrencyManager)owner.LinkingRow.DataGrid.BindingContext[owner.DataSource, owner.DataMember];
+                    CurrencyManager source = (CurrencyManager)owner.LinkingRow!.DataGrid.BindingContext![owner.DataSource!, owner.DataMember];
 
-                    sb.Append(owner.ListManager.GetListName());
+                    sb.Append(owner.ListManager!.GetListName());
                     sb.Append(": ");
 
                     bool needComma = false;
-                    foreach (DataGridColumnStyle col in owner.GridColumnStyles)
+                    foreach (DataGridColumnStyle col in owner.GridColumnStyles!)
                     {
                         if (needComma)
                         {
@@ -223,7 +223,7 @@ namespace System.Windows.Forms
                         }
 
                         string colName = col.HeaderText;
-                        string cellValue = col.PropertyDescriptor.Converter.ConvertToString(col.PropertyDescriptor.GetValue(source.Current));
+                        string? cellValue = col.PropertyDescriptor!.Converter.ConvertToString(col.PropertyDescriptor.GetValue(source.Current));
                         sb.Append(colName);
                         sb.Append(": ");
                         sb.Append(cellValue);
@@ -237,7 +237,7 @@ namespace System.Windows.Forms
             /// <summary>
             ///  Navigate to the next or previous grid entry.
             /// </summary>
-            public override AccessibleObject Navigate(AccessibleNavigation navdir)
+            public override AccessibleObject? Navigate(AccessibleNavigation navdir)
             {
                 DataGridParentRows.DataGridParentRowsAccessibleObject parentAcc = (DataGridParentRows.DataGridParentRowsAccessibleObject)Parent;
 

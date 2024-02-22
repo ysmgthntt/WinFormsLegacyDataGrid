@@ -155,7 +155,7 @@ namespace System.Windows.Forms
 
         private void Collapse()
         {
-            Debug.Assert(dgTable.DataGrid.AllowNavigation, "how can the user collapse the relations if the grid does not allow navigation?");
+            Debug.Assert(dgTable.DataGrid!.AllowNavigation, "how can the user collapse the relations if the grid does not allow navigation?");
             if (expanded)
             {
                 expanded = false;
@@ -172,7 +172,7 @@ namespace System.Windows.Forms
 
         private void Expand()
         {
-            Debug.Assert(dgTable.DataGrid.AllowNavigation, "how can the user expand the relations if the grid does not allow navigation?");
+            Debug.Assert(dgTable.DataGrid!.AllowNavigation, "how can the user expand the relations if the grid does not allow navigation?");
             if (expanded == false
                 && DataGrid is not null
                 && dgTable is not null
@@ -369,7 +369,7 @@ namespace System.Windows.Forms
                 {
                     // first, reset the FocusedRelation
                     FocusedRelation = -1;
-                    DataGrid.NavigateTo(((string)dgTable.RelationsList[r]), this, true);
+                    DataGrid.NavigateTo(((string)dgTable.RelationsList[r]!), this, true);
                 }
                 // DataGrid.OnLinkClick(EventArgs.Empty);
                 return true;
@@ -480,7 +480,7 @@ namespace System.Windows.Forms
                     {
                         // somebody set the relation number up already
                         // navigate to the relation
-                        DataGrid.NavigateTo(((string)dgTable.RelationsList[FocusedRelation]), this, true);
+                        DataGrid.NavigateTo(((string)dgTable.RelationsList[FocusedRelation]!), this, true);
 
                         // now reset the FocusedRelation
                         FocusedRelation = -1;
@@ -663,10 +663,10 @@ namespace System.Windows.Forms
             //
             string errString = string.Empty;
             Rectangle bounds = cellBounds;
-            object errInfo = DataGrid.ListManager/*[number]*/.Get(number);
+            object? errInfo = DataGrid.ListManager/*[number]*/.Get(number);
             if (errInfo is IDataErrorInfo)
             {
-                errString = ((IDataErrorInfo)errInfo)[column.PropertyDescriptor.Name];
+                errString = ((IDataErrorInfo)errInfo)[column.PropertyDescriptor!.Name];
             }
 
             if (!string.IsNullOrEmpty(errString))
@@ -687,7 +687,7 @@ namespace System.Windows.Forms
                     bounds.X += errRect.Width + xOffset;
                 }
 
-                DataGrid.ToolTipProvider.AddToolTip(errString, (IntPtr)(DataGrid.ToolTipId++), errRect);
+                DataGrid.ToolTipProvider!.AddToolTip(errString, (IntPtr)(DataGrid.ToolTipId++), errRect);
             }
 
             column.Paint(g, bounds, listManager, RowNumber, backBr, foreBrush, alignToRight);
@@ -718,7 +718,7 @@ namespace System.Windows.Forms
         public void PaintHeaderInside(Graphics g, Rectangle bounds, Brush backBr, bool alignToRight, bool isDirty)
         {
             // paint the row header
-            bool paintPlusMinus = dgTable.RelationsList.Count > 0 && dgTable.DataGrid.AllowNavigation;
+            bool paintPlusMinus = dgTable.RelationsList.Count > 0 && dgTable.DataGrid!.AllowNavigation;
             int rowHeaderBoundsX = MirrorRectangle(bounds.X,
                                                    bounds.Width - (paintPlusMinus ? expandoBoxWidth : 0),
                                                    bounds, alignToRight);
@@ -868,7 +868,7 @@ namespace System.Windows.Forms
                     format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                     format.Alignment = StringAlignment.Far;
                 }
-                g.DrawString(((string)dgTable.RelationsList[r]), textFont, textBrush, textBounds,
+                g.DrawString(((string?)dgTable.RelationsList[r]), textFont, textBrush, textBounds,
                              format);
                 if (r == FocusedRelation && number == DataGrid.CurrentCell.RowNumber)
                 {
@@ -1015,7 +1015,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string DefaultAction
+            public override string? DefaultAction
             {
                 get
                 {
@@ -1062,7 +1062,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override AccessibleObject GetFocused()
+            public override AccessibleObject? GetFocused()
             {
                 DataGridRelationshipRow row = (DataGridRelationshipRow)Owner;
                 int focusRel = row.dgTable.FocusedRelation;
@@ -1080,7 +1080,7 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         protected class DataGridRelationshipAccessibleObject : AccessibleObject
         {
-            readonly DataGridRelationshipRow owner = null;
+            readonly DataGridRelationshipRow owner /*= null*/;
             readonly int relationship;
 
             public DataGridRelationshipAccessibleObject(DataGridRelationshipRow owner, int relationship) : base()
@@ -1111,11 +1111,11 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string Name
+            public override string? Name
             {
                 get
                 {
-                    return (string)owner.dgTable.RelationsList[relationship];
+                    return (string?)owner.dgTable.RelationsList[relationship];
                 }
             }
 
@@ -1180,7 +1180,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string Value
+            public override string? Value
             {
                 get
                 {
@@ -1191,7 +1191,7 @@ namespace System.Windows.Forms
                     }
                     else
                     {
-                        return (string)owner.dgTable.RelationsList[relationship];
+                        return (string?)owner.dgTable.RelationsList[relationship];
                     }
                 }
                 set
@@ -1212,7 +1212,7 @@ namespace System.Windows.Forms
             {
                 ((DataGridRelationshipRow)Owner).Expanded = true;
                 owner.FocusedRelation = -1;
-                DataGrid.NavigateTo((string)owner.dgTable.RelationsList[relationship], owner, true);
+                DataGrid.NavigateTo((string)owner.dgTable.RelationsList[relationship]!, owner, true);
                 DataGrid.BeginInvoke(new MethodInvoker(ResetAccessibilityLayer));
             }
 
@@ -1226,7 +1226,7 @@ namespace System.Windows.Forms
             /// <summary>
             ///  Navigate to the next or previous grid entry.
             /// </summary>
-            public override AccessibleObject Navigate(AccessibleNavigation navdir)
+            public override AccessibleObject? Navigate(AccessibleNavigation navdir)
             {
                 switch (navdir)
                 {

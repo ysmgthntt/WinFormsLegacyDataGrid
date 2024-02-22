@@ -25,7 +25,7 @@ namespace WinFormsLegacyControls
         private bool isSelected = false;
         private bool allowNull = true;
         private int editingRow = -1;
-        private object currentValue = Convert.DBNull;
+        private object? currentValue = Convert.DBNull;
 
         private object trueValue = true;
         private object falseValue = false;
@@ -166,7 +166,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected internal override object GetColumnValueAtRow(CurrencyManager lm, int row)
         {
-            object baseValue = base.GetColumnValueAtRow(lm, row);
+            object baseValue = base.GetColumnValueAtRow(lm, row)!;
             object value = Convert.DBNull;
             if (baseValue.Equals(trueValue))
             {
@@ -196,9 +196,9 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Sets the value a a specified row.
         /// </summary>
-        protected internal override void SetColumnValueAtRow(CurrencyManager lm, int row, object value)
+        protected internal override void SetColumnValueAtRow(CurrencyManager lm, int row, object? value)
         {
-            object baseValue = null;
+            object? baseValue = null;
             if (true.Equals(value))
             {
                 baseValue = TrueValue;
@@ -219,7 +219,7 @@ namespace WinFormsLegacyControls
         ///  Gets the optimum width and height of a cell given
         ///  a specific value to contain.
         /// </summary>
-        protected internal override Size GetPreferredSize(Graphics g, object value)
+        protected internal override Size GetPreferredSize(Graphics g, object? value)
         {
             return new Size(idealCheckSize + 2, idealCheckSize + 2);
         }
@@ -236,7 +236,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the height used when resizing columns.
         /// </summary>
-        protected internal override int GetPreferredHeight(Graphics g, object value)
+        protected internal override int GetPreferredHeight(Graphics g, object? value)
         {
             return idealCheckSize + 2;
         }
@@ -277,7 +277,7 @@ namespace WinFormsLegacyControls
                                     int rowNum,
                                     Rectangle bounds,
                                     bool readOnly,
-                                    string displayText,
+                                    string? displayText,
                                     bool cellIsVisible)
         {
             // toggle state right now...
@@ -285,7 +285,7 @@ namespace WinFormsLegacyControls
 
             // move the focus away from the previous column and give it to the grid
             //
-            DataGrid grid = DataGridTableStyle.DataGrid;
+            DataGrid grid = DataGridTableStyle!.DataGrid!;
             if (!grid.Focused)
             {
                 grid.Focus();
@@ -373,7 +373,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected internal override void Paint(Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight)
         {
-            Paint(g, bounds, source, rowNum, DataGridTableStyle.BackBrush, DataGridTableStyle.ForeBrush, alignToRight);
+            Paint(g, bounds, source, rowNum, DataGridTableStyle!.BackBrush, DataGridTableStyle.ForeBrush, alignToRight);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace WinFormsLegacyControls
                                      Brush backBrush, Brush foreBrush,
                                      bool alignToRight)
         {
-            object value = (isEditing && editingRow == rowNum) ? currentValue : GetColumnValueAtRow(source, rowNum);
+            object value = (isEditing && editingRow == rowNum) ? currentValue! : GetColumnValueAtRow(source, rowNum);
             ButtonState checkedState = ButtonState.Inactive;
             if (!Convert.IsDBNull(value))
             {
@@ -396,7 +396,7 @@ namespace WinFormsLegacyControls
             Region r = g.Clip;
             g.ExcludeClip(box);
 
-            Brush selectionBrush = DataGridTableStyle.IsDefault ? DataGridTableStyle.DataGrid.SelectionBackBrush : DataGridTableStyle.SelectionBackBrush;
+            Brush selectionBrush = DataGridTableStyle!.IsDefault ? DataGridTableStyle.DataGrid!.SelectionBackBrush : DataGridTableStyle.SelectionBackBrush;
             if (isSelected && editingRow == rowNum && !IsReadOnly())
             {
                 g.FillRectangle(selectionBrush, bounds);
@@ -526,7 +526,7 @@ namespace WinFormsLegacyControls
             isEditing = true;
             // tell the dataGrid that things are changing
             // we put Rectangle.Empty cause toggle will invalidate the row anyhow
-            DataGridTableStyle.DataGrid.ColumnStartedEditing(Rectangle.Empty);
+            DataGridTableStyle!.DataGrid!.ColumnStartedEditing(Rectangle.Empty);
         }
     }
 }

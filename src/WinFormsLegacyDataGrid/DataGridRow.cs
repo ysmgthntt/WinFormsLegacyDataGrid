@@ -26,7 +26,7 @@ namespace WinFormsLegacyControls
         // protected DataRow   dataRow;
         private IntPtr tooltipID = new IntPtr(-1);
         private string tooltip = string.Empty;
-        AccessibleObject accessibleObject;
+        AccessibleObject? accessibleObject;
 
         // for accessibility...
         //
@@ -43,11 +43,11 @@ namespace WinFormsLegacyControls
 
         // bitmaps
         //
-        private static Bitmap rightArrow = null;
-        private static Bitmap leftArrow = null;
-        private static Bitmap errorBmp = null;
-        private static Bitmap pencilBmp = null;
-        private static Bitmap starBmp = null;
+        private static Bitmap? rightArrow = null;
+        private static Bitmap? leftArrow = null;
+        private static Bitmap? errorBmp = null;
+        private static Bitmap? pencilBmp = null;
+        private static Bitmap? starBmp = null;
         protected const int xOffset = 3;
         protected const int yOffset = 2;
 
@@ -105,7 +105,7 @@ namespace WinFormsLegacyControls
 
             try
             {
-                if (dgTable.DataGrid.DataSource is not null)
+                if (dgTable.DataGrid!.DataSource is not null)
                 {
                     int nCols = columns.Count;
                     for (int i = 0; i < nCols; ++i)
@@ -135,7 +135,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                return dgTable.DataGrid;
+                return dgTable.DataGrid!;
             }
         }
 
@@ -186,7 +186,7 @@ namespace WinFormsLegacyControls
                 // when we resize the row, or when we set the PreferredRowHeigth on the
                 // DataGridTableStyle, we change the height of the Row, which will cause to invalidate,
                 // then the grid itself will do another invalidate call.
-                dgTable.DataGrid.OnRowHeightChanged(this);
+                dgTable.DataGrid!.OnRowHeightChanged(this);
             }
         }
 
@@ -243,7 +243,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public virtual Rectangle GetCellBounds(int col)
         {
-            int firstVisibleCol = dgTable.DataGrid.FirstVisibleColumn;
+            int firstVisibleCol = dgTable.DataGrid!.FirstVisibleColumn;
             int cx = 0;
             Rectangle cellBounds = new Rectangle();
             GridColumnStylesCollection columns = dgTable.GridColumnStyles;
@@ -337,12 +337,12 @@ namespace WinFormsLegacyControls
 
         public virtual void InvalidateRow()
         {
-            dgTable.DataGrid.InvalidateRow(number);
+            dgTable.DataGrid!.InvalidateRow(number);
         }
 
         public virtual void InvalidateRowRect(Rectangle r)
         {
-            dgTable.DataGrid.InvalidateRowRect(number, r);
+            dgTable.DataGrid!.InvalidateRowRect(number, r);
         }
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public virtual bool OnKeyPress(Keys keyData)
         {
-            int currentColIndex = dgTable.DataGrid.CurrentCell.ColumnNumber;
+            int currentColIndex = dgTable.DataGrid!.CurrentCell.ColumnNumber;
             GridColumnStylesCollection columns = dgTable.GridColumnStyles;
             if (columns is not null && currentColIndex >= 0 && currentColIndex < columns.Count)
             {
@@ -470,7 +470,7 @@ namespace WinFormsLegacyControls
             // paint any exposed region to the right
             if (dataWidth < bounds.Width)
             {
-                g.FillRectangle(dgTable.DataGrid.BackgroundBrush,
+                g.FillRectangle(dgTable.DataGrid!.BackgroundBrush,
                                 alignToRight ? bounds.X : bottomBorder.Right,
                                 bottomBorder.Y,
                                 bounds.Width - bottomBorder.Width,
@@ -501,7 +501,7 @@ namespace WinFormsLegacyControls
             int bWidth = dgTable.IsDefault ? DataGrid.GridLineWidth : dgTable.GridLineWidth;
             int cx = 0;
 
-            DataGridCell current = dgTable.DataGrid.CurrentCell;
+            DataGridCell current = dgTable.DataGrid!.CurrentCell;
 
             GridColumnStylesCollection columns = dgTable.GridColumnStyles;
             int nCols = columns.Count;
@@ -657,7 +657,7 @@ namespace WinFormsLegacyControls
 
             // Paint the error icon
             //
-            object errorInfo = DataGrid.ListManager/*[number]*/.Get(number);
+            object? errorInfo = DataGrid.ListManager/*[number]*/.Get(number);
             if (!(errorInfo is IDataErrorInfo))
             {
                 return;
@@ -673,7 +673,7 @@ namespace WinFormsLegacyControls
             {
                 if (!string.IsNullOrEmpty(tooltip))
                 {
-                    DataGrid.ToolTipProvider.RemoveToolTip(tooltipID);
+                    DataGrid.ToolTipProvider!.RemoveToolTip(tooltipID);
                     tooltip = string.Empty;
                     tooltipID = new IntPtr(-1);
                 }
@@ -695,7 +695,7 @@ namespace WinFormsLegacyControls
 
             tooltip = errString;
             tooltipID = (IntPtr)((int)DataGrid.ToolTipId++);
-            DataGrid.ToolTipProvider.AddToolTip(tooltip, tooltipID, errRect);
+            DataGrid.ToolTipProvider!.AddToolTip(tooltip, tooltipID, errRect);
         }
 
         protected Brush GetBackBrush()
@@ -749,13 +749,13 @@ namespace WinFormsLegacyControls
         protected class DataGridRowAccessibleObject : AccessibleObject
         {
             ArrayList cells;
-            readonly DataGridRow owner = null;
+            readonly DataGridRow owner /*= null*/;
 
-            internal static string CellToDisplayString(DataGrid grid, int row, int column)
+            internal static string? CellToDisplayString(DataGrid grid, int row, int column)
             {
                 if (column < grid.myGridTable.GridColumnStyles.Count)
                 {
-                    return grid.myGridTable.GridColumnStyles[column].PropertyDescriptor.Converter.ConvertToString(grid[row, column]);
+                    return grid.myGridTable.GridColumnStyles[column].PropertyDescriptor!.Converter.ConvertToString(grid[row, column]);
                 }
                 else
                 {
@@ -763,11 +763,11 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            internal static object DisplayStringToCell(DataGrid grid, int row, int column, string value)
+            internal static object? DisplayStringToCell(DataGrid grid, int row, int column, string value)
             {
                 if (column < grid.myGridTable.GridColumnStyles.Count)
                 {
-                    return grid.myGridTable.GridColumnStyles[column].PropertyDescriptor.Converter.ConvertFromString(value);
+                    return grid.myGridTable.GridColumnStyles[column].PropertyDescriptor!.Converter.ConvertFromString(value);
                 }
                 // ignore...
                 //
@@ -779,11 +779,12 @@ namespace WinFormsLegacyControls
                 Debug.Assert(owner is not null, "DataGridRowAccessibleObject must have a valid owner DataGridRow");
                 this.owner = owner;
                 DataGrid grid = DataGrid;
-                Debug.WriteLineIf(DataGrid.DataGridAcc.TraceVerbose, "Create row accessible object");
+                Debug.WriteLineIf(DataGrid.DataGridAcc!.TraceVerbose, "Create row accessible object");
 
                 EnsureChildren();
             }
 
+            [MemberNotNull(nameof(cells))]
             private void EnsureChildren()
             {
                 if (cells is null)
@@ -797,7 +798,7 @@ namespace WinFormsLegacyControls
 
             protected virtual void AddChildAccessibleObjects(IList children)
             {
-                Debug.WriteLineIf(DataGrid.DataGridAcc.TraceVerbose, "Create row's accessible children");
+                Debug.WriteLineIf(DataGrid.DataGridAcc!.TraceVerbose, "Create row's accessible children");
                 Debug.Indent();
                 GridColumnStylesCollection cols = DataGrid.myGridTable.GridColumnStyles;
                 int len = cols.Count;
@@ -822,7 +823,7 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            public override string Name
+            public override string? Name
             {
                 get
                 {
@@ -893,7 +894,7 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            public override string Value
+            public override string? Value
             {
                 get
                 {
@@ -901,11 +902,11 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            public override AccessibleObject GetChild(int index)
+            public override AccessibleObject? GetChild(int index)
             {
                 if (index < cells.Count)
                 {
-                    return (AccessibleObject)cells[index];
+                    return (AccessibleObject?)cells[index];
                 }
 
                 return null;
@@ -920,14 +921,14 @@ namespace WinFormsLegacyControls
             ///  Returns the currently focused child, if any.
             ///  Returns this if the object itself is focused.
             /// </summary>
-            public override AccessibleObject GetFocused()
+            public override AccessibleObject? GetFocused()
             {
                 if (DataGrid.Focused)
                 {
                     DataGridCell cell = DataGrid.CurrentCell;
                     if (cell.RowNumber == owner.RowNumber)
                     {
-                        return (AccessibleObject)cells[cell.ColumnNumber];
+                        return (AccessibleObject?)cells[cell.ColumnNumber];
                     }
                 }
 
@@ -937,7 +938,7 @@ namespace WinFormsLegacyControls
             /// <summary>
             ///  Navigate to the next or previous grid entry.entry.
             /// </summary>
-            public override AccessibleObject Navigate(AccessibleNavigation navdir)
+            public override AccessibleObject? Navigate(AccessibleNavigation navdir)
             {
                 switch (navdir)
                 {
@@ -991,7 +992,7 @@ namespace WinFormsLegacyControls
         [ComVisible(true)]
         protected class DataGridCellAccessibleObject : AccessibleObject
         {
-            readonly DataGridRow owner = null;
+            readonly DataGridRow owner /*= null*/;
             readonly int column;
 
             public DataGridCellAccessibleObject(DataGridRow owner, int column) : base()
@@ -999,7 +1000,7 @@ namespace WinFormsLegacyControls
                 Debug.Assert(owner is not null, "DataGridColumnAccessibleObject must have a valid owner DataGridRow");
                 this.owner = owner;
                 this.column = column;
-                Debug.WriteLineIf(DataGrid.DataGridAcc.TraceVerbose, "Create cell accessible object");
+                Debug.WriteLineIf(DataGrid.DataGridAcc!.TraceVerbose, "Create cell accessible object");
             }
 
             public override Rectangle Bounds
@@ -1072,7 +1073,7 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            public override string Value
+            public override string? Value
             {
                 get
                 {
@@ -1090,7 +1091,7 @@ namespace WinFormsLegacyControls
                 {
                     if (!(owner is DataGridAddNewRow))
                     {
-                        object realValue = DataGridRowAccessibleObject.DisplayStringToCell(DataGrid, owner.RowNumber, column, value);
+                        object? realValue = DataGridRowAccessibleObject.DisplayStringToCell(DataGrid, owner.RowNumber, column, value!);
                         DataGrid[owner.RowNumber, column] = realValue;
                     }
                 }
@@ -1105,7 +1106,7 @@ namespace WinFormsLegacyControls
             ///  Returns the currently focused child, if any.
             ///  Returns this if the object itself is focused.
             /// </summary>
-            public override AccessibleObject GetFocused()
+            public override AccessibleObject? GetFocused()
             {
                 // Datagrid always returns the cell as the focused thing... so do we!
                 //
@@ -1115,7 +1116,7 @@ namespace WinFormsLegacyControls
             /// <summary>
             ///  Navigate to the next or previous grid entry.
             /// </summary>
-            public override AccessibleObject Navigate(AccessibleNavigation navdir)
+            public override AccessibleObject? Navigate(AccessibleNavigation navdir)
             {
                 switch (navdir)
                 {
@@ -1127,7 +1128,7 @@ namespace WinFormsLegacyControls
                         }
                         else
                         {
-                            AccessibleObject o = DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber + 1);
+                            AccessibleObject? o = DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber + 1);
                             if (o is not null)
                             {
                                 return o.Navigate(AccessibleNavigation.FirstChild);
@@ -1135,9 +1136,9 @@ namespace WinFormsLegacyControls
                         }
                         break;
                     case AccessibleNavigation.Down:
-                        return DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber + 1).Navigate(AccessibleNavigation.FirstChild);
+                        return DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber + 1)!.Navigate(AccessibleNavigation.FirstChild);
                     case AccessibleNavigation.Up:
-                        return DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber - 1).Navigate(AccessibleNavigation.FirstChild);
+                        return DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber - 1)!.Navigate(AccessibleNavigation.FirstChild);
                     case AccessibleNavigation.Left:
                     case AccessibleNavigation.Previous:
                         if (column > 0)
@@ -1146,7 +1147,7 @@ namespace WinFormsLegacyControls
                         }
                         else
                         {
-                            AccessibleObject o = DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber - 1);
+                            AccessibleObject? o = DataGrid.AccessibilityObject.GetChild(1 + owner.dgTable.GridColumnStyles.Count + owner.RowNumber - 1);
                             if (o is not null)
                             {
                                 return o.Navigate(AccessibleNavigation.LastChild);
