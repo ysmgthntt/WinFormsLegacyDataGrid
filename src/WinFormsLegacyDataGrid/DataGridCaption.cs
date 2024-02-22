@@ -60,7 +60,7 @@ namespace System.Windows.Forms
 
         private CaptionLocation lastMouseLocation = CaptionLocation.Nowhere;
 
-        private EventEntry? eventList;
+        //private EventEntry? eventList;
         private static readonly object EVENT_BACKWARDCLICKED = new object();
         private static readonly object EVENT_DOWNCLICKED = new object();
         private static readonly object EVENT_CAPTIONCLICKED = new object();
@@ -351,6 +351,7 @@ namespace System.Windows.Forms
         // =        Methods
         // =------------------------------------------------------------------
 
+        /*
         protected virtual void AddEventHandler(object key, Delegate handler)
         {
             // Locking 'this' here is ok since this is an internal class.
@@ -372,6 +373,7 @@ namespace System.Windows.Forms
                 eventList = new EventEntry(eventList, key, handler);
             }
         }
+        */
 
         /// <summary>
         ///  Adds a listener for the BackwardClicked event.
@@ -497,6 +499,7 @@ namespace System.Windows.Forms
             return magnifyingGlassBitmap;
         }
 
+        /*
         protected virtual Delegate? GetEventHandler(object key)
         {
             // Locking 'this' here is ok since this is an internal class.
@@ -512,6 +515,7 @@ namespace System.Windows.Forms
                 return null;
             }
         }
+        */
 
         internal Rectangle GetBackButtonRect(Rectangle bounds, bool alignRight, int downButtonWidth)
         {
@@ -824,6 +828,7 @@ namespace System.Windows.Forms
             lastMouseLocation = newLoc;
         }
 
+        /*
         protected virtual void RaiseEvent(object key, EventArgs e)
         {
             Delegate? handler = GetEventHandler(key);
@@ -869,6 +874,7 @@ namespace System.Windows.Forms
         {
             eventList = null;
         }
+        */
 
         internal void SetDownButtonDirection(bool pointDown)
         {
@@ -892,6 +898,7 @@ namespace System.Windows.Forms
             Text
         }
 
+        /*
         private sealed class EventEntry
         {
             internal EventEntry? next;
@@ -905,7 +912,7 @@ namespace System.Windows.Forms
                 this.handler = handler;
             }
         }
-
+        */
     }
 }
 
