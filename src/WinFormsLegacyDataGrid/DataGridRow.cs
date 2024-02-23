@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -748,7 +749,7 @@ namespace WinFormsLegacyControls
         [ComVisible(true)]
         protected class DataGridRowAccessibleObject : AccessibleObject
         {
-            ArrayList cells;
+            private List<AccessibleObject> _cells;
             readonly DataGridRow owner /*= null*/;
 
             internal static string? CellToDisplayString(DataGrid grid, int row, int column)
@@ -784,15 +785,15 @@ namespace WinFormsLegacyControls
                 EnsureChildren();
             }
 
-            [MemberNotNull(nameof(cells))]
+            [MemberNotNull(nameof(_cells))]
             private void EnsureChildren()
             {
-                if (cells is null)
+                if (_cells is null)
                 {
                     // default size... little extra for relationships...
                     //
-                    cells = new ArrayList(DataGrid.myGridTable.GridColumnStyles.Count + 2);
-                    AddChildAccessibleObjects(cells);
+                    _cells = new(DataGrid.myGridTable.GridColumnStyles.Count + 2);
+                    AddChildAccessibleObjects(_cells);
                 }
             }
 
@@ -904,18 +905,15 @@ namespace WinFormsLegacyControls
 
             public override AccessibleObject? GetChild(int index)
             {
-                if (index < cells.Count)
+                if (index < _cells.Count)
                 {
-                    return (AccessibleObject?)cells[index];
+                    return _cells[index];
                 }
 
                 return null;
             }
 
-            public override int GetChildCount()
-            {
-                return cells.Count;
-            }
+            public override int GetChildCount() => _cells.Count;
 
             /// <summary>
             ///  Returns the currently focused child, if any.
@@ -928,7 +926,7 @@ namespace WinFormsLegacyControls
                     DataGridCell cell = DataGrid.CurrentCell;
                     if (cell.RowNumber == owner.RowNumber)
                     {
-                        return (AccessibleObject?)cells[cell.ColumnNumber];
+                        return _cells[cell.ColumnNumber];
                     }
                 }
 

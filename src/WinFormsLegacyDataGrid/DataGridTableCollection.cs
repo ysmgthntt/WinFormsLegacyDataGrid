@@ -3,7 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 
 #if WINFORMS_NAMESPACE
@@ -20,97 +22,49 @@ namespace WinFormsLegacyControls
     public class GridTableStylesCollection : BaseCollection, IList
     {
         CollectionChangeEventHandler? onCollectionChanged;
-        readonly ArrayList items = new ArrayList();
+        private readonly List<DataGridTableStyle> _items = new();
         readonly DataGrid owner /*= null*/;
 
-        int IList.Add(object? value)
-        {
-            return Add((DataGridTableStyle)value!);
-        }
+        int IList.Add(object? value) => Add((DataGridTableStyle)value!);
 
-        void IList.Clear()
-        {
-            Clear();
-        }
+        void IList.Clear() => Clear();
 
-        bool IList.Contains(object? value)
-        {
-            return items.Contains(value);
-        }
+        bool IList.Contains(object? value) => ((IList)_items).Contains(value);
 
-        int IList.IndexOf(object? value)
-        {
-            return items.IndexOf(value);
-        }
+        int IList.IndexOf(object? value) => ((IList)_items).IndexOf(value);
 
-        void IList.Insert(int index, object? value)
-        {
-            throw new NotSupportedException();
-        }
+        void IList.Insert(int index, object? value) => throw new NotSupportedException();
 
-        void IList.Remove(object? value)
-        {
-            Remove((DataGridTableStyle)value!);
-        }
+        void IList.Remove(object? value) => Remove((DataGridTableStyle)value!);
 
-        void IList.RemoveAt(int index)
-        {
-            RemoveAt(index);
-        }
+        void IList.RemoveAt(int index) => RemoveAt(index);
 
-        bool IList.IsFixedSize
-        {
-            get { return false; }
-        }
+        bool IList.IsFixedSize => false;
 
-        bool IList.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool IList.IsReadOnly => false;
 
         object? IList.this[int index]
         {
-            get { return items[index]; }
-            set { throw new NotSupportedException(); }
+            get => _items[index];
+            set => throw new NotSupportedException();
         }
 
-        void ICollection.CopyTo(Array array, int index)
-        {
-            items.CopyTo(array, index);
-        }
+        void ICollection.CopyTo(Array array, int index) => ((ICollection)_items).CopyTo(array, index);
 
-        int ICollection.Count
-        {
-            get { return items.Count; }
-        }
+        int ICollection.Count => _items.Count;
 
-        bool ICollection.IsSynchronized
-        {
-            get { return false; }
-        }
+        bool ICollection.IsSynchronized => false;
 
-        object ICollection.SyncRoot
-        {
-            get { return this; }
-        }
+        object ICollection.SyncRoot => this;
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return items.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => _items.GetEnumerator();
 
         internal GridTableStylesCollection(DataGrid grid)
         {
             owner = grid;
         }
 
-        protected override ArrayList List
-        {
-            get
-            {
-                return items;
-            }
-        }
+        protected override ArrayList List => ArrayList.Adapter(_items);
 
         /* implemented in BaseCollection
         /// <summary>
@@ -129,13 +83,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Retrieves the DataGridTable with the specified index.
         /// </summary>
-        public DataGridTableStyle this[int index]
-        {
-            get
-            {
-                return (DataGridTableStyle)items[index]!;
-            }
-        }
+        public DataGridTableStyle this[int index] => _items[index];
 
         /// <summary>
         ///  Retrieves the DataGridTable with the name provided.
@@ -146,10 +94,10 @@ namespace WinFormsLegacyControls
             {
                 ArgumentNullException.ThrowIfNull(tableName);
 
-                int itemCount = items.Count;
+                int itemCount = _items.Count;
                 for (int i = 0; i < itemCount; ++i)
                 {
-                    DataGridTableStyle table = (DataGridTableStyle)items[i]!;
+                    DataGridTableStyle table = _items[i];
                     // NOTE: case-insensitive
                     if (string.Equals(table.MappingName, tableName, StringComparison.OrdinalIgnoreCase))
                     {
@@ -167,9 +115,9 @@ namespace WinFormsLegacyControls
                 return;
             }
 
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < _items.Count; i++)
             {
-                if (((DataGridTableStyle)items[i]!).MappingName.Equals(table.MappingName) && table != items[i])
+                if (_items[i].MappingName.Equals(table.MappingName) && table != _items[i])
                 {
                     throw new ArgumentException(SR.DataGridTableStyleDuplicateMappingName, "table");
                 }
@@ -196,7 +144,9 @@ namespace WinFormsLegacyControls
             table.DataGrid = owner;
             CheckForMappingNameDuplicates(table);
             table.MappingNameChanged += new EventHandler(TableStyleMappingNameChanged);
-            int index = items.Add(table);
+            int index = _items.Count;
+            _items.Add(table);
+            Debug.Assert(index == _items.IndexOf(table));
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Add, table));
 
             return index;
@@ -215,7 +165,7 @@ namespace WinFormsLegacyControls
             {
                 table.DataGrid = owner;
                 table.MappingNameChanged += new EventHandler(TableStyleMappingNameChanged);
-                items.Add(table);
+                _items.Add(table);
             }
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null));
         }
@@ -228,24 +178,20 @@ namespace WinFormsLegacyControls
 
         public void Clear()
         {
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < _items.Count; i++)
             {
-                DataGridTableStyle element = (DataGridTableStyle)items[i]!;
+                DataGridTableStyle element = _items[i];
                 element.MappingNameChanged -= new EventHandler(TableStyleMappingNameChanged);
             }
 
-            items.Clear();
+            _items.Clear();
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Refresh, null));
         }
 
         /// <summary>
         ///  Checks to see if a DataGridTableStyle is contained in this collection.
         /// </summary>
-        public bool Contains(DataGridTableStyle table)
-        {
-            int index = items.IndexOf(table);
-            return index != -1;
-        }
+        public bool Contains(DataGridTableStyle table) => _items.Contains(table);
 
         /// <summary>
         ///  Checks to see if a <see cref='DataGridTableStyle'/> with the given name
@@ -253,10 +199,10 @@ namespace WinFormsLegacyControls
         /// </summary>
         public bool Contains(string name)
         {
-            int itemCount = items.Count;
+            int itemCount = _items.Count;
             for (int i = 0; i < itemCount; ++i)
             {
-                DataGridTableStyle table = (DataGridTableStyle)items[i]!;
+                DataGridTableStyle table = _items[i];
                 // NOTE: case-insensitive
                 if (string.Compare(table.MappingName, name, true, CultureInfo.InvariantCulture) == 0)
                 {
@@ -304,10 +250,10 @@ namespace WinFormsLegacyControls
         public void Remove(DataGridTableStyle table)
         {
             int tableIndex = -1;
-            int itemsCount = items.Count;
+            int itemsCount = _items.Count;
             for (int i = 0; i < itemsCount; ++i)
             {
-                if (items[i] == table)
+                if (_items[i] == table)
                 {
                     tableIndex = i;
                     break;
@@ -326,9 +272,9 @@ namespace WinFormsLegacyControls
 
         public void RemoveAt(int index)
         {
-            DataGridTableStyle element = (DataGridTableStyle)items[index]!;
+            DataGridTableStyle element = _items[index];
             element.MappingNameChanged -= new EventHandler(TableStyleMappingNameChanged);
-            items.RemoveAt(index);
+            _items.RemoveAt(index);
             OnCollectionChanged(new CollectionChangeEventArgs(CollectionChangeAction.Remove, element));
         }
     }

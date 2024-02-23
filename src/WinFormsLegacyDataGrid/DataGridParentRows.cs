@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -62,9 +63,9 @@ namespace System.Windows.Forms
 
         // storage for parent row states
         //
-        private readonly ArrayList parents = new ArrayList();
+        private readonly List<DataGridState> _parents = new();
         private int parentsCount = 0;
-        private readonly ArrayList rowHeights = new ArrayList();
+        private readonly List<int> _rowHeights = new();
         AccessibleObject? accessibleObject;
 
         internal DataGridParentRows(DataGrid dataGrid)
@@ -155,8 +156,8 @@ namespace System.Windows.Forms
             int rectY = 0;
             for (int i = 0; i < parentsCount; i++)
             {
-                int height = (int)rowHeights[i]!;
-                if (parents[i] == dgs)
+                int height = _rowHeights[i];
+                if (_parents[i] == dgs)
                 {
                     ret.X = layout.leftArrow.IsEmpty ? layout.data.X : layout.leftArrow.Right;
                     ret.Height = height;
@@ -277,21 +278,21 @@ namespace System.Windows.Forms
         /// </summary>
         internal void AddParent(DataGridState dgs)
         {
-            CurrencyManager childDataSource = (CurrencyManager)dataGrid.BindingContext![dgs.DataSource!, dgs.DataMember];
-            parents.Add(dgs);
+            _ = (CurrencyManager)dataGrid.BindingContext![dgs.DataSource!, dgs.DataMember];
+            _parents.Add(dgs);
             SetParentCount(parentsCount + 1);
             Debug.Assert(GetTopParent() is not null, "we should have a parent at least");
         }
 
         internal void Clear()
         {
-            for (int i = 0; i < parents.Count; i++)
+            for (int i = 0; i < _parents.Count; i++)
             {
-                DataGridState dgs = (DataGridState)parents[i]!;
+                DataGridState dgs = _parents[i];
                 dgs.RemoveChangeNotification();
             }
-            parents.Clear();
-            rowHeights.Clear();
+            _parents.Clear();
+            _rowHeights.Clear();
             totalHeight = 0;
             SetParentCount(0);
         }
@@ -316,7 +317,7 @@ namespace System.Windows.Forms
             {
                 return null;
             }
-            return (DataGridState)(((ICloneable)(parents[parentsCount - 1]!)).Clone());
+            return (DataGridState)_parents[parentsCount - 1].Clone();
         }
 
         /// <summary>
@@ -338,9 +339,9 @@ namespace System.Windows.Forms
             }
 
             SetParentCount(parentsCount - 1);
-            DataGridState ret = (DataGridState)parents[parentsCount]!;
+            DataGridState ret = _parents[parentsCount];
             ret.RemoveChangeNotification();
-            parents.RemoveAt(parentsCount);
+            _parents.RemoveAt(parentsCount);
             return ret;
         }
 
@@ -364,7 +365,7 @@ namespace System.Windows.Forms
         // called from DataGrid::OnLayout
         internal void OnLayout()
         {
-            if (parentsCount == rowHeights.Count)
+            if (parentsCount == _rowHeights.Count)
             {
                 return;
             }
@@ -387,13 +388,13 @@ namespace System.Windows.Forms
             // ( ie, when the form does not process PerformLayout )
             // the grid will receive an OnLayout message when there is more
             // than one parent in the grid
-            if (parentsCount > rowHeights.Count)
+            if (parentsCount > _rowHeights.Count)
             {
-                Debug.Assert(parentsCount == rowHeights.Count + 1 || rowHeights.Count == 0, "see comment above for more info");
-                int rowHeightsCount = rowHeights.Count;
+                Debug.Assert(parentsCount == _rowHeights.Count + 1 || _rowHeights.Count == 0, "see comment above for more info");
+                int rowHeightsCount = _rowHeights.Count;
                 for (int i = rowHeightsCount; i < parentsCount; i++)
                 {
-                    DataGridState dgs = (DataGridState)parents[i]!;
+                    DataGridState dgs = _parents[i];
                     GridColumnStylesCollection cols = dgs.GridColumnStyles!;
 
                     int colsHeight = 0;
@@ -406,24 +407,24 @@ namespace System.Windows.Forms
 
                     // the height of the bottom border
                     height++;
-                    rowHeights.Add(height);
+                    _rowHeights.Add(height);
 
                     totalHeight += height;
                 }
             }
             else
             {
-                Debug.Assert(parentsCount == rowHeights.Count - 1, "we do layout only for push/popTop");
+                Debug.Assert(parentsCount == _rowHeights.Count - 1, "we do layout only for push/popTop");
                 if (parentsCount == 0)
                 {
                     totalHeight = 0;
                 }
                 else
                 {
-                    totalHeight -= (int)rowHeights[rowHeights.Count - 1]!;
+                    totalHeight -= _rowHeights[_rowHeights.Count - 1];
                 }
 
-                rowHeights.RemoveAt(rowHeights.Count - 1);
+                _rowHeights.RemoveAt(_rowHeights.Count - 1);
             }
         }
 
@@ -655,7 +656,7 @@ namespace System.Windows.Forms
             int width = 0;
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row]!;
+                DataGridState dgs = _parents[row];
                 // Graphics.MeasureString(...) returns different results for ": " than for " :"
                 //
                 string displayTableName = dgs.ListManager!.GetListName() + " :";
@@ -674,7 +675,7 @@ namespace System.Windows.Forms
 
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row]!;
+                DataGridState dgs = _parents[row];
                 GridColumnStylesCollection columns = dgs.GridColumnStyles!;
                 if (colNum < columns.Count)
                 {
@@ -696,7 +697,7 @@ namespace System.Windows.Forms
             int width = 0;
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row]!;
+                DataGridState dgs = _parents[row];
                 GridColumnStylesCollection columns = dgs.GridColumnStyles!;
                 if (colNum < columns.Count)
                 {
@@ -715,7 +716,7 @@ namespace System.Windows.Forms
             int colNum = 0;
             for (int row = 0; row < parentsCount; row++)
             {
-                DataGridState dgs = (DataGridState)parents[row]!;
+                DataGridState dgs = _parents[row];
                 colNum = Math.Max(colNum, dgs.GridColumnStyles!.Count);
             }
             return colNum;
@@ -807,7 +808,7 @@ namespace System.Windows.Forms
             Rectangle rowBounds = layout.data;
             for (int row = 0; row < parentsCount; ++row)
             {
-                rowBounds.Height = (int)rowHeights[row]!;
+                rowBounds.Height = _rowHeights[row];
                 if (rowBounds.Y > bounds.Bottom)
                 {
                     break;
@@ -964,11 +965,11 @@ namespace System.Windows.Forms
         private int PaintRow(Graphics g, Rectangle bounds, int row, Font font, bool alignToRight,
                              int tableNameBoxWidth, int[] colsNameWidths, int[] colsDataWidths)
         {
-            DataGridState dgs = (DataGridState)parents[row]!;
+            DataGridState dgs = _parents[row];
             Rectangle paintBounds = bounds;
             Rectangle rowBounds = bounds;
-            paintBounds.Height = (int)rowHeights[row]!;
-            rowBounds.Height = (int)rowHeights[row]!;
+            paintBounds.Height = _rowHeights[row];
+            rowBounds.Height = _rowHeights[row];
 
             int paintedWidth = 0;
             // used for scrolling: when paiting, we will skip horizOffset cells in the dataGrid ParentRows
@@ -1282,9 +1283,7 @@ namespace System.Windows.Forms
             }
 
             public override AccessibleObject GetChild(int index)
-            {
-                return ((DataGridState)owner.parents[index]!).ParentRowAccessibleObject;
-            }
+                => owner._parents[index].ParentRowAccessibleObject;
 
             public override int GetChildCount()
             {

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -35,7 +36,7 @@ namespace WinFormsLegacyControls
         private int focusedTextWidth;
 
         // will contain a list of relationships that this table has
-        private readonly ArrayList relationsList = new ArrayList(2);
+        private readonly List<string> _relationsList = new(2);
 
         // the name of the table
         private string mappingName = string.Empty;
@@ -389,7 +390,7 @@ namespace WinFormsLegacyControls
                     else
                     {
                         Graphics g = DataGrid!.CreateGraphicsInternal();
-                        focusedTextWidth = (int)Math.Ceiling(g.MeasureString(((string)RelationsList[focusedRelation]!), DataGrid.LinkFont).Width);
+                        focusedTextWidth = (int)Math.Ceiling(g.MeasureString(RelationsList[focusedRelation], DataGrid.LinkFont).Width);
                         g.Dispose();
                     }
                 }
@@ -848,7 +849,7 @@ namespace WinFormsLegacyControls
                 int longestRelationship = 0;
                 for (int r = 0; r < RelationsList.Count; ++r)
                 {
-                    int rwidth = (int)Math.Ceiling(g.MeasureString(((string?)RelationsList[r]), DataGrid.LinkFont).Width)
+                    int rwidth = (int)Math.Ceiling(g.MeasureString(RelationsList[r], DataGrid.LinkFont).Width)
 ;
                     if (rwidth > longestRelationship)
                     {
@@ -1227,9 +1228,9 @@ namespace WinFormsLegacyControls
             PropertyDescriptorCollection propCollection = listManager.GetItemProperties();
             Debug.Assert(!IsDefault, "the grid can set the relations only on a table that was manually added by the user");
             int propCount = propCollection.Count;
-            if (relationsList.Count > 0)
+            if (_relationsList.Count > 0)
             {
-                relationsList.Clear();
+                _relationsList.Clear();
             }
 
             for (int i = 0; i < propCount; i++)
@@ -1239,7 +1240,7 @@ namespace WinFormsLegacyControls
                 if (PropertyDescriptorIsARelation(prop))
                 {
                     // relation
-                    relationsList.Add(prop.Name);
+                    _relationsList.Add(prop.Name);
                 }
             }
         }
@@ -1252,9 +1253,9 @@ namespace WinFormsLegacyControls
             PropertyDescriptorCollection propCollection = listManager.GetItemProperties();
 
             // we need to clear the relations list
-            if (relationsList.Count > 0)
+            if (_relationsList.Count > 0)
             {
-                relationsList.Clear();
+                _relationsList.Clear();
             }
 
             Debug.Assert(propCollection is not null, "propCollection is null: how that happened?");
@@ -1272,7 +1273,7 @@ namespace WinFormsLegacyControls
                 if (PropertyDescriptorIsARelation(prop))
                 {
                     // relation
-                    relationsList.Add(prop.Name);
+                    _relationsList.Add(prop.Name);
                 }
                 else
                 {
@@ -1349,7 +1350,7 @@ namespace WinFormsLegacyControls
         {
             if (isDefaultTableStyle)
             {
-                relationsList.Clear();
+                _relationsList.Clear();
             }
         }
 
@@ -1410,13 +1411,7 @@ namespace WinFormsLegacyControls
         ///  Gets the
         ///  list of relation objects for the grid table.
         /// </summary>
-        internal ArrayList RelationsList
-        {
-            get
-            {
-                return relationsList;
-            }
-        }
+        internal List<string> RelationsList => _relationsList;
 
         /// <summary>
         ///  Gets the collection of columns drawn for this table.

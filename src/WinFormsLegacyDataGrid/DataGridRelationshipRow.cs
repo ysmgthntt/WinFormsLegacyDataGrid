@@ -369,7 +369,7 @@ namespace System.Windows.Forms
                 {
                     // first, reset the FocusedRelation
                     FocusedRelation = -1;
-                    DataGrid.NavigateTo(((string)dgTable.RelationsList[r]!), this, true);
+                    DataGrid.NavigateTo(dgTable.RelationsList[r], this, true);
                 }
                 // DataGrid.OnLinkClick(EventArgs.Empty);
                 return true;
@@ -480,7 +480,7 @@ namespace System.Windows.Forms
                     {
                         // somebody set the relation number up already
                         // navigate to the relation
-                        DataGrid.NavigateTo(((string)dgTable.RelationsList[FocusedRelation]!), this, true);
+                        DataGrid.NavigateTo(dgTable.RelationsList[FocusedRelation], this, true);
 
                         // now reset the FocusedRelation
                         FocusedRelation = -1;
@@ -868,8 +868,7 @@ namespace System.Windows.Forms
                     format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                     format.Alignment = StringAlignment.Far;
                 }
-                g.DrawString(((string?)dgTable.RelationsList[r]), textFont, textBrush, textBounds,
-                             format);
+                g.DrawString(dgTable.RelationsList[r], textFont, textBrush, textBounds, format);
                 if (r == FocusedRelation && number == DataGrid.CurrentCell.RowNumber)
                 {
                     textBounds.Width = dgTable.FocusedTextWidth;
@@ -1111,13 +1110,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string? Name
-            {
-                get
-                {
-                    return (string?)owner.dgTable.RelationsList[relationship];
-                }
-            }
+            public override string? Name => owner.dgTable.RelationsList[relationship];
 
             protected DataGridRelationshipRow Owner
             {
@@ -1191,7 +1184,7 @@ namespace System.Windows.Forms
                     }
                     else
                     {
-                        return (string?)owner.dgTable.RelationsList[relationship];
+                        return owner.dgTable.RelationsList[relationship];
                     }
                 }
                 set
@@ -1212,7 +1205,7 @@ namespace System.Windows.Forms
             {
                 ((DataGridRelationshipRow)Owner).Expanded = true;
                 owner.FocusedRelation = -1;
-                DataGrid.NavigateTo((string)owner.dgTable.RelationsList[relationship]!, owner, true);
+                DataGrid.NavigateTo(owner.dgTable.RelationsList[relationship], owner, true);
                 DataGrid.BeginInvoke(new MethodInvoker(ResetAccessibilityLayer));
             }
 
