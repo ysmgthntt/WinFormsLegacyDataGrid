@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -4064,7 +4065,7 @@ namespace WinFormsLegacyControls
             if (originalState is not null)
             {
                 Debug.Assert(!parentRows.IsEmpty(), "if the originalState is not null, then parentRows contains at least one row");
-                Stack parentStack = new Stack();
+                Stack<DataGridState> parentStack = new();
                 // this is a huge performance hit:
                 // everytime we get/put something from/to
                 // the parentRows, the buttons in the dataGridCaption
@@ -4086,7 +4087,7 @@ namespace WinFormsLegacyControls
 
                 while (parentStack.Count != 0)
                 {
-                    parentRows.AddParent((DataGridState)parentStack.Pop()!);
+                    parentRows.AddParent(parentStack.Pop());
                 }
             }
 
