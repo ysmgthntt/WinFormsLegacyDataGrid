@@ -3211,15 +3211,12 @@ namespace WinFormsLegacyControls
             get
             {
                 EnsureBound();
-                if (rowIndex < 0 || rowIndex >= DataGridRowsLength)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(rowIndex));
-                }
 
-                if (columnIndex < 0 || columnIndex >= myGridTable.GridColumnStyles.Count)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(columnIndex));
-                }
+                ArgumentOutOfRangeException.ThrowIfNegative(rowIndex);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(rowIndex, DataGridRowsLength);
+
+                ArgumentOutOfRangeException.ThrowIfNegative(columnIndex);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(columnIndex, myGridTable.GridColumnStyles.Count);
 
                 CurrencyManager listManager = this.listManager;
                 DataGridColumnStyle column = myGridTable.GridColumnStyles[columnIndex];
@@ -3228,15 +3225,12 @@ namespace WinFormsLegacyControls
             set
             {
                 EnsureBound();
-                if (rowIndex < 0 || rowIndex >= DataGridRowsLength)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(rowIndex));
-                }
 
-                if (columnIndex < 0 || columnIndex >= myGridTable.GridColumnStyles.Count)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(columnIndex));
-                }
+                ArgumentOutOfRangeException.ThrowIfNegative(rowIndex);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(rowIndex, DataGridRowsLength);
+
+                ArgumentOutOfRangeException.ThrowIfNegative(columnIndex);
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(columnIndex, myGridTable.GridColumnStyles.Count);
 
                 CurrencyManager listManager = this.listManager;
                 if (listManager.Position != rowIndex)
@@ -7402,10 +7396,8 @@ namespace WinFormsLegacyControls
         /// </summary>
         public bool IsExpanded(int rowNumber)
         {
-            if (rowNumber < 0 || rowNumber > DataGridRowsLength)
-            {
-                throw new ArgumentOutOfRangeException(nameof(rowNumber));
-            }
+            ArgumentOutOfRangeException.ThrowIfNegative(rowNumber);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(rowNumber, DataGridRowsLength);
 
             DataGridRow[] localGridRows = DataGridRows;
 
@@ -7751,10 +7743,10 @@ namespace WinFormsLegacyControls
             }
 
             DataGridRow[] localGridRows = DataGridRows;
-            if (rowNumber < 0 || rowNumber > DataGridRowsLength - (policy.AllowAdd ? 2 : 1))
-            {
-                throw new ArgumentOutOfRangeException(nameof(rowNumber));
-            }
+
+            ArgumentOutOfRangeException.ThrowIfNegative(rowNumber);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(rowNumber, DataGridRowsLength - (policy.AllowAdd ? 2 : 1));
+
             EnsureBound();
 
             DataGridRow source = localGridRows[rowNumber];
@@ -9944,10 +9936,8 @@ namespace WinFormsLegacyControls
         /// </summary>
         private void SetRowExpansionState(int row, bool expanded)
         {
-            if (row < -1 || row > DataGridRowsLength - (policy.AllowAdd ? 2 : 1))
-            {
-                throw new ArgumentOutOfRangeException(nameof(row));
-            }
+            ArgumentOutOfRangeException.ThrowIfLessThan(row, -1);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(row, DataGridRowsLength - (policy.AllowAdd ? 2 : 1));
 
             DataGridRow[] localGridRows = DataGridRows;
             if (row == -1)
