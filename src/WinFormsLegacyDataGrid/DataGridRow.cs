@@ -233,7 +233,7 @@ namespace WinFormsLegacyControls
             catch (Exception e)
             {
                 Debug.Fail("Failed to load bitmap: " + bitmapName, e.ToString());
-                throw e;
+                throw;
             }
         }
 
