@@ -19,7 +19,7 @@ namespace WinFormsLegacyControls
     /// </summary>
     public class DataGridBoolColumn : DataGridColumnStyle
     {
-        private static readonly int idealCheckSize = 14;
+        private const int idealCheckSize = 14;
 
         private bool isEditing = false;
         private bool isSelected = false;
