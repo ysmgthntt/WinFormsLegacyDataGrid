@@ -57,10 +57,8 @@ namespace WinFormsLegacyControls
         /// </summary>
         public DataGridRow(DataGrid dataGrid, DataGridTableStyle dgTable, int rowNumber)
         {
-            if (dataGrid is null || dgTable.DataGrid is null)
-            {
-                throw new ArgumentNullException(nameof(dataGrid));
-            }
+            ArgumentNullException.ThrowIfNull(dataGrid);
+            ArgumentNullException.ThrowIfNull(dgTable.DataGrid, nameof(dataGrid));
 
             if (rowNumber < 0)
             {
