@@ -68,7 +68,7 @@ namespace WinFormsLegacyControls
         private System.Collections.Specialized.BitVector32 gridState;                  // see GRIDSTATE_ consts above
 
         // for column widths
-        private const int NumRowsForAutoResize = 10;
+        // private const int NumRowsForAutoResize = 10;
 
         private const int errorRowBitmapWidth = 15;
 

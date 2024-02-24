@@ -19,9 +19,9 @@ namespace System.Windows.Forms
     {
         private const bool defaultOpen = false;
         private const int expandoBoxWidth = 14;
-        private const int indentWidth = 20;
+        // private const int indentWidth = 20;
         // private const int  relationshipSpacing = 1;
-        private const int triangleSize = 5;
+        // private const int triangleSize = 5;
 
         private bool expanded = defaultOpen;
         // private bool hasRelationships = false;
