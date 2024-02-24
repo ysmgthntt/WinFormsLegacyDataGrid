@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 #if WINFORMS_NAMESPACE
 namespace System.Windows.Forms
@@ -117,10 +118,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(AllowSorting)));
-                }
+                ThrowIfDefault();
 
                 if (allowSorting != value)
                 {
@@ -151,10 +149,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(AlternatingBackColor)));
-                }
+                ThrowIfDefault();
 
                 if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
@@ -231,10 +226,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(BackColor)));
-                }
+                ThrowIfDefault();
 
                 if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
@@ -417,10 +409,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(ForeColor)));
-                }
+                ThrowIfDefault();
 
                 if (value.IsEmpty)
                 {
@@ -469,10 +458,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(GridLineColor)));
-                }
+                ThrowIfDefault();
 
                 if (gridLineBrush.Color != value)
                 {
@@ -536,10 +522,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(GridLineStyle)));
-                }
+                ThrowIfDefault();
 
                 //valid values are 0x0 to 0x1.
                 if (!ClientUtils.IsEnumValid(value, (int)value, (int)DataGridLineStyle.None, (int)DataGridLineStyle.Solid))
@@ -572,10 +555,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(HeaderBackColor)));
-                }
+                ThrowIfDefault();
 
                 if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
@@ -636,10 +616,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(HeaderFont)));
-                }
+                ThrowIfDefault();
 
                 if ((value is null && headerFont is not null) || (value is not null && !value.Equals(headerFont)))
                 {
@@ -681,10 +658,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(HeaderForeColor)));
-                }
+                ThrowIfDefault();
 
                 if (value.IsEmpty)
                 {
@@ -748,10 +722,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(LinkColor)));
-                }
+                ThrowIfDefault();
 
                 if (value.IsEmpty)
                 {
@@ -905,10 +876,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(PreferredColumnWidth)));
-                }
+                ThrowIfDefault();
 
                 if (value < 0)
                 {
@@ -942,10 +910,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(PreferredRowHeight)));
-                }
+                ThrowIfDefault();
 
                 if (value < 0)
                 {
@@ -1075,10 +1040,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(SelectionBackColor)));
-                }
+                ThrowIfDefault();
 
                 if (/*System.Windows.Forms.*/DataGrid.IsTransparentColor(value))
                 {
@@ -1147,10 +1109,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (isDefaultTableStyle)
-                {
-                    throw new ArgumentException(string.Format(SR.DataGridDefaultTableSet, nameof(SelectionForeColor)));
-                }
+                ThrowIfDefault();
 
                 if (value.IsEmpty)
                 {
@@ -1772,5 +1731,16 @@ namespace WinFormsLegacyControls
             }
         }
 
+        private void ThrowIfDefault([CallerMemberName] string? paramName = null)
+        {
+            static void Throw(string? paramName)
+                // SR.DataGridDefaultTableSet has no format item
+                => throw new ArgumentException(SR.DataGridDefaultTableSet, paramName);
+
+            if (isDefaultTableStyle)
+            {
+                Throw(paramName);
+            }
+        }
     }
 }
