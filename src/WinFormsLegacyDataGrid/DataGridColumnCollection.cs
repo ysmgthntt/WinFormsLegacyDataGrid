@@ -197,7 +197,7 @@ namespace WinFormsLegacyControls
             {
                 if (_items[i].MappingName.Equals(column.MappingName) && column != _items[i])
                 {
-                    throw new ArgumentException(SR.DataGridColumnStyleDuplicateMappingName, "column");
+                    throw new ArgumentException(SR.DataGridColumnStyleDuplicateMappingName, nameof(column));
                 }
             }
         }

@@ -119,7 +119,7 @@ namespace WinFormsLegacyControls
             {
                 if (_items[i].MappingName.Equals(table.MappingName) && table != _items[i])
                 {
-                    throw new ArgumentException(SR.DataGridTableStyleDuplicateMappingName, "table");
+                    throw new ArgumentException(SR.DataGridTableStyleDuplicateMappingName, nameof(table));
                 }
             }
         }
@@ -138,7 +138,7 @@ namespace WinFormsLegacyControls
 
             if (table.DataGrid != owner && table.DataGrid is not null)
             {
-                throw new ArgumentException(SR.DataGridTableStyleCollectionAddedParentedTableStyle, "table");
+                throw new ArgumentException(SR.DataGridTableStyleCollectionAddedParentedTableStyle, nameof(table));
             }
 
             table.DataGrid = owner;
@@ -262,7 +262,7 @@ namespace WinFormsLegacyControls
 
             if (tableIndex == -1)
             {
-                throw new ArgumentException(SR.DataGridTableCollectionMissingTable, "table");
+                throw new ArgumentException(SR.DataGridTableCollectionMissingTable, nameof(table));
             }
             else
             {

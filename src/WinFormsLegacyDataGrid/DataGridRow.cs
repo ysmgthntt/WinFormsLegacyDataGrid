@@ -62,8 +62,9 @@ namespace WinFormsLegacyControls
 
             if (rowNumber < 0)
             {
-                throw new ArgumentException(SR.DataGridRowRowNumber, "rowNumber");
+                throw new ArgumentException(SR.DataGridRowRowNumber, nameof(rowNumber));
             }
+
             // this.dataGrid = dataGrid;
             number = rowNumber;
 

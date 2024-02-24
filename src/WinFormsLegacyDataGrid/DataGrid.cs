@@ -417,8 +417,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor,
-                                                              "AlternatingBackColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(AlternatingBackColor)));
                 }
                 if (IsTransparentColor(value))
                 {
@@ -1298,7 +1297,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "SelectionBackColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(SelectionBackColor)));
                 }
 
                 if (IsTransparentColor(value))
@@ -1358,7 +1357,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "SelectionForeColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(SelectionForeColor)));
                 }
 
                 if (!value.Equals(selectionForeBrush.Color))
@@ -2007,7 +2006,7 @@ namespace WinFormsLegacyControls
                 {
                     if (value.IsEmpty)
                     {
-                        throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "GridLineColor"));
+                        throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(GridLineColor)));
                     }
 
                     gridLineBrush = new SolidBrush(value);
@@ -2195,7 +2194,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "HeaderBackColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(HeaderBackColor)));
                 }
 
                 if (IsTransparentColor(value))
@@ -2283,7 +2282,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "BackgroundColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(BackgroundColor)));
                 }
 
                 if (!value.Equals(backgroundBrush.Color))
@@ -2374,7 +2373,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "HeaderForeColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(HeaderForeColor)));
                 }
 
                 if (!value.Equals(headerForePen.Color))
@@ -2581,7 +2580,7 @@ namespace WinFormsLegacyControls
             {
                 if (value.IsEmpty)
                 {
-                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, "LinkColor"));
+                    throw new ArgumentException(string.Format(SR.DataGridEmptyColor, nameof(LinkColor)));
                 }
 
                 if (!linkBrush.Color.Equals(value))
@@ -2895,7 +2894,7 @@ namespace WinFormsLegacyControls
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(SR.DataGridColumnWidth, "PreferredColumnWidth");
+                    throw new ArgumentException(SR.DataGridColumnWidth, nameof(PreferredColumnWidth));
                 }
 
                 if (preferredColumnWidth != value)
