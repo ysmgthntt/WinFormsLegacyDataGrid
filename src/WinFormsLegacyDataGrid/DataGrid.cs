@@ -10085,7 +10085,7 @@ namespace WinFormsLegacyControls
         ///  are accessible objects corresponding to the propertygrid entries.
         /// </summary>
         [ComVisible(true)]
-        internal class DataGridAccessibleObject : ControlAccessibleObject
+        internal sealed class DataGridAccessibleObject : ControlAccessibleObject
         {
             /// <summary>
             ///  Construct a PropertyGridViewAccessibleObject
@@ -10310,7 +10310,7 @@ namespace WinFormsLegacyControls
         //      This simple data structure holds all of the layout information
         //      for the DataGrid.
         // </summary>
-        internal class LayoutData
+        private sealed class LayoutData
         {
             internal bool dirty = true;
             // region inside the Control's borders.
@@ -10522,7 +10522,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Holds policy information for what the grid can and cannot do.
         /// </summary>
-        private class Policy
+        private sealed class Policy
         {
             private bool allowAdd = true;
             private bool allowEdit = true;

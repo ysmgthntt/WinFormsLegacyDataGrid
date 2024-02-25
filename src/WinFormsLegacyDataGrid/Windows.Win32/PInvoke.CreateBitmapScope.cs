@@ -14,7 +14,7 @@ internal static partial class PInvoke
     ///  by <see langword="ref" /> to avoid duplicating the handle and risking a double delete.
     /// </remarks>
 #if DEBUG
-    internal class CreateBitmapScope : DisposalTracking.Tracker, IDisposable
+    internal sealed class CreateBitmapScope : DisposalTracking.Tracker, IDisposable
 #else
     internal readonly ref struct CreateBitmapScope
 #endif

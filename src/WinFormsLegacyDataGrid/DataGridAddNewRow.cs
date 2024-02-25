@@ -10,7 +10,7 @@ namespace System.Windows.Forms
     ///  This class fully encapsulates the painting logic for an addnew row
     ///  appearing in a DataGrid.
     /// </summary>
-    internal class DataGridAddNewRow : DataGridRow
+    internal sealed class DataGridAddNewRow : DataGridRow
     {
         private bool dataBound = false;
 

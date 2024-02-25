@@ -987,7 +987,7 @@ namespace WinFormsLegacyControls
         }
 
         [ComVisible(true)]
-        protected class DataGridCellAccessibleObject : AccessibleObject
+        private sealed class DataGridCellAccessibleObject : AccessibleObject
         {
             readonly DataGridRow owner /*= null*/;
             readonly int column;

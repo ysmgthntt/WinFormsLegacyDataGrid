@@ -13,7 +13,7 @@ namespace System.Windows.Forms
     /// <summary>
     ///  Represents a caption in the DataGrid control.
     /// </summary>
-    internal class DataGridCaption
+    internal sealed class DataGridCaption
     {
         internal EventHandlerList? events;
 

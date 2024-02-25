@@ -157,7 +157,7 @@ namespace System.Windows.Forms
         }
 
         [ComVisible(true)]
-        internal class DataGridStateParentRowAccessibleObject : AccessibleObject
+        private sealed class DataGridStateParentRowAccessibleObject : AccessibleObject
         {
             readonly DataGridState owner /*= null*/;
 

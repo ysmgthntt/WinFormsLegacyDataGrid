@@ -12,7 +12,7 @@ using System.Text;
 
 namespace System.Windows.Forms
 {
-    internal class DataGridParentRows
+    internal sealed class DataGridParentRows
     {
         // siting
         //
@@ -1158,7 +1158,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private class Layout
+        private sealed class Layout
         {
             public Rectangle data;
             public Rectangle leftArrow;
@@ -1188,7 +1188,7 @@ namespace System.Windows.Forms
         }
 
         [ComVisible(true)]
-        protected internal class DataGridParentRowsAccessibleObject : AccessibleObject
+        internal sealed class DataGridParentRowsAccessibleObject : AccessibleObject
         {
             readonly DataGridParentRows owner /*= null*/;
 

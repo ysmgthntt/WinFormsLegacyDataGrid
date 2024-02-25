@@ -11,7 +11,7 @@ namespace System.Windows.Forms
 {
     // this class is basically a NativeWindow that does toolTipping
     // should be one for the entire grid
-    internal class DataGridToolTip /*: MarshalByRefObject*/
+    internal sealed class DataGridToolTip /*: MarshalByRefObject*/
     {
         // the toolTip control
         private NativeWindow? tipWindow = null;

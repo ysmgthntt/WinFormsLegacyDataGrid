@@ -15,7 +15,7 @@ namespace System.Windows.Forms
     ///  This class fully encapsulates the painting logic for a row
     ///  appearing in a DataGrid.
     /// </summary>
-    internal class DataGridRelationshipRow : DataGridRow
+    internal sealed class DataGridRelationshipRow : DataGridRow
     {
         private const bool defaultOpen = false;
         private const int expandoBoxWidth = 14;
@@ -77,7 +77,7 @@ namespace System.Windows.Forms
         // =        Properties
         // =------------------------------------------------------------------
 
-        public virtual bool Expanded
+        public /*virtual*/ bool Expanded
         {
             get
             {
@@ -987,7 +987,7 @@ namespace System.Windows.Forms
         }
 
         [ComVisible(true)]
-        protected class DataGridRelationshipRowAccessibleObject : DataGridRowAccessibleObject
+        private sealed class DataGridRelationshipRowAccessibleObject : DataGridRowAccessibleObject
         {
             public DataGridRelationshipRowAccessibleObject(DataGridRow owner) : base(owner)
             {
@@ -1077,7 +1077,7 @@ namespace System.Windows.Forms
         }
 
         [ComVisible(true)]
-        protected class DataGridRelationshipAccessibleObject : AccessibleObject
+        private sealed class DataGridRelationshipAccessibleObject : AccessibleObject
         {
             readonly DataGridRelationshipRow owner /*= null*/;
             readonly int relationship;
