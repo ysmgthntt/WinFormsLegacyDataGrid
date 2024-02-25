@@ -421,12 +421,9 @@ namespace WinFormsLegacyControls
             if (IsReadOnly() && isSelected && source.Position == rowNum)
             {
                 bounds.Inflate(-1, -1);
-                Pen pen = new Pen(selectionBrush)
-                {
-                    DashStyle = System.Drawing.Drawing2D.DashStyle.Dash
-                };
+                using Pen pen = new Pen(selectionBrush);
+                pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
                 g.DrawRectangle(pen, bounds);
-                pen.Dispose();
                 // restore the bounds rectangle
                 bounds.Inflate(1, 1);
             }

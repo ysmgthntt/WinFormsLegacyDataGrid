@@ -608,7 +608,7 @@ namespace WinFormsLegacyControls
 
             Rectangle rect = textBounds;
 
-            StringFormat format = new StringFormat();
+            using StringFormat format = new StringFormat();
             if (alignToRight)
             {
                 format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
@@ -626,7 +626,6 @@ namespace WinFormsLegacyControls
             rect.Offset(0, 2 * yMargin);
             rect.Height -= 2 * yMargin;
             g.DrawString(text, DataGridTableStyle!.DataGrid!.Font, foreBrush, rect, format);
-            format.Dispose();
         }
 
         private void RollBack()

@@ -381,9 +381,8 @@ namespace WinFormsLegacyControls
                     }
                     else
                     {
-                        Graphics g = DataGrid!.CreateGraphicsInternal();
+                        using Graphics g = DataGrid!.CreateGraphicsInternal();
                         focusedTextWidth = (int)Math.Ceiling(g.MeasureString(RelationsList[focusedRelation], DataGrid.LinkFont).Width);
-                        g.Dispose();
                     }
                 }
             }
@@ -809,26 +808,24 @@ namespace WinFormsLegacyControls
             if (relationshipRect.IsEmpty && DataGrid!.AllowNavigation)
             {
                 Debug.WriteLineIf(CompModSwitches.DGRelationShpRowLayout.TraceVerbose, "GetRelationshipRect grinding away");
-                Graphics g = DataGrid.CreateGraphicsInternal();
-                relationshipRect = new Rectangle
-                {
-                    X = 0 //indentWidth;
-                };
+
+                relationshipRect = new Rectangle();
+                relationshipRect.X = 0; //indentWidth;
                 // relationshipRect.Y = base.Height - BorderWidth;
 
                 // Determine the width of the widest relationship name
                 int longestRelationship = 0;
-                for (int r = 0; r < RelationsList.Count; ++r)
+                using (Graphics g = DataGrid.CreateGraphicsInternal())
                 {
-                    int rwidth = (int)Math.Ceiling(g.MeasureString(RelationsList[r], DataGrid.LinkFont).Width)
-;
-                    if (rwidth > longestRelationship)
+                    for (int r = 0; r < RelationsList.Count; ++r)
                     {
-                        longestRelationship = rwidth;
+                        int rwidth = (int)Math.Ceiling(g.MeasureString(RelationsList[r], DataGrid.LinkFont).Width);
+                        if (rwidth > longestRelationship)
+                        {
+                            longestRelationship = rwidth;
+                        }
                     }
                 }
-
-                g.Dispose();
 
                 relationshipRect.Width = longestRelationship + 5;
                 relationshipRect.Width += 2; // relationshipRect border;

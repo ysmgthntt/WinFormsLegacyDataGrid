@@ -639,10 +639,9 @@ namespace System.Windows.Forms
 
         private static void PaintIcon(Graphics g, Rectangle bounds, Bitmap b)
         {
-            ImageAttributes attr = new ImageAttributes();
+            using ImageAttributes attr = new ImageAttributes();
             attr.SetRemapTable(colorMap, ColorAdjustType.Bitmap);
             g.DrawImage(b, bounds, 0, 0, bounds.Width, bounds.Height, GraphicsUnit.Pixel, attr);
-            attr.Dispose();
         }
 
         private static void PaintBackButton(Graphics g, Rectangle bounds, bool alignRight)
@@ -699,14 +698,13 @@ namespace System.Windows.Forms
             g.FillRectangle(backBrush, textBounds);
 
             // Brush foreBrush = new SolidBrush(dataGrid.CaptionForeColor);
-            StringFormat format = new StringFormat();
+            using StringFormat format = new StringFormat();
             if (alignToRight)
             {
                 format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                 format.Alignment = StringAlignment.Far;
             }
             g.DrawString(text, Font, foreBrush, textBounds, format);
-            format.Dispose();
             // foreBrush.Dispose();
         }
 

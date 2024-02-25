@@ -303,10 +303,12 @@ namespace System.Windows.Forms
             dataGrid.Caption.BackButtonVisible = (parentsCount > 0) && (dataGrid.AllowNavigation);
         }
 
+        /*
         internal void Dispose()
         {
             gridLinePen.Dispose();
         }
+        */
 
         /// <summary>
         ///  Retrieves the top most parent in the list of parents.
@@ -877,11 +879,10 @@ namespace System.Windows.Forms
             g.FillRectangle(BackBrush, bmpRect);
 
             // now draw the bitmap
-            ImageAttributes attr = new ImageAttributes();
+            using ImageAttributes attr = new ImageAttributes();
             colorMap[0].NewColor = ForeColor;
             attr.SetRemapTable(colorMap, ColorAdjustType.Bitmap);
             g.DrawImage(b, bmpRect, 0, 0, bmpRect.Width, bmpRect.Height, GraphicsUnit.Pixel, attr);
-            attr.Dispose();
         }
 
         /*
@@ -1125,7 +1126,7 @@ namespace System.Windows.Forms
 
             // right now, we paint the entire box, cause it will be used anyway
             g.FillRectangle(BackBrush, textBounds);
-            StringFormat format = new StringFormat();
+            using StringFormat format = new StringFormat();
             if (alignToRight)
             {
                 format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
@@ -1138,7 +1139,6 @@ namespace System.Windows.Forms
             textBounds.Offset(0, 2);
             textBounds.Height -= 2;
             g.DrawString(text, textFont, ForeBrush, textBounds, format);
-            format.Dispose();
             return textBounds.Width;
 
         }

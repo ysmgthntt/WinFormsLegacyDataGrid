@@ -4748,34 +4748,36 @@ namespace WinFormsLegacyControls
 
                 Graphics g = pe.Graphics;
 
-                Region clipRegion = g.Clip;
-                if (layout.CaptionVisible)
+                using (Region clipRegion = g.Clip)
                 {
-                    caption.Paint(g, layout.Caption, isRightToLeft());
+                    if (layout.CaptionVisible)
+                    {
+                        caption.Paint(g, layout.Caption, isRightToLeft());
+                    }
+
+                    if (layout.ParentRowsVisible)
+                    {
+                        Debug.WriteLineIf(CompModSwitches.DataGridParents.TraceVerbose, "DataGridParents: Painting ParentRows " + layout.ParentRows.ToString());
+                        g.FillRectangle(SystemBrushes.AppWorkspace, layout.ParentRows);
+                        parentRows.Paint(g, layout.ParentRows, isRightToLeft());
+                    }
+
+                    Rectangle gridRect = layout.Data;
+                    if (layout.RowHeadersVisible)
+                    {
+                        gridRect = Rectangle.Union(gridRect, layout.RowHeaders);
+                    }
+
+                    if (layout.ColumnHeadersVisible)
+                    {
+                        gridRect = Rectangle.Union(gridRect, layout.ColumnHeaders);
+                    }
+
+                    g.SetClip(gridRect);
+                    PaintGrid(g, gridRect);
+                    g.Clip = clipRegion;
                 }
 
-                if (layout.ParentRowsVisible)
-                {
-                    Debug.WriteLineIf(CompModSwitches.DataGridParents.TraceVerbose, "DataGridParents: Painting ParentRows " + layout.ParentRows.ToString());
-                    g.FillRectangle(SystemBrushes.AppWorkspace, layout.ParentRows);
-                    parentRows.Paint(g, layout.ParentRows, isRightToLeft());
-                }
-
-                Rectangle gridRect = layout.Data;
-                if (layout.RowHeadersVisible)
-                {
-                    gridRect = Rectangle.Union(gridRect, layout.RowHeaders);
-                }
-
-                if (layout.ColumnHeadersVisible)
-                {
-                    gridRect = Rectangle.Union(gridRect, layout.ColumnHeaders);
-                }
-
-                g.SetClip(gridRect);
-                PaintGrid(g, gridRect);
-                g.Clip = clipRegion;
-                clipRegion.Dispose();
                 PaintBorder(g, layout.ClientRectangle);
 
                 g.FillRectangle(DefaultHeaderBackBrush, layout.ResizeBoxRect);
@@ -5145,22 +5147,21 @@ namespace WinFormsLegacyControls
             }
 
             int size;
-            Graphics g = CreateGraphicsInternal();
-            try
+            DataGridColumnStyle column = myGridTable.GridColumnStyles[col];
+            string columnName = column.HeaderText;
+
+            Font headerFont;
+            if (myGridTable.IsDefault)
             {
-                DataGridColumnStyle column = myGridTable.GridColumnStyles[col];
-                string columnName = column.HeaderText;
+                headerFont = HeaderFont;
+            }
+            else
+            {
+                headerFont = myGridTable.HeaderFont;
+            }
 
-                Font headerFont;
-                if (myGridTable.IsDefault)
-                {
-                    headerFont = HeaderFont;
-                }
-                else
-                {
-                    headerFont = myGridTable.HeaderFont;
-                }
-
+            using (Graphics g = CreateGraphicsInternal())
+            {
                 size = (int)g.MeasureString(columnName, headerFont).Width + layout.ColumnHeaders.Height + 1; // The sort triangle's width is equal to it's height
                 int rowCount = listManager.Count;
                 for (int row = 0; row < rowCount; ++row)
@@ -5172,114 +5173,110 @@ namespace WinFormsLegacyControls
                         size = width;
                     }
                 }
+            }
 
-                if (column.Width != size)
+            if (column.Width != size)
+            {
+                column._width = size;
+
+                ComputeVisibleColumns();
+
+                bool lastColumnIsLastTotallyVisibleCol = true;
+                if (lastTotallyVisibleCol != -1)
                 {
-                    column._width = size;
-
-                    ComputeVisibleColumns();
-
-                    bool lastColumnIsLastTotallyVisibleCol = true;
-                    if (lastTotallyVisibleCol != -1)
+                    for (int i = lastTotallyVisibleCol + 1; i < myGridTable.GridColumnStyles.Count; i++)
                     {
-                        for (int i = lastTotallyVisibleCol + 1; i < myGridTable.GridColumnStyles.Count; i++)
+                        if (myGridTable.GridColumnStyles[i].PropertyDescriptor is not null)
                         {
-                            if (myGridTable.GridColumnStyles[i].PropertyDescriptor is not null)
-                            {
-                                lastColumnIsLastTotallyVisibleCol = false;
-                                break;
-                            }
+                            lastColumnIsLastTotallyVisibleCol = false;
+                            break;
                         }
                     }
-                    else
+                }
+                else
+                {
+                    lastColumnIsLastTotallyVisibleCol = false;
+                }
+
+                // if the column shrank and the last totally visible column was the last column
+                // then we need to recompute the horizontalOffset, firstVisibleCol, negOffset.
+                // lastTotallyVisibleCol remains the last column
+                if (lastColumnIsLastTotallyVisibleCol &&
+                    (negOffset != 0 || horizontalOffset != 0))
+                {
+
+                    // update the column width
+                    column._width = size;
+
+                    int cx = 0;
+                    int colCount = myGridTable.GridColumnStyles.Count;
+                    int visibleWidth = layout.Data.Width;
+                    GridColumnStylesCollection cols = myGridTable.GridColumnStyles;
+
+                    // assume everything fits
+                    negOffset = 0;
+                    horizontalOffset = 0;
+                    firstVisibleCol = 0;
+
+                    for (int i = colCount - 1; i >= 0; i--)
                     {
-                        lastColumnIsLastTotallyVisibleCol = false;
-                    }
-
-                    // if the column shrank and the last totally visible column was the last column
-                    // then we need to recompute the horizontalOffset, firstVisibleCol, negOffset.
-                    // lastTotallyVisibleCol remains the last column
-                    if (lastColumnIsLastTotallyVisibleCol &&
-                        (negOffset != 0 || horizontalOffset != 0))
-                    {
-
-                        // update the column width
-                        column._width = size;
-
-                        int cx = 0;
-                        int colCount = myGridTable.GridColumnStyles.Count;
-                        int visibleWidth = layout.Data.Width;
-                        GridColumnStylesCollection cols = myGridTable.GridColumnStyles;
-
-                        // assume everything fits
-                        negOffset = 0;
-                        horizontalOffset = 0;
-                        firstVisibleCol = 0;
-
-                        for (int i = colCount - 1; i >= 0; i--)
+                        if (cols[i].PropertyDescriptor is null)
                         {
-                            if (cols[i].PropertyDescriptor is null)
-                            {
-                                continue;
-                            }
+                            continue;
+                        }
 
-                            cx += cols[i].Width;
-                            if (cx > visibleWidth)
+                        cx += cols[i].Width;
+                        if (cx > visibleWidth)
+                        {
+                            if (negOffset == 0)
                             {
-                                if (negOffset == 0)
-                                {
-                                    firstVisibleCol = i;
-                                    negOffset = cx - visibleWidth;
-                                    horizontalOffset = negOffset;
-                                    numVisibleCols++;
-                                }
-                                else
-                                {
-                                    horizontalOffset += cols[i].Width;
-                                }
+                                firstVisibleCol = i;
+                                negOffset = cx - visibleWidth;
+                                horizontalOffset = negOffset;
+                                numVisibleCols++;
                             }
                             else
                             {
-                                numVisibleCols++;
+                                horizontalOffset += cols[i].Width;
                             }
-                        }
-
-                        // refresh the horizontal scrollbar
-                        PerformLayout();
-
-                        // we need to invalidate the layout.Data and layout.ColumnHeaders
-                        Invalidate(Rectangle.Union(layout.Data, layout.ColumnHeaders));
-                    }
-                    else
-                    {
-                        // need to refresh the scroll bar
-                        PerformLayout();
-
-                        Rectangle rightArea = layout.Data;
-                        if (layout.ColumnHeadersVisible)
-                        {
-                            rightArea = Rectangle.Union(rightArea, layout.ColumnHeaders);
-                        }
-
-                        int left = GetColBeg(col);
-
-                        if (!isRightToLeft())
-                        {
-                            rightArea.Width -= left - rightArea.X;
-                            rightArea.X = left;
                         }
                         else
                         {
-                            rightArea.Width -= left;
+                            numVisibleCols++;
                         }
-
-                        Invalidate(rightArea);
                     }
+
+                    // refresh the horizontal scrollbar
+                    PerformLayout();
+
+                    // we need to invalidate the layout.Data and layout.ColumnHeaders
+                    Invalidate(Rectangle.Union(layout.Data, layout.ColumnHeaders));
                 }
-            }
-            finally
-            {
-                g.Dispose();
+                else
+                {
+                    // need to refresh the scroll bar
+                    PerformLayout();
+
+                    Rectangle rightArea = layout.Data;
+                    if (layout.ColumnHeadersVisible)
+                    {
+                        rightArea = Rectangle.Union(rightArea, layout.ColumnHeaders);
+                    }
+
+                    int left = GetColBeg(col);
+
+                    if (!isRightToLeft())
+                    {
+                        rightArea.Width -= left - rightArea.X;
+                        rightArea.X = left;
+                    }
+                    else
+                    {
+                        rightArea.Width -= left;
+                    }
+
+                    Invalidate(rightArea);
+                }
             }
 
             if (horizScrollBar.Visible)
@@ -5499,48 +5496,42 @@ namespace WinFormsLegacyControls
                 return;
             }
 
-            Graphics g = CreateGraphicsInternal();
-            try
-            {
-                GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
-                DataGridRow resizeRow = DataGridRows[row];
-                int rowCount = listManager.Count;
-                int resizeHeight = 0;
+            GridColumnStylesCollection columns = myGridTable.GridColumnStyles;
+            DataGridRow resizeRow = DataGridRows[row];
+            int rowCount = listManager.Count;
+            int resizeHeight = 0;
 
-                // compute the height that we should resize to:
-                int columnsCount = columns.Count;
+            // compute the height that we should resize to:
+            int columnsCount = columns.Count;
+            using (Graphics g = CreateGraphicsInternal())
+            {
                 for (int col = 0; col < columnsCount; col++)
                 {
                     object? value = columns[col].GetColumnValueAtRow(listManager, row);
                     resizeHeight = Math.Max(resizeHeight, columns[col].GetPreferredHeight(g, value));
                 }
-
-                if (resizeRow.Height != resizeHeight)
-                {
-                    resizeRow.Height = resizeHeight;
-
-                    // needed to refresh scrollbar properties
-                    PerformLayout();
-
-                    Rectangle rightArea = layout.Data;
-                    if (layout.RowHeadersVisible)
-                    {
-                        rightArea = Rectangle.Union(rightArea, layout.RowHeaders);
-                    }
-
-                    int top = GetRowTop(row);
-                    rightArea.Height -= rightArea.Y - top;
-                    rightArea.Y = top;
-                    Invalidate(rightArea);
-                }
             }
-            finally
+
+            if (resizeRow.Height != resizeHeight)
             {
-                g.Dispose();
+                resizeRow.Height = resizeHeight;
+
+                // needed to refresh scrollbar properties
+                PerformLayout();
+
+                Rectangle rightArea = layout.Data;
+                if (layout.RowHeadersVisible)
+                {
+                    rightArea = Rectangle.Union(rightArea, layout.RowHeaders);
+                }
+
+                int top = GetRowTop(row);
+                rightArea.Height -= rightArea.Y - top;
+                rightArea.Y = top;
+                Invalidate(rightArea);
             }
 
             // OnRowResize(EventArgs.Empty);
-            return;
         }
 
         private void RowResizeBegin(MouseEventArgs e, int row)
@@ -8021,30 +8012,30 @@ namespace WinFormsLegacyControls
                     textBounds.Y += 2;
                 }
 
-                StringFormat format = new StringFormat();
-
-                // the columnHeaderText alignment should be the same as
-                // the alignment in the column
-                //
-                HorizontalAlignment colAlignment = gridColumns[col].Alignment;
-                format.Alignment = colAlignment == HorizontalAlignment.Right ? StringAlignment.Far :
-                                   colAlignment == HorizontalAlignment.Center ? StringAlignment.Center :
-                                                                                 StringAlignment.Near;
-
-                // part 1, section 1: the column headers should not wrap
-                format.FormatFlags |= StringFormatFlags.NoWrap;
-
-                if (alignRight)
+                using (StringFormat format = new StringFormat())
                 {
-                    format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
-                    format.Alignment = StringAlignment.Near;
+                    // the columnHeaderText alignment should be the same as
+                    // the alignment in the column
+                    //
+                    HorizontalAlignment colAlignment = gridColumns[col].Alignment;
+                    format.Alignment = colAlignment == HorizontalAlignment.Right ? StringAlignment.Far :
+                                       colAlignment == HorizontalAlignment.Center ? StringAlignment.Center :
+                                                                                     StringAlignment.Near;
+
+                    // part 1, section 1: the column headers should not wrap
+                    format.FormatFlags |= StringFormatFlags.NoWrap;
+
+                    if (alignRight)
+                    {
+                        format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
+                        format.Alignment = StringAlignment.Near;
+                    }
+                    g.DrawString(gridColumns[col].HeaderText,
+                                 myGridTable.IsDefault ? HeaderFont : myGridTable.HeaderFont,
+                                 myGridTable.IsDefault ? HeaderForeBrush : myGridTable.HeaderForeBrush,
+                                 textBounds,
+                                 format);
                 }
-                g.DrawString(gridColumns[col].HeaderText,
-                             myGridTable.IsDefault ? HeaderFont : myGridTable.HeaderFont,
-                             myGridTable.IsDefault ? HeaderForeBrush : myGridTable.HeaderForeBrush,
-                             textBounds,
-                             format);
-                format.Dispose();
 
                 if (alignRight)
                 {
@@ -8070,11 +8061,9 @@ namespace WinFormsLegacyControls
                     int deflateValue = Math.Max(0, (textBounds.Height - 5) / 2);
                     triBounds.Inflate(-deflateValue, -deflateValue);
 
-                    Pen pen1 = new Pen(BackgroundBrush);
-                    Pen pen2 = new Pen(myGridTable.BackBrush);
+                    using Pen pen1 = new Pen(BackgroundBrush);
+                    using Pen pen2 = new Pen(myGridTable.BackBrush);
                     Triangle.Paint(g, triBounds, whichWay, headerBrush, pen1, pen2, pen1, true);
-                    pen1.Dispose();
-                    pen2.Dispose();
                 }
                 int paintedWidth = textBounds.Width + (columnSorted ? textBounds.Height : 0);
 
@@ -8164,11 +8153,12 @@ namespace WinFormsLegacyControls
             {
                 if (layout.ColumnHeadersVisible)
                 {
-                    Region r = g.Clip;
-                    g.SetClip(layout.ColumnHeaders);
-                    PaintColumnHeaders(g);
-                    g.Clip = r;
-                    r.Dispose();
+                    using (Region r = g.Clip)
+                    {
+                        g.SetClip(layout.ColumnHeaders);
+                        PaintColumnHeaders(g);
+                        g.Clip = r;
+                    }
                     int columnHeaderHeight = layout.ColumnHeaders.Height;
                     rc.Y += columnHeaderHeight;
                     rc.Height -= columnHeaderHeight;

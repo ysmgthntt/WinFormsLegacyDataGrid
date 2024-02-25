@@ -862,20 +862,21 @@ namespace System.Windows.Forms
 
                 g.FillRectangle(GetBackBrush(), textBounds);
 
-                StringFormat format = new StringFormat();
-                if (alignToRight)
+                using (StringFormat format = new StringFormat())
                 {
-                    format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
-                    format.Alignment = StringAlignment.Far;
+                    if (alignToRight)
+                    {
+                        format.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
+                        format.Alignment = StringAlignment.Far;
+                    }
+                    g.DrawString(dgTable.RelationsList[r], textFont, textBrush, textBounds, format);
                 }
-                g.DrawString(dgTable.RelationsList[r], textFont, textBrush, textBounds, format);
                 if (r == FocusedRelation && number == DataGrid.CurrentCell.RowNumber)
                 {
                     textBounds.Width = dgTable.FocusedTextWidth;
                     ControlPaint.DrawFocusRectangle(g, textBounds, ((SolidBrush)textBrush).Color, ((SolidBrush)GetBackBrush()).Color);
                     textBounds.Width = bounds.Width;
                 }
-                format.Dispose();
 
                 textBounds.Y += relationshipHeight;
                 cy += textBounds.Height;

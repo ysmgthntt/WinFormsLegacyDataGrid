@@ -589,6 +589,7 @@ namespace WinFormsLegacyControls
             return PaintIcon(g, visualBounds, paintIcon, alignToRight, bmp,
                              dgTable.IsDefault ? DataGrid.HeaderBackBrush : dgTable.HeaderBackBrush);
         }
+
         protected Rectangle PaintIcon(Graphics g, Rectangle visualBounds, bool paintIcon, bool alignToRight, Bitmap bmp, Brush backBrush)
         {
             Size bmpSize = bmp.Size;
@@ -601,11 +602,10 @@ namespace WinFormsLegacyControls
             {
                 colorMap[0].NewColor = dgTable.IsDefault ? DataGrid.HeaderForeColor : dgTable.HeaderForeColor;
                 colorMap[0].OldColor = Color.Black;
-                ImageAttributes attr = new ImageAttributes();
+                using ImageAttributes attr = new ImageAttributes();
                 attr.SetRemapTable(colorMap, ColorAdjustType.Bitmap);
                 g.DrawImage(bmp, bmpRect, 0, 0, bmpRect.Width, bmpRect.Height, GraphicsUnit.Pixel, attr);
                 // g.DrawImage(bmp, bmpRect);
-                attr.Dispose();
             }
 
             return bmpRect;
