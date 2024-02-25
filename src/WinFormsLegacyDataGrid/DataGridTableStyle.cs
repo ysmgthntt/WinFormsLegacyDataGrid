@@ -27,10 +27,10 @@ namespace WinFormsLegacyControls
     {
         // internal for DataGridColumn accessibility...
         //
-        internal DataGrid? dataGrid = null;
+        internal DataGrid? dataGrid;
 
         // relationship UI
-        private int relationshipHeight = 0;
+        private int relationshipHeight;
         internal const int relationshipSpacing = 1;
         private Rectangle relationshipRect = Rectangle.Empty;
         private int focusedRelation = -1;
@@ -41,9 +41,9 @@ namespace WinFormsLegacyControls
 
         // the name of the table
         private string mappingName = string.Empty;
-        private readonly GridColumnStylesCollection gridColumns /*= null*/;
-        private bool readOnly = false;
-        private readonly bool isDefaultTableStyle = false;
+        private readonly GridColumnStylesCollection gridColumns;
+        private bool readOnly;
+        private readonly bool isDefaultTableStyle;
 
         private static readonly object EventAllowSorting = new object();
         private static readonly object EventGridLineColor = new object();
@@ -87,7 +87,7 @@ namespace WinFormsLegacyControls
         private SolidBrush gridLineBrush = DefaultGridLineBrush;
         private DataGridLineStyle gridLineStyle = defaultGridLineStyle;
         internal SolidBrush headerBackBrush = DefaultHeaderBackBrush;
-        internal Font? headerFont = null; // this is ambient property to Font value.
+        internal Font? headerFont; // this is ambient property to Font value.
         internal SolidBrush headerForeBrush = DefaultHeaderForeBrush;
         internal Pen headerForePen = DefaultHeaderForePen;
         private SolidBrush linkBrush = DefaultLinkBrush;

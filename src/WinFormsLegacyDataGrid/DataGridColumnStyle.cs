@@ -23,17 +23,17 @@ namespace WinFormsLegacyControls
     public abstract class DataGridColumnStyle : Component, IDataGridColumnStyleEditingNotificationService
     {
         private HorizontalAlignment _alignment = HorizontalAlignment.Left;
-        private PropertyDescriptor? _propertyDescriptor = null;
-        private DataGridTableStyle? _dataGridTableStyle = null;
+        private PropertyDescriptor? _propertyDescriptor;
+        private DataGridTableStyle? _dataGridTableStyle;
         //private readonly Font _font = null;
         private string _mappingName = string.Empty;
         private string _headerName = string.Empty;
-        private bool _invalid = false;
+        private bool _invalid;
         private string _nullText = SR.DataGridNullText;
-        private bool _readOnly = false;
-        private bool _updating = false;
+        private bool _readOnly;
+        private bool _updating;
         internal int _width = -1;
-        private AccessibleObject? _headerAccessibleObject = null;
+        private AccessibleObject? _headerAccessibleObject;
 
         private static readonly object s_alignmentEvent = new object();
         private static readonly object s_propertyDescriptorEvent = new object();

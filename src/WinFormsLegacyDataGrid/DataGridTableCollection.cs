@@ -23,7 +23,7 @@ namespace WinFormsLegacyControls
     {
         CollectionChangeEventHandler? onCollectionChanged;
         private readonly List<DataGridTableStyle> _items = new();
-        readonly DataGrid owner /*= null*/;
+        readonly DataGrid owner;
 
         int IList.Add(object? value) => Add((DataGridTableStyle)value!);
 

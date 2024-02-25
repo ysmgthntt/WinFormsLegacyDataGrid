@@ -14,10 +14,10 @@ namespace System.Windows.Forms
     internal sealed class DataGridToolTip /*: MarshalByRefObject*/
     {
         // the toolTip control
-        private NativeWindow? tipWindow = null;
+        private NativeWindow? tipWindow;
 
         // the dataGrid which contains this toolTip
-        private readonly DataGrid dataGrid /*= null*/;
+        private readonly DataGrid dataGrid;
 
         // CONSTRUCTOR
         public DataGridToolTip(DataGrid dataGrid)

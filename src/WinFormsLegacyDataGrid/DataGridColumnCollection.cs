@@ -27,8 +27,8 @@ namespace WinFormsLegacyControls
     {
         CollectionChangeEventHandler? onCollectionChanged;
         private readonly List<DataGridColumnStyle> _items = new();
-        readonly DataGridTableStyle owner /*= null*/;
-        private readonly bool isDefault = false;
+        readonly DataGridTableStyle owner;
+        private readonly bool isDefault;
 
         // we have to implement IList for the Collection editor to work
         //

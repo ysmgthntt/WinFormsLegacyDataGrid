@@ -30,8 +30,8 @@ namespace System.Windows.Forms
         // private Color borderColor = SystemColors.WindowFrame;
         private Brush borderBrush = new SolidBrush(SystemColors.WindowFrame);
 
-        private static Bitmap? rightArrow = null;
-        private static Bitmap? leftArrow = null;
+        private static Bitmap? rightArrow;
+        private static Bitmap? leftArrow;
 
         private readonly ColorMap[] colorMap = new ColorMap[] { new ColorMap() };
 
@@ -40,8 +40,8 @@ namespace System.Windows.Forms
         // private Brush gridLineBrush = SystemBrushes.Control;
         private readonly Pen gridLinePen = SystemPens.Control;
 
-        private int totalHeight = 0;
-        private int textRegionHeight = 0;
+        private int totalHeight;
+        private int textRegionHeight;
 
         // now that we have left and right arrows, we also have layout
         private readonly Layout layout = new Layout();
@@ -50,8 +50,8 @@ namespace System.Windows.Forms
         //
         // private bool overLeftArrow = false;
         // private bool overRightArrow = false;
-        private bool downLeftArrow = false;
-        private bool downRightArrow = false;
+        private bool downLeftArrow;
+        private bool downRightArrow;
 
         // a horizOffset of 0 means that the layout for the parent
         // rows is left aligned.
@@ -59,12 +59,12 @@ namespace System.Windows.Forms
         // table name, a column name or a column value ) is not visible.
         // a horizOffset of 2 means that the leftmost 2 units of information are not visible, and so on
         //
-        private int horizOffset = 0;
+        private int horizOffset;
 
         // storage for parent row states
         //
         private readonly List<DataGridState> _parents = new();
-        private int parentsCount = 0;
+        private int parentsCount;
         private readonly List<int> _rowHeights = new();
         AccessibleObject? accessibleObject;
 
@@ -1190,7 +1190,7 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         internal sealed class DataGridParentRowsAccessibleObject : AccessibleObject
         {
-            readonly DataGridParentRows owner /*= null*/;
+            readonly DataGridParentRows owner;
 
             public DataGridParentRowsAccessibleObject(DataGridParentRows owner) : base()
             {

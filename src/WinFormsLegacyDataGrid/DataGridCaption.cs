@@ -25,38 +25,38 @@ namespace System.Windows.Forms
 
         // private static readonly Point minimumBounds = new Point(50, 30);
 
-        private readonly DataGrid dataGrid /*= null*/;
-        private bool backButtonVisible = false;
-        private bool downButtonVisible = false;
+        private readonly DataGrid dataGrid;
+        private bool backButtonVisible;
+        private bool downButtonVisible;
 
         private SolidBrush backBrush = DefaultBackBrush;
         private SolidBrush foreBrush = DefaultForeBrush;
         private readonly Pen textBorderPen = DefaultTextBorderPen;
 
         private string text = string.Empty;
-        private bool textBorderVisible = false;
-        private Font? textFont = null;
+        private bool textBorderVisible;
+        private Font? textFont;
 
         // use the datagridFont when the textFont is not set
         // we cache this font ( cause we have to make it bold every time we paint the caption )
         //
         private Font dataGridFont = null!;
 
-        private bool backActive = false;
-        private bool downActive = false;
-        private bool backPressed = false;
-        private bool downPressed = false;
+        private bool backActive;
+        private bool downActive;
+        private bool backPressed;
+        private bool downPressed;
 
         // if the downButton should point down or not
-        private bool downButtonDown = false;
+        private bool downButtonDown;
 
         private static Bitmap? leftButtonBitmap;
         private static Bitmap? leftButtonBitmap_bidi;
         private static Bitmap? magnifyingGlassBitmap;
 
-        private Rectangle backButtonRect = new Rectangle();
-        private Rectangle downButtonRect = new Rectangle();
-        private Rectangle textRect = new Rectangle();
+        private Rectangle backButtonRect;
+        private Rectangle downButtonRect;
+        private Rectangle textRect;
 
         private CaptionLocation lastMouseLocation = CaptionLocation.Nowhere;
 

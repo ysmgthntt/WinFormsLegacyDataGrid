@@ -12,7 +12,7 @@ namespace System.Windows.Forms
     /// </summary>
     internal sealed class DataGridAddNewRow : DataGridRow
     {
-        private bool dataBound = false;
+        private bool dataBound;
 
         public DataGridAddNewRow(DataGrid dGrid, DataGridTableStyle gridTable, int rowNum)
             : base(dGrid, gridTable, rowNum)

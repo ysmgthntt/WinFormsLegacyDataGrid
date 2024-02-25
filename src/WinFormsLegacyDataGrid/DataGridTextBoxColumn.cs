@@ -22,16 +22,16 @@ namespace WinFormsLegacyControls
         private readonly int xMargin = 2;
         private readonly int yMargin = 1;
         // private int   fontHandle =        0;
-        private string? format = null;
+        private string? format;
         private TypeConverter? typeConverter;
-        private IFormatProvider? formatInfo = null;
+        private IFormatProvider? formatInfo;
         private System.Reflection.MethodInfo? parseMethod;
 
         // hosted control
         private readonly DataGridTextBox edit;
 
         // editing state
-        private string? oldValue = null;
+        private string? oldValue;
         private int editRow = -1;
 
         /// <summary>

@@ -95,7 +95,7 @@ namespace WinFormsLegacyControls
 
         private SolidBrush headerBackBrush = DefaultHeaderBackBrush;
 
-        private Font? headerFont = null; // this is ambient property to Font value
+        private Font? headerFont; // this is ambient property to Font value
 
         private SolidBrush headerForeBrush = DefaultHeaderForeBrush;
         private Pen headerForePen = DefaultHeaderForePen;
@@ -118,26 +118,26 @@ namespace WinFormsLegacyControls
 
         // parent rows
         //
-        private readonly DataGridParentRows parentRows /*= null*/;
+        private readonly DataGridParentRows parentRows;
         // Set_ListManager uses the originalState to determine
         // if the grid should disconnect from all the MetaDataChangedEvents
         // keep "originalState != null" when navigating back and forth in the grid
         // and use Add/RemoveMetaDataChanged methods.
-        private DataGridState? originalState = null;
+        private DataGridState? originalState;
 
         // ui state
         //
         // Don't use dataGridRows, use the accessor!!!
         private DataGridRow[]? dataGridRows = Array.Empty<DataGridRow>();
-        private int dataGridRowsLength = 0;
+        private int dataGridRowsLength;
 
         // for toolTip
-        private int toolTipId = 0;
-        private DataGridToolTip? toolTipProvider = null;
+        private int toolTipId;
+        private DataGridToolTip? toolTipProvider;
 
-        private DataGridAddNewRow? addNewRow = null;
+        private DataGridAddNewRow? addNewRow;
         private LayoutData layout = new LayoutData();
-        private RECT[]? cachedScrollableRegion = null;
+        private RECT[]? cachedScrollableRegion;
 
         // header namespace goo
         //
@@ -151,13 +151,13 @@ namespace WinFormsLegacyControls
 
         // information for col/row resizing
         // private bool       trackColResize         = false;
-        private int trackColAnchor = 0;
-        private int trackColumn = 0;
+        private int trackColAnchor;
+        private int trackColumn;
         // private bool       trackRowResize         = false;
-        private int trackRowAnchor = 0;
-        private int trackRow = 0;
-        private PropertyDescriptor? trackColumnHeader = null;
-        private MouseEventArgs? lastSplitBar = null;
+        private int trackRowAnchor;
+        private int trackRow;
+        private PropertyDescriptor? trackColumnHeader;
+        private MouseEventArgs? lastSplitBar;
 
         // private bool isLedgerStyle = true;
         // private bool isFlatMode    = false;
@@ -188,26 +188,26 @@ namespace WinFormsLegacyControls
 
         // data binding
         //
-        private object? dataSource = null;
+        private object? dataSource;
         private string dataMember = string.Empty;
-        private CurrencyManager? listManager = null;
+        private CurrencyManager? listManager;
 
         // currently focused control
         // we want to unparent it either when rebinding the grid or when the grid is disposed
-        Control? toBeDisposedEditingControl = null;
+        Control? toBeDisposedEditingControl;
 
         // persistent data state
         //
-        internal GridTableStylesCollection dataGridTables /*= null*/;
+        internal GridTableStylesCollection dataGridTables;
         // SET myGridTable in SetDataGridTable ONLY
-        internal DataGridTableStyle myGridTable /*= null*/;
+        internal DataGridTableStyle myGridTable;
         internal bool checkHierarchy = true;
-        internal bool inInit = false;
+        internal bool inInit;
 
         // Selection
-        internal int currentRow = 0;
-        internal int currentCol = 0;
-        private int numSelectedRows = 0;
+        internal int currentRow;
+        internal int currentCol;
+        private int numSelectedRows;
         private int lastRowSelected = -1;
 
         // dragging:
@@ -227,7 +227,7 @@ namespace WinFormsLegacyControls
 
         // for CurrentCell
 #if DEBUG
-        private bool inDataSource_PositionChanged = false;
+        private bool inDataSource_PositionChanged;
 #endif // DEBUG
 
         // Policy
@@ -239,8 +239,8 @@ namespace WinFormsLegacyControls
         // private bool isNavigating = false;
         // private bool isEditing = false;
         // private bool editControlChanging = false;
-        private DataGridColumnStyle? editColumn = null;
-        private DataGridRow? editRow = null;
+        private DataGridColumnStyle? editColumn;
+        private DataGridRow? editRow;
 
         // scrolling
         //
@@ -249,25 +249,25 @@ namespace WinFormsLegacyControls
 
         // the sum of the widths of the columns preceding the firstVisibleColumn
         //
-        private int horizontalOffset = 0;
+        private int horizontalOffset;
 
         // the number of pixels of the firstVisibleColumn which are not visible
         //
-        private int negOffset = 0;
+        private int negOffset;
 
-        private int wheelDelta = 0;
+        private int wheelDelta;
         // private bool      isScrolling = false;
 
         // Visibility
         //
-        internal int firstVisibleRow = 0;
-        internal int firstVisibleCol = 0;
-        private int numVisibleRows = 0;
+        internal int firstVisibleRow;
+        internal int firstVisibleCol;
+        private int numVisibleRows;
         // the number of columns which are visible
-        private int numVisibleCols = 0;
-        private int numTotallyVisibleRows = 0;
+        private int numVisibleCols;
+        private int numTotallyVisibleRows;
         // lastTotallyVisibleCol == -1 means that the data grid does not show any column in its entirety
-        private int lastTotallyVisibleCol = 0;
+        private int lastTotallyVisibleCol;
 
         // mouse move hot-tracking
         //

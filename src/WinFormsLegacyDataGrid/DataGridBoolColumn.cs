@@ -21,8 +21,8 @@ namespace WinFormsLegacyControls
     {
         private const int idealCheckSize = 14;
 
-        private bool isEditing = false;
-        private bool isSelected = false;
+        private bool isEditing;
+        private bool isSelected;
         private bool allowNull = true;
         private int editingRow = -1;
         private object? currentValue = Convert.DBNull;

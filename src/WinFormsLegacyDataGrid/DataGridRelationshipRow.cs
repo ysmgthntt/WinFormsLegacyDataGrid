@@ -1079,7 +1079,7 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         private sealed class DataGridRelationshipAccessibleObject : AccessibleObject
         {
-            readonly DataGridRelationshipRow owner /*= null*/;
+            readonly DataGridRelationshipRow owner;
             readonly int relationship;
 
             public DataGridRelationshipAccessibleObject(DataGridRelationshipRow owner, int relationship) : base()

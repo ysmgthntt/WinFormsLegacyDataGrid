@@ -44,11 +44,11 @@ namespace WinFormsLegacyControls
 
         // bitmaps
         //
-        private static Bitmap? rightArrow = null;
-        private static Bitmap? leftArrow = null;
-        private static Bitmap? errorBmp = null;
-        private static Bitmap? pencilBmp = null;
-        private static Bitmap? starBmp = null;
+        private static Bitmap? rightArrow;
+        private static Bitmap? leftArrow;
+        private static Bitmap? errorBmp;
+        private static Bitmap? pencilBmp;
+        private static Bitmap? starBmp;
         protected const int xOffset = 3;
         protected const int yOffset = 2;
 
@@ -749,7 +749,7 @@ namespace WinFormsLegacyControls
         protected class DataGridRowAccessibleObject : AccessibleObject
         {
             private List<AccessibleObject> _cells;
-            readonly DataGridRow owner /*= null*/;
+            readonly DataGridRow owner;
 
             internal static string? CellToDisplayString(DataGrid grid, int row, int column)
             {
@@ -989,7 +989,7 @@ namespace WinFormsLegacyControls
         [ComVisible(true)]
         private sealed class DataGridCellAccessibleObject : AccessibleObject
         {
-            readonly DataGridRow owner /*= null*/;
+            readonly DataGridRow owner;
             readonly int column;
 
             public DataGridCellAccessibleObject(DataGridRow owner, int column) : base()

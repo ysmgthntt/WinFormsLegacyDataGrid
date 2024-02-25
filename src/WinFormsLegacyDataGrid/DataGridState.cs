@@ -17,21 +17,21 @@ namespace System.Windows.Forms
     {
         // fields
         //
-        public object? DataSource = null;
-        public string? DataMember = null;
-        public CurrencyManager? ListManager = null;
+        public object? DataSource;
+        public string? DataMember;
+        public CurrencyManager? ListManager;
         public DataGridRow[] DataGridRows = Array.Empty<DataGridRow>();
         public DataGrid? DataGrid;
-        public int DataGridRowsLength = 0;
-        public GridColumnStylesCollection? GridColumnStyles = null;
+        public int DataGridRowsLength;
+        public GridColumnStylesCollection? GridColumnStyles;
 
-        public int FirstVisibleRow = 0;
-        public int FirstVisibleCol = 0;
+        public int FirstVisibleRow;
+        public int FirstVisibleCol;
 
-        public int CurrentRow = 0;
-        public int CurrentCol = 0;
+        public int CurrentRow;
+        public int CurrentCol;
 
-        public DataGridRow? LinkingRow = null;
+        public DataGridRow? LinkingRow;
         AccessibleObject? parentRowAccessibleObject;
 
         public DataGridState()
@@ -159,7 +159,7 @@ namespace System.Windows.Forms
         [ComVisible(true)]
         private sealed class DataGridStateParentRowAccessibleObject : AccessibleObject
         {
-            readonly DataGridState owner /*= null*/;
+            readonly DataGridState owner;
 
             public DataGridStateParentRowAccessibleObject(DataGridState owner) : base()
             {
