@@ -224,7 +224,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the bitmap associated with the row.
         /// </summary>
-        protected Bitmap GetBitmap(string bitmapName)
+        protected static Bitmap GetBitmap(string bitmapName)
         {
             try
             {
@@ -278,7 +278,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the bitmap displayed in the row header of a new row.
         /// </summary>
-        protected Bitmap GetStarBitmap()
+        protected static Bitmap GetStarBitmap()
         {
             if (starBmp is null)
             {
@@ -292,7 +292,7 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the bitmap displayed in the row header that indicates a row can
         ///  be edited.
         /// </summary>
-        protected Bitmap GetPencilBitmap()
+        protected static Bitmap GetPencilBitmap()
         {
             if (pencilBmp is null)
             {
@@ -305,7 +305,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the bitmap displayed on a row with an error.
         /// </summary>
-        protected Bitmap GetErrorBitmap()
+        protected static Bitmap GetErrorBitmap()
         {
             if (errorBmp is null)
             {
@@ -315,7 +315,7 @@ namespace WinFormsLegacyControls
             return errorBmp;
         }
 
-        protected Bitmap GetLeftArrowBitmap()
+        protected static Bitmap GetLeftArrowBitmap()
         {
             if (leftArrow is null)
             {
@@ -325,7 +325,7 @@ namespace WinFormsLegacyControls
             return leftArrow;
         }
 
-        protected Bitmap GetRightArrowBitmap()
+        protected static Bitmap GetRightArrowBitmap()
         {
             if (rightArrow is null)
             {

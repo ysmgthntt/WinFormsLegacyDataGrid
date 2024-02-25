@@ -1444,9 +1444,9 @@ namespace WinFormsLegacyControls
             if (!parentRows.IsEmpty())
             {
                 bool alignRight = isRightToLeft();
-                int detailsButtonWidth = Caption.GetDetailsButtonWidth();
-                Rectangle backButton = Caption.GetBackButtonRect(layout.Caption, alignRight, detailsButtonWidth);
-                Rectangle detailsButton = Caption.GetDetailsButtonRect(layout.Caption, alignRight);
+                int detailsButtonWidth = DataGridCaption.GetDetailsButtonWidth();
+                Rectangle backButton = DataGridCaption.GetBackButtonRect(layout.Caption, alignRight, detailsButtonWidth);
+                Rectangle detailsButton = DataGridCaption.GetDetailsButtonRect(layout.Caption, alignRight);
 
                 // mirror the buttons wrt RTL property
                 backButton.X = MirrorRectangle(backButton, layout.Inside, isRightToLeft());
@@ -8516,7 +8516,7 @@ namespace WinFormsLegacyControls
         // convention:
         // if we return -1 it means that the user was going left and there were no visible columns to the left of the current one
         // if we return cols.Count + 1 it means that the user was going right and there were no visible columns to the right of the currrent
-        private int MoveLeftRight(GridColumnStylesCollection cols, int startCol, bool goRight)
+        private static int MoveLeftRight(GridColumnStylesCollection cols, int startCol, bool goRight)
         {
             int i;
             if (goRight)
@@ -9979,7 +9979,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        private void ObjectSiteChange(IContainer container, IComponent component, bool site)
+        private static void ObjectSiteChange(IContainer container, IComponent component, bool site)
         {
             if (site)
             {
@@ -10612,7 +10612,7 @@ namespace WinFormsLegacyControls
         //  this function returns the x coordinate of the rectangle that
         //  corresponds to the Bi-Di transformation
         //
-        private int MirrorRectangle(Rectangle R1, Rectangle rect, bool rightToLeft)
+        private static int MirrorRectangle(Rectangle R1, Rectangle rect, bool rightToLeft)
         {
             if (rightToLeft)
             {
@@ -10629,7 +10629,7 @@ namespace WinFormsLegacyControls
         //  this function returns the x coordinate of the point that
         //  corresponds to the Bi-Di transformation
         //
-        private int MirrorPoint(int x, Rectangle rect, bool rightToLeft)
+        private static int MirrorPoint(int x, Rectangle rect, bool rightToLeft)
         {
             if (rightToLeft)
             {

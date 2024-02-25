@@ -143,7 +143,7 @@ namespace WinFormsLegacyControls
             isEditing = false;
         }
 
-        private Rectangle GetCheckBoxBounds(Rectangle bounds, bool alignToRight)
+        private static Rectangle GetCheckBoxBounds(Rectangle bounds, bool alignToRight)
         {
             if (alignToRight)
             {

@@ -235,7 +235,8 @@ namespace WinFormsLegacyControls
         // =        Methods
         // =------------------------------------------------------------------
 
-        private void DebugOut(string s)
+        [Conditional("DEBUG")]
+        private static void DebugOut(string s)
         {
             Debug.WriteLineIf(CompModSwitches.DGEditColumnEditing.TraceVerbose, "DGEditColumnEditing: " + s);
         }

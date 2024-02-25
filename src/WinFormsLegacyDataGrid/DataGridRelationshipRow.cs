@@ -229,7 +229,7 @@ namespace System.Windows.Forms
         ///  Given an origin, this procedure returns
         ///  a rectangle that describes the location of an outline box.
         /// </summary>
-        private Rectangle GetOutlineRect(int xOrigin, int yOrigin)
+        private static Rectangle GetOutlineRect(int xOrigin, int yOrigin)
         {
             Rectangle outline = new Rectangle(xOrigin + 2,
                                               yOrigin + 2,
@@ -960,7 +960,7 @@ namespace System.Windows.Forms
 
         // given the relRect and the rowHeader, this function will return the
         // X coordinate of the relationship rectangle as it should appear on the screen
-        private int MirrorRelationshipRectangle(Rectangle relRect, Rectangle rowHeader, bool alignToRight)
+        private static int MirrorRelationshipRectangle(Rectangle relRect, Rectangle rowHeader, bool alignToRight)
         {
             if (alignToRight)
             {
@@ -974,7 +974,7 @@ namespace System.Windows.Forms
 
         // given the X and Width of a rectangle R1 contained in rect,
         // this will return the X coordinate of the rectangle that corresponds to R1 in Bi-Di transformation
-        private int MirrorRectangle(int x, int width, Rectangle rect, bool alignToRight)
+        private static int MirrorRectangle(int x, int width, Rectangle rect, bool alignToRight)
         {
             if (alignToRight)
             {

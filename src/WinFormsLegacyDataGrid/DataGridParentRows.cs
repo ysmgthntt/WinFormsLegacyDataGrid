@@ -723,7 +723,7 @@ namespace System.Windows.Forms
         }
 
         // will return the total width required to paint the parentRows
-        private int TotalWidth(int tableNameBoxWidth, int[] colsNameWidths, int[] colsDataWidths)
+        private static int TotalWidth(int tableNameBoxWidth, int[] colsNameWidths, int[] colsDataWidths)
         {
             int totalWidth = 0;
             totalWidth += tableNameBoxWidth;
@@ -834,7 +834,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private Bitmap GetBitmap(string bitmapName)
+        private static Bitmap GetBitmap(string bitmapName)
         {
             try
             {
@@ -847,7 +847,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private Bitmap GetRightArrowBitmap()
+        private static Bitmap GetRightArrowBitmap()
         {
             if (rightArrow is null)
             {
@@ -857,7 +857,7 @@ namespace System.Windows.Forms
             return rightArrow;
         }
 
-        private Bitmap GetLeftArrowBitmap()
+        private static Bitmap GetLeftArrowBitmap()
         {
             if (leftArrow is null)
             {
@@ -890,7 +890,7 @@ namespace System.Windows.Forms
         }
         */
 
-        private void PaintDownButton(Graphics g, Rectangle bounds)
+        private static void PaintDownButton(Graphics g, Rectangle bounds)
         {
             g.DrawLine(Pens.Black, bounds.X, bounds.Y, bounds.X + bounds.Width, bounds.Y);  // the top
             g.DrawLine(Pens.White, bounds.X + bounds.Width, bounds.Y, bounds.X + bounds.Width, bounds.Y + bounds.Height);  // the right side
@@ -1145,7 +1145,7 @@ namespace System.Windows.Forms
 
         // will return the X coordinate of the containedRect mirrored within the surroundingRect
         // according to the value of alignToRight
-        private int MirrorRect(Rectangle surroundingRect, Rectangle containedRect, bool alignToRight)
+        private static int MirrorRect(Rectangle surroundingRect, Rectangle containedRect, bool alignToRight)
         {
             Debug.Assert(containedRect.X >= surroundingRect.X && containedRect.Right <= surroundingRect.Right, "containedRect is not contained in surroundingRect");
             if (alignToRight)

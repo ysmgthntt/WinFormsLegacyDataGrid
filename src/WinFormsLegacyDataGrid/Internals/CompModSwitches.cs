@@ -50,7 +50,9 @@ namespace System.ComponentModel
 
             private TraceSwitch() { }
 
+#pragma warning disable CA1822 // メンバーを static に設定します
             public bool TraceVerbose => false;
+#pragma warning restore CA1822 // メンバーを static に設定します
         }
     }
 }

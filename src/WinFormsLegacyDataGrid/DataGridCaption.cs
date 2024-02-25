@@ -23,7 +23,7 @@ namespace System.Windows.Forms
         private const int buttonToText = 4;
         private static readonly ColorMap[] colorMap = new ColorMap[] { new ColorMap() };
 
-        private static readonly Point minimumBounds = new Point(50, 30);
+        // private static readonly Point minimumBounds = new Point(50, 30);
 
         private readonly DataGrid dataGrid /*= null*/;
         private bool backButtonVisible = false;
@@ -307,6 +307,7 @@ namespace System.Windows.Forms
             }
         }
 
+        /*
         internal Point MinimumBounds
         {
             get
@@ -314,6 +315,7 @@ namespace System.Windows.Forms
                 return minimumBounds;
             }
         }
+        */
 
         internal bool BackButtonVisible
         {
@@ -454,7 +456,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private Bitmap GetBitmap(string bitmapName)
+        private static Bitmap GetBitmap(string bitmapName)
         {
             try
             {
@@ -467,7 +469,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private Bitmap GetBackButtonBmp(bool alignRight)
+        private static Bitmap GetBackButtonBmp(bool alignRight)
         {
             if (alignRight)
             {
@@ -489,7 +491,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private Bitmap GetDetailsBmp()
+        private static Bitmap GetDetailsBmp()
         {
             if (magnifyingGlassBitmap is null)
             {
@@ -517,7 +519,7 @@ namespace System.Windows.Forms
         }
         */
 
-        internal Rectangle GetBackButtonRect(Rectangle bounds, bool alignRight, int downButtonWidth)
+        internal static Rectangle GetBackButtonRect(Rectangle bounds, bool alignRight, int downButtonWidth)
         {
             Bitmap backButtonBmp = GetBackButtonBmp(false);
             Size backButtonSize;
@@ -531,7 +533,7 @@ namespace System.Windows.Forms
                                   backButtonSize.Height);
         }
 
-        internal int GetDetailsButtonWidth()
+        internal static int GetDetailsButtonWidth()
         {
             int width = 0;
             Bitmap detailsBmp = GetDetailsBmp();
@@ -542,7 +544,7 @@ namespace System.Windows.Forms
             return width;
         }
 
-        internal Rectangle GetDetailsButtonRect(Rectangle bounds, bool alignRight)
+        internal static Rectangle GetDetailsButtonRect(Rectangle bounds, bool alignRight)
         {
             Size downButtonSize;
             Bitmap detailsBmp = GetDetailsBmp();
@@ -635,7 +637,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private void PaintIcon(Graphics g, Rectangle bounds, Bitmap b)
+        private static void PaintIcon(Graphics g, Rectangle bounds, Bitmap b)
         {
             ImageAttributes attr = new ImageAttributes();
             attr.SetRemapTable(colorMap, ColorAdjustType.Bitmap);
@@ -643,7 +645,7 @@ namespace System.Windows.Forms
             attr.Dispose();
         }
 
-        private void PaintBackButton(Graphics g, Rectangle bounds, bool alignRight)
+        private static void PaintBackButton(Graphics g, Rectangle bounds, bool alignRight)
         {
             Bitmap backButtonBmp = GetBackButtonBmp(alignRight);
             lock (backButtonBmp)
@@ -652,7 +654,7 @@ namespace System.Windows.Forms
             }
         }
 
-        private void PaintDownButton(Graphics g, Rectangle bounds)
+        private static void PaintDownButton(Graphics g, Rectangle bounds)
         {
             Bitmap detailsBmp = GetDetailsBmp();
             lock (detailsBmp)
