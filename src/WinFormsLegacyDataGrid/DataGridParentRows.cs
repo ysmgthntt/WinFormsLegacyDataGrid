@@ -83,11 +83,7 @@ namespace System.Windows.Forms
         {
             get
             {
-                if (accessibleObject is null)
-                {
-                    accessibleObject = new DataGridParentRowsAccessibleObject(this);
-                }
-                return accessibleObject;
+                return accessibleObject ??= new DataGridParentRowsAccessibleObject(this);
             }
         }
 
@@ -851,22 +847,12 @@ namespace System.Windows.Forms
 
         private static Bitmap GetRightArrowBitmap()
         {
-            if (rightArrow is null)
-            {
-                rightArrow = GetBitmap("DataGridParentRows.RightArrow");
-            }
-
-            return rightArrow;
+            return rightArrow ??= GetBitmap("DataGridParentRows.RightArrow");
         }
 
         private static Bitmap GetLeftArrowBitmap()
         {
-            if (leftArrow is null)
-            {
-                leftArrow = GetBitmap("DataGridParentRows.LeftArrow");
-            }
-
-            return leftArrow;
+            return leftArrow ??= GetBitmap("DataGridParentRows.LeftArrow");
         }
 
         private void PaintBitmap(Graphics g, Bitmap b, Rectangle bounds)

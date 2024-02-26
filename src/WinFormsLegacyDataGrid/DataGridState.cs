@@ -47,11 +47,7 @@ namespace System.Windows.Forms
         {
             get
             {
-                if (parentRowAccessibleObject is null)
-                {
-                    parentRowAccessibleObject = new DataGridStateParentRowAccessibleObject(this);
-                }
-                return parentRowAccessibleObject;
+                return parentRowAccessibleObject ??= new DataGridStateParentRowAccessibleObject(this);
             }
         }
 

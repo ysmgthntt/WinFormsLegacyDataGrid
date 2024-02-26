@@ -173,11 +173,7 @@ namespace System.Windows.Forms
         {
             get
             {
-                if (events is null)
-                {
-                    events = new EventHandlerList();
-                }
-                return events;
+                return events ??= new EventHandlerList();
             }
         }
 
@@ -188,14 +184,7 @@ namespace System.Windows.Forms
                 // use the dataGridFont only if the user
                 // did not set the CaptionFont
                 //
-                if (textFont is null)
-                {
-                    return dataGridFont;
-                }
-                else
-                {
-                    return textFont;
-                }
+                return textFont ?? dataGridFont;
             }
             set
             {
@@ -262,14 +251,7 @@ namespace System.Windows.Forms
             }
             set
             {
-                if (value is null)
-                {
-                    text = string.Empty;
-                }
-                else
-                {
-                    text = value;
-                }
+                text = value ?? string.Empty;
 
                 Invalidate();
             }
@@ -473,32 +455,17 @@ namespace System.Windows.Forms
         {
             if (alignRight)
             {
-                if (leftButtonBitmap_bidi is null)
-                {
-                    leftButtonBitmap_bidi = GetBitmap("DataGridCaption.backarrow_bidi");
-                }
-
-                return leftButtonBitmap_bidi;
+                return leftButtonBitmap_bidi ??= GetBitmap("DataGridCaption.backarrow_bidi");
             }
             else
             {
-                if (leftButtonBitmap is null)
-                {
-                    leftButtonBitmap = GetBitmap("DataGridCaption.backarrow");
-                }
-
-                return leftButtonBitmap;
+                return leftButtonBitmap ??= GetBitmap("DataGridCaption.backarrow");
             }
         }
 
         private static Bitmap GetDetailsBmp()
         {
-            if (magnifyingGlassBitmap is null)
-            {
-                magnifyingGlassBitmap = GetBitmap("DataGridCaption.Details");
-            }
-
-            return magnifyingGlassBitmap;
+            return magnifyingGlassBitmap ??= GetBitmap("DataGridCaption.Details");
         }
 
         /*

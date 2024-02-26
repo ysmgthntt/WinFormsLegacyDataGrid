@@ -1327,10 +1327,7 @@ namespace WinFormsLegacyControls
             }
             set
             {
-                if (value is null)
-                {
-                    value = string.Empty;
-                }
+                value ??= string.Empty;
 
                 if (value.Equals(mappingName))
                 {

@@ -126,7 +126,7 @@ namespace WinFormsLegacyControls
         [Browsable(false)]
         public AccessibleObject HeaderAccessibleObject
         {
-            get => _headerAccessibleObject ?? (_headerAccessibleObject = CreateHeaderAccessibleObject());
+            get => _headerAccessibleObject ??= CreateHeaderAccessibleObject();
         }
 
         /// <summary>
@@ -261,10 +261,7 @@ namespace WinFormsLegacyControls
             get => _headerName;
             set
             {
-                if (value is null)
-                {
-                    value = string.Empty;
-                }
+                value ??= string.Empty;
 
                 if (!_headerName.Equals(value))
                 {
@@ -293,10 +290,7 @@ namespace WinFormsLegacyControls
             get => _mappingName;
             set
             {
-                if (value is null)
-                {
-                    value = string.Empty;
-                }
+                value ??= string.Empty;
 
                 if (!_mappingName.Equals(value))
                 {
@@ -701,12 +695,7 @@ namespace WinFormsLegacyControls
             {
                 get
                 {
-                    if (dgEditColumnEditing is null)
-                    {
-                        dgEditColumnEditing = new TraceSwitch("DGEditColumnEditing", "Editing related tracing");
-                    }
-
-                    return dgEditColumnEditing;
+                    return dgEditColumnEditing ??= new TraceSwitch("DGEditColumnEditing", "Editing related tracing");
                 }
             }
         }

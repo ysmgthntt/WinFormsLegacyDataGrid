@@ -81,11 +81,7 @@ namespace WinFormsLegacyControls
         {
             get
             {
-                if (accessibleObject is null)
-                {
-                    accessibleObject = CreateAccessibleObject();
-                }
-                return accessibleObject;
+                return accessibleObject ??= CreateAccessibleObject();
             }
         }
 
@@ -280,12 +276,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected static Bitmap GetStarBitmap()
         {
-            if (starBmp is null)
-            {
-                starBmp = GetBitmap("DataGridRow.star");
-            }
-
-            return starBmp;
+            return starBmp ??= GetBitmap("DataGridRow.star");
         }
 
         /// <summary>
@@ -294,12 +285,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected static Bitmap GetPencilBitmap()
         {
-            if (pencilBmp is null)
-            {
-                pencilBmp = GetBitmap("DataGridRow.pencil");
-            }
-
-            return pencilBmp;
+            return pencilBmp ??= GetBitmap("DataGridRow.pencil");
         }
 
         /// <summary>
@@ -307,32 +293,17 @@ namespace WinFormsLegacyControls
         /// </summary>
         protected static Bitmap GetErrorBitmap()
         {
-            if (errorBmp is null)
-            {
-                errorBmp = GetBitmap("DataGridRow.error");
-            }
-
-            return errorBmp;
+            return errorBmp ??= GetBitmap("DataGridRow.error");
         }
 
         protected static Bitmap GetLeftArrowBitmap()
         {
-            if (leftArrow is null)
-            {
-                leftArrow = GetBitmap("DataGridRow.left");
-            }
-
-            return leftArrow;
+            return leftArrow ??= GetBitmap("DataGridRow.left");
         }
 
         protected static Bitmap GetRightArrowBitmap()
         {
-            if (rightArrow is null)
-            {
-                rightArrow = GetBitmap("DataGridRow.right");
-            }
-
-            return rightArrow;
+            return rightArrow ??= GetBitmap("DataGridRow.right");
         }
 
         public virtual void InvalidateRow()
@@ -663,11 +634,7 @@ namespace WinFormsLegacyControls
                 return;
             }
 
-            string errString = ((IDataErrorInfo)errorInfo).Error;
-            if (errString is null)
-            {
-                errString = string.Empty;
-            }
+            string errString = ((IDataErrorInfo)errorInfo).Error ?? string.Empty;
 
             if (tooltip != errString)
             {
