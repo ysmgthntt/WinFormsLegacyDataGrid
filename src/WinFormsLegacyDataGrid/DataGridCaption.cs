@@ -15,7 +15,7 @@ namespace System.Windows.Forms
     /// </summary>
     internal sealed class DataGridCaption
     {
-        internal EventHandlerList? events;
+        private EventHandlerList? events;
 
         private const int xOffset = 3;
         private const int yOffset = 1;
@@ -63,7 +63,7 @@ namespace System.Windows.Forms
         //private EventEntry? eventList;
         private static readonly object EVENT_BACKWARDCLICKED = new object();
         private static readonly object EVENT_DOWNCLICKED = new object();
-        private static readonly object EVENT_CAPTIONCLICKED = new object();
+        // private static readonly object EVENT_CAPTIONCLICKED = new object();
 
         internal DataGridCaption(DataGrid dataGrid)
         {
@@ -327,6 +327,7 @@ namespace System.Windows.Forms
             remove => Events.RemoveHandler(EVENT_BACKWARDCLICKED, value);
         }
 
+        /*
         /// <summary>
         ///  Adds a listener for the CaptionClicked event.
         /// </summary>
@@ -335,6 +336,7 @@ namespace System.Windows.Forms
             add => Events.AddHandler(EVENT_CAPTIONCLICKED, value);
             remove => Events.RemoveHandler(EVENT_CAPTIONCLICKED, value);
         }
+        */
 
         internal event EventHandler DownClicked
         {
@@ -386,7 +388,7 @@ namespace System.Windows.Forms
 
         protected void OnCaptionClicked(EventArgs e)
         {
-            ((EventHandler?)Events[EVENT_CAPTIONCLICKED])?.Invoke(this, e);
+            //((EventHandler?)Events[EVENT_CAPTIONCLICKED])?.Invoke(this, e);
         }
 
         protected void OnDownClicked(EventArgs e)
