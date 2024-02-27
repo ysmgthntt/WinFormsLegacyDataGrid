@@ -1153,7 +1153,7 @@ namespace System.Windows.Forms
             }
         }
 
-        [ComVisible(true)]
+        //[ComVisible(true)]
         internal sealed class DataGridParentRowsAccessibleObject : AccessibleObject
         {
             readonly DataGridParentRows owner;

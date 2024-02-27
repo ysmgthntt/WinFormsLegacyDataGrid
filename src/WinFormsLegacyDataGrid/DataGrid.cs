@@ -22,8 +22,8 @@ namespace WinFormsLegacyControls
     /// <summary>
     ///  Displays ADO.NET data in a scrollable grid.
     /// </summary>
-    [ComVisible(true)]
-    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    //[ComVisible(true)]
+    //[ClassInterface(ClassInterfaceType.AutoDispatch)]
     //[Designer("System.Windows.Forms.Design.DataGridDesigner, " + AssemblyRef.SystemDesign)]
     [DefaultProperty(nameof(DataSource))]
     [DefaultEvent(nameof(Navigate))]
@@ -499,7 +499,7 @@ namespace WinFormsLegacyControls
         [SRCategory(nameof(SR.CatAppearance))]
         [DefaultValue(defaultBorderStyle)]
         //[DispId(NativeMethods.ActiveX.DISPID_BORDERSTYLE)]
-        [DispId(PInvoke.DISPID_BORDERSTYLE)]
+        //[DispId(PInvoke.DISPID_BORDERSTYLE)]
         [SRDescription(nameof(SR.DataGridBorderStyleDescr))]
         public BorderStyle BorderStyle
         {
@@ -9552,7 +9552,7 @@ namespace WinFormsLegacyControls
         ///  The accessible object class for a DataGrid. The child accessible objects
         ///  are accessible objects corresponding to the propertygrid entries.
         /// </summary>
-        [ComVisible(true)]
+        //[ComVisible(true)]
         internal sealed class DataGridAccessibleObject : ControlAccessibleObject
         {
             /// <summary>

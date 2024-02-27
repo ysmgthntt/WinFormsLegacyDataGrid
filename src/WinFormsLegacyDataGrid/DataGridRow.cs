@@ -682,7 +682,7 @@ namespace WinFormsLegacyControls
             return foreBrush;
         }
 
-        [ComVisible(true)]
+        //[ComVisible(true)]
         protected class DataGridRowAccessibleObject : AccessibleObject
         {
             private List<AccessibleObject> _cells;
@@ -887,7 +887,7 @@ namespace WinFormsLegacyControls
 
         }
 
-        [ComVisible(true)]
+        //[ComVisible(true)]
         private sealed class DataGridCellAccessibleObject : AccessibleObject
         {
             readonly DataGridRow owner;

@@ -690,7 +690,7 @@ namespace WinFormsLegacyControls
                 => dgEditColumnEditing ??= new TraceSwitch("DGEditColumnEditing", "Editing related tracing");
         }
 
-        [ComVisible(true)]
+        //[ComVisible(true)]
         protected class DataGridColumnHeaderAccessibleObject : AccessibleObject
         {
             public DataGridColumnHeaderAccessibleObject(DataGridColumnStyle owner) : this()

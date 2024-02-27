@@ -978,7 +978,7 @@ namespace System.Windows.Forms
             }
         }
 
-        [ComVisible(true)]
+        //[ComVisible(true)]
         private sealed class DataGridRelationshipRowAccessibleObject : DataGridRowAccessibleObject
         {
             public DataGridRelationshipRowAccessibleObject(DataGridRow owner) : base(owner)
@@ -1062,7 +1062,7 @@ namespace System.Windows.Forms
             }
         }
 
-        [ComVisible(true)]
+        //[ComVisible(true)]
         private sealed class DataGridRelationshipAccessibleObject : AccessibleObject
         {
             readonly DataGridRelationshipRow owner;

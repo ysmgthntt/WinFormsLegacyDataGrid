@@ -1,7 +1,6 @@
 ﻿CreateBitmap
 CreateBrushIndirect
 DeleteObject
-DISPID_BORDERSTYLE
 GetDC
 GetDCEx
 GetDeviceCaps
