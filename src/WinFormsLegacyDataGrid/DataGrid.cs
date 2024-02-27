@@ -1191,7 +1191,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal /*override*/ bool ShouldSerializeForeColor()
+        private /*override*/ bool ShouldSerializeForeColor()
         {
             return !DefaultForeBrush.Color.Equals(ForeColor);
         }
@@ -1200,7 +1200,7 @@ namespace WinFormsLegacyControls
         ///  Indicates whether the <see cref='BackColor'/> property should be
         ///  persisted.
         /// </summary>
-        internal /*override*/ bool ShouldSerializeBackColor()
+        private /*override*/ bool ShouldSerializeBackColor()
         {
             return !DefaultBackBrush.Color.Equals(BackColor);
         }
@@ -2268,7 +2268,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal virtual bool ShouldSerializeLinkColor()
+        private /*virtual*/ bool ShouldSerializeLinkColor()
         {
             return !LinkBrush.Equals(DefaultLinkBrush);
         }
