@@ -53,8 +53,8 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the actual value used when setting the
         ///  value of the column to <see langword='true'/> .
         /// </summary>
-        [TypeConverter(typeof(StringConverter)),
-        DefaultValue(true)]
+        [TypeConverter(typeof(StringConverter))]
+        [DefaultValue(true)]
         public object TrueValue
         {
             get => trueValue;
@@ -79,7 +79,8 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the actual value used when setting the value of the column to
         ///  <see langword='false'/>.
         /// </summary>
-        [TypeConverter(typeof(StringConverter)), DefaultValue(false)]
+        [TypeConverter(typeof(StringConverter))]
+        [DefaultValue(false)]
         public object FalseValue
         {
             get => falseValue;
@@ -423,11 +424,9 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets a value indicating whether null values are allowed.
         /// </summary>
-        [
-        SRCategory(nameof(SR.CatBehavior)),
-        DefaultValue(true),
-        SRDescription(nameof(SR.DataGridBoolColumnAllowNullValue))
-        ]
+        [SRCategory(nameof(SR.CatBehavior))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridBoolColumnAllowNullValue))]
         public bool AllowNull
         {
             get => allowNull;

@@ -19,10 +19,8 @@ namespace WinFormsLegacyControls
     ///  Represents a collection of System.Windows.Forms.DataGridColumnStyle objects in the <see cref='DataGrid'/>
     ///  control.
     /// </summary>
-    [
-    //Editor("System.Windows.Forms.Design.DataGridColumnCollectionEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-    ListBindable(false)
-    ]
+    //[Editor("System.Windows.Forms.Design.DataGridColumnCollectionEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor))]
+    [ListBindable(false)]
     public class GridColumnStylesCollection : BaseCollection, IList
     {
         CollectionChangeEventHandler? onCollectionChanged;

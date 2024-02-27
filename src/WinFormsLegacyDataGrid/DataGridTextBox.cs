@@ -16,12 +16,10 @@ namespace WinFormsLegacyControls
     ///  Represents a <see cref='TextBox'/> control that is hosted in a
     /// <see cref='DataGridTextBoxColumn'/> .
     /// </summary>
-    [
-    ComVisible(true),
-    ClassInterface(ClassInterfaceType.AutoDispatch),
-    ToolboxItem(false),
-    DesignTimeVisible(false)
-    ]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
     public class DataGridTextBox : TextBox
     {
         private bool isInEditOrNavigateMode = true;

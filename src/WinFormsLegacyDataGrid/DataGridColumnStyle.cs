@@ -146,7 +146,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public event EventHandler PropertyDescriptorChanged
         {
             add => Events.AddHandler(s_propertyDescriptorEvent, value);

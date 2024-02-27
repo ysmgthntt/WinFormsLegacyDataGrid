@@ -131,10 +131,8 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the System.Windows.Forms.ComponentModel.Format for the System.Windows.Forms.DataGridTextBoxColumn
         ///  .
         /// </summary>
-        [
-        SRDescription(nameof(SR.FormatControlFormatDescr)),
-        DefaultValue(null)
-        ]
+        [SRDescription(nameof(SR.FormatControlFormatDescr))]
+        [DefaultValue(null)]
         public override PropertyDescriptor? PropertyDescriptor
         {
             set
@@ -182,7 +180,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IFormatProvider? FormatInfo
         {
             get => formatInfo;

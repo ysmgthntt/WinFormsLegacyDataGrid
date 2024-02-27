@@ -18,11 +18,9 @@ namespace WinFormsLegacyControls
     /// <summary>
     ///  Represents the table drawn by the <see cref='Forms.DataGrid'/> control at run time.
     /// </summary>
-    [
-    ToolboxItem(false),
-    DesignTimeVisible(false),
-    //DefaultProperty("GridTableName")
-    ]
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
+    //[DefaultProperty("GridTableName")]
     public class DataGridTableStyle : Component, IDataGridEditingService
     {
         // internal for DataGridColumn accessibility...
@@ -105,11 +103,9 @@ namespace WinFormsLegacyControls
         // LinkColor, LinkHoverColor
         //
 
-        [
-        SRCategory(nameof(SR.CatBehavior)),
-        DefaultValue(defaultAllowSorting),
-        SRDescription(nameof(SR.DataGridAllowSortingDescr))
-        ]
+        [SRCategory(nameof(SR.CatBehavior))]
+        [DefaultValue(defaultAllowSorting)]
+        [SRDescription(nameof(SR.DataGridAllowSortingDescr))]
         public bool AllowSorting
         {
             get => allowSorting;
@@ -134,10 +130,8 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventAllowSorting, value);
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridAlternatingBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridAlternatingBackColorDescr))]
         public Color AlternatingBackColor
         {
             get => alternatingBackBrush.Color;
@@ -196,10 +190,8 @@ namespace WinFormsLegacyControls
 
         internal SolidBrush BackBrush => backBrush;
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.ControlBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.ControlBackColorDescr))]
         public Color BackColor
         {
             get => backBrush.Color;
@@ -306,10 +298,8 @@ namespace WinFormsLegacyControls
 
         internal int FocusedTextWidth => focusedTextWidth;
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.ControlForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.ControlForeColorDescr))]
         public Color ForeColor
         {
             get => foreBrush.Color;
@@ -346,10 +336,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridGridLineColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridGridLineColorDescr))]
         public Color GridLineColor
         {
             get => gridLineBrush.Color;
@@ -400,11 +388,9 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatAppearance)),
-         DefaultValue(defaultGridLineStyle),
-         SRDescription(nameof(SR.DataGridGridLineStyleDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [DefaultValue(defaultGridLineStyle)]
+        [SRDescription(nameof(SR.DataGridGridLineStyleDescr))]
         public DataGridLineStyle GridLineStyle
         {
             get => gridLineStyle;
@@ -431,10 +417,8 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventGridLineStyle, value);
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridHeaderBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridHeaderBackColorDescr))]
         public Color HeaderBackColor
         {
             get => headerBackBrush.Color;
@@ -481,12 +465,10 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatAppearance)),
-         Localizable(true),
-         AmbientValue(null),
-         SRDescription(nameof(SR.DataGridHeaderFontDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [Localizable(true)]
+        [AmbientValue(null)]
+        [SRDescription(nameof(SR.DataGridHeaderFontDescr))]
         public Font HeaderFont
         {
             get => (headerFont ?? (DataGrid is null ? Control.DefaultFont : DataGrid.Font));
@@ -522,10 +504,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridHeaderForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridHeaderForeColorDescr))]
         public Color HeaderForeColor
         {
             get => headerForePen.Color;
@@ -571,10 +551,8 @@ namespace WinFormsLegacyControls
 
         internal Pen HeaderForePen => headerForePen;
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridLinkColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridLinkColorDescr))]
         public Color LinkColor
         {
             get => linkBrush.Color;
@@ -616,12 +594,10 @@ namespace WinFormsLegacyControls
 
         internal Brush LinkBrush => linkBrush;
 
-        [
-         SRDescription(nameof(SR.DataGridLinkHoverColorDescr)),
-         SRCategory(nameof(SR.CatColors)),
-         Browsable(false),
-         EditorBrowsable(EditorBrowsableState.Never)
-        ]
+        [SRDescription(nameof(SR.DataGridLinkHoverColorDescr))]
+        [SRCategory(nameof(SR.CatColors))]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Color LinkHoverColor
         {
             get => LinkColor;
@@ -700,13 +676,11 @@ namespace WinFormsLegacyControls
         {
         }
 
-        [
-         DefaultValue(defaultPreferredColumnWidth),
-         SRCategory(nameof(SR.CatLayout)),
-         Localizable(true),
-         SRDescription(nameof(SR.DataGridPreferredColumnWidthDescr)),
-         TypeConverter(typeof(DataGridPreferredColumnWidthTypeConverter))
-        ]
+        [DefaultValue(defaultPreferredColumnWidth)]
+        [SRCategory(nameof(SR.CatLayout))]
+        [Localizable(true)]
+        [SRDescription(nameof(SR.DataGridPreferredColumnWidthDescr))]
+        [TypeConverter(typeof(DataGridPreferredColumnWidthTypeConverter))]
         public int PreferredColumnWidth
         {
             get => preferredColumnWidth;
@@ -733,11 +707,9 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventPreferredColumnWidth, value);
         }
 
-        [
-         SRCategory(nameof(SR.CatLayout)),
-         Localizable(true),
-         SRDescription(nameof(SR.DataGridPreferredRowHeightDescr))
-        ]
+        [SRCategory(nameof(SR.CatLayout))]
+        [Localizable(true)]
+        [SRDescription(nameof(SR.DataGridPreferredRowHeightDescr))]
         public int PreferredRowHeight
         {
             get => preferredRowHeight;
@@ -774,11 +746,9 @@ namespace WinFormsLegacyControls
             return preferredRowHeight != defaultFontHeight + 3;
         }
 
-        [
-         SRCategory(nameof(SR.CatDisplay)),
-         DefaultValue(true),
-         SRDescription(nameof(SR.DataGridColumnHeadersVisibleDescr))
-        ]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridColumnHeadersVisibleDescr))]
         public bool ColumnHeadersVisible
         {
             get => columnHeadersVisible;
@@ -798,11 +768,9 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventColumnHeadersVisible, value);
         }
 
-        [
-         SRCategory(nameof(SR.CatDisplay)),
-         DefaultValue(true),
-         SRDescription(nameof(SR.DataGridRowHeadersVisibleDescr))
-        ]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridRowHeadersVisibleDescr))]
         public bool RowHeadersVisible
         {
             get => rowHeadersVisible;
@@ -822,12 +790,10 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventRowHeadersVisible, value);
         }
 
-        [
-         SRCategory(nameof(SR.CatLayout)),
-         DefaultValue(defaultRowHeaderWidth),
-         Localizable(true),
-         SRDescription(nameof(SR.DataGridRowHeaderWidthDescr))
-        ]
+        [SRCategory(nameof(SR.CatLayout))]
+        [DefaultValue(defaultRowHeaderWidth)]
+        [Localizable(true)]
+        [SRDescription(nameof(SR.DataGridRowHeaderWidthDescr))]
         public int RowHeaderWidth
         {
             get => rowHeaderWidth;
@@ -852,10 +818,8 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventRowHeaderWidth, value);
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridSelectionBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridSelectionBackColorDescr))]
         public Color SelectionBackColor
         {
             get => selectionBackBrush.Color;
@@ -905,11 +869,11 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         Description("The foreground color for the current data grid row"),
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridSelectionForeColorDescr))
-        ]
+        /// <summary>
+        /// The foreground color for the current data grid row
+        /// </summary>
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridSelectionForeColorDescr))]
         public Color SelectionForeColor
         {
             get => selectionForeBrush.Color;
@@ -1126,7 +1090,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the name of this grid table.
         /// </summary>
-        //[Editor("System.Windows.Forms.Design.DataGridTableStyleMappingNameEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)), DefaultValue("")]
+        //[Editor("System.Windows.Forms.Design.DataGridTableStyleMappingNameEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
         [DefaultValue("")]
         public string MappingName
         {
@@ -1175,10 +1139,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the collection of columns drawn for this table.
         /// </summary>
-        [
-        Localizable(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content)
-        ]
+        [Localizable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public virtual GridColumnStylesCollection GridColumnStyles => gridColumns;
 
         /// <summary>

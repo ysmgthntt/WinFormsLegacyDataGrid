@@ -22,14 +22,12 @@ namespace WinFormsLegacyControls
     /// <summary>
     ///  Displays ADO.NET data in a scrollable grid.
     /// </summary>
-    [
-    ComVisible(true),
-    ClassInterface(ClassInterfaceType.AutoDispatch),
-    //Designer("System.Windows.Forms.Design.DataGridDesigner, " + AssemblyRef.SystemDesign),
-    DefaultProperty(nameof(DataSource)),
-    DefaultEvent(nameof(Navigate)),
-    ComplexBindingProperties(nameof(DataSource), nameof(DataMember)),
-    ]
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    //[Designer("System.Windows.Forms.Design.DataGridDesigner, " + AssemblyRef.SystemDesign)]
+    [DefaultProperty(nameof(DataSource))]
+    [DefaultEvent(nameof(Navigate))]
+    [ComplexBindingProperties(nameof(DataSource), nameof(DataMember))]
     public partial class DataGrid : Control, ISupportInitialize, IDataGridEditingService
     {
 #if DEBUG
@@ -375,11 +373,9 @@ namespace WinFormsLegacyControls
         ///  Gets or sets a value indicating whether the grid can be resorted by clicking on
         ///  a column header.
         /// </summary>
-        [
-        SRCategory(nameof(SR.CatBehavior)),
-        DefaultValue(true),
-        SRDescription(nameof(SR.DataGridAllowSortingDescr))
-        ]
+        [SRCategory(nameof(SR.CatBehavior))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridAllowSortingDescr))]
         public bool AllowSorting
         {
             get => gridState[GRIDSTATE_allowSorting];
@@ -400,10 +396,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridAlternatingBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridAlternatingBackColorDescr))]
         public Color AlternatingBackColor
         {
             get => alternatingBackBrush.Color;
@@ -447,10 +441,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the background color of the grid.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.ControlBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.ControlBackColorDescr))]
         public override Color BackColor
         {
             // overrode those properties just to move the BackColor and the ForeColor
@@ -475,10 +467,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.ControlForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.ControlForeColorDescr))]
         public override Color ForeColor
         {
             get => base.ForeColor;
@@ -506,13 +496,11 @@ namespace WinFormsLegacyControls
         ///  Gets or
         ///  sets the border style.
         /// </summary>
-        [
-        SRCategory(nameof(SR.CatAppearance)),
-        DefaultValue(defaultBorderStyle),
-        //DispId(NativeMethods.ActiveX.DISPID_BORDERSTYLE),
-        DispId(PInvoke.DISPID_BORDERSTYLE),
-        SRDescription(nameof(SR.DataGridBorderStyleDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [DefaultValue(defaultBorderStyle)]
+        //[DispId(NativeMethods.ActiveX.DISPID_BORDERSTYLE)]
+        [DispId(PInvoke.DISPID_BORDERSTYLE)]
+        [SRDescription(nameof(SR.DataGridBorderStyleDescr))]
         public BorderStyle BorderStyle
         {
             get => borderStyle;
@@ -535,7 +523,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_BORDERSTYLECHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnBorderStyleChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnBorderStyleChangedDescr))]
         public event EventHandler BorderStyleChanged
         {
             add => Events.AddHandler(EVENT_BORDERSTYLECHANGED, value);
@@ -626,10 +615,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the background color of the caption area.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridCaptionBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridCaptionBackColorDescr))]
         public Color CaptionBackColor
         {
             get => Caption.BackColor;
@@ -664,10 +651,8 @@ namespace WinFormsLegacyControls
         ///  or sets the foreground color
         ///  of the caption area.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridCaptionForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridCaptionForeColorDescr))]
         public Color CaptionForeColor
         {
             get => Caption.ForeColor;
@@ -692,12 +677,10 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the font of the grid's caption.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatAppearance)),
-         Localizable(true),
-         AmbientValue(null),
-         SRDescription(nameof(SR.DataGridCaptionFontDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [Localizable(true)]
+        [AmbientValue(null)]
+        [SRDescription(nameof(SR.DataGridCaptionFontDescr))]
         public Font CaptionFont
         {
             get => Caption.Font;
@@ -721,12 +704,10 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the text of the grid's caption.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatAppearance)),
-         DefaultValue(""),
-         Localizable(true),
-         SRDescription(nameof(SR.DataGridCaptionTextDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [DefaultValue("")]
+        [Localizable(true)]
+        [SRDescription(nameof(SR.DataGridCaptionTextDescr))]
         [AllowNull]
         public string CaptionText
         {
@@ -738,11 +719,9 @@ namespace WinFormsLegacyControls
         ///  Gets or sets a value that indicates
         ///  whether the grid's caption is visible.
         /// </summary>
-        [
-         DefaultValue(true),
-         SRCategory(nameof(SR.CatDisplay)),
-         SRDescription(nameof(SR.DataGridCaptionVisibleDescr))
-        ]
+        [DefaultValue(true)]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [SRDescription(nameof(SR.DataGridCaptionVisibleDescr))]
         public bool CaptionVisible
         {
             get => layout.CaptionVisible;
@@ -760,7 +739,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_CAPTIONVISIBLECHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnCaptionVisibleChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnCaptionVisibleChangedDescr))]
         public event EventHandler CaptionVisibleChanged
         {
             add => Events.AddHandler(EVENT_CAPTIONVISIBLECHANGED, value);
@@ -770,11 +750,9 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets which cell has the focus. Not available at design time.
         /// </summary>
-        [
-         Browsable(false),
-         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-         SRDescription(nameof(SR.DataGridCurrentCellDescr))
-        ]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [SRDescription(nameof(SR.DataGridCurrentCellDescr))]
         public DataGridCell CurrentCell
         {
             get => new DataGridCell(currentRow, currentCol);
@@ -1091,7 +1069,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnCurrentCellChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnCurrentCellChangedDescr))]
         public event EventHandler CurrentCellChanged
         {
             add => Events.AddHandler(EVENT_CURRENTCELLCHANGED, value);
@@ -1110,10 +1089,8 @@ namespace WinFormsLegacyControls
             set => CurrentCell = new DataGridCell(value, currentCol);
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridSelectionBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridSelectionBackColorDescr))]
         public Color SelectionBackColor
         {
             get => selectionBackBrush.Color;
@@ -1155,10 +1132,8 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridSelectionForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridSelectionForeColorDescr))]
         public Color SelectionForeColor
         {
             get => selectionForeBrush.Color;
@@ -1354,13 +1329,11 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the data source that the grid is displaying data for.
         /// </summary>
-        [
-         DefaultValue(null),
-         SRCategory(nameof(SR.CatData)),
-         RefreshProperties(RefreshProperties.Repaint),
-         AttributeProvider(typeof(IListSource)),
-         SRDescription(nameof(SR.DataGridDataSourceDescr))
-        ]
+        [DefaultValue(null)]
+        [SRCategory(nameof(SR.CatData))]
+        [RefreshProperties(RefreshProperties.Repaint)]
+        [AttributeProvider(typeof(IListSource))]
+        [SRDescription(nameof(SR.DataGridDataSourceDescr))]
         public object? DataSource
         {
             get => dataSource;
@@ -1404,7 +1377,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_DATASOURCECHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnDataSourceChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnDataSourceChangedDescr))]
         public event EventHandler DataSourceChanged
         {
             add => Events.AddHandler(EVENT_DATASOURCECHANGED, value);
@@ -1414,12 +1388,10 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the specific table in a DataSource for the control.
         /// </summary>
-        [
-         DefaultValue(/*null*/""),
-         SRCategory(nameof(SR.CatData)),
-         //Editor("System.Windows.Forms.Design.DataMemberListEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor)),
-         SRDescription(nameof(SR.DataGridDataMemberDescr))
-        ]
+        [DefaultValue(/*null*/"")]
+        [SRCategory(nameof(SR.CatData))]
+        //[Editor("System.Windows.Forms.Design.DataMemberListEditor, " + AssemblyRef.SystemDesign, typeof(Drawing.Design.UITypeEditor))]
+        [SRDescription(nameof(SR.DataGridDataMemberDescr))]
         public string DataMember
         {
             get => dataMember;
@@ -1449,10 +1421,9 @@ namespace WinFormsLegacyControls
             Set_ListManager(dataSource, dataMember, false);
         }
 
-        [
-         Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced),
-         SRDescription(nameof(SR.DataGridListManagerDescr))
-        ]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        [SRDescription(nameof(SR.DataGridListManagerDescr))]
         internal protected CurrencyManager ListManager
         {
             get
@@ -1676,11 +1647,9 @@ namespace WinFormsLegacyControls
         /// </summary>
         // will set the position in the ListManager
         //
-        [
-         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-         Browsable(false),
-         SRDescription(nameof(SR.DataGridSelectedIndexDescr))
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        [SRDescription(nameof(SR.DataGridSelectedIndexDescr))]
         public int CurrentRowIndex
         {
             get
@@ -1730,12 +1699,10 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the collection of tables for the grid.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatData)),
-         DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-         Localizable(true),
-         SRDescription(nameof(SR.DataGridGridTablesDescr))
-        ]
+        [SRCategory(nameof(SR.CatData))]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [Localizable(true)]
+        [SRDescription(nameof(SR.DataGridGridTablesDescr))]
         public GridTableStylesCollection TableStyles => dataGridTables;
 
         internal new int FontHeight => fontHeight;
@@ -1747,10 +1714,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the color of the grid lines.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridGridLineColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridGridLineColorDescr))]
         public Color GridLineColor
         {
             get => gridLineBrush.Color;
@@ -1788,11 +1753,9 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the line style of the grid.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatAppearance)),
-         DefaultValue(defaultGridLineStyle),
-         SRDescription(nameof(SR.DataGridGridLineStyleDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [DefaultValue(defaultGridLineStyle)]
+        [SRDescription(nameof(SR.DataGridGridLineStyleDescr))]
         public DataGridLineStyle GridLineStyle
         {
             get => gridLineStyle;
@@ -1826,11 +1789,10 @@ namespace WinFormsLegacyControls
         ///  sets the
         ///  way parent row labels are displayed.
         /// </summary>
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-         DefaultValue(defaultParentRowsLabelStyle),
-         SRCategory(nameof(SR.CatDisplay)),
-         SRDescription(nameof(SR.DataGridParentRowsLabelStyleDescr))
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DefaultValue(defaultParentRowsLabelStyle)]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [SRDescription(nameof(SR.DataGridParentRowsLabelStyleDescr))]
         public DataGridParentRowsLabelStyle ParentRowsLabelStyle
         {
             get => parentRowsLabels;
@@ -1853,7 +1815,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_PARENTROWSLABELSTYLECHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnParentRowsLabelStyleChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnParentRowsLabelStyleChangedDescr))]
         public event EventHandler ParentRowsLabelStyleChanged
         {
             add => Events.AddHandler(EVENT_PARENTROWSLABELSTYLECHANGED, value);
@@ -1865,20 +1828,16 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the index of the first visible column in a grid.
         /// </summary>
-        [
-         Browsable(false),
-         SRDescription(nameof(SR.DataGridFirstVisibleColumnDescr))
-        ]
+        [Browsable(false)]
+        [SRDescription(nameof(SR.DataGridFirstVisibleColumnDescr))]
         public int FirstVisibleColumn => firstVisibleCol;
 
         /// <summary>
         ///  Gets or sets a value indicating whether the grid displays in flat mode.
         /// </summary>
-        [
-         DefaultValue(false),
-         SRCategory(nameof(SR.CatAppearance)),
-         SRDescription(nameof(SR.DataGridFlatModeDescr))
-        ]
+        [DefaultValue(false)]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [SRDescription(nameof(SR.DataGridFlatModeDescr))]
         public bool FlatMode
         {
             get => gridState[GRIDSTATE_isFlatMode];
@@ -1895,7 +1854,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_FLATMODECHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnFlatModeChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnFlatModeChangedDescr))]
         public event EventHandler FlatModeChanged
         {
             add => Events.AddHandler(EVENT_FLATMODECHANGED, value);
@@ -1906,10 +1866,8 @@ namespace WinFormsLegacyControls
         ///  Gets or
         ///  sets the background color of all row and column headers.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridHeaderBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridHeaderBackColorDescr))]
         public Color HeaderBackColor
         {
             get => headerBackBrush.Color;
@@ -1980,10 +1938,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the background color of the grid.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridBackgroundColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridBackgroundColorDescr))]
         public Color BackgroundColor
         {
             get => backgroundBrush.Color;
@@ -2012,7 +1968,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_BACKGROUNDCOLORCHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnBackgroundColorChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnBackgroundColorChangedDescr))]
         public event EventHandler BackgroundColorChanged
         {
             add => Events.AddHandler(EVENT_BACKGROUNDCOLORCHANGED, value);
@@ -2022,10 +1979,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Indicates whether the <see cref='HeaderFont'/> property should be persisted.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatAppearance)),
-         SRDescription(nameof(SR.DataGridHeaderFontDescr))
-        ]
+        [SRCategory(nameof(SR.CatAppearance))]
+        [SRDescription(nameof(SR.DataGridHeaderFontDescr))]
         public Font HeaderFont
         {
             get => (headerFont ?? Font);
@@ -2065,10 +2020,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the foreground color of the grid's headers.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridHeaderForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridHeaderForeColorDescr))]
         public Color HeaderForeColor
         {
             get => headerForePen.Color;
@@ -2220,9 +2173,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRDescription(nameof(SR.DataGridHorizScrollBarDescr))
-        ]
+        [SRDescription(nameof(SR.DataGridHorizScrollBarDescr))]
         protected ScrollBar HorizScrollBar => horizScrollBar;
 
         /// <summary>
@@ -2246,10 +2197,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Indicates whether the <see cref='LinkColor'/> property should be persisted.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridLinkColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridLinkColorDescr))]
         public Color LinkColor
         {
             get => linkBrush.Color;
@@ -2288,13 +2237,10 @@ namespace WinFormsLegacyControls
         ///  or sets the color a link changes to when
         ///  the mouse pointer moves over it.
         /// </summary>
-        [
-         SRDescription(nameof(SR.DataGridLinkHoverColorDescr)),
-         SRCategory(nameof(SR.CatColors)),
-         Browsable(false),
-         EditorBrowsable(EditorBrowsableState.Never)
-
-        ]
+        [SRDescription(nameof(SR.DataGridLinkHoverColorDescr))]
+        [SRCategory(nameof(SR.CatColors))]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public Color LinkHoverColor
         {
             get => LinkColor;
@@ -2326,11 +2272,9 @@ namespace WinFormsLegacyControls
         ///  Gets or sets a value
         ///  that specifies which links are shown and in what context.
         /// </summary>
-        [
-         DefaultValue(true),
-         SRDescription(nameof(SR.DataGridNavigationModeDescr)),
-         SRCategory(nameof(SR.CatBehavior))
-        ]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridNavigationModeDescr))]
+        [SRCategory(nameof(SR.CatBehavior))]
         public bool AllowNavigation
         {
             get => gridState[GRIDSTATE_allowNavigation];
@@ -2351,16 +2295,16 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_ALLOWNAVIGATIONCHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnNavigationModeChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnNavigationModeChangedDescr))]
         public event EventHandler AllowNavigationChanged
         {
             add => Events.AddHandler(EVENT_ALLOWNAVIGATIONCHANGED, value);
             remove => Events.RemoveHandler(EVENT_ALLOWNAVIGATIONCHANGED, value);
         }
 
-        [
-            Browsable(false), EditorBrowsable(EditorBrowsableState.Never)
-        ]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         [AllowNull]
         public override Cursor Cursor
         {
@@ -2369,16 +2313,16 @@ namespace WinFormsLegacyControls
             set => base.Cursor = value;
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         new public event EventHandler CursorChanged
         {
             add => base.CursorChanged += value;
             remove => base.CursorChanged -= value;
         }
 
-        [
-            Browsable(false), EditorBrowsable(EditorBrowsableState.Never)
-        ]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override Image? BackgroundImage
         {
             // get the BackgroundImage out of the propertyGrid.
@@ -2386,9 +2330,8 @@ namespace WinFormsLegacyControls
             set => base.BackgroundImage = value;
         }
 
-        [
-            Browsable(false), EditorBrowsable(EditorBrowsableState.Never)
-        ]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override ImageLayout BackgroundImageLayout
         {
             // get the BackgroundImage out of the propertyGrid.
@@ -2396,14 +2339,16 @@ namespace WinFormsLegacyControls
             set => base.BackgroundImageLayout = value;
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         new public event EventHandler BackgroundImageChanged
         {
             add => base.BackgroundImageChanged += value;
             remove => base.BackgroundImageChanged -= value;
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         new public event EventHandler BackgroundImageLayoutChanged
         {
             add => base.BackgroundImageLayoutChanged += value;
@@ -2413,10 +2358,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the background color of parent rows.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridParentRowsBackColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridParentRowsBackColorDescr))]
         public Color ParentRowsBackColor
         {
             get => parentRows.BackColor;
@@ -2453,10 +2396,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the foreground color of parent rows.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatColors)),
-         SRDescription(nameof(SR.DataGridParentRowsForeColorDescr))
-        ]
+        [SRCategory(nameof(SR.CatColors))]
+        [SRDescription(nameof(SR.DataGridParentRowsForeColorDescr))]
         public Color ParentRowsForeColor
         {
             get => parentRows.ForeColor;
@@ -2487,12 +2428,10 @@ namespace WinFormsLegacyControls
         ///  or sets the default width of the grid columns in
         ///  pixels.
         /// </summary>
-        [
-         DefaultValue(defaultPreferredColumnWidth),
-         SRCategory(nameof(SR.CatLayout)),
-         SRDescription(nameof(SR.DataGridPreferredColumnWidthDescr)),
-         TypeConverter(typeof(DataGridPreferredColumnWidthTypeConverter))
-        ]
+        [DefaultValue(defaultPreferredColumnWidth)]
+        [SRCategory(nameof(SR.CatLayout))]
+        [SRDescription(nameof(SR.DataGridPreferredColumnWidthDescr))]
+        [TypeConverter(typeof(DataGridPreferredColumnWidthTypeConverter))]
         public int PreferredColumnWidth
         {
             get => preferredColumnWidth;
@@ -2513,10 +2452,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the preferred row height for the <see cref='DataGrid'/> control.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatLayout)),
-         SRDescription(nameof(SR.DataGridPreferredRowHeightDescr))
-        ]
+        [SRCategory(nameof(SR.CatLayout))]
+        [SRDescription(nameof(SR.DataGridPreferredRowHeightDescr))]
         public int PreferredRowHeight
         {
             get => preferredRowHeight;
@@ -2545,11 +2482,9 @@ namespace WinFormsLegacyControls
         ///  Gets or sets a value indicating whether the grid
         ///  is in read-only mode.
         /// </summary>
-        [
-         DefaultValue(false),
-         SRCategory(nameof(SR.CatBehavior)),
-         SRDescription(nameof(SR.DataGridReadOnlyDescr))
-        ]
+        [DefaultValue(false)]
+        [SRCategory(nameof(SR.CatBehavior))]
+        [SRDescription(nameof(SR.DataGridReadOnlyDescr))]
         public bool ReadOnly
         {
             get => gridState[GRIDSTATE_readOnlyMode];
@@ -2599,7 +2534,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_READONLYCHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnReadOnlyChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnReadOnlyChangedDescr))]
         public event EventHandler ReadOnlyChanged
         {
             add => Events.AddHandler(EVENT_READONLYCHANGED, value);
@@ -2610,11 +2546,9 @@ namespace WinFormsLegacyControls
         ///  Gets
         ///  or sets a value indicating if the grid's column headers are visible.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatDisplay)),
-         DefaultValue(true),
-         SRDescription(nameof(SR.DataGridColumnHeadersVisibleDescr))
-        ]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridColumnHeadersVisibleDescr))]
         public bool ColumnHeadersVisible
         {
             get => gridState[GRIDSTATE_columnHeadersVisible];
@@ -2634,11 +2568,9 @@ namespace WinFormsLegacyControls
         ///  Gets or sets a value indicating whether the parent rows of a table are
         ///  visible.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatDisplay)),
-         DefaultValue(true),
-         SRDescription(nameof(SR.DataGridParentRowsVisibleDescr))
-        ]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridParentRowsVisibleDescr))]
         public bool ParentRowsVisible
         {
             get => layout.ParentRowsVisible;
@@ -2659,7 +2591,8 @@ namespace WinFormsLegacyControls
 
         private static readonly object EVENT_PARENTROWSVISIBLECHANGED = new object();
 
-        [SRCategory(nameof(SR.CatPropertyChanged)), SRDescription(nameof(SR.DataGridOnParentRowsVisibleChangedDescr))]
+        [SRCategory(nameof(SR.CatPropertyChanged))]
+        [SRDescription(nameof(SR.DataGridOnParentRowsVisibleChangedDescr))]
         public event EventHandler ParentRowsVisibleChanged
         {
             add => Events.AddHandler(EVENT_PARENTROWSVISIBLECHANGED, value);
@@ -2675,11 +2608,9 @@ namespace WinFormsLegacyControls
         ///  Gets or sets a value indicating whether the data grid's row headers are
         ///  visible.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatDisplay)),
-         DefaultValue(true),
-         SRDescription(nameof(SR.DataGridRowHeadersVisibleDescr))
-        ]
+        [SRCategory(nameof(SR.CatDisplay))]
+        [DefaultValue(true)]
+        [SRDescription(nameof(SR.DataGridRowHeadersVisibleDescr))]
         public bool RowHeadersVisible
         {
             get => gridState[GRIDSTATE_rowHeadersVisible];
@@ -2694,11 +2625,9 @@ namespace WinFormsLegacyControls
             }
         }
 
-        [
-         SRCategory(nameof(SR.CatLayout)),
-         DefaultValue(defaultRowHeaderWidth),
-         SRDescription(nameof(SR.DataGridRowHeaderWidthDescr))
-        ]
+        [SRCategory(nameof(SR.CatLayout))]
+        [DefaultValue(defaultRowHeaderWidth)]
+        [SRDescription(nameof(SR.DataGridRowHeaderWidthDescr))]
         public int RowHeaderWidth
         {
             get => rowHeaderWidth;
@@ -2720,11 +2649,10 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets or sets the width of headers.
         /// </summary>
-        [
-         Browsable(false), EditorBrowsable(EditorBrowsableState.Never),
-         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-         Bindable(false)
-        ]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Bindable(false)]
         [AllowNull]
         public override string Text
         {
@@ -2732,7 +2660,8 @@ namespace WinFormsLegacyControls
             set => base.Text = value;
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         new public event EventHandler TextChanged
         {
             add => base.TextChanged += value;
@@ -2742,28 +2671,23 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the vertical scroll bar of the control.
         /// </summary>
-        [
-         Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced),
-         SRDescription(nameof(SR.DataGridVertScrollBarDescr))
-        ]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        [SRDescription(nameof(SR.DataGridVertScrollBarDescr))]
         protected ScrollBar VertScrollBar => vertScrollBar;
 
         /// <summary>
         ///  Gets the number of visible columns.
         /// </summary>
-        [
-         Browsable(false),
-         SRDescription(nameof(SR.DataGridVisibleColumnCountDescr))
-        ]
+        [Browsable(false)]
+        [SRDescription(nameof(SR.DataGridVisibleColumnCountDescr))]
         public int VisibleColumnCount => Math.Min(numVisibleCols, myGridTable is null ? 0 : myGridTable.GridColumnStyles.Count);
 
         /// <summary>
         ///  Gets the number of rows visible.
         /// </summary>
-        [
-         Browsable(false),
-         SRDescription(nameof(SR.DataGridVisibleRowCountDescr))
-        ]
+        [Browsable(false)]
+        [SRDescription(nameof(SR.DataGridVisibleRowCountDescr))]
         public int VisibleRowCount => numVisibleRows;
 
         /// <summary>
@@ -4507,7 +4431,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Occurs when the user navigates to a new table.
         /// </summary>
-        [SRCategory(nameof(SR.CatAction)), SRDescription(nameof(SR.DataGridNavigateEventDescr))]
+        [SRCategory(nameof(SR.CatAction))]
+        [SRDescription(nameof(SR.DataGridNavigateEventDescr))]
         public event NavigateEventHandler Navigate
         {
             add => onNavigate += value;
@@ -4527,7 +4452,8 @@ namespace WinFormsLegacyControls
         ///  Adds an event handler for the 'System.Windows.Forms.DataGrid.OnNodeClick'
         ///  event.
         /// </summary>
-        [SRCategory(nameof(SR.CatAction)), SRDescription(nameof(SR.DataGridNodeClickEventDescr))]
+        [SRCategory(nameof(SR.CatAction))]
+        [SRDescription(nameof(SR.DataGridNodeClickEventDescr))]
         internal event EventHandler NodeClick
         {
             add => Events.AddHandler(EVENT_NODECLICKED, value);
@@ -4537,7 +4463,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Occurs when the user scrolls the <see cref='DataGrid'/> control.
         /// </summary>
-        [SRCategory(nameof(SR.CatAction)), SRDescription(nameof(SR.DataGridScrollEventDescr))]
+        [SRCategory(nameof(SR.CatAction))]
+        [SRDescription(nameof(SR.DataGridScrollEventDescr))]
         public event EventHandler Scroll
         {
             add => Events.AddHandler(EVENT_SCROLL, value);
@@ -9033,10 +8960,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Occurs when the BackButton is clicked.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatAction)),
-         SRDescription(nameof(SR.DataGridBackButtonClickDescr))
-        ]
+        [SRCategory(nameof(SR.CatAction))]
+        [SRDescription(nameof(SR.DataGridBackButtonClickDescr))]
         public event EventHandler BackButtonClick
         {
             add => Events.AddHandler(EVENT_BACKBUTTONCLICK, value);
@@ -9048,10 +8973,8 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Occurs when the Down button is clicked.
         /// </summary>
-        [
-         SRCategory(nameof(SR.CatAction)),
-         SRDescription(nameof(SR.DataGridDownButtonClickDescr))
-        ]
+        [SRCategory(nameof(SR.CatAction))]
+        [SRDescription(nameof(SR.DataGridDownButtonClickDescr))]
         public event EventHandler ShowParentDetailsButtonClick
         {
             add => Events.AddHandler(EVENT_DOWNBUTTONCLICK, value);
