@@ -79,20 +79,11 @@ namespace System.Windows.Forms
         // =        Properties
         // =------------------------------------------------------------------
 
-        public AccessibleObject AccessibleObject
-        {
-            get
-            {
-                return accessibleObject ??= new DataGridParentRowsAccessibleObject(this);
-            }
-        }
+        public AccessibleObject AccessibleObject => accessibleObject ??= new DataGridParentRowsAccessibleObject(this);
 
         internal Color BackColor
         {
-            get
-            {
-                return backBrush.Color;
-            }
+            get => backBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -110,10 +101,7 @@ namespace System.Windows.Forms
 
         internal SolidBrush BackBrush
         {
-            get
-            {
-                return backBrush;
-            }
+            get => backBrush;
             set
             {
                 ArgumentNullException.ThrowIfNull(value, nameof(BackBrush));
@@ -128,10 +116,7 @@ namespace System.Windows.Forms
 
         internal SolidBrush ForeBrush
         {
-            get
-            {
-                return foreBrush;
-            }
+            get => foreBrush;
             set
             {
                 ArgumentNullException.ThrowIfNull(value, nameof(ForeBrush));
@@ -180,6 +165,7 @@ namespace System.Windows.Forms
         }
         */
 
+        /*
         internal Brush BorderBrush
         {
             get
@@ -195,6 +181,7 @@ namespace System.Windows.Forms
                 }
             }
         }
+        */
 
         /*
         internal Brush GridLineBrush {
@@ -224,20 +211,11 @@ namespace System.Windows.Forms
         }
         */
 
-        internal int Height
-        {
-            get
-            {
-                return totalHeight;
-            }
-        }
+        internal int Height => totalHeight;
 
         internal Color ForeColor
         {
-            get
-            {
-                return foreBrush.Color;
-            }
+            get => foreBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -253,6 +231,7 @@ namespace System.Windows.Forms
             }
         }
 
+        /*
         internal bool Visible
         {
             get
@@ -264,6 +243,7 @@ namespace System.Windows.Forms
                 dataGrid.ParentRowsVisible = value;
             }
         }
+        */
 
         // =------------------------------------------------------------------
         // =        Methods
@@ -1184,53 +1164,17 @@ namespace System.Windows.Forms
                 this.owner = owner;
             }
 
-            internal DataGridParentRows Owner
-            {
-                get
-                {
-                    return owner;
-                }
-            }
+            internal DataGridParentRows Owner => owner;
 
-            public override Rectangle Bounds
-            {
-                get
-                {
-                    return owner.dataGrid.RectangleToScreen(owner.dataGrid.ParentRowsBounds);
-                }
-            }
+            public override Rectangle Bounds => owner.dataGrid.RectangleToScreen(owner.dataGrid.ParentRowsBounds);
 
-            public override string DefaultAction
-            {
-                get
-                {
-                    return SR.AccDGNavigateBack;
-                }
-            }
+            public override string DefaultAction => SR.AccDGNavigateBack;
 
-            public override string Name
-            {
-                get
-                {
-                    return SR.AccDGParentRows;
-                }
-            }
+            public override string Name => SR.AccDGParentRows;
 
-            public override AccessibleObject Parent
-            {
-                get
-                {
-                    return owner.dataGrid.AccessibilityObject;
-                }
-            }
+            public override AccessibleObject Parent => owner.dataGrid.AccessibilityObject;
 
-            public override AccessibleRole Role
-            {
-                get
-                {
-                    return AccessibleRole.List;
-                }
-            }
+            public override AccessibleRole Role => AccessibleRole.List;
 
             public override AccessibleStates State
             {
@@ -1255,13 +1199,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string? Value
-            {
-                get
-                {
-                    return null;
-                }
-            }
+            public override string? Value => null;
 
             public override void DoDefaultAction()
             {

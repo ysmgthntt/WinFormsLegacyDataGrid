@@ -94,10 +94,7 @@ namespace System.Windows.Forms
 
         internal bool BackButtonActive
         {
-            get
-            {
-                return backActive;
-            }
+            get => backActive;
             set
             {
                 if (backActive != value)
@@ -110,10 +107,7 @@ namespace System.Windows.Forms
 
         internal bool DownButtonActive
         {
-            get
-            {
-                return downActive;
-            }
+            get => downActive;
             set
             {
                 if (downActive != value)
@@ -124,36 +118,15 @@ namespace System.Windows.Forms
             }
         }
 
-        internal static SolidBrush DefaultBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ActiveCaption;
-            }
-        }
+        private static SolidBrush DefaultBackBrush => (SolidBrush)SystemBrushes.ActiveCaption;
 
-        internal static Pen DefaultTextBorderPen
-        {
-            get
-            {
-                return new Pen(SystemColors.ActiveCaptionText);
-            }
-        }
+        private static Pen DefaultTextBorderPen => new Pen(SystemColors.ActiveCaptionText);
 
-        internal static SolidBrush DefaultForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ActiveCaptionText;
-            }
-        }
+        private static SolidBrush DefaultForeBrush => (SolidBrush)SystemBrushes.ActiveCaptionText;
 
         internal Color BackColor
         {
-            get
-            {
-                return backBrush.Color;
-            }
+            get => backBrush.Color;
             set
             {
                 if (!backBrush.Color.Equals(value))
@@ -169,23 +142,14 @@ namespace System.Windows.Forms
             }
         }
 
-        internal EventHandlerList Events
-        {
-            get
-            {
-                return events ??= new EventHandlerList();
-            }
-        }
+        private EventHandlerList Events => events ??= new EventHandlerList();
 
         internal Font Font
         {
-            get
-            {
-                // use the dataGridFont only if the user
-                // did not set the CaptionFont
-                //
-                return textFont ?? dataGridFont;
-            }
+            // use the dataGridFont only if the user
+            // did not set the CaptionFont
+            //
+            get => textFont ?? dataGridFont;
             set
             {
                 if (textFont is null || !textFont.Equals(value))
@@ -245,10 +209,7 @@ namespace System.Windows.Forms
         [AllowNull]
         internal string Text
         {
-            get
-            {
-                return text;
-            }
+            get => text;
             set
             {
                 text = value ?? string.Empty;
@@ -257,6 +218,7 @@ namespace System.Windows.Forms
             }
         }
 
+        /*
         internal bool TextBorderVisible
         {
             get
@@ -269,13 +231,11 @@ namespace System.Windows.Forms
                 Invalidate();
             }
         }
+        */
 
         internal Color ForeColor
         {
-            get
-            {
-                return foreBrush.Color;
-            }
+            get => foreBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -301,10 +261,7 @@ namespace System.Windows.Forms
 
         internal bool BackButtonVisible
         {
-            get
-            {
-                return backButtonVisible;
-            }
+            get => backButtonVisible;
             set
             {
                 if (backButtonVisible != value)
@@ -315,6 +272,7 @@ namespace System.Windows.Forms
             }
         }
 
+        /*
         internal bool DownButtonVisible
         {
             get
@@ -330,6 +288,7 @@ namespace System.Windows.Forms
                 }
             }
         }
+        */
 
         // =------------------------------------------------------------------
         // =        Methods
@@ -703,10 +662,7 @@ namespace System.Windows.Forms
 
         private bool DownButtonDown
         {
-            get
-            {
-                return downButtonDown;
-            }
+            get => downButtonDown;
             set
             {
                 if (downButtonDown != value)
@@ -717,10 +673,12 @@ namespace System.Windows.Forms
             }
         }
 
+        /*
         internal bool GetDownButtonDirection()
         {
             return DownButtonDown;
         }
+        */
 
         /// <summary>
         ///  Called by the dataGrid when the mouse is pressed

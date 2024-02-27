@@ -32,14 +32,8 @@ namespace System.Windows.Forms
         /// </summary>
         public bool DataBound
         {
-            get
-            {
-                return dataBound;
-            }
-            set
-            {
-                dataBound = value;
-            }
+            get => dataBound;
+            set => dataBound = value;
         }
 
         public override void OnEdit()

@@ -112,10 +112,7 @@ namespace WinFormsLegacyControls
         ]
         public bool AllowSorting
         {
-            get
-            {
-                return allowSorting;
-            }
+            get => allowSorting;
             set
             {
                 ThrowIfDefault();
@@ -143,10 +140,7 @@ namespace WinFormsLegacyControls
         ]
         public Color AlternatingBackColor
         {
-            get
-            {
-                return alternatingBackBrush.Color;
-            }
+            get => alternatingBackBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -188,13 +182,7 @@ namespace WinFormsLegacyControls
             return !AlternatingBackBrush.Equals(DefaultAlternatingBackBrush);
         }
 
-        internal SolidBrush AlternatingBackBrush
-        {
-            get
-            {
-                return alternatingBackBrush;
-            }
-        }
+        internal SolidBrush AlternatingBackBrush => alternatingBackBrush;
 
         protected bool ShouldSerializeBackColor()
         {
@@ -206,13 +194,7 @@ namespace WinFormsLegacyControls
             return !/*System.Windows.Forms.*/DataGridTableStyle.DefaultForeBrush.Equals(foreBrush);
         }
 
-        internal SolidBrush BackBrush
-        {
-            get
-            {
-                return backBrush;
-            }
-        }
+        internal SolidBrush BackBrush => backBrush;
 
         [
          SRCategory(nameof(SR.CatColors)),
@@ -220,10 +202,7 @@ namespace WinFormsLegacyControls
         ]
         public Color BackColor
         {
-            get
-            {
-                return backBrush.Color;
-            }
+            get => backBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -293,83 +272,20 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal static SolidBrush DefaultAlternatingBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Window;
-            }
-        }
-        internal static SolidBrush DefaultBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Window;
-            }
-        }
-        internal static SolidBrush DefaultForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.WindowText;
-            }
-        }
-        private static SolidBrush DefaultGridLineBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Control;
-            }
-        }
-        private static SolidBrush DefaultHeaderBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Control;
-            }
-        }
-        private static SolidBrush DefaultHeaderForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ControlText;
-            }
-        }
-        private static Pen DefaultHeaderForePen
-        {
-            get
-            {
-                return new Pen(SystemColors.ControlText);
-            }
-        }
-        private static SolidBrush DefaultLinkBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.HotTrack;
-            }
-        }
-        private static SolidBrush DefaultSelectionBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ActiveCaption;
-            }
-        }
-        private static SolidBrush DefaultSelectionForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ActiveCaptionText;
-            }
-        }
+        private static SolidBrush DefaultAlternatingBackBrush => (SolidBrush)SystemBrushes.Window;
+        private static SolidBrush DefaultBackBrush => (SolidBrush)SystemBrushes.Window;
+        private static SolidBrush DefaultForeBrush => (SolidBrush)SystemBrushes.WindowText;
+        private static SolidBrush DefaultGridLineBrush => (SolidBrush)SystemBrushes.Control;
+        private static SolidBrush DefaultHeaderBackBrush => (SolidBrush)SystemBrushes.Control;
+        private static SolidBrush DefaultHeaderForeBrush => (SolidBrush)SystemBrushes.ControlText;
+        private static Pen DefaultHeaderForePen => new Pen(SystemColors.ControlText);
+        private static SolidBrush DefaultLinkBrush => (SolidBrush)SystemBrushes.HotTrack;
+        private static SolidBrush DefaultSelectionBackBrush => (SolidBrush)SystemBrushes.ActiveCaption;
+        private static SolidBrush DefaultSelectionForeBrush => (SolidBrush)SystemBrushes.ActiveCaptionText;
 
         internal int FocusedRelation
         {
-            get
-            {
-                return focusedRelation;
-            }
+            get => focusedRelation;
             set
             {
                 if (focusedRelation != value)
@@ -388,13 +304,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal int FocusedTextWidth
-        {
-            get
-            {
-                return focusedTextWidth;
-            }
-        }
+        internal int FocusedTextWidth => focusedTextWidth;
 
         [
          SRCategory(nameof(SR.CatColors)),
@@ -402,10 +312,7 @@ namespace WinFormsLegacyControls
         ]
         public Color ForeColor
         {
-            get
-            {
-                return foreBrush.Color;
-            }
+            get => foreBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -429,13 +336,7 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventForeColor, value);
         }
 
-        internal SolidBrush ForeBrush
-        {
-            get
-            {
-                return foreBrush;
-            }
-        }
+        internal SolidBrush ForeBrush => foreBrush;
 
         public void ResetForeColor()
         {
@@ -451,10 +352,7 @@ namespace WinFormsLegacyControls
         ]
         public Color GridLineColor
         {
-            get
-            {
-                return gridLineBrush.Color;
-            }
+            get => gridLineBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -491,13 +389,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush GridLineBrush
-        {
-            get
-            {
-                return gridLineBrush;
-            }
-        }
+        internal SolidBrush GridLineBrush => gridLineBrush;
 
         internal int GridLineWidth
         {
@@ -515,10 +407,7 @@ namespace WinFormsLegacyControls
         ]
         public DataGridLineStyle GridLineStyle
         {
-            get
-            {
-                return gridLineStyle;
-            }
+            get => gridLineStyle;
             set
             {
                 ThrowIfDefault();
@@ -548,10 +437,7 @@ namespace WinFormsLegacyControls
         ]
         public Color HeaderBackColor
         {
-            get
-            {
-                return headerBackBrush.Color;
-            }
+            get => headerBackBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -580,13 +466,7 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventHeaderBackColor, value);
         }
 
-        internal SolidBrush HeaderBackBrush
-        {
-            get
-            {
-                return headerBackBrush;
-            }
-        }
+        internal SolidBrush HeaderBackBrush => headerBackBrush;
 
         protected virtual bool ShouldSerializeHeaderBackColor()
         {
@@ -609,10 +489,7 @@ namespace WinFormsLegacyControls
         ]
         public Font HeaderFont
         {
-            get
-            {
-                return (headerFont ?? (DataGrid is null ? Control.DefaultFont : DataGrid.Font));
-            }
+            get => (headerFont ?? (DataGrid is null ? Control.DefaultFont : DataGrid.Font));
             set
             {
                 ThrowIfDefault();
@@ -651,10 +528,7 @@ namespace WinFormsLegacyControls
         ]
         public Color HeaderForeColor
         {
-            get
-            {
-                return headerForePen.Color;
-            }
+            get => headerForePen.Color;
             set
             {
                 ThrowIfDefault();
@@ -693,21 +567,9 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush HeaderForeBrush
-        {
-            get
-            {
-                return headerForeBrush;
-            }
-        }
+        internal SolidBrush HeaderForeBrush => headerForeBrush;
 
-        internal Pen HeaderForePen
-        {
-            get
-            {
-                return headerForePen;
-            }
-        }
+        internal Pen HeaderForePen => headerForePen;
 
         [
          SRCategory(nameof(SR.CatColors)),
@@ -715,10 +577,7 @@ namespace WinFormsLegacyControls
         ]
         public Color LinkColor
         {
-            get
-            {
-                return linkBrush.Color;
-            }
+            get => linkBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -755,13 +614,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal Brush LinkBrush
-        {
-            get
-            {
-                return linkBrush;
-            }
-        }
+        internal Brush LinkBrush => linkBrush;
 
         [
          SRDescription(nameof(SR.DataGridLinkHoverColorDescr)),
@@ -771,13 +624,8 @@ namespace WinFormsLegacyControls
         ]
         public Color LinkHoverColor
         {
-            get
-            {
-                return LinkColor;
-            }
-            set
-            {
-            }
+            get => LinkColor;
+            set { }
         }
 
         public event EventHandler LinkHoverColorChanged
@@ -846,13 +694,7 @@ namespace WinFormsLegacyControls
             relationshipHeight = dataGrid!.LinkFontHeight + relationshipSpacing;
         }
 
-        internal int RelationshipHeight
-        {
-            get
-            {
-                return relationshipHeight;
-            }
-        }
+        internal int RelationshipHeight => relationshipHeight;
 
         public void ResetLinkHoverColor()
         {
@@ -867,10 +709,7 @@ namespace WinFormsLegacyControls
         ]
         public int PreferredColumnWidth
         {
-            get
-            {
-                return preferredColumnWidth;
-            }
+            get => preferredColumnWidth;
             set
             {
                 ThrowIfDefault();
@@ -901,10 +740,7 @@ namespace WinFormsLegacyControls
         ]
         public int PreferredRowHeight
         {
-            get
-            {
-                return preferredRowHeight;
-            }
+            get => preferredRowHeight;
             set
             {
                 ThrowIfDefault();
@@ -945,10 +781,7 @@ namespace WinFormsLegacyControls
         ]
         public bool ColumnHeadersVisible
         {
-            get
-            {
-                return columnHeadersVisible;
-            }
+            get => columnHeadersVisible;
             set
             {
                 if (columnHeadersVisible != value)
@@ -972,10 +805,7 @@ namespace WinFormsLegacyControls
         ]
         public bool RowHeadersVisible
         {
-            get
-            {
-                return rowHeadersVisible;
-            }
+            get => rowHeadersVisible;
             set
             {
                 if (rowHeadersVisible != value)
@@ -1000,10 +830,7 @@ namespace WinFormsLegacyControls
         ]
         public int RowHeaderWidth
         {
-            get
-            {
-                return rowHeaderWidth;
-            }
+            get => rowHeaderWidth;
             set
             {
                 if (DataGrid is not null)
@@ -1031,10 +858,7 @@ namespace WinFormsLegacyControls
         ]
         public Color SelectionBackColor
         {
-            get
-            {
-                return selectionBackBrush.Color;
-            }
+            get => selectionBackBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -1064,21 +888,9 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EventSelectionBackColor, value);
         }
 
-        internal SolidBrush SelectionBackBrush
-        {
-            get
-            {
-                return selectionBackBrush;
-            }
-        }
+        internal SolidBrush SelectionBackBrush => selectionBackBrush;
 
-        internal SolidBrush SelectionForeBrush
-        {
-            get
-            {
-                return selectionForeBrush;
-            }
-        }
+        internal SolidBrush SelectionForeBrush => selectionForeBrush;
 
         protected bool ShouldSerializeSelectionBackColor()
         {
@@ -1100,10 +912,7 @@ namespace WinFormsLegacyControls
         ]
         public Color SelectionForeColor
         {
-            get
-            {
-                return selectionForeBrush.Color;
-            }
+            get => selectionForeBrush.Color;
             set
             {
                 ThrowIfDefault();
@@ -1321,10 +1130,7 @@ namespace WinFormsLegacyControls
         [DefaultValue("")]
         public string MappingName
         {
-            get
-            {
-                return mappingName;
-            }
+            get => mappingName;
             set
             {
                 value ??= string.Empty;
@@ -1373,13 +1179,7 @@ namespace WinFormsLegacyControls
         Localizable(true),
         DesignerSerializationVisibility(DesignerSerializationVisibility.Content)
         ]
-        public virtual GridColumnStylesCollection GridColumnStyles
-        {
-            get
-            {
-                return gridColumns;
-            }
-        }
+        public virtual GridColumnStylesCollection GridColumnStyles => gridColumns;
 
         /// <summary>
         ///  Gets or sets the <see cref='Forms.DataGrid'/>
@@ -1413,14 +1213,8 @@ namespace WinFormsLegacyControls
         [Browsable(false)]
         public virtual DataGrid? DataGrid
         {
-            get
-            {
-                return dataGrid;
-            }
-            set
-            {
-                SetInternalDataGrid(value, true);
-            }
+            get => dataGrid;
+            set => SetInternalDataGrid(value, true);
         }
 
         /// <summary>
@@ -1430,10 +1224,7 @@ namespace WinFormsLegacyControls
         [DefaultValue(false)]
         public virtual bool ReadOnly
         {
-            get
-            {
-                return readOnly;
-            }
+            get => readOnly;
             set
             {
                 if (readOnly != value)
@@ -1717,13 +1508,7 @@ namespace WinFormsLegacyControls
             base.Dispose(disposing);
         }
 
-        internal bool IsDefault
-        {
-            get
-            {
-                return isDefaultTableStyle;
-            }
-        }
+        internal bool IsDefault => isDefaultTableStyle;
 
         private void ThrowIfDefault([CallerMemberName] string? paramName = null)
         {

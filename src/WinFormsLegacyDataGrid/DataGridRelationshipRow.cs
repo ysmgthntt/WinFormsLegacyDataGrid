@@ -79,10 +79,7 @@ namespace System.Windows.Forms
 
         public /*virtual*/ bool Expanded
         {
-            get
-            {
-                return expanded;
-            }
+            get => expanded;
             set
             {
                 if (expanded == value)
@@ -139,14 +136,8 @@ namespace System.Windows.Forms
 
         private int FocusedRelation
         {
-            get
-            {
-                return dgTable.FocusedRelation;
-            }
-            set
-            {
-                dgTable.FocusedRelation = value;
-            }
+            get => dgTable.FocusedRelation;
+            set => dgTable.FocusedRelation = value;
         }
 
         // =------------------------------------------------------------------
@@ -1007,13 +998,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            private DataGridRelationshipRow RelationshipRow
-            {
-                get
-                {
-                    return (DataGridRelationshipRow)Owner;
-                }
-            }
+            private DataGridRelationshipRow RelationshipRow => (DataGridRelationshipRow)Owner;
 
             public override string? DefaultAction
             {
@@ -1113,37 +1098,13 @@ namespace System.Windows.Forms
 
             public override string? Name => owner.dgTable.RelationsList[relationship];
 
-            protected DataGridRelationshipRow Owner
-            {
-                get
-                {
-                    return owner;
-                }
-            }
+            protected DataGridRelationshipRow Owner => owner;
 
-            public override AccessibleObject Parent
-            {
-                get
-                {
-                    return owner.AccessibleObject;
-                }
-            }
+            public override AccessibleObject Parent => owner.AccessibleObject;
 
-            protected DataGrid DataGrid
-            {
-                get
-                {
-                    return owner.DataGrid;
-                }
-            }
+            protected DataGrid DataGrid => owner.DataGrid;
 
-            public override AccessibleRole Role
-            {
-                get
-                {
-                    return AccessibleRole.Link;
-                }
-            }
+            public override AccessibleRole Role => AccessibleRole.Link;
 
             public override AccessibleStates State
             {
@@ -1194,13 +1155,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string DefaultAction
-            {
-                get
-                {
-                    return SR.AccDGNavigate;
-                }
-            }
+            public override string DefaultAction => SR.AccDGNavigate;
 
             public override void DoDefaultAction()
             {

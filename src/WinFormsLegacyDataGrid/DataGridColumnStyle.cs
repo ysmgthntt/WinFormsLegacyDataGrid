@@ -124,10 +124,7 @@ namespace WinFormsLegacyControls
         ///  Gets or sets the background color of the column.
         /// </summary>
         [Browsable(false)]
-        public AccessibleObject HeaderAccessibleObject
-        {
-            get => _headerAccessibleObject ??= CreateHeaderAccessibleObject();
-        }
+        public AccessibleObject HeaderAccessibleObject => _headerAccessibleObject ??= CreateHeaderAccessibleObject();
 
         /// <summary>
         ///  Gets or sets the <see cref='Data.DataColumn'/> that determines the
@@ -233,10 +230,7 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the height of the column's font.
         /// </summary>
-        protected int FontHeight
-        {
-            get => DataGridTableStyle?.DataGrid?.FontHeight ?? DataGridTableStyle.defaultFontHeight;
-        }
+        protected int FontHeight => DataGridTableStyle?.DataGrid?.FontHeight ?? DataGridTableStyle.defaultFontHeight;
 
         /*
         /// <summary>
@@ -692,12 +686,7 @@ namespace WinFormsLegacyControls
             private static TraceSwitch? dgEditColumnEditing;
 
             public static TraceSwitch DGEditColumnEditing
-            {
-                get
-                {
-                    return dgEditColumnEditing ??= new TraceSwitch("DGEditColumnEditing", "Editing related tracing");
-                }
-            }
+                => dgEditColumnEditing ??= new TraceSwitch("DGEditColumnEditing", "Editing related tracing");
         }
 
         [ComVisible(true)]

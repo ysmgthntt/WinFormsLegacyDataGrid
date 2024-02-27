@@ -175,13 +175,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal DataGridTableStyle DataGridTableStyle
-        {
-            get
-            {
-                return owner;
-            }
-        }
+        private DataGridTableStyle DataGridTableStyle => owner;
 
         /// <summary>
         ///  Adds a System.Windows.Forms.DataGridColumnStyle to the System.Windows.Forms.GridColumnStylesCollection

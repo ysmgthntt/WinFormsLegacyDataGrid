@@ -43,13 +43,7 @@ namespace System.Windows.Forms
             PushState(dataGrid);
         }
 
-        internal AccessibleObject ParentRowAccessibleObject
-        {
-            get
-            {
-                return parentRowAccessibleObject ??= new DataGridStateParentRowAccessibleObject(this);
-            }
-        }
+        internal AccessibleObject ParentRowAccessibleObject => parentRowAccessibleObject ??= new DataGridStateParentRowAccessibleObject(this);
 
         // methods
         //
@@ -175,29 +169,11 @@ namespace System.Windows.Forms
                 }
             }
 
-            public override string Name
-            {
-                get
-                {
-                    return SR.AccDGParentRow;
-                }
-            }
+            public override string Name => SR.AccDGParentRow;
 
-            public override AccessibleObject Parent
-            {
-                get
-                {
-                    return owner.LinkingRow!.DataGrid.ParentRowsAccessibleObject;
-                }
-            }
+            public override AccessibleObject Parent => owner.LinkingRow!.DataGrid.ParentRowsAccessibleObject;
 
-            public override AccessibleRole Role
-            {
-                get
-                {
-                    return AccessibleRole.ListItem;
-                }
-            }
+            public override AccessibleRole Role => AccessibleRole.ListItem;
 
             public override string Value
             {

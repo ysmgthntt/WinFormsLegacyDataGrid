@@ -79,13 +79,7 @@ namespace WinFormsLegacyControls
         ///  Gets the hosted System.Windows.Forms.TextBox control.
         /// </summary>
         [Browsable(false)]
-        public virtual TextBox TextBox
-        {
-            get
-            {
-                return edit;
-            }
-        }
+        public virtual TextBox TextBox => edit;
 
         internal override bool KeyPress(int rowNum, Keys keyData)
         {
@@ -163,10 +157,7 @@ namespace WinFormsLegacyControls
         [DefaultValue(null)]
         public string? Format
         {
-            get
-            {
-                return format;
-            }
+            get => format;
             set
             {
                 value ??= string.Empty;
@@ -194,10 +185,7 @@ namespace WinFormsLegacyControls
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
         public IFormatProvider? FormatInfo
         {
-            get
-            {
-                return formatInfo;
-            }
+            get => formatInfo;
             set
             {
                 if (formatInfo is null || !formatInfo.Equals(value))
@@ -209,10 +197,7 @@ namespace WinFormsLegacyControls
 
         public override bool ReadOnly
         {
-            get
-            {
-                return base.ReadOnly;
-            }
+            get => base.ReadOnly;
             set
             {
                 // if the gridColumn is can't convert the string to

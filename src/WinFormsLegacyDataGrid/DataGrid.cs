@@ -382,10 +382,7 @@ namespace WinFormsLegacyControls
         ]
         public bool AllowSorting
         {
-            get
-            {
-                return gridState[GRIDSTATE_allowSorting];
-            }
+            get => gridState[GRIDSTATE_allowSorting];
             set
             {
                 if (AllowSorting != value)
@@ -409,10 +406,7 @@ namespace WinFormsLegacyControls
         ]
         public Color AlternatingBackColor
         {
-            get
-            {
-                return alternatingBackBrush.Color;
-            }
+            get => alternatingBackBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -446,13 +440,7 @@ namespace WinFormsLegacyControls
             return !AlternatingBackBrush.Equals(DefaultAlternatingBackBrush);
         }
 
-        internal Brush AlternatingBackBrush
-        {
-            get
-            {
-                return alternatingBackBrush;
-            }
-        }
+        internal Brush AlternatingBackBrush => alternatingBackBrush;
 
         // overrode those properties just to move the BackColor and the ForeColor
         // from the Appearance group onto the Color Group
@@ -467,10 +455,7 @@ namespace WinFormsLegacyControls
         {
             // overrode those properties just to move the BackColor and the ForeColor
             // from the Appearance group onto the Color Group
-            get
-            {
-                return base.BackColor;
-            }
+            get => base.BackColor;
             set
             {
                 if (IsTransparentColor(value))
@@ -496,15 +481,10 @@ namespace WinFormsLegacyControls
         ]
         public override Color ForeColor
         {
-            get
-            {
-                return base.ForeColor;
-            }
-            set
-            {
-                base.ForeColor = value;
-            }
+            get => base.ForeColor;
+            set => base.ForeColor = value;
         }
+
         public override void ResetForeColor()
         {
             if (!ForeColor.Equals(DefaultForeBrush.Color))
@@ -518,21 +498,9 @@ namespace WinFormsLegacyControls
         ///  indicating whether the <see cref='AlternatingBackColor'/> property should be
         ///  persisted.
         /// </summary>
-        internal SolidBrush BackBrush
-        {
-            get
-            {
-                return backBrush;
-            }
-        }
+        internal SolidBrush BackBrush => backBrush;
 
-        internal SolidBrush ForeBrush
-        {
-            get
-            {
-                return foreBrush;
-            }
-        }
+        internal SolidBrush ForeBrush => foreBrush;
 
         /// <summary>
         ///  Gets or
@@ -547,10 +515,7 @@ namespace WinFormsLegacyControls
         ]
         public BorderStyle BorderStyle
         {
-            get
-            {
-                return borderStyle;
-            }
+            get => borderStyle;
             set
             {
                 //valid values are 0x0 to 0x2.
@@ -596,112 +561,25 @@ namespace WinFormsLegacyControls
             }
         }
 
-        protected override Size DefaultSize
-        {
-            get
-            {
-                return new Size(130, 80);
-            }
-        }
+        protected override Size DefaultSize => new Size(130, 80);
 
-        private static SolidBrush DefaultSelectionBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ActiveCaption;
-            }
-        }
-        private static SolidBrush DefaultSelectionForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ActiveCaptionText;
-            }
-        }
-        internal static SolidBrush DefaultBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Window;
-            }
-        }
-        internal static SolidBrush DefaultForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.WindowText;
-            }
-        }
-        private static SolidBrush DefaultBackgroundBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.AppWorkspace;
-            }
-        }
-        internal static SolidBrush DefaultParentRowsForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.WindowText;
-            }
-        }
-        internal static SolidBrush DefaultParentRowsBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Control;
-            }
-        }
-        internal static SolidBrush DefaultAlternatingBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Window;
-            }
-        }
-        private static SolidBrush DefaultGridLineBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Control;
-            }
-        }
-        private static SolidBrush DefaultHeaderBackBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.Control;
-            }
-        }
-        private static SolidBrush DefaultHeaderForeBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.ControlText;
-            }
-        }
-        private static Pen DefaultHeaderForePen
-        {
-            get
-            {
-                return new Pen(SystemColors.ControlText);
-            }
-        }
-        private static SolidBrush DefaultLinkBrush
-        {
-            get
-            {
-                return (SolidBrush)SystemBrushes.HotTrack;
-            }
-        }
+        private static SolidBrush DefaultSelectionBackBrush => (SolidBrush)SystemBrushes.ActiveCaption;
+        private static SolidBrush DefaultSelectionForeBrush => (SolidBrush)SystemBrushes.ActiveCaptionText;
+        private static SolidBrush DefaultBackBrush => (SolidBrush)SystemBrushes.Window;
+        private static SolidBrush DefaultForeBrush => (SolidBrush)SystemBrushes.WindowText;
+        private static SolidBrush DefaultBackgroundBrush => (SolidBrush)SystemBrushes.AppWorkspace;
+        internal static SolidBrush DefaultParentRowsForeBrush => (SolidBrush)SystemBrushes.WindowText;
+        internal static SolidBrush DefaultParentRowsBackBrush => (SolidBrush)SystemBrushes.Control;
+        private static SolidBrush DefaultAlternatingBackBrush => (SolidBrush)SystemBrushes.Window;
+        private static SolidBrush DefaultGridLineBrush => (SolidBrush)SystemBrushes.Control;
+        private static SolidBrush DefaultHeaderBackBrush => (SolidBrush)SystemBrushes.Control;
+        private static SolidBrush DefaultHeaderForeBrush => (SolidBrush)SystemBrushes.ControlText;
+        private static Pen DefaultHeaderForePen => new Pen(SystemColors.ControlText);
+        private static SolidBrush DefaultLinkBrush => (SolidBrush)SystemBrushes.HotTrack;
 
         private bool ListHasErrors
         {
-            get
-            {
-                return gridState[GRIDSTATE_listHasErrors];
-            }
+            get => gridState[GRIDSTATE_listHasErrors];
             set
             {
                 if (ListHasErrors != value)
@@ -741,21 +619,9 @@ namespace WinFormsLegacyControls
 
         [MemberNotNullWhen(true, nameof(listManager))]
         [MemberNotNullWhen(true, nameof(myGridTable))]
-        private bool Bound
-        {
-            get
-            {
-                return !(listManager is null || myGridTable is null);
-            }
-        }
+        private bool Bound => !(listManager is null || myGridTable is null);
 
-        internal DataGridCaption Caption
-        {
-            get
-            {
-                return caption;
-            }
-        }
+        internal DataGridCaption Caption => caption;
 
         /// <summary>
         ///  Gets or sets the background color of the caption area.
@@ -766,10 +632,7 @@ namespace WinFormsLegacyControls
         ]
         public Color CaptionBackColor
         {
-            get
-            {
-                return Caption.BackColor;
-            }
+            get => Caption.BackColor;
             set
             {
                 if (IsTransparentColor(value))
@@ -807,14 +670,8 @@ namespace WinFormsLegacyControls
         ]
         public Color CaptionForeColor
         {
-            get
-            {
-                return Caption.ForeColor;
-            }
-            set
-            {
-                Caption.ForeColor = value;
-            }
+            get => Caption.ForeColor;
+            set => Caption.ForeColor = value;
         }
 
         private void ResetCaptionForeColor()
@@ -843,14 +700,8 @@ namespace WinFormsLegacyControls
         ]
         public Font CaptionFont
         {
-            get
-            {
-                return Caption.Font;
-            }
-            set
-            {
-                Caption.Font = value;
-            }
+            get => Caption.Font;
+            set => Caption.Font = value;
         }
 
         /// <summary>
@@ -879,14 +730,8 @@ namespace WinFormsLegacyControls
         [AllowNull]
         public string CaptionText
         {
-            get
-            {
-                return Caption.Text;
-            }
-            set
-            {
-                Caption.Text = value;
-            }
+            get => Caption.Text;
+            set => Caption.Text = value;
         }
 
         /// <summary>
@@ -900,10 +745,7 @@ namespace WinFormsLegacyControls
         ]
         public bool CaptionVisible
         {
-            get
-            {
-                return layout.CaptionVisible;
-            }
+            get => layout.CaptionVisible;
             set
             {
                 if (layout.CaptionVisible != value)
@@ -935,10 +777,7 @@ namespace WinFormsLegacyControls
         ]
         public DataGridCell CurrentCell
         {
-            get
-            {
-                return new DataGridCell(currentRow, currentCol);
-            }
+            get => new DataGridCell(currentRow, currentCol);
             set
             {
                 // if the OnLayout event was not set in the grid, then we can't
@@ -1261,26 +1100,14 @@ namespace WinFormsLegacyControls
 
         private int CurrentColumn
         {
-            get
-            {
-                return CurrentCell.ColumnNumber;
-            }
-            set
-            {
-                CurrentCell = new DataGridCell(currentRow, value);
-            }
+            get => CurrentCell.ColumnNumber;
+            set => CurrentCell = new DataGridCell(currentRow, value);
         }
 
         private int CurrentRow
         {
-            get
-            {
-                return CurrentCell.RowNumber;
-            }
-            set
-            {
-                CurrentCell = new DataGridCell(value, currentCol);
-            }
+            get => CurrentCell.RowNumber;
+            set => CurrentCell = new DataGridCell(value, currentCol);
         }
 
         [
@@ -1289,10 +1116,7 @@ namespace WinFormsLegacyControls
         ]
         public Color SelectionBackColor
         {
-            get
-            {
-                return selectionBackBrush.Color;
-            }
+            get => selectionBackBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -1314,21 +1138,9 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush SelectionBackBrush
-        {
-            get
-            {
-                return selectionBackBrush;
-            }
-        }
+        internal SolidBrush SelectionBackBrush => selectionBackBrush;
 
-        internal SolidBrush SelectionForeBrush
-        {
-            get
-            {
-                return selectionForeBrush;
-            }
-        }
+        internal SolidBrush SelectionForeBrush => selectionForeBrush;
 
         protected bool ShouldSerializeSelectionBackColor()
         {
@@ -1349,10 +1161,7 @@ namespace WinFormsLegacyControls
         ]
         public Color SelectionForeColor
         {
-            get
-            {
-                return selectionForeBrush.Color;
-            }
+            get => selectionForeBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -1411,24 +1220,12 @@ namespace WinFormsLegacyControls
         }
 
         // ToolTipping
-        internal DataGridToolTip? ToolTipProvider
-        {
-            get
-            {
-                return toolTipProvider;
-            }
-        }
+        internal DataGridToolTip? ToolTipProvider => toolTipProvider;
 
         internal int ToolTipId
         {
-            get
-            {
-                return toolTipId;
-            }
-            set
-            {
-                toolTipId = value;
-            }
+            get => toolTipId;
+            set => toolTipId = value;
         }
 
         private void ResetToolTip(DataGridToolTip toolTipProvider)
@@ -1552,13 +1349,7 @@ namespace WinFormsLegacyControls
             Debug.WriteLineIf(CompModSwitches.DataGridCursor.TraceVerbose, "DataGridCursor: There are now " + DataGridRowsLength.ToString(CultureInfo.InvariantCulture) + " rows.");
         }
 
-        internal int DataGridRowsLength
-        {
-            get
-            {
-                return dataGridRowsLength;
-            }
-        }
+        internal int DataGridRowsLength => dataGridRowsLength;
 
         /// <summary>
         ///  Gets or sets the data source that the grid is displaying data for.
@@ -1572,11 +1363,7 @@ namespace WinFormsLegacyControls
         ]
         public object? DataSource
         {
-            get
-            {
-                return dataSource;
-            }
-
+            get => dataSource;
             set
             {
                 if (value is not null && !(value is IList || value is IListSource))
@@ -1635,10 +1422,7 @@ namespace WinFormsLegacyControls
         ]
         public string DataMember
         {
-            get
-            {
-                return dataMember;
-            }
+            get => dataMember;
             set
             {
                 if (dataMember is not null && dataMember.Equals(value))
@@ -1683,10 +1467,7 @@ namespace WinFormsLegacyControls
                     return listManager!;
                 }
             }
-            set
-            {
-                throw new NotSupportedException(SR.DataGridSetListManager);
-            }
+            set => throw new NotSupportedException(SR.DataGridSetListManager);
         }
 
         internal void Set_ListManager(object? newDataSource, string? newDataMember, bool force)
@@ -1955,37 +1736,13 @@ namespace WinFormsLegacyControls
          Localizable(true),
          SRDescription(nameof(SR.DataGridGridTablesDescr))
         ]
-        public GridTableStylesCollection TableStyles
-        {
-            get
-            {
-                return dataGridTables;
-            }
-        }
+        public GridTableStylesCollection TableStyles => dataGridTables;
 
-        internal new int FontHeight
-        {
-            get
-            {
-                return fontHeight;
-            }
-        }
+        internal new int FontHeight => fontHeight;
 
-        internal AccessibleObject ParentRowsAccessibleObject
-        {
-            get
-            {
-                return parentRows.AccessibleObject;
-            }
-        }
+        internal AccessibleObject ParentRowsAccessibleObject => parentRows.AccessibleObject;
 
-        internal Rectangle ParentRowsBounds
-        {
-            get
-            {
-                return layout.ParentRows;
-            }
-        }
+        internal Rectangle ParentRowsBounds => layout.ParentRows;
 
         /// <summary>
         ///  Gets or sets the color of the grid lines.
@@ -1996,10 +1753,7 @@ namespace WinFormsLegacyControls
         ]
         public Color GridLineColor
         {
-            get
-            {
-                return gridLineBrush.Color;
-            }
+            get => gridLineBrush.Color;
             set
             {
                 if (gridLineBrush.Color != value)
@@ -2029,13 +1783,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush GridLineBrush
-        {
-            get
-            {
-                return gridLineBrush;
-            }
-        }
+        internal SolidBrush GridLineBrush => gridLineBrush;
 
         /// <summary>
         ///  Gets or sets the line style of the grid.
@@ -2047,10 +1795,7 @@ namespace WinFormsLegacyControls
         ]
         public DataGridLineStyle GridLineStyle
         {
-            get
-            {
-                return gridLineStyle;
-            }
+            get => gridLineStyle;
             set
             {
                 //valid values are 0x0 to 0x1.
@@ -2088,11 +1833,7 @@ namespace WinFormsLegacyControls
         ]
         public DataGridParentRowsLabelStyle ParentRowsLabelStyle
         {
-            get
-            {
-                return parentRowsLabels;
-            }
-
+            get => parentRowsLabels;
             set
             {
                 //valid values are 0x0 to 0x3
@@ -2119,13 +1860,7 @@ namespace WinFormsLegacyControls
             remove => Events.RemoveHandler(EVENT_PARENTROWSLABELSTYLECHANGED, value);
         }
 
-        internal bool Initializing
-        {
-            get
-            {
-                return inInit;
-            }
-        }
+        internal bool Initializing => inInit;
 
         /// <summary>
         ///  Gets the index of the first visible column in a grid.
@@ -2134,13 +1869,7 @@ namespace WinFormsLegacyControls
          Browsable(false),
          SRDescription(nameof(SR.DataGridFirstVisibleColumnDescr))
         ]
-        public int FirstVisibleColumn
-        {
-            get
-            {
-                return firstVisibleCol;
-            }
-        }
+        public int FirstVisibleColumn => firstVisibleCol;
 
         /// <summary>
         ///  Gets or sets a value indicating whether the grid displays in flat mode.
@@ -2152,10 +1881,7 @@ namespace WinFormsLegacyControls
         ]
         public bool FlatMode
         {
-            get
-            {
-                return gridState[GRIDSTATE_isFlatMode];
-            }
+            get => gridState[GRIDSTATE_isFlatMode];
             set
             {
                 if (value != FlatMode)
@@ -2186,10 +1912,7 @@ namespace WinFormsLegacyControls
         ]
         public Color HeaderBackColor
         {
-            get
-            {
-                return headerBackBrush.Color;
-            }
+            get => headerBackBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -2221,13 +1944,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush HeaderBackBrush
-        {
-            get
-            {
-                return headerBackBrush;
-            }
-        }
+        internal SolidBrush HeaderBackBrush => headerBackBrush;
 
         protected virtual bool ShouldSerializeHeaderBackColor()
         {
@@ -2241,13 +1958,8 @@ namespace WinFormsLegacyControls
                 HeaderBackColor = DefaultHeaderBackBrush.Color;
             }
         }
-        internal SolidBrush BackgroundBrush
-        {
-            get
-            {
-                return backgroundBrush;
-            }
-        }
+
+        internal SolidBrush BackgroundBrush => backgroundBrush;
 
         private void ResetBackgroundColor()
         {
@@ -2274,10 +1986,7 @@ namespace WinFormsLegacyControls
         ]
         public Color BackgroundColor
         {
-            get
-            {
-                return backgroundBrush.Color;
-            }
+            get => backgroundBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -2319,10 +2028,7 @@ namespace WinFormsLegacyControls
         ]
         public Font HeaderFont
         {
-            get
-            {
-                return (headerFont ?? Font);
-            }
+            get => (headerFont ?? Font);
             set
             {
                 ArgumentNullException.ThrowIfNull(value, nameof(HeaderFont));
@@ -2365,10 +2071,7 @@ namespace WinFormsLegacyControls
         ]
         public Color HeaderForeColor
         {
-            get
-            {
-                return headerForePen.Color;
-            }
+            get => headerForePen.Color;
             set
             {
                 if (value.IsEmpty)
@@ -2410,21 +2113,10 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush HeaderForeBrush
-        {
-            get
-            {
-                return headerForeBrush;
-            }
-        }
+        private SolidBrush HeaderForeBrush => headerForeBrush;
 
-        internal Pen HeaderForePen
-        {
-            get
-            {
-                return headerForePen;
-            }
-        }
+        internal Pen HeaderForePen => headerForePen;
+
         private void ResetHorizontalOffset()
         {
             horizontalOffset = 0;
@@ -2434,12 +2126,9 @@ namespace WinFormsLegacyControls
             lastTotallyVisibleCol = -1;
         }
 
-        internal int HorizontalOffset
+        private int HorizontalOffset
         {
-            get
-            {
-                return horizontalOffset;
-            }
+            get => horizontalOffset;
             set
             {
                 //if (CompModSwitches.DataGridScrolling.TraceVerbose) Debug.WriteLine("DataGridScrolling: Set_HorizontalOffset, value = " + value.ToString());
@@ -2534,13 +2223,7 @@ namespace WinFormsLegacyControls
         [
          SRDescription(nameof(SR.DataGridHorizScrollBarDescr))
         ]
-        protected ScrollBar HorizScrollBar
-        {
-            get
-            {
-                return horizScrollBar;
-            }
-        }
+        protected ScrollBar HorizScrollBar => horizScrollBar;
 
         /// <summary>
         ///  Retrieves a value indicating whether odd and even
@@ -2549,10 +2232,7 @@ namespace WinFormsLegacyControls
         // Cleanup eventually to be static.
         internal bool LedgerStyle
         {
-            get
-            {
-                return gridState[GRIDSTATE_isLedgerStyle];
-            }
+            get => gridState[GRIDSTATE_isLedgerStyle];
             /*
             set {
                 if (isLedgerStyle != value) {
@@ -2572,10 +2252,7 @@ namespace WinFormsLegacyControls
         ]
         public Color LinkColor
         {
-            get
-            {
-                return linkBrush.Color;
-            }
+            get => linkBrush.Color;
             set
             {
                 if (value.IsEmpty)
@@ -2604,13 +2281,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal Brush LinkBrush
-        {
-            get
-            {
-                return linkBrush;
-            }
-        }
+        internal Brush LinkBrush => linkBrush;
 
         /// <summary>
         ///  Gets
@@ -2626,13 +2297,8 @@ namespace WinFormsLegacyControls
         ]
         public Color LinkHoverColor
         {
-            get
-            {
-                return LinkColor;
-            }
-            set
-            {
-            }
+            get => LinkColor;
+            set { }
         }
 
         protected virtual bool ShouldSerializeLinkHoverColor()
@@ -2652,21 +2318,9 @@ namespace WinFormsLegacyControls
         ///  Indicates whether the <see cref='LinkHoverColor'/> property should be
         ///  persisted.
         /// </summary>
-        internal Font LinkFont
-        {
-            get
-            {
-                return linkFont;
-            }
-        }
+        internal Font LinkFont => linkFont;
 
-        internal int LinkFontHeight
-        {
-            get
-            {
-                return linkFontHeight;
-            }
-        }
+        internal int LinkFontHeight => linkFontHeight;
 
         /// <summary>
         ///  Gets or sets a value
@@ -2679,10 +2333,7 @@ namespace WinFormsLegacyControls
         ]
         public bool AllowNavigation
         {
-            get
-            {
-                return gridState[GRIDSTATE_allowNavigation];
-            }
+            get => gridState[GRIDSTATE_allowNavigation];
             set
             {
                 if (AllowNavigation != value)
@@ -2714,15 +2365,8 @@ namespace WinFormsLegacyControls
         public override Cursor Cursor
         {
             // get the cursor out of the propertyGrid.
-            get
-            {
-                return base.Cursor;
-            }
-
-            set
-            {
-                base.Cursor = value;
-            }
+            get => base.Cursor;
+            set => base.Cursor = value;
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -2738,15 +2382,8 @@ namespace WinFormsLegacyControls
         public override Image? BackgroundImage
         {
             // get the BackgroundImage out of the propertyGrid.
-            get
-            {
-                return base.BackgroundImage;
-            }
-
-            set
-            {
-                base.BackgroundImage = value;
-            }
+            get => base.BackgroundImage;
+            set => base.BackgroundImage = value;
         }
 
         [
@@ -2755,15 +2392,8 @@ namespace WinFormsLegacyControls
         public override ImageLayout BackgroundImageLayout
         {
             // get the BackgroundImage out of the propertyGrid.
-            get
-            {
-                return base.BackgroundImageLayout;
-            }
-
-            set
-            {
-                base.BackgroundImageLayout = value;
-            }
+            get => base.BackgroundImageLayout;
+            set => base.BackgroundImageLayout = value;
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -2789,10 +2419,7 @@ namespace WinFormsLegacyControls
         ]
         public Color ParentRowsBackColor
         {
-            get
-            {
-                return parentRows.BackColor;
-            }
+            get => parentRows.BackColor;
             set
             {
                 if (IsTransparentColor(value))
@@ -2804,13 +2431,7 @@ namespace WinFormsLegacyControls
             }
         }
 
-        internal SolidBrush ParentRowsBackBrush
-        {
-            get
-            {
-                return parentRows.BackBrush;
-            }
-        }
+        private SolidBrush ParentRowsBackBrush => parentRows.BackBrush;
 
         /// <summary>
         ///  Indicates whether the <see cref='ParentRowsBackColor'/> property should be
@@ -2838,23 +2459,11 @@ namespace WinFormsLegacyControls
         ]
         public Color ParentRowsForeColor
         {
-            get
-            {
-                return parentRows.ForeColor;
-            }
-            set
-            {
-                parentRows.ForeColor = value;
-            }
+            get => parentRows.ForeColor;
+            set => parentRows.ForeColor = value;
         }
 
-        internal SolidBrush ParentRowsForeBrush
-        {
-            get
-            {
-                return parentRows.ForeBrush;
-            }
-        }
+        private SolidBrush ParentRowsForeBrush => parentRows.ForeBrush;
 
         /// <summary>
         ///  Indicates whether the <see cref='ParentRowsForeColor'/> property should be
@@ -2886,10 +2495,7 @@ namespace WinFormsLegacyControls
         ]
         public int PreferredColumnWidth
         {
-            get
-            {
-                return preferredColumnWidth;
-            }
+            get => preferredColumnWidth;
             set
             {
                 if (value < 0)
@@ -2913,10 +2519,7 @@ namespace WinFormsLegacyControls
         ]
         public int PreferredRowHeight
         {
-            get
-            {
-                return preferredRowHeight;
-            }
+            get => preferredRowHeight;
             set
             {
                 if (value < 0)
@@ -2949,10 +2552,7 @@ namespace WinFormsLegacyControls
         ]
         public bool ReadOnly
         {
-            get
-            {
-                return gridState[GRIDSTATE_readOnlyMode];
-            }
+            get => gridState[GRIDSTATE_readOnlyMode];
             set
             {
                 if (ReadOnly != value)
@@ -3017,10 +2617,7 @@ namespace WinFormsLegacyControls
         ]
         public bool ColumnHeadersVisible
         {
-            get
-            {
-                return gridState[GRIDSTATE_columnHeadersVisible];
-            }
+            get => gridState[GRIDSTATE_columnHeadersVisible];
             set
             {
                 if (ColumnHeadersVisible != value)
@@ -3044,10 +2641,7 @@ namespace WinFormsLegacyControls
         ]
         public bool ParentRowsVisible
         {
-            get
-            {
-                return layout.ParentRowsVisible;
-            }
+            get => layout.ParentRowsVisible;
             set
             {
                 if (layout.ParentRowsVisible != value)
@@ -3088,10 +2682,7 @@ namespace WinFormsLegacyControls
         ]
         public bool RowHeadersVisible
         {
-            get
-            {
-                return gridState[GRIDSTATE_rowHeadersVisible];
-            }
+            get => gridState[GRIDSTATE_rowHeadersVisible];
             set
             {
                 if (RowHeadersVisible != value)
@@ -3110,10 +2701,7 @@ namespace WinFormsLegacyControls
         ]
         public int RowHeaderWidth
         {
-            get
-            {
-                return rowHeaderWidth;
-            }
+            get => rowHeaderWidth;
             set
             {
                 value = Math.Max(minRowHeaderWidth, value);
@@ -3140,14 +2728,8 @@ namespace WinFormsLegacyControls
         [AllowNull]
         public override string Text
         {
-            get
-            {
-                return base.Text;
-            }
-            set
-            {
-                base.Text = value;
-            }
+            get => base.Text;
+            set => base.Text = value;
         }
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -3164,13 +2746,7 @@ namespace WinFormsLegacyControls
          Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced),
          SRDescription(nameof(SR.DataGridVertScrollBarDescr))
         ]
-        protected ScrollBar VertScrollBar
-        {
-            get
-            {
-                return vertScrollBar;
-            }
-        }
+        protected ScrollBar VertScrollBar => vertScrollBar;
 
         /// <summary>
         ///  Gets the number of visible columns.
@@ -3179,13 +2755,7 @@ namespace WinFormsLegacyControls
          Browsable(false),
          SRDescription(nameof(SR.DataGridVisibleColumnCountDescr))
         ]
-        public int VisibleColumnCount
-        {
-            get
-            {
-                return Math.Min(numVisibleCols, myGridTable is null ? 0 : myGridTable.GridColumnStyles.Count);
-            }
-        }
+        public int VisibleColumnCount => Math.Min(numVisibleCols, myGridTable is null ? 0 : myGridTable.GridColumnStyles.Count);
 
         /// <summary>
         ///  Gets the number of rows visible.
@@ -3194,13 +2764,7 @@ namespace WinFormsLegacyControls
          Browsable(false),
          SRDescription(nameof(SR.DataGridVisibleRowCountDescr))
         ]
-        public int VisibleRowCount
-        {
-            get
-            {
-                return numVisibleRows;
-            }
-        }
+        public int VisibleRowCount => numVisibleRows;
 
         /// <summary>
         ///  Gets or sets the value of the cell at
@@ -3256,14 +2820,8 @@ namespace WinFormsLegacyControls
         /// </summary>
         public object? this[DataGridCell cell]
         {
-            get
-            {
-                return this[cell.RowNumber, cell.ColumnNumber];
-            }
-            set
-            {
-                this[cell.RowNumber, cell.ColumnNumber] = value;
-            }
+            get => this[cell.RowNumber, cell.ColumnNumber];
+            set => this[cell.RowNumber, cell.ColumnNumber] = value;
         }
 
         private void WireTableStylePropChanged(DataGridTableStyle gridTable)
@@ -4988,10 +4546,7 @@ namespace WinFormsLegacyControls
 
         public override ISite? Site
         {
-            get
-            {
-                return base.Site;
-            }
+            get => base.Site;
             set
             {
                 ISite? temp = Site;
@@ -10084,54 +9639,25 @@ namespace WinFormsLegacyControls
             {
             }
 
-            internal DataGrid DataGrid
-            {
-                get
-                {
-                    return (DataGrid)Owner!;
-                }
-            }
+            private DataGrid DataGrid => (DataGrid)Owner!;
 
-            private int ColumnCountPrivate
-            {
-                get
-                {
-                    return ((DataGrid)Owner!).myGridTable.GridColumnStyles.Count;
-                }
-            }
+            private int ColumnCountPrivate => ((DataGrid)Owner!).myGridTable.GridColumnStyles.Count;
 
-            private int RowCountPrivate
-            {
-                get
-                {
-                    return ((DataGrid)Owner!).dataGridRows!.Length;
-                }
-            }
+            private int RowCountPrivate => ((DataGrid)Owner!).dataGridRows!.Length;
 
             public override string? Name
             {
-                get
-                {
-                    // Special case: If an explicit name has been set in the AccessibleName property, use that.
-                    // Note: Any non-null value in AccessibleName overrides the default accessible name logic,
-                    // even an empty string (this is the only way to *force* the accessible name to be blank).
-                    string? name = Owner!.AccessibleName;
-                    if (name is not null)
-                    {
-                        return name;
-                    }
-
+                // Special case: If an explicit name has been set in the AccessibleName property, use that.
+                // Note: Any non-null value in AccessibleName overrides the default accessible name logic,
+                // even an empty string (this is the only way to *force* the accessible name to be blank).
+                get => Owner!.AccessibleName
                     // Otherwise just return the default label string, minus any mnemonics
-                    return "DataGrid";
-                }
+                    ?? "DataGrid";
 
-                set
-                {
-                    // If anyone tries to set the accessible name, just cache the value in the control's
-                    // AccessibleName property. This value will then end up overriding the normal accessible
-                    // name logic, until such time as AccessibleName is set back to null.
-                    Owner!.AccessibleName = value;
-                }
+                // If anyone tries to set the accessible name, just cache the value in the control's
+                // AccessibleName property. This value will then end up overriding the normal accessible
+                // name logic, until such time as AccessibleName is set back to null.
+                set => Owner!.AccessibleName = value;
             }
 
             public override AccessibleRole Role
@@ -10432,37 +9958,19 @@ namespace WinFormsLegacyControls
             /// <summary>
             ///  Gets the number of the clicked column.
             /// </summary>
-            public int Column
-            {
-                get
-                {
-                    return col;
-                }
-            }
+            public int Column => col;
 
             /// <summary>
             ///  Gets the
             ///  number of the clicked row.
             /// </summary>
-            public int Row
-            {
-                get
-                {
-                    return row;
-                }
-            }
+            public int Row => row;
 
             /// <summary>
             ///  Gets the part of the <see cref='DataGrid'/> control, other than the row or column, that was
             ///  clicked.
             /// </summary>
-            public HitTestType Type
-            {
-                get
-                {
-                    return type;
-                }
-            }
+            public HitTestType Type => type;
 
             /// <summary>
             ///  Indicates whether two objects are identical.
@@ -10524,10 +10032,7 @@ namespace WinFormsLegacyControls
 
             public bool AllowAdd
             {
-                get
-                {
-                    return allowAdd;
-                }
+                get => allowAdd;
                 set
                 {
                     if (allowAdd != value)
@@ -10539,10 +10044,7 @@ namespace WinFormsLegacyControls
 
             public bool AllowEdit
             {
-                get
-                {
-                    return allowEdit;
-                }
+                get => allowEdit;
                 set
                 {
                     if (allowEdit != value)
@@ -10554,10 +10056,7 @@ namespace WinFormsLegacyControls
 
             public bool AllowRemove
             {
-                get
-                {
-                    return allowRemove;
-                }
+                get => allowRemove;
                 set
                 {
                     if (allowRemove != value)

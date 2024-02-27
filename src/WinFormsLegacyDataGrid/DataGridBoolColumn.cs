@@ -57,10 +57,7 @@ namespace WinFormsLegacyControls
         DefaultValue(true)]
         public object TrueValue
         {
-            get
-            {
-                return trueValue;
-            }
+            get => trueValue;
             set
             {
                 if (!trueValue.Equals(value))
@@ -85,10 +82,7 @@ namespace WinFormsLegacyControls
         [TypeConverter(typeof(StringConverter)), DefaultValue(false)]
         public object FalseValue
         {
-            get
-            {
-                return falseValue;
-            }
+            get => falseValue;
             set
             {
                 if (!falseValue.Equals(value))
@@ -113,10 +107,7 @@ namespace WinFormsLegacyControls
         [TypeConverter(typeof(StringConverter))]
         public object NullValue
         {
-            get
-            {
-                return nullValue;
-            }
+            get => nullValue;
             set
             {
                 if (!nullValue.Equals(value))
@@ -439,10 +430,7 @@ namespace WinFormsLegacyControls
         ]
         public bool AllowNull
         {
-            get
-            {
-                return allowNull;
-            }
+            get => allowNull;
             set
             {
                 if (allowNull != value)

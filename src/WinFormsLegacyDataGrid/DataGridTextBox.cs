@@ -287,10 +287,7 @@ namespace WinFormsLegacyControls
 
         public bool IsInEditOrNavigateMode
         {
-            get
-            {
-                return isInEditOrNavigateMode;
-            }
+            get => isInEditOrNavigateMode;
             set
             {
                 isInEditOrNavigateMode = value;

@@ -77,13 +77,7 @@ namespace WinFormsLegacyControls
             height = MinimumRowHeight(dgTable);
         }
 
-        public AccessibleObject AccessibleObject
-        {
-            get
-            {
-                return accessibleObject ??= CreateAccessibleObject();
-            }
-        }
+        public AccessibleObject AccessibleObject => accessibleObject ??= CreateAccessibleObject();
 
         protected virtual AccessibleObject CreateAccessibleObject()
         {
@@ -127,24 +121,12 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the <see cref='Forms.DataGrid'/> control the row belongs to.
         /// </summary>
-        public DataGrid DataGrid
-        {
-            get
-            {
-                return dgTable.DataGrid!;
-            }
-        }
+        public DataGrid DataGrid => dgTable.DataGrid!;
 
         internal DataGridTableStyle DataGridTableStyle
         {
-            get
-            {
-                return dgTable;
-            }
-            set
-            {
-                dgTable = value;
-            }
+            get => dgTable;
+            set => dgTable = value;
         }
 
         /*
@@ -168,10 +150,7 @@ namespace WinFormsLegacyControls
         /// </summary>
         public virtual int Height
         {
-            get
-            {
-                return height;
-            }
+            get => height;
             set
             {
                 // the height of the row should be at least 0.
@@ -189,23 +168,14 @@ namespace WinFormsLegacyControls
         /// <summary>
         ///  Gets the row's number.
         /// </summary>
-        public int RowNumber
-        {
-            get
-            {
-                return number;
-            }
-        }
+        public int RowNumber => number;
 
         /// <summary>
         ///  Gets or sets a value indicating whether the row is selected.
         /// </summary>
         public virtual bool Selected
         {
-            get
-            {
-                return selected;
-            }
+            get => selected;
             set
             {
                 selected = value;
@@ -782,13 +752,7 @@ namespace WinFormsLegacyControls
                 return new DataGridCellAccessibleObject(owner, column);
             }
 
-            public override Rectangle Bounds
-            {
-                get
-                {
-                    return DataGrid.RectangleToScreen(DataGrid.GetRowBounds(owner));
-                }
-            }
+            public override Rectangle Bounds => DataGrid.RectangleToScreen(DataGrid.GetRowBounds(owner));
 
             public override string? Name
             {
@@ -805,37 +769,13 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            protected DataGridRow Owner
-            {
-                get
-                {
-                    return owner;
-                }
-            }
+            protected DataGridRow Owner => owner;
 
-            public override AccessibleObject Parent
-            {
-                get
-                {
-                    return DataGrid.AccessibilityObject;
-                }
-            }
+            public override AccessibleObject Parent => DataGrid.AccessibilityObject;
 
-            private DataGrid DataGrid
-            {
-                get
-                {
-                    return owner.DataGrid;
-                }
-            }
+            private DataGrid DataGrid => owner.DataGrid;
 
-            public override AccessibleRole Role
-            {
-                get
-                {
-                    return AccessibleRole.Row;
-                }
-            }
+            public override AccessibleRole Role => AccessibleRole.Row;
 
             public override AccessibleStates State
             {
@@ -861,13 +801,7 @@ namespace WinFormsLegacyControls
                 }
             }
 
-            public override string? Value
-            {
-                get
-                {
-                    return Name;
-                }
-            }
+            public override string? Value => Name;
 
             public override AccessibleObject? GetChild(int index)
             {
@@ -967,53 +901,17 @@ namespace WinFormsLegacyControls
                 Debug.WriteLineIf(DataGrid.DataGridAcc!.TraceVerbose, "Create cell accessible object");
             }
 
-            public override Rectangle Bounds
-            {
-                get
-                {
-                    return DataGrid.RectangleToScreen(DataGrid.GetCellBounds(new DataGridCell(owner.RowNumber, column)));
-                }
-            }
+            public override Rectangle Bounds => DataGrid.RectangleToScreen(DataGrid.GetCellBounds(new DataGridCell(owner.RowNumber, column)));
 
-            public override string Name
-            {
-                get
-                {
-                    return DataGrid.myGridTable.GridColumnStyles[column].HeaderText;
-                }
-            }
+            public override string Name => DataGrid.myGridTable.GridColumnStyles[column].HeaderText;
 
-            public override AccessibleObject Parent
-            {
-                get
-                {
-                    return owner.AccessibleObject;
-                }
-            }
+            public override AccessibleObject Parent => owner.AccessibleObject;
 
-            protected DataGrid DataGrid
-            {
-                get
-                {
-                    return owner.DataGrid;
-                }
-            }
+            protected DataGrid DataGrid => owner.DataGrid;
 
-            public override string DefaultAction
-            {
-                get
-                {
-                    return SR.AccDGEdit;
-                }
-            }
+            public override string DefaultAction => SR.AccDGEdit;
 
-            public override AccessibleRole Role
-            {
-                get
-                {
-                    return AccessibleRole.Cell;
-                }
-            }
+            public override AccessibleRole Role => AccessibleRole.Cell;
 
             public override AccessibleStates State
             {
